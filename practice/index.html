@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Practice Lab | Finance Knowledge Hub</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#14213d;
+}
+
+header{
+    background:linear-gradient(135deg,#071a33,#1769aa);
+    color:white;
+    padding:35px 7%;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:36px;
+}
+
+header p{
+    margin:0;
+    font-size:18px;
+}
+
+.container{
+    width:86%;
+    max-width:1200px;
+    margin:35px auto;
+}
+
+.intro{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.intro h2{
+    margin-top:0;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.card h2{
+    margin-top:0;
+    color:#071a33;
+}
+
+.card p{
+    color:#5c6b82;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px;
+    margin-top:6px;
+    border:1px solid #ccd6e3;
+    border-radius:8px;
+    font-size:15px;
+}
+
+button{
+    margin-top:16px;
+    background:#1769aa;
+    color:white;
+    border:none;
+    padding:11px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#0d4f82;
+}
+
+.result{
+    margin-top:15px;
+    padding:12px;
+    background:#eef6ff;
+    border-radius:8px;
+    font-weight:bold;
+    color:#071a33;
+}
+
+.formula{
+    font-size:13px;
+    color:#6b778c;
+    margin-top:12px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#667085;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🧮 Finance Practice Lab</h1>
+    <p>Learn → Calculate → Understand → Apply</p>
+</header>
+
+<div class="container">
+
+<div class="intro">
+    <h2>Welcome to the Finance Practice Lab</h2>
+    <p>
+        Practice important finance calculations using simple interactive tools.
+        Enter the values and click <b>Calculate</b> to see the answer.
+    </p>
+</div>
+
+<div class="grid">
+
+<!-- WORKING CAPITAL -->
+<div class="card">
+<h2>💰 Working Capital</h2>
+<p>Calculate Net Working Capital.</p>
+
+<label>Current Assets (₹)</label>
+<input type="number" id="ca" placeholder="Example: 500000">
+
+<label>Current Liabilities (₹)</label>
+<input type="number" id="cl" placeholder="Example: 300000">
+
+<button onclick="workingCapital()">Calculate</button>
+
+<div class="result" id="wcResult">Result will appear here.</div>
+
+<div class="formula">
+Formula: Working Capital = Current Assets − Current Liabilities
+</div>
+</div>
+
+
+<!-- CURRENT RATIO -->
+<div class="card">
+<h2>📊 Current Ratio</h2>
+<p>Measure short-term liquidity.</p>
+
+<label>Current Assets (₹)</label>
+<input type="number" id="cra" placeholder="Example: 500000">
+
+<label>Current Liabilities (₹)</label>
+<input type="number" id="crl" placeholder="Example: 250000">
+
+<button onclick="currentRatio()">Calculate</button>
+
+<div class="result" id="crResult">Result will appear here.</div>
+
+<div class="formula">
+Formula: Current Ratio = Current Assets ÷ Current Liabilities
+</div>
+</div>
+
+
+<!-- BREAK EVEN -->
+<div class="card">
+<h2>📈 Break-even Point</h2>
+<p>Calculate the break-even quantity.</p>
+
+<label>Fixed Cost (₹)</label>
+<input type="number" id="fixedCost" placeholder="Example: 100000">
+
+<label>Selling Price per Unit (₹)</label>
+<input type="number" id="sellingPrice" placeholder="Example: 100">
+
+<label>Variable Cost per Unit (₹)</label>
+<input type="number" id="variableCost" placeholder="Example: 60">
+
+<button onclick="breakEven()">Calculate</button>
+
+<div class="result" id="beResult">Result will appear here.</div>
+
+<div class="formula">
+Formula: BEP Units = Fixed Cost ÷ (Selling Price − Variable Cost)
+</div>
+</div>
+
+
+<!-- SIMPLE INTEREST -->
+<div class="card">
+<h2>💵 Simple Interest</h2>
+<p>Calculate simple interest and maturity value.</p>
+
+<label>Principal (₹)</label>
+<input type="number" id="principal" placeholder="Example: 100000">
+
+<label>Rate (% per year)</label>
+<input type="number" id="rate" placeholder="Example: 8">
+
+<label>Time (Years)</label>
+<input type="number" id="time" placeholder="Example: 2">
+
+<button onclick="simpleInterest()">Calculate</button>
+
+<div class="result" id="siResult">Result will appear here.</div>
+
+<div class="formula">
+Formula: SI = P × R × T ÷ 100
+</div>
+</div>
+
+
+<!-- COMPOUND INTEREST -->
+<div class="card">
+<h2>📚 Compound Interest</h2>
+<p>Calculate compound interest annually.</p>
+
+<label>Principal (₹)</label>
+<input type="number" id="cp" placeholder="Example: 100000">
+
+<label>Rate (% per year)</label>
+<input type="number" id="cr" placeholder="Example: 10">
+
+<label>Time (Years)</label>
+<input type="number" id="ct" placeholder="Example: 2">
+
+<button onclick="compoundInterest()">Calculate</button>
+
+<div class="result" id="ciResult">Result will appear here.</div>
+
+<div class="formula">
+Formula: A = P(1 + R/100)^T
+</div>
+</div>
+
+
+<!-- EMI -->
+<div class="card">
+<h2>🏦 Loan EMI</h2>
+<p>Calculate monthly loan EMI.</p>
+
+<label>Loan Amount (₹)</label>
+<input type="number" id="loan" placeholder="Example: 500000">
+
+<label>Annual Interest Rate (%)</label>
+<input type="number" id="loanRate" placeholder="Example: 10">
+
+<label>Loan Period (Years)</label>
+<input type="number" id="loanYears" placeholder="Example: 5">
+
+<button onclick="emi()">Calculate</button>
+
+<div class="result" id="emiResult">Result will appear here.</div>
+
+<div class="formula">
+EMI is calculated using the standard reducing-balance formula.
+</div>
+</div>
+
+
+<!-- NPV -->
+<div class="card">
+<h2>📉 NPV Calculator</h2>
+<p>Calculate Net Present Value for a simple project.</p>
+
+<label>Initial Investment (₹)</label>
+<input type="number" id="investment" placeholder="Example: 100000">
+
+<label>Annual Cash Flow (₹)</label>
+<input type="number" id="cashflow" placeholder="Example: 40000">
+
+<label>Discount Rate (%)</label>
+<input type="number" id="discount" placeholder="Example: 10">
+
+<label>Project Life (Years)</label>
+<input type="number" id="years" placeholder="Example: 4">
+
+<button onclick="npv()">Calculate</button>
+
+<div class="result" id="npvResult">Result will appear here.</div>
+
+<div class="formula">
+NPV = Present Value of Cash Flows − Initial Investment
+</div>
+</div>
+
+
+<!-- IPO -->
+<div class="card">
+<h2>🚀 IPO Investment Calculator</h2>
+<p>Estimate the amount required for an IPO application.</p>
+
+<label>Bid Price per Share (₹)</label>
+<input type="number" id="ipoPrice" placeholder="Example: 272">
+
+<label>Number of Shares</label>
+<input type="number" id="ipoShares" placeholder="Example: 55">
+
+<button onclick="ipo()">Calculate</button>
+
+<div class="result" id="ipoResult">Result will appear here.</div>
+
+<div class="formula">
+Application Amount = Bid Price × Number of Shares
+</div>
+</div>
+
+</div>
+</div>
+
+<footer>
+    Finance Knowledge Hub | Finance Practice Lab
+</footer>
+
+
+<script>
+
+function workingCapital(){
+    let ca=Number(document.getElementById("ca").value);
+    let cl=Number(document.getElementById("cl").value);
+
+    if(!ca || !cl){
+        document.getElementById("wcResult").innerHTML="Please enter both values.";
+        return;
+    }
+
+    let result=ca-cl;
+
+    document.getElementById("wcResult").innerHTML=
+    "Net Working Capital = ₹"+result.toLocaleString("en-IN");
+}
+
+
+function currentRatio(){
+    let ca=Number(document.getElementById("cra").value);
+    let cl=Number(document.getElementById("crl").value);
+
+    if(!ca || !cl){
+        document.getElementById("crResult").innerHTML="Please enter both values.";
+        return;
+    }
+
+    let result=ca/cl;
+
+    document.getElementById("crResult").innerHTML=
+    "Current Ratio = "+result.toFixed(2)+":1";
+}
+
+
+function breakEven(){
+    let fc=Number(document.getElementById("fixedCost").value);
+    let sp=Number(document.getElementById("sellingPrice").value);
+    let vc=Number(document.getElementById("variableCost").value);
+
+    if(!fc || !sp || !vc || sp<=vc){
+        document.getElementById("beResult").innerHTML=
+        "Please enter valid values. Selling price must be greater than variable cost.";
+        return;
+    }
+
+    let result=fc/(sp-vc);
+
+    document.getElementById("beResult").innerHTML=
+    "Break-even Point = "+result.toFixed(2)+" units";
+}
+
+
+function simpleInterest(){
+    let p=Number(document.getElementById("principal").value);
+    let r=Number(document.getElementById("rate").value);
+    let t=Number(document.getElementById("time").value);
+
+    if(!p || !r || !t){
+        document.getElementById("siResult").innerHTML="Please enter all values.";
+        return;
+    }
+
+    let si=(p*r*t)/100;
+    let amount=p+si;
+
+    document.getElementById("siResult").innerHTML=
+    "Simple Interest = ₹"+si.toLocaleString("en-IN")+
+    "<br>Total Amount = ₹"+amount.toLocaleString("en-IN");
+}
+
+
+function compoundInterest(){
+    let p=Number(document.getElementById("cp").value);
+    let r=Number(document.getElementById("cr").value);
+    let t=Number(document.getElementById("ct").value);
+
+    if(!p || !r || !t){
+        document.getElementById("ciResult").innerHTML="Please enter all values.";
+        return;
+    }
+
+    let amount=p*Math.pow((1+r/100),t);
+    let ci=amount-p;
+
+    document.getElementById("ciResult").innerHTML=
+    "Compound Interest = ₹"+ci.toLocaleString("en-IN")+
+    "<br>Maturity Amount = ₹"+amount.toLocaleString("en-IN");
+}
+
+
+function emi(){
+    let p=Number(document.getElementById("loan").value);
+    let annualRate=Number(document.getElementById("loanRate").value);
+    let years=Number(document.getElementById("loanYears").value);
+
+    if(!p || !annualRate || !years){
+        document.getElementById("emiResult").innerHTML="Please enter all values.";
+        return;
+    }
+
+    let r=annualRate/12/100;
+    let n=years*12;
+
+    let monthlyEMI=
+    p*r*Math.pow(1+r,n)/
+    (Math.pow(1+r,n)-1);
+
+    document.getElementById("emiResult").innerHTML=
+    "Monthly EMI = ₹"+monthlyEMI.toFixed(2);
+}
+
+
+function npv(){
+    let investment=Number(document.getElementById("investment").value);
+    let cashflow=Number(document.getElementById("cashflow").value);
+    let rate=Number(document.getElementById("discount").value)/100;
+    let years=Number(document.getElementById("years").value);
+
+    if(!investment || !cashflow || !years){
+        document.getElementById("npvResult").innerHTML="Please enter all values.";
+        return;
+    }
+
+    let pv=0;
+
+    for(let i=1;i<=years;i++){
+        pv += cashflow/Math.pow(1+rate,i);
+    }
+
+    let result=pv-investment;
+
+    document.getElementById("npvResult").innerHTML=
+    "NPV = ₹"+result.toFixed(2);
+}
+
+
+function ipo(){
+    let price=Number(document.getElementById("ipoPrice").value);
+    let shares=Number(document.getElementById("ipoShares").value);
+
+    if(!price || !shares){
+        document.getElementById("ipoResult").innerHTML="Please enter both values.";
+        return;
+    }
+
+    let amount=price*shares;
+
+    document.getElementById("ipoResult").innerHTML=
+    "IPO Application Amount = ₹"+amount.toLocaleString("en-IN");
+}
+
+</script>
+
+</body>
+</html>
