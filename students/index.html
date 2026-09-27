@@ -1,1 +1,316 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Zone | Finance Knowledge Hub</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#14213d;
+}
+
+header{
+    background:linear-gradient(135deg,#071a33,#1769aa);
+    color:white;
+    padding:25px 8%;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#dbeafe;
+}
+
+.container{
+    width:84%;
+    max-width:1100px;
+    margin:35px auto;
+}
+
+.hero{
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 8px 25px #00000012;
+    margin-bottom:30px;
+}
+
+.hero h2{
+    color:#1769aa;
+    margin-top:0;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 5px 20px #00000010;
+}
+
+.card h3{
+    color:#1769aa;
+}
+
+.card ul{
+    padding-left:20px;
+    line-height:1.8;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:11px 18px;
+    background:#1769aa;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+}
+
+.quiz{
+    background:#fff;
+    padding:30px;
+    margin-top:30px;
+    border-radius:16px;
+    box-shadow:0 5px 20px #00000010;
+}
+
+.question{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin:8px 0;
+}
+
+#quizResult{
+    font-weight:bold;
+    margin-top:20px;
+    font-size:20px;
+}
+
+footer{
+    margin-top:50px;
+    padding:25px;
+    text-align:center;
+    background:#071a33;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎓 Student Zone</h1>
+    <p>Finance Knowledge Hub — Learn • Practice • Apply</p>
+</header>
+
+<div class="container">
+
+<section class="hero">
+    <h2>Welcome, Finance Students!</h2>
+
+    <p>
+        This section is designed to help students understand finance
+        through simple explanations, practical examples, calculations,
+        activities and quizzes.
+    </p>
+
+    <p><strong>Learn finance from classroom concepts to real-world applications.</strong></p>
+</section>
+
+<div class="grid">
+
+<div class="card">
+    <h3>💰 Financial Management</h3>
+    <ul>
+        <li>Financial decisions</li>
+        <li>Capital budgeting</li>
+        <li>Working capital</li>
+        <li>Cost of capital</li>
+        <li>Leverage</li>
+        <li>Dividend decisions</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>📊 Stock Market</h3>
+    <ul>
+        <li>Equity shares</li>
+        <li>Market indices</li>
+        <li>Trading basics</li>
+        <li>Market terminology</li>
+        <li>Investment concepts</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🚀 IPO & Primary Market</h3>
+    <ul>
+        <li>What is an IPO?</li>
+        <li>Price band</li>
+        <li>Book building</li>
+        <li>Fresh Issue</li>
+        <li>OFS</li>
+        <li>Allotment</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🏦 Banking & Credit</h3>
+    <ul>
+        <li>Loans & interest</li>
+        <li>Credit rating</li>
+        <li>NPA concepts</li>
+        <li>Banking operations</li>
+        <li>Financial institutions</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🌱 ESG & Green Finance</h3>
+    <ul>
+        <li>ESG fundamentals</li>
+        <li>Green bonds</li>
+        <li>Sustainable finance</li>
+        <li>Climate finance</li>
+        <li>Responsible investment</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🤖 FinTech & Digital Finance</h3>
+    <ul>
+        <li>Digital lending</li>
+        <li>AI in finance</li>
+        <li>Digital payments</li>
+        <li>Financial inclusion</li>
+        <li>FinTech applications</li>
+    </ul>
+</div>
+
+</div>
+
+<section class="quiz">
+
+<h2>🧠 Quick Finance Quiz</h2>
+
+<div class="question">
+<strong>1. What does IPO stand for?</strong>
+
+<label>
+<input type="radio" name="q1" value="a">
+Initial Public Offering
+</label>
+
+<label>
+<input type="radio" name="q1" value="b">
+Indian Public Organisation
+</label>
+</div>
+
+<div class="question">
+<strong>2. What is OFS?</strong>
+
+<label>
+<input type="radio" name="q2" value="a">
+Offer for Sale
+</label>
+
+<label>
+<input type="radio" name="q2" value="b">
+Order for Shares
+</label>
+</div>
+
+<div class="question">
+<strong>3. Which one is an ESG factor?</strong>
+
+<label>
+<input type="radio" name="q3" value="a">
+Only share price
+</label>
+
+<label>
+<input type="radio" name="q3" value="b">
+Environmental sustainability
+</label>
+</div>
+
+<button class="btn" onclick="checkQuiz()">Check My Score</button>
+
+<div id="quizResult"></div>
+
+</section>
+
+<section class="hero">
+
+<h2>📚 Coming Soon</h2>
+
+<p>More student resources will be added:</p>
+
+<ul>
+<li>Finance Notes</li>
+<li>Numerical Problems with Solutions</li>
+<li>IPO Case Studies</li>
+<li>Stock Market Activities</li>
+<li>Financial Management Calculators</li>
+<li>Question Banks</li>
+<li>Interactive Quizzes</li>
+<li>Student Projects</li>
+</ul>
+
+</section>
+
+</div>
+
+<footer>
+© 2026 Dr. Vijay Kumar Kaluvala | Finance Knowledge Hub
+</footer>
+
+<script>
+
+function checkQuiz(){
+
+let score = 0;
+
+if(document.querySelector('input[name="q1"]:checked')?.value === "a"){
+    score++;
+}
+
+if(document.querySelector('input[name="q2"]:checked')?.value === "a"){
+    score++;
+}
+
+if(document.querySelector('input[name="q3"]:checked')?.value === "b"){
+    score++;
+}
+
+document.getElementById("quizResult").innerHTML =
+"🎉 Your Score: " + score + "/3";
+
+}
+
+</script>
+
+</body>
+</html>
