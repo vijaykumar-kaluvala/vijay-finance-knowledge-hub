@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Financial Management | Student Zone</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f4f7fb;
+  color:#182334;
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,#071a32,#1769aa);
+  color:white;
+  padding:35px 7%;
+}
+
+header h1{
+  margin:0;
+  font-size:40px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:18px;
+}
+
+nav{
+  margin-top:20px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-right:20px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1200px;
+  margin:35px auto;
+  padding:0 20px;
+}
+
+.welcome{
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 8px 25px #00000012;
+  margin-bottom:30px;
+}
+
+.welcome h2{
+  color:#1769aa;
+  margin-top:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 6px 20px #00000010;
+  border-top:5px solid #1769aa;
+}
+
+.card h3{
+  color:#1769aa;
+  margin-top:0;
+}
+
+.formula{
+  background:#eef6ff;
+  padding:15px;
+  border-radius:10px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.example{
+  background:#fff8e8;
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.practice{
+  margin-top:35px;
+  background:linear-gradient(135deg,#071a32,#1769aa);
+  color:white;
+  padding:30px;
+  border-radius:18px;
+}
+
+.practice h2{
+  margin-top:0;
+}
+
+button{
+  background:#d89b22;
+  color:white;
+  border:0;
+  padding:12px 20px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  background:white;
+  color:#182334;
+  padding:15px;
+  margin-top:15px;
+  border-radius:10px;
+}
+
+footer{
+  margin-top:50px;
+  background:#071a32;
+  color:white;
+  text-align:center;
+  padding:25px;
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  header h1{
+    font-size:32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>💰 Financial Management</h1>
+
+<p>Student Zone — Learn • Understand • Calculate • Apply</p>
+
+<nav>
+<a href="index.html">← Student Zone</a>
+<a href="../index.html">Finance Knowledge Hub</a>
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<section class="welcome">
+
+<h2>Welcome, Finance Students! 👋</h2>
+
+<p>
+Financial Management is the process of planning, raising, investing
+and controlling financial resources to achieve the objectives of an organisation.
+</p>
+
+<p>
+This page helps you learn Financial Management through
+<strong>simple explanations, formulas, examples and practice problems.</strong>
+</p>
+
+</section>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>1️⃣ Financial Decisions</h3>
+
+<p>
+Financial management mainly involves three important decisions.
+</p>
+
+<ul>
+<li>Investment Decision</li>
+<li>Financing Decision</li>
+<li>Dividend Decision</li>
+</ul>
+
+<div class="example">
+<strong>Example:</strong><br>
+A company has ₹10 lakh. It must decide whether to invest
+in a new machine, borrow money or distribute profit to shareholders.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>2️⃣ Capital Budgeting</h3>
+
+<p>
+Capital budgeting means evaluating long-term investment projects.
+</p>
+
+<ul>
+<li>Payback Period</li>
+<li>ARR</li>
+<li>NPV</li>
+<li>IRR</li>
+<li>Profitability Index</li>
+</ul>
+
+<div class="formula">
+NPV = Present Value of Cash Inflows − Initial Investment
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>3️⃣ Working Capital</h3>
+
+<p>
+Working capital is required for the day-to-day operations of a business.
+</p>
+
+<div class="formula">
+Working Capital = Current Assets − Current Liabilities
+</div>
+
+<div class="example">
+<strong>Example:</strong><br>
+Current Assets = ₹5,00,000<br>
+Current Liabilities = ₹3,00,000<br><br>
+
+Working Capital = ₹2,00,000
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>4️⃣ Cost of Capital</h3>
+
+<p>
+Cost of capital is the minimum return expected by investors and lenders.
+</p>
+
+<ul>
+<li>Cost of Debt</li>
+<li>Cost of Preference Capital</li>
+<li>Cost of Equity</li>
+<li>WACC</li>
+</ul>
+
+<div class="formula">
+WACC = Σ (Weight × Cost)
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>5️⃣ Leverage</h3>
+
+<p>
+Leverage shows the effect of fixed costs on business performance.
+</p>
+
+<ul>
+<li>Operating Leverage</li>
+<li>Financial Leverage</li>
+<li>Combined Leverage</li>
+</ul>
+
+<div class="formula">
+DOL = Contribution ÷ EBIT
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>6️⃣ Dividend Decision</h3>
+
+<p>
+Dividend decision determines how much profit should be distributed
+to shareholders and how much should be retained.
+</p>
+
+<div class="example">
+<strong>Example:</strong><br>
+Profit = ₹10 lakh<br>
+Dividend paid = ₹4 lakh<br>
+Retained earnings = ₹6 lakh
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>7️⃣ Break-even Analysis</h3>
+
+<p>
+Break-even point is the level of sales where total revenue equals total cost.
+</p>
+
+<div class="formula">
+BEP = Fixed Cost ÷ Contribution per Unit
+</div>
+
+<div class="example">
+Fixed Cost = ₹1,00,000<br>
+Selling Price = ₹100<br>
+Variable Cost = ₹60<br><br>
+
+Contribution = ₹40<br>
+BEP = 1,00,000 ÷ 40<br>
+<strong>BEP = 2,500 units</strong>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>8️⃣ Financial Planning</h3>
+
+<p>
+Financial planning estimates the financial requirements of a business
+and determines how those requirements will be financed.
+</p>
+
+<ul>
+<li>Estimate funds required</li>
+<li>Determine sources of finance</li>
+<li>Maintain liquidity</li>
+<li>Control financial resources</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h3>9️⃣ Objectives of Financial Management</h3>
+
+<ul>
+<li>Profit Maximisation</li>
+<li>Wealth Maximisation</li>
+<li>Maintaining Liquidity</li>
+<li>Efficient use of funds</li>
+<li>Risk management</li>
+</ul>
+
+<div class="example">
+<strong>Key idea:</strong><br>
+Modern financial management generally focuses on
+<strong>maximising shareholders' wealth</strong> while considering
+risk and return.
+</div>
+
+</div>
+
+</div>
+
+
+<section class="practice">
+
+<h2>🧮 Practice Problem</h2>
+
+<p>
+A company has Current Assets of ₹8,00,000 and Current Liabilities
+of ₹5,00,000.
+</p>
+
+<p><strong>Question:</strong> Calculate Net Working Capital.</p>
+
+<button onclick="showAnswer()">Show Answer</button>
+
+<div id="answer" class="answer">
+
+<strong>Solution:</strong>
+
+<br><br>
+
+Working Capital = Current Assets − Current Liabilities
+
+<br><br>
+
+= ₹8,00,000 − ₹5,00,000
+
+<br><br>
+
+<strong>Answer = ₹3,00,000</strong>
+
+</div>
+
+</section>
+
+
+<section class="practice">
+
+<h2>🎯 Think Like a Finance Manager</h2>
+
+<p>
+A company has ₹50 lakh available for investment.
+It can either purchase a new machine, repay debt,
+or distribute the money as dividend.
+</p>
+
+<p>
+<strong>Question:</strong>
+What factors should the finance manager consider before making the decision?
+</p>
+
+<ul>
+<li>Expected return</li>
+<li>Risk</li>
+<li>Cost of finance</li>
+<li>Cash-flow requirements</li>
+<li>Future growth opportunities</li>
+<li>Shareholder expectations</li>
+</ul>
+
+</section>
+
+</div>
+
+
+<footer>
+
+<strong>Finance Knowledge Hub</strong><br>
+Financial Management Student Zone<br>
+Learn • Calculate • Understand • Apply
+
+</footer>
+
+
+<script>
+
+function showAnswer(){
+
+  const answer = document.getElementById("answer");
+
+  if(answer.style.display === "block"){
+    answer.style.display = "none";
+  }
+  else{
+    answer.style.display = "block";
+  }
+
+}
+
+</script>
+
+</body>
+</html>
