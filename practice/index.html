@@ -488,5 +488,111 @@ function ipo(){
 
 </script>
 
+<section style="padding:50px 7%;background:#f4f7fb;">
+    <div style="max-width:900px;margin:auto;">
+        <h2 style="color:#0b1f3a;font-size:32px;">
+            🧮 Working Capital Calculator
+        </h2>
+
+        <p style="color:#667085;font-size:17px;">
+            Enter the values below and calculate Working Capital,
+            Current Ratio and Quick Ratio instantly.
+        </p>
+
+        <div style="
+            background:white;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        ">
+
+            <label>Current Assets (₹)</label>
+            <input id="wcCA" type="number"
+                placeholder="Example: 500000"
+                style="width:100%;padding:12px;margin:8px 0 18px;">
+
+            <label>Current Liabilities (₹)</label>
+            <input id="wcCL" type="number"
+                placeholder="Example: 250000"
+                style="width:100%;padding:12px;margin:8px 0 18px;">
+
+            <label>Inventory (₹)</label>
+            <input id="wcInventory" type="number"
+                placeholder="Example: 100000"
+                style="width:100%;padding:12px;margin:8px 0 18px;">
+
+            <button onclick="calculateWorkingCapital()"
+                style="
+                background:#1769aa;
+                color:white;
+                border:none;
+                padding:14px 24px;
+                border-radius:8px;
+                font-size:16px;
+                cursor:pointer;
+                ">
+                Calculate
+            </button>
+
+            <div id="wcResult"
+                style="
+                margin-top:25px;
+                padding:20px;
+                background:#eef6ff;
+                border-radius:10px;
+                font-size:17px;
+                line-height:1.8;
+                ">
+                Your result will appear here.
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+function calculateWorkingCapital(){
+
+    let currentAssets =
+        Number(document.getElementById("wcCA").value);
+
+    let currentLiabilities =
+        Number(document.getElementById("wcCL").value);
+
+    let inventory =
+        Number(document.getElementById("wcInventory").value);
+
+    if(!currentAssets || !currentLiabilities){
+
+        document.getElementById("wcResult").innerHTML =
+        "⚠️ Please enter Current Assets and Current Liabilities.";
+
+        return;
+    }
+
+    let workingCapital =
+        currentAssets - currentLiabilities;
+
+    let currentRatio =
+        currentAssets / currentLiabilities;
+
+    let quickAssets =
+        currentAssets - inventory;
+
+    let quickRatio =
+        quickAssets / currentLiabilities;
+
+    document.getElementById("wcResult").innerHTML =
+
+        "<b>Working Capital:</b> ₹" +
+        workingCapital.toLocaleString("en-IN") +
+
+        "<br><b>Current Ratio:</b> " +
+        currentRatio.toFixed(2) +
+
+        "<br><b>Quick Ratio:</b> " +
+        quickRatio.toFixed(2);
+}
+</script>
 </body>
 </html>
