@@ -475,6 +475,78 @@ function showAnswer(){
 }
 
 </script>
+<!-- WORKING CAPITAL CALCULATOR -->
+<section style="background:white;padding:30px;margin:25px 0;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.08);">
 
+  <h2 style="color:#1769aa;">🧮 Working Capital Calculator</h2>
+
+  <p>
+    Working Capital shows the amount available to a business for its
+    day-to-day operations.
+  </p>
+
+  <div style="background:#eef6ff;padding:20px;border-radius:10px;margin:20px 0;">
+    <h3>Formula</h3>
+    <p style="font-size:18px;font-weight:bold;">
+      Working Capital = Current Assets − Current Liabilities
+    </p>
+  </div>
+
+  <label><strong>Current Assets (₹)</strong></label>
+  <input
+    type="number"
+    id="currentAssets"
+    placeholder="Example: 500000"
+    style="width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ccc;border-radius:6px;"
+  >
+
+  <label><strong>Current Liabilities (₹)</strong></label>
+  <input
+    type="number"
+    id="currentLiabilities"
+    placeholder="Example: 300000"
+    style="width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ccc;border-radius:6px;"
+  >
+
+  <button
+    onclick="calculateWorkingCapital()"
+    style="background:#1769aa;color:white;padding:12px 22px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;"
+  >
+    Calculate Working Capital
+  </button>
+
+  <div
+    id="workingCapitalResult"
+    style="margin-top:20px;font-size:18px;font-weight:bold;"
+  ></div>
+
+</section>
+
+<script>
+function calculateWorkingCapital() {
+
+  const currentAssets =
+    parseFloat(document.getElementById("currentAssets").value);
+
+  const currentLiabilities =
+    parseFloat(document.getElementById("currentLiabilities").value);
+
+  const result =
+    document.getElementById("workingCapitalResult");
+
+  if (isNaN(currentAssets) || isNaN(currentLiabilities)) {
+    result.innerHTML =
+      "⚠️ Please enter both Current Assets and Current Liabilities.";
+    return;
+  }
+
+  const workingCapital =
+    currentAssets - currentLiabilities;
+
+  result.innerHTML =
+    "✅ Working Capital = ₹" +
+    workingCapital.toLocaleString("en-IN");
+}
+</script>
 </body>
 </html>
