@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,328 +7,873 @@
 <title>Student Zone | Finance Knowledge Hub</title>
 
 <style>
-body{
-     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:linear-gradient(135deg,#0b1220,#111827,#172033);
-    color:#172033;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+    line-height:1.6;
+}
+
+/* ================= HEADER ================= */
 
 header{
-   background:linear-gradient(135deg,#08111f,#172033,#2a2110);
+    background:linear-gradient(135deg,#061b33,#0b426d,#087f8c);
     color:white;
-    padding:30px 8%;
-    border-bottom:3px solid #d4af37;
-    box-shadow:0 5px 25px rgba(0,0,0,0.35);
+    padding:22px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.25);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-header h1{
-    margin:0;
-    font-size:32px;
+.logo{
+    font-size:25px;
+    font-weight:bold;
 }
 
-header p{
-    margin:8px 0 0;
-    color:#dbeafe;
+.logo span{
+    color:#ffd166;
 }
 
-.container{
-    width:84%;
-    max-width:1100px;
-    margin:35px auto;
+nav{
+    display:flex;
+    gap:25px;
 }
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ffd166;
+}
+
+/* ================= HERO ================= */
 
 .hero{
-     background:linear-gradient(135deg,#ffffff,#f8f5ea);
-    padding:35px;
-    border-radius:18px;
-    border:1px solid #e6d7a5;
-    box-shadow:0 10px 30px rgba(0,0,0,0.20);
-    margin-bottom:30px;
-}
-
-.hero h2{
-    color:#9a7418;
-    margin-top:0;
-}
-
-.grid{
+    background:
+    linear-gradient(135deg,rgba(255,255,255,.96),rgba(226,247,250,.96));
+    padding:70px 7%;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:1.3fr .7fr;
+    gap:40px;
+    align-items:center;
 }
 
-.card{
-    background:white;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 5px 20px #00000010;
+.badge{
+    display:inline-block;
+    background:#dff6f8;
+    color:#087f8c;
+    padding:8px 16px;
+    border-radius:30px;
+    font-weight:bold;
+    margin-bottom:18px;
 }
 
-.card h3{
-    color:#1769aa;
+.hero h1{
+    font-size:52px;
+    line-height:1.1;
+    color:#092746;
+    margin-bottom:20px;
 }
 
-.card ul{
-    padding-left:20px;
-    line-height:1.8;
+.hero h1 span{
+    color:#087f8c;
+}
+
+.hero p{
+    font-size:19px;
+    color:#52627a;
+    max-width:700px;
+}
+
+.hero-buttons{
+    margin-top:30px;
 }
 
 .btn{
     display:inline-block;
-    margin-top:10px;
-    padding:11px 18px;
-    background:#1769aa;
-    color:white;
+    padding:13px 22px;
+    border-radius:10px;
     text-decoration:none;
-    border-radius:8px;
-    border:none;
-    cursor:pointer;
+    font-weight:bold;
+    margin-right:10px;
+    margin-bottom:10px;
 }
 
-.quiz{
-    background:#fff;
+.btn-primary{
+    background:#087f8c;
+    color:white;
+}
+
+.btn-secondary{
+    background:white;
+    color:#087f8c;
+    border:2px solid #087f8c;
+}
+
+/* ================= HERO CARD ================= */
+
+.hero-card{
+    background:linear-gradient(145deg,#092746,#087f8c);
+    color:white;
     padding:30px;
-    margin-top:30px;
-    border-radius:16px;
-    box-shadow:0 5px 20px #00000010;
+    border-radius:24px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
-.question{
+.hero-card h2{
     margin-bottom:20px;
 }
 
-label{
-    display:block;
-    margin:8px 0;
+.hero-item{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid rgba(255,255,255,.2);
 }
 
-#quizResult{
-    font-weight:bold;
-    margin-top:20px;
-    font-size:20px;
+.hero-item:last-child{
+    border-bottom:none;
 }
+
+/* ================= SECTION ================= */
+
+.section{
+    padding:65px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:34px;
+    color:#092746;
+}
+
+.section-title p{
+    color:#66758a;
+    margin-top:8px;
+}
+
+/* ================= CARDS ================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:28px;
+    border-radius:18px;
+    border:1px solid #e0e8ef;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 15px 35px rgba(0,0,0,.14);
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    color:#092746;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#617087;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:18px;
+    color:#087f8c;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* ================= SUBJECTS ================= */
+
+.subjects{
+    background:#eaf6f8;
+}
+
+.subject-card{
+    border-top:5px solid #087f8c;
+}
+
+.subject-card:nth-child(2){
+    border-top-color:#f4a261;
+}
+
+.subject-card:nth-child(3){
+    border-top-color:#7b61ff;
+}
+
+.subject-card:nth-child(4){
+    border-top-color:#2a9d8f;
+}
+
+.subject-card:nth-child(5){
+    border-top-color:#e76f51;
+}
+
+.subject-card:nth-child(6){
+    border-top-color:#457b9d;
+}
+
+/* ================= PRACTICE ================= */
+
+.practice{
+    background:linear-gradient(135deg,#061b33,#0b426d);
+    color:white;
+}
+
+.practice .section-title h2{
+    color:white;
+}
+
+.practice .section-title p{
+    color:#d7e6f2;
+}
+
+.practice .card{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    color:white;
+}
+
+.practice .card h3{
+    color:white;
+}
+
+.practice .card p{
+    color:#d8e6f2;
+}
+
+/* ================= FEATURES ================= */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.feature{
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 7px 20px rgba(0,0,0,.07);
+}
+
+.feature strong{
+    display:block;
+    font-size:27px;
+    color:#087f8c;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    margin:60px 7%;
+    padding:50px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#ffd166,#f4a261);
+    text-align:center;
+    color:#092746;
+}
+
+.cta h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.cta p{
+    margin-bottom:20px;
+}
+
+/* ================= FOOTER ================= */
 
 footer{
-    margin-top:50px;
-    padding:30px 20px;
+    background:#061b33;
+    color:#dbe8f2;
+    padding:40px 7%;
     text-align:center;
-    background:linear-gradient(135deg,#08111f,#172033,#2a2110);
-    color:#f5ead0;
-    border-top:3px solid #d4af37;
-    box-shadow:0 -5px 25px rgba(0,0,0,0.25);
 }
+
+footer h3{
+    color:white;
+    margin-bottom:10px;
+}
+
+footer span{
+    color:#ffd166;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:50px 6%;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .grid,
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    nav{
+        gap:12px;
+        font-size:14px;
+    }
+
+    .section{
+        padding:45px 5%;
+    }
+
+    .cta{
+        margin:40px 5%;
+        padding:35px 20px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
-    <h1>🎓 Student Zone</h1>
-    <p>Finance Knowledge Hub — Learn • Practice • Apply</p>
+
+<div class="logo">
+Finance <span>Knowledge Hub</span>
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="#subjects">Subjects</a>
+<a href="#practice">Practice</a>
+<a href="#skills">Skills</a>
+<a href="#resources">Resources</a>
+</nav>
+
 </header>
 
-<div class="container">
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
-    <h2>Welcome, Finance Students!</h2>
 
-    <p>
-        This section is designed to help students understand finance
-        through simple explanations, practical examples, calculations,
-        activities and quizzes.
-    </p>
+<div>
 
-    <p><strong>Learn finance from classroom concepts to real-world applications.</strong></p>
+<div class="badge">
+🎓 STUDENT LEARNING ZONE
+</div>
+
+<h1>
+Learn Finance.<br>
+<span>Practice Finance.</span><br>
+Build Your Career.
+</h1>
+
+<p>
+A practical learning space for students to understand
+Finance, Accounting, Banking, Investment, Markets,
+FinTech, ESG and Business concepts through simple
+explanations, examples and activities.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#subjects" class="btn btn-primary">
+Explore Subjects →
+</a>
+
+<a href="#practice" class="btn btn-secondary">
+Practice Now
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<h2>🚀 What You Can Learn</h2>
+
+<div class="hero-item">
+<span>📘 Concepts</span>
+<strong>Simple</strong>
+</div>
+
+<div class="hero-item">
+<span>📊 Examples</span>
+<strong>Practical</strong>
+</div>
+
+<div class="hero-item">
+<span>🧮 Calculations</span>
+<strong>Step-by-step</strong>
+</div>
+
+<div class="hero-item">
+<span>📈 Markets</span>
+<strong>Real-world</strong>
+</div>
+
+<div class="hero-item">
+<span>💡 Research</span>
+<strong>Ideas</strong>
+</div>
+
+</div>
+
 </section>
+
+
+<!-- ================= SUBJECTS ================= -->
+
+<section class="section subjects" id="subjects">
+
+<div class="section-title">
+
+<h2>📚 Finance Subjects</h2>
+
+<p>
+Build your fundamentals and gradually move toward advanced concepts.
+</p>
+
+</div>
+
 
 <div class="grid">
 
-<div class="card">
-    <h3>💰 Financial Management</h3>
-    <ul>
-        <li>Financial decisions</li>
-        <li>Capital budgeting</li>
-        <li>Working capital</li>
-        <li>Cost of capital</li>
-        <li>Leverage</li>
-        <li>Dividend decisions</li>
-    </ul>
-</div>
 
-<div class="card">
-    <h3>📊 Stock Market</h3>
-    <ul>
-        <li>Equity shares</li>
-        <li>Market indices</li>
-        <li>Trading basics</li>
-        <li>Market terminology</li>
-        <li>Investment concepts</li>
-    </ul>
-</div>
+<div class="card subject-card">
 
-<div class="card">
-    <h3>🚀 IPO & Primary Market</h3>
-    <ul>
-        <li>What is an IPO?</li>
-        <li>Price band</li>
-        <li>Book building</li>
-        <li>Fresh Issue</li>
-        <li>OFS</li>
-        <li>Allotment</li>
-    </ul>
-</div>
+<div class="icon">💰</div>
 
-<div class="card">
-    <h3>🏦 Banking & Credit</h3>
-    <ul>
-        <li>Loans & interest</li>
-        <li>Credit rating</li>
-        <li>NPA concepts</li>
-        <li>Banking operations</li>
-        <li>Financial institutions</li>
-    </ul>
-</div>
+<h3>Financial Management</h3>
 
-<div class="card">
-    <h3>🌱 ESG & Green Finance</h3>
-    <ul>
-        <li>ESG fundamentals</li>
-        <li>Green bonds</li>
-        <li>Sustainable finance</li>
-        <li>Climate finance</li>
-        <li>Responsible investment</li>
-    </ul>
-</div>
+<p>
+Capital budgeting, working capital, cost of capital,
+capital structure, dividend decisions and financial analysis.
+</p>
 
-<div class="card">
-    <h3>🤖 FinTech & Digital Finance</h3>
-    <ul>
-        <li>Digital lending</li>
-        <li>AI in finance</li>
-        <li>Digital payments</li>
-        <li>Financial inclusion</li>
-        <li>FinTech applications</li>
-    </ul>
-</div>
+<a href="financial-management.html">
+Learn Financial Management →
+</a>
 
 </div>
 
-<section class="quiz">
 
-<h2>🧠 Quick Finance Quiz</h2>
+<div class="card subject-card">
 
-<div class="question">
-<strong>1. What does IPO stand for?</strong>
+<div class="icon">📒</div>
 
-<label>
-<input type="radio" name="q1" value="a">
-Initial Public Offering
-</label>
+<h3>Accounting</h3>
 
-<label>
-<input type="radio" name="q1" value="b">
-Indian Public Organisation
-</label>
+<p>
+Financial accounting, management accounting, cost accounting,
+ratios, budgeting and practical accounting problems.
+</p>
+
+<a href="#">
+Explore Accounting →
+</a>
+
 </div>
 
-<div class="question">
-<strong>2. What is OFS?</strong>
 
-<label>
-<input type="radio" name="q2" value="a">
-Offer for Sale
-</label>
+<div class="card subject-card">
 
-<label>
-<input type="radio" name="q2" value="b">
-Order for Shares
-</label>
+<div class="icon">📈</div>
+
+<h3>Financial Markets</h3>
+
+<p>
+Stocks, IPOs, FPOs, OFS, bonds, mutual funds,
+SEBI and Indian financial markets.
+</p>
+
+<a href="#">
+Explore Markets →
+</a>
+
 </div>
 
-<div class="question">
-<strong>3. Which one is an ESG factor?</strong>
 
-<label>
-<input type="radio" name="q3" value="a">
-Only share price
-</label>
+<div class="card subject-card">
 
-<label>
-<input type="radio" name="q3" value="b">
-Environmental sustainability
-</label>
+<div class="icon">🏦</div>
+
+<h3>Banking & Investment</h3>
+
+<p>
+Commercial banking, investment banking, loans,
+credit ratings, risk and investment decisions.
+</p>
+
+<a href="#">
+Explore Banking →
+</a>
+
 </div>
 
-<button class="btn" onclick="checkQuiz()">Check My Score</button>
 
-<div id="quizResult"></div>
+<div class="card subject-card">
+
+<div class="icon">🌱</div>
+
+<h3>Green Finance & ESG</h3>
+
+<p>
+ESG, sustainable finance, green bonds, climate finance
+and responsible investment.
+</p>
+
+<a href="#">
+Explore ESG →
+</a>
+
+</div>
+
+
+<div class="card subject-card">
+
+<div class="icon">🤖</div>
+
+<h3>FinTech</h3>
+
+<p>
+Digital payments, digital lending, AI in finance,
+blockchain and financial inclusion.
+</p>
+
+<a href="#">
+Explore FinTech →
+</a>
+
+</div>
+
+
+</div>
 
 </section>
 
-<section class="hero">
-<section style="background:white;padding:25px;border-radius:15px;margin:25px 0;box-shadow:0 4px 15px rgba(0,0,0,0.08);">
 
-<h2>💰 Financial Management</h2>
+<!-- ================= PRACTICE ================= -->
+
+<section class="section practice" id="practice">
+
+<div class="section-title">
+
+<h2>🧮 Practice & Learning Lab</h2>
 
 <p>
-Learn important financial management concepts through simple explanations,
-formulas, numerical problems and practical examples.
+Don't just read finance — calculate, analyse and apply it.
 </p>
 
-<a href="financial-management.html"
-style="display:inline-block;background:#1769aa;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;">
-Open Financial Management →
+</div>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<div class="icon">🧮</div>
+
+<h3>Finance Calculators</h3>
+
+<p>
+Practice NPV, IRR, WACC, ratios, working capital
+and other financial calculations.
+</p>
+
+<a href="../practice/index.html">
+Open Practice Lab →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📝</div>
+
+<h3>Problems & Solutions</h3>
+
+<p>
+Solve numerical problems with step-by-step
+solutions designed for students.
+</p>
+
+<a href="#">
+Practice Problems →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🎯</div>
+
+<h3>Finance Quizzes</h3>
+
+<p>
+Test your understanding with short,
+interactive finance questions.
+</p>
+
+<a href="#">
+Take a Quiz →
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= SKILLS ================= -->
+
+<section class="section" id="skills">
+
+<div class="section-title">
+
+<h2>🎓 Student Skills</h2>
+
+<p>
+Develop practical skills that go beyond classroom theory.
+</p>
+
+</div>
+
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<div class="icon">📊</div>
+
+<strong>Analysis</strong>
+
+<p>Analyse financial information.</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">💻</div>
+
+<strong>Excel</strong>
+
+<p>Develop practical spreadsheet skills.</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">📈</div>
+
+<strong>Markets</strong>
+
+<p>Understand real market situations.</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">🔬</div>
+
+<strong>Research</strong>
+
+<p>Develop finance research skills.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RESOURCES ================= -->
+
+<section class="section" id="resources">
+
+<div class="section-title">
+
+<h2>📖 Student Resources</h2>
+
+<p>
+Use these resources for classes, assignments, exams and projects.
+</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<div class="icon">📘</div>
+
+<h3>Class Notes</h3>
+
+<p>
+Easy-to-understand notes with examples
+for important finance subjects.
+</p>
+
+<a href="#">
+View Notes →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📋</div>
+
+<h3>Question Banks</h3>
+
+<p>
+Important questions, numerical problems,
+MCQs and exam preparation materials.
+</p>
+
+<a href="#">
+View Questions →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🔬</div>
+
+<h3>Research Corner</h3>
+
+<p>
+Finance research topics, FinTech ideas,
+ESG topics and research resources.
+</p>
+
+<a href="#">
+Explore Research →
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+<h2>🚀 Start Learning Finance Today</h2>
+
+<p>
+Learn the concept → See the example → Practice the problem → Apply it.
+</p>
+
+<a href="#subjects" class="btn btn-primary">
+Start Learning →
 </a>
 
 </section>
-<h2>📚 Coming Soon</h2>
 
-<p>More student resources will be added:</p>
 
-<ul>
-<li>Finance Notes</li>
-<li>Numerical Problems with Solutions</li>
-<li>IPO Case Studies</li>
-<li>Stock Market Activities</li>
-<li>Financial Management Calculators</li>
-<li>Question Banks</li>
-<li>Interactive Quizzes</li>
-<li>Student Projects</li>
-</ul>
-
-</section>
-
-</div>
+<!-- ================= FOOTER ================= -->
 
 <footer>
-© 2026 Dr. Vijay Kumar Kaluvala | Finance Knowledge Hub
+
+<h3>
+Finance <span>Knowledge Hub</span>
+</h3>
+
+<p>
+A practical finance learning platform for students,
+teachers, researchers and finance learners.
+</p>
+
+<p style="margin-top:15px;">
+© 2026 Finance Knowledge Hub | Dr. Vijay Kumar
+</p>
+
 </footer>
 
-<script>
-
-function checkQuiz(){
-
-let score = 0;
-
-if(document.querySelector('input[name="q1"]:checked')?.value === "a"){
-    score++;
-}
-
-if(document.querySelector('input[name="q2"]:checked')?.value === "a"){
-    score++;
-}
-
-if(document.querySelector('input[name="q3"]:checked')?.value === "b"){
-    score++;
-}
-
-document.getElementById("quizResult").innerHTML =
-"🎉 Your Score: " + score + "/3";
-
-}
-
-</script>
 
 </body>
 </html>
