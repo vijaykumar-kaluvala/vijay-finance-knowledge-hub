@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Finance Quiz | Finance Knowledge Hub</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#14213d;
+}
+
+header{
+    background:linear-gradient(135deg,#071a33,#1769aa);
+    color:white;
+    padding:30px 7%;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:34px;
+}
+
+header p{
+    margin:0;
+    font-size:17px;
+}
+
+.container{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+.quiz-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+.quiz-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.progress{
+    font-weight:bold;
+    color:#1769aa;
+}
+
+.score-info{
+    background:#eef6ff;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.question{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:22px;
+    line-height:1.5;
+}
+
+.option{
+    display:block;
+    padding:15px 18px;
+    margin:12px 0;
+    border:2px solid #d9e2ec;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.2s;
+    background:#fff;
+}
+
+.option:hover{
+    border-color:#1769aa;
+    background:#f4f9ff;
+}
+
+.option input{
+    margin-right:10px;
+}
+
+.option.selected{
+    border-color:#1769aa;
+    background:#eef6ff;
+}
+
+.btn{
+    border:none;
+    padding:13px 25px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+.btn-primary{
+    background:#1769aa;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#0d4f85;
+}
+
+.btn-secondary{
+    background:#e9eef5;
+    color:#14213d;
+}
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+}
+
+.result{
+    text-align:center;
+    padding:35px 20px;
+}
+
+.result-icon{
+    font-size:55px;
+}
+
+.result h2{
+    font-size:32px;
+    margin:10px 0;
+}
+
+.final-score{
+    font-size:48px;
+    font-weight:bold;
+    color:#1769aa;
+    margin:15px 0;
+}
+
+.percentage{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.result-message{
+    font-size:18px;
+    margin:20px auto;
+    max-width:600px;
+    line-height:1.6;
+}
+
+.review{
+    margin-top:30px;
+    text-align:left;
+}
+
+.review-item{
+    padding:15px;
+    margin:12px 0;
+    border-radius:10px;
+}
+
+.correct{
+    background:#e9f8ef;
+    border-left:5px solid #1b8a4b;
+}
+
+.wrong{
+    background:#fff0f0;
+    border-left:5px solid #d93025;
+}
+
+.review-item strong{
+    display:block;
+    margin-bottom:7px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:14px;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:27px;
+    }
+
+    .quiz-card{
+        padding:20px;
+    }
+
+    .question{
+        font-size:19px;
+    }
+
+    .navigation{
+        flex-direction:column;
+    }
+
+    .navigation button{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>💰 Finance Knowledge Hub</h1>
+    <p>Finance Quiz Challenge | Test Your Financial Knowledge</p>
+</header>
+
+<div class="container">
+
+<div class="quiz-card">
+
+<!-- QUIZ SCREEN -->
+
+<div id="quizScreen">
+
+    <div class="quiz-top">
+        <div class="progress" id="progress">
+            Question 1 of 20
+        </div>
+
+        <div class="score-info">
+            Score: <span id="liveScore">0</span>
+        </div>
+    </div>
+
+    <div class="question" id="question">
+        Question will appear here
+    </div>
+
+    <div id="options"></div>
+
+    <div class="navigation">
+
+        <button
+            class="btn btn-secondary"
+            id="prevBtn"
+            onclick="previousQuestion()">
+            ← Previous
+        </button>
+
+        <button
+            class="btn btn-primary"
+            id="nextBtn"
+            onclick="nextQuestion()">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT SCREEN -->
+
+<div id="resultScreen" class="result hidden">
+
+    <div class="result-icon">🎉</div>
+
+    <h2>Quiz Completed!</h2>
+
+    <div class="final-score" id="finalScore">
+        0 / 20
+    </div>
+
+    <div class="percentage" id="percentage">
+        0%
+    </div>
+
+    <div class="result-message" id="resultMessage">
+    </div>
+
+    <button
+        class="btn btn-primary"
+        onclick="restartQuiz()">
+        🔄 Try Another Quiz
+    </button>
+
+    <div class="review">
+
+        <h3>📋 Answer Review</h3>
+
+        <div id="reviewContainer"></div>
+
+    </div>
+
+</div>
+
+</div>
+</div>
+
+<footer>
+    Finance Knowledge Hub | Finance Practice Lab
+    <br>
+    Developed for Finance Learning & Practice
+</footer>
+
+
+<script>
+
+/* =====================================================
+   FINANCE QUESTION BANK
+   60 QUESTIONS
+===================================================== */
+
+const questionBank = [
+
+{
+question:"What is the formula for Net Working Capital?",
+options:[
+"Current Assets − Current Liabilities",
+"Current Liabilities − Current Assets",
+"Total Assets − Total Liabilities",
+"Fixed Assets − Current Assets"
+],
+answer:"Current Assets − Current Liabilities"
+},
+
+{
+question:"Which of the following is a current asset?",
+options:[
+"Building",
+"Machinery",
+"Inventory",
+"Goodwill"
+],
+answer:"Inventory"
+},
+
+{
+question:"Which ratio measures short-term liquidity?",
+options:[
+"Debt Equity Ratio",
+"Current Ratio",
+"Return on Equity",
+"Gross Profit Ratio"
+],
+answer:"Current Ratio"
+},
+
+{
+question:"What is the traditional ideal Current Ratio?",
+options:[
+"1 : 1",
+"2 : 1",
+"3 : 1",
+"0.5 : 1"
+],
+answer:"2 : 1"
+},
+
+{
+question:"What is the formula for Current Ratio?",
+options:[
+"Current Assets / Current Liabilities",
+"Current Liabilities / Current Assets",
+"Total Assets / Total Liabilities",
+"Cash / Current Liabilities"
+],
+answer:"Current Assets / Current Liabilities"
+},
+
+{
+question:"Which asset is normally excluded from the Quick Ratio?",
+options:[
+"Cash",
+"Debtors",
+"Inventory",
+"Marketable Securities"
+],
+answer:"Inventory"
+},
+
+{
+question:"What is the formula for Quick Ratio?",
+options:[
+"Current Assets / Current Liabilities",
+"(Current Assets − Inventory) / Current Liabilities",
+"Current Liabilities / Current Assets",
+"Cash / Total Assets"
+],
+answer:"(Current Assets − Inventory) / Current Liabilities"
+},
+
+{
+question:"Which of the following is a fixed asset?",
+options:[
+"Cash",
+"Inventory",
+"Plant and Machinery",
+"Trade Receivables"
+],
+answer:"Plant and Machinery"
+},
+
+{
+question:"Depreciation is generally classified as:",
+options:[
+"Cash expense",
+"Non-cash expense",
+"Current liability",
+"Revenue"
+],
+answer:"Non-cash expense"
+},
+
+{
+question:"Gross Profit is calculated as:",
+options:[
+"Sales − Cost of Goods Sold",
+"Sales − Operating Expenses",
+"Sales + Expenses",
+"Assets − Liabilities"
+],
+answer:"Sales − Cost of Goods Sold"
+},
+
+{
+question:"Net Profit is generally calculated after deducting:",
+options:[
+"Only purchases",
+"Only sales",
+"Operating and other expenses",
+"Only inventory"
+],
+answer:"Operating and other expenses"
+},
+
+{
+question:"Which financial statement shows the financial position of a business?",
+options:[
+"Income Statement",
+"Balance Sheet",
+"Cash Book",
+"Trial Balance"
+],
+answer:"Balance Sheet"
+},
+
+{
+question:"Which statement shows revenue and expenses?",
+options:[
+"Balance Sheet",
+"Income Statement",
+"Cash Flow Statement",
+"Bank Reconciliation Statement"
+],
+answer:"Income Statement"
+},
+
+{
+question:"Cash Flow Statement is mainly concerned with:",
+options:[
+"Cash inflows and outflows",
+"Only profits",
+"Only assets",
+"Only liabilities"
+],
+answer:"Cash inflows and outflows"
+},
+
+{
+question:"Which is an operating activity?",
+options:[
+"Purchase of machinery",
+"Sale of shares",
+"Cash received from customers",
+"Issue of debentures"
+],
+answer:"Cash received from customers"
+},
+
+{
+question:"An IPO means:",
+options:[
+"Initial Public Offering",
+"Internal Public Operation",
+"Indian Private Offering",
+"Initial Private Organisation"
+],
+answer:"Initial Public Offering"
+},
+
+{
+question:"In an IPO, OFS stands for:",
+options:[
+"Offer for Sale",
+"Order for Shares",
+"Offer for Security",
+"Open Financial System"
+],
+answer:"Offer for Sale"
+},
+
+{
+question:"In an OFS, the shares are generally sold by:",
+options:[
+"Existing shareholders",
+"Only employees",
+"Only customers",
+"Government departments"
+],
+answer:"Existing shareholders"
+},
+
+{
+question:"FPO stands for:",
+options:[
+"Follow-on Public Offer",
+"Financial Public Operation",
+"Future Public Order",
+"Fixed Price Offer"
+],
+answer:"Follow-on Public Offer"
+},
+
+{
+question:"A stock exchange provides a platform for:",
+options:[
+"Trading securities",
+"Only bank deposits",
+"Only insurance",
+"Only taxation"
+],
+answer:"Trading securities"
+},
+
+{
+question:"NSE stands for:",
+options:[
+"National Stock Exchange",
+"National Securities Enterprise",
+"New Stock Exchange",
+"National Savings Exchange"
+],
+answer:"National Stock Exchange"
+},
+
+{
+question:"BSE stands for:",
+options:[
+"Bombay Stock Exchange",
+"Banking Stock Enterprise",
+"Business Securities Exchange",
+"Bombay Securities Enterprise"
+],
+answer:"Bombay Stock Exchange"
+},
+
+{
+question:"A share represents:",
+options:[
+"Ownership interest in a company",
+"Only a loan",
+"An expense",
+"A tax payment"
+],
+answer:"Ownership interest in a company"
+},
+
+{
+question:"A debenture is generally a form of:",
+options:[
+"Debt",
+"Equity",
+"Inventory",
+"Cash"
+],
+answer:"Debt"
+},
+
+{
+question:"Dividend is generally paid to:",
+options:[
+"Shareholders",
+"Debtors",
+"Suppliers",
+"Employees only"
+],
+answer:"Shareholders"
+},
+
+{
+question:"Interest on a loan is:",
+options:[
+"Cost of borrowing",
+"Dividend",
+"Capital gain",
+"Revenue from sales"
+],
+answer:"Cost of borrowing"
+},
+
+{
+question:"The time value of money means:",
+options:[
+"Money today is generally worth more than the same amount in the future",
+"Money never changes in value",
+"Future money is always worth more",
+"Money has no opportunity cost"
+],
+answer:"Money today is generally worth more than the same amount in the future"
+},
+
+{
+question:"NPV stands for:",
+options:[
+"Net Present Value",
+"Net Profit Value",
+"New Present Value",
+"National Profit Value"
+],
+answer:"Net Present Value"
+},
+
+{
+question:"If NPV is positive, the project generally:",
+options:[
+"Adds value based on the assumed discount rate",
+"Always creates a loss",
+"Must be rejected",
+"Has zero cash flows"
+],
+answer:"Adds value based on the assumed discount rate"
+},
+
+{
+question:"IRR stands for:",
+options:[
+"Internal Rate of Return",
+"Investment Return Ratio",
+"Internal Revenue Rate",
+"Indian Rate of Return"
+],
+answer:"Internal Rate of Return"
+},
+
+{
+question:"ROI stands for:",
+options:[
+"Return on Investment",
+"Rate of Income",
+"Return on Interest",
+"Revenue on Investment"
+],
+answer:"Return on Investment"
+},
+
+{
+question:"ROE measures return earned on:",
+options:[
+"Shareholders' equity",
+"Inventory",
+"Current liabilities",
+"Sales only"
+],
+answer:"Shareholders' equity"
+},
+
+{
+question:"Debt-Equity Ratio compares:",
+options:[
+"Debt with shareholders' equity",
+"Sales with inventory",
+"Cash with sales",
+"Assets with revenue"
+],
+answer:"Debt with shareholders' equity"
+},
+
+{
+question:"A higher debt-equity ratio generally indicates:",
+options:[
+"Greater financial leverage",
+"Zero debt",
+"Lower borrowing",
+"No liabilities"
+],
+answer:"Greater financial leverage"
+},
+
+{
+question:"Break-even point is where:",
+options:[
+"Total Revenue = Total Cost",
+"Revenue is zero",
+"Profit is maximum",
+"Fixed cost is zero"
+],
+answer:"Total Revenue = Total Cost"
+},
+
+{
+question:"Contribution is calculated as:",
+options:[
+"Sales − Variable Cost",
+"Sales − Fixed Cost",
+"Profit − Sales",
+"Fixed Cost − Variable Cost"
+],
+answer:"Sales − Variable Cost"
+},
+
+{
+question:"Fixed costs remain constant within:",
+options:[
+"A relevant range of activity",
+"All possible activity levels",
+"Only zero production",
+"No production level"
+],
+answer:"A relevant range of activity"
+},
+
+{
+question:"Which is normally a variable cost?",
+options:[
+"Factory rent",
+"Direct material",
+"Insurance",
+"Manager salary"
+],
+answer:"Direct material"
+},
+
+{
+question:"Budget is best described as:",
+options:[
+"A financial or quantitative plan",
+"Only a historical statement",
+"Only a tax document",
+"Only a bank statement"
+],
+answer:"A financial or quantitative plan"
+},
+
+{
+question:"Cash Budget estimates:",
+options:[
+"Cash receipts and cash payments",
+"Only profits",
+"Only assets",
+"Only depreciation"
+],
+answer:"Cash receipts and cash payments"
+},
+
+{
+question:"Credit sales are recorded in the cash budget as:",
+options:[
+"Cash receipts when collected",
+"Immediate cash receipts always",
+"Fixed assets",
+"Capital expenditure"
+],
+answer:"Cash receipts when collected"
+},
+
+{
+question:"Capital budgeting deals mainly with:",
+options:[
+"Long-term investment decisions",
+"Daily petty cash",
+"Employee attendance",
+"Inventory counting only"
+],
+answer:"Long-term investment decisions"
+},
+
+{
+question:"Liquidity refers to the ability to:",
+options:[
+"Meet short-term obligations",
+"Increase sales only",
+"Increase fixed assets",
+"Reduce depreciation"
+],
+answer:"Meet short-term obligations"
+},
+
+{
+question:"Solvency refers mainly to the ability to:",
+options:[
+"Meet long-term obligations",
+"Pay daily expenses only",
+"Increase inventory",
+"Calculate sales"
+],
+answer:"Meet long-term obligations"
+},
+
+{
+question:"Financial leverage arises mainly from the use of:",
+options:[
+"Debt",
+"Inventory",
+"Cash sales",
+"Trade discounts"
+],
+answer:"Debt"
+},
+
+{
+question:"Cost of capital is generally the:",
+options:[
+"Required rate of return on capital",
+"Cost of inventory only",
+"Cost of sales",
+"Tax rate only"
+],
+answer:"Required rate of return on capital"
+},
+
+{
+question:"WACC stands for:",
+options:[
+"Weighted Average Cost of Capital",
+"Working Asset Cost Calculation",
+"Weighted Annual Cash Cost",
+"Working Average Capital Cost"
+],
+answer:"Weighted Average Cost of Capital"
+},
+
+{
+question:"ESG stands for:",
+options:[
+"Environmental, Social and Governance",
+"Economic, Social and Growth",
+"Environmental Sales and Governance",
+"Equity, Sustainability and Growth"
+],
+answer:"Environmental, Social and Governance"
+},
+
+{
+question:"Green finance mainly supports:",
+options:[
+"Environmentally sustainable projects",
+"Only luxury consumption",
+"Only cash transactions",
+"Only short-term loans"
+],
+answer:"Environmentally sustainable projects"
+},
+
+{
+question:"A green bond is generally issued to finance:",
+options:[
+"Eligible environmentally beneficial projects",
+"Only employee salaries",
+"Only dividends",
+"Personal consumption"
+],
+answer:"Eligible environmentally beneficial projects"
+},
+
+{
+question:"Financial inclusion means:",
+options:[
+"Access to appropriate financial services",
+"Only stock market investment",
+"Only corporate banking",
+"Only foreign exchange trading"
+],
+answer:"Access to appropriate financial services"
+},
+
+{
+question:"FinTech refers to:",
+options:[
+"Technology applied to financial services",
+"Only physical banking",
+"Only taxation",
+"Only accounting books"
+],
+answer:"Technology applied to financial services"
+},
+
+{
+question:"Digital payments are an example of:",
+options:[
+"Financial technology",
+"Fixed assets",
+"Inventory management",
+"Capital budgeting"
+],
+answer:"Financial technology"
+},
+
+{
+question:"A mutual fund pools money from:",
+options:[
+"Multiple investors",
+"Only one investor",
+"Only banks",
+"Only governments"
+],
+answer:"Multiple investors"
+},
+
+{
+question:"Diversification is used mainly to:",
+options:[
+"Reduce unsystematic risk",
+"Guarantee profit",
+"Eliminate all risk",
+"Increase taxes"
+],
+answer:"Reduce unsystematic risk"
+},
+
+{
+question:"Systematic risk is generally associated with:",
+options:[
+"Market-wide factors",
+"Only one company's management",
+"One employee",
+"One supplier"
+],
+answer:"Market-wide factors"
+},
+
+{
+question:"A portfolio is:",
+options:[
+"A collection of investments",
+"Only one share",
+"Only cash",
+"Only a bank loan"
+],
+answer:"A collection of investments"
+},
+
+{
+question:"Inflation generally means:",
+options:[
+"A sustained increase in the general price level",
+"A fall in all prices",
+"An increase in production only",
+"A reduction in money supply only"
+],
+answer:"A sustained increase in the general price level"
+},
+
+{
+question:"Opportunity cost means:",
+options:[
+"The benefit of the next best alternative forgone",
+"Only accounting cost",
+"Only fixed cost",
+"Only tax cost"
+],
+answer:"The benefit of the next best alternative forgone"
+},
+
+{
+question:"Accounts receivable represents:",
+options:[
+"Money owed by customers",
+"Money owed to suppliers",
+"Cash in hand only",
+"Long-term debt"
+],
+answer:"Money owed by customers"
+},
+
+{
+question:"Accounts payable represents:",
+options:[
+"Money owed to suppliers",
+"Money owed by customers",
+"Cash sales",
+"Share capital"
+],
+answer:"Money owed to suppliers"
+}
+
+];
+
+
+/* =====================================================
+   QUIZ VARIABLES
+===================================================== */
+
+let quizQuestions = [];
+let currentQuestion = 0;
+let userAnswers = [];
+let score = 0;
+
+
+/* =====================================================
+   SHUFFLE FUNCTION
+===================================================== */
+
+function shuffle(array){
+
+    let arr = [...array];
+
+    for(let i = arr.length - 1; i > 0; i--){
+
+        let j = Math.floor(Math.random() * (i + 1));
+
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
+    return arr;
+}
+
+
+/* =====================================================
+   START QUIZ
+===================================================== */
+
+function startQuiz(){
+
+    /*
+       Select 20 random questions
+       from the 60-question bank
+    */
+
+    quizQuestions = shuffle(questionBank)
+        .slice(0,20)
+        .map(q => ({
+            ...q,
+            options: shuffle(q.options)
+        }));
+
+    currentQuestion = 0;
+    userAnswers = new Array(20).fill(null);
+    score = 0;
+
+    document.getElementById("quizScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    showQuestion();
+}
+
+
+/* =====================================================
+   DISPLAY QUESTION
+===================================================== */
+
+function showQuestion(){
+
+    const q = quizQuestions[currentQuestion];
+
+    document.getElementById("progress").innerText =
+        "Question " + (currentQuestion + 1) + " of 20";
+
+    document.getElementById("question").innerText =
+        q.question;
+
+    const optionsContainer =
+        document.getElementById("options");
+
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((option,index)=>{
+
+        const label = document.createElement("label");
+
+        label.className = "option";
+
+        label.innerHTML = `
+            <input
+                type="radio"
+                name="answer"
+                value="${option}"
+                ${userAnswers[currentQuestion] === option ? "checked" : ""}
+            >
+            ${option}
+        `;
+
+        label.addEventListener("click",function(){
+
+            userAnswers[currentQuestion] = option;
+
+            document
+                .querySelectorAll(".option")
+                .forEach(el => el.classList.remove("selected"));
+
+            label.classList.add("selected");
+        });
+
+        if(userAnswers[currentQuestion] === option){
+            label.classList.add("selected");
+        }
+
+        optionsContainer.appendChild(label);
+
+    });
+
+
+    /* Previous button */
+
+    document.getElementById("prevBtn").style.visibility =
+        currentQuestion === 0 ? "hidden" : "visible";
+
+
+    /* Last question button */
+
+    if(currentQuestion === 19){
+
+        document.getElementById("nextBtn").innerText =
+            "Submit Quiz ✓";
+
+    }else{
+
+        document.getElementById("nextBtn").innerText =
+            "Next →";
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+function nextQuestion(){
+
+    if(!userAnswers[currentQuestion]){
+
+        alert("Please select an answer before continuing.");
+
+        return;
+    }
+
+
+    if(currentQuestion < 19){
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }else{
+
+        finishQuiz();
+
+    }
+
+}
+
+
+/* =====================================================
+   PREVIOUS QUESTION
+===================================================== */
+
+function previousQuestion(){
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+
+}
+
+
+/* =====================================================
+   FINISH QUIZ
+===================================================== */
+
+function finishQuiz(){
+
+    score = 0;
+
+
+    quizQuestions.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+
+            score++;
+
+        }
+
+    });
+
+
+    const percentage =
+        Math.round((score / 20) * 100);
+
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.remove("hidden");
+
+
+    document.getElementById("finalScore").innerText =
+        score + " / 20";
+
+
+    document.getElementById("percentage").innerText =
+        percentage + "%";
+
+
+    let message = "";
+
+
+    if(percentage >= 90){
+
+        message =
+        "🌟 Outstanding! You have demonstrated excellent knowledge of finance.";
+
+    }else if(percentage >= 75){
+
+        message =
+        "👏 Very good! You have a strong understanding of finance concepts.";
+
+    }else if(percentage >= 60){
+
+        message =
+        "👍 Good effort! Keep practicing to strengthen your finance knowledge.";
+
+    }else if(percentage >= 40){
+
+        message =
+        "📚 Good beginning. Review the concepts and try the quiz again.";
+
+    }else{
+
+        message =
+        "💡 Keep learning and practicing. Every attempt is an opportunity to improve.";
+
+    }
+
+
+    document.getElementById("resultMessage").innerText =
+        message;
+
+
+    showReview();
+
+}
+
+
+/* =====================================================
+   ANSWER REVIEW
+===================================================== */
+
+function showReview(){
+
+    const container =
+        document.getElementById("reviewContainer");
+
+    container.innerHTML = "";
+
+
+    quizQuestions.forEach((q,index)=>{
+
+        const div =
+            document.createElement("div");
+
+
+        const isCorrect =
+            userAnswers[index] === q.answer;
+
+
+        div.className =
+            "review-item " +
+            (isCorrect ? "correct" : "wrong");
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${index + 1}. ${q.question}
+            </strong>
+
+            Your answer:
+            ${userAnswers[index] || "Not answered"}
+
+            <br>
+
+            Correct answer:
+            ${q.answer}
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartQuiz(){
+
+    startQuiz();
+
+}
+
+
+/* =====================================================
+   START AUTOMATICALLY
+===================================================== */
+
+startQuiz();
+
+</script>
+
+</body>
+</html>
