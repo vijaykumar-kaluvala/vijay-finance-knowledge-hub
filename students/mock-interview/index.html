@@ -302,75 +302,176 @@ button:hover {
 
 <script>
 
+
 const questionBank = {
 
-finance: [
-"What is working capital? Explain with an example.",
-"What is the difference between debt and equity?",
-"What is the meaning of capital budgeting?",
-"Explain the concept of financial leverage.",
-"What are the major financial statements of a company?",
-"What is the difference between gross profit and net profit?",
-"What is the importance of cash flow management?",
-"What is ROI and how is it calculated?",
-"What is the difference between fixed cost and variable cost?",
-"Why is financial planning important for a business?"
-],
+  banking: [
 
-banking: [
-"What is the role of commercial banks in an economy?",
-"What is the difference between NEFT, RTGS and IMPS?",
-"What is a non-performing asset (NPA)?",
-"What is the meaning of bank rate?",
-"What is CRR?",
-"What is SLR?",
-"What is financial inclusion?",
-"What is a credit score?",
-"What is the difference between secured and unsecured loans?",
-"Why is KYC important in banking?"
-],
+    "What is the role of a commercial bank?",
+    "What is the difference between a savings account and a current account?",
+    "What is a Non-Performing Asset (NPA)?",
+    "Why is KYC important in banking?",
+    "What is the difference between secured and unsecured loans?",
 
-analyst: [
-"What is financial ratio analysis?",
-"Explain the current ratio.",
-"What is EBITDA?",
-"How would you evaluate the financial performance of a company?",
-"What is discounted cash flow analysis?",
-"What is a P/E ratio?",
-"What is free cash flow?",
-"How would you analyse a company's profitability?",
-"What is financial forecasting?",
-"What factors would you consider before investing in a company?"
-],
+    "A bank provides a loan of ₹5,00,000 at 10% simple interest for one year. Calculate the interest.",
+    "A customer deposits ₹1,00,000 in a bank at 6% annual interest. Calculate the interest earned in one year.",
+    "A bank has deposits of ₹10 crore and advances of ₹7 crore. Calculate the credit-deposit ratio.",
+    "A borrower has an outstanding loan of ₹4,00,000 and pays ₹40,000 interest during the year. Calculate the interest rate.",
+    "A bank's total deposits are ₹50 crore and its total loans are ₹35 crore. What percentage of deposits have been converted into loans?",
 
-accounting: [
-"What is the accounting equation?",
-"What is the difference between assets and liabilities?",
-"What is depreciation?",
-"What is a trial balance?",
-"What is the difference between capital expenditure and revenue expenditure?",
-"What is double-entry bookkeeping?",
-"What is a balance sheet?",
-"What is a profit and loss statement?",
-"What is a cash flow statement?",
-"What is working capital?"
-],
+    "What is the difference between repo rate and reverse repo rate?",
+    "What is CRR and why is it maintained?",
+    "What is SLR?",
+    "How does an increase in interest rates affect borrowers?",
+    "What is the importance of liquidity management in banks?",
+    "What is credit risk?",
+    "What is interest rate risk?",
+    "What is capital adequacy ratio?",
+    "What is digital banking?",
+    "How has FinTech changed traditional banking?",
+    "What is financial inclusion?",
+    "What is the purpose of credit appraisal?",
+    "What factors should a bank consider before sanctioning a loan?",
+    "What is the difference between retail banking and corporate banking?",
+    "What is the importance of asset-liability management in banks?"
 
-investment: [
-"What is an IPO?",
-"What is the difference between primary and secondary markets?",
-"What is a mutual fund?",
-"What is diversification?",
-"What is systematic risk?",
-"What is unsystematic risk?",
-"What is an investment portfolio?",
-"What is the difference between shares and bonds?",
-"What is market capitalization?",
-"What factors should an investor consider before investing in an IPO?"
-]
+  ],
+
+
+  analyst: [
+
+    "What is financial ratio analysis?",
+    "Explain the current ratio.",
+    "What is EBITDA?",
+    "How would you evaluate the financial performance of a company?",
+    "What is discounted cash flow analysis?",
+    "What is a P/E ratio?",
+    "What is free cash flow?",
+    "How would you analyse a company's profitability?",
+    "What is financial forecasting?",
+    "What factors would you consider before investing in a company?",
+
+    "A company has current assets of ₹5,00,000 and current liabilities of ₹2,50,000. Calculate the current ratio.",
+    "A company has current assets of ₹8,00,000, inventory of ₹2,00,000 and current liabilities of ₹4,00,000. Calculate the quick ratio.",
+    "A company has sales of ₹10,00,000 and operating profit of ₹2,00,000. Calculate the operating profit ratio.",
+    "A company has net profit of ₹1,50,000 and sales of ₹10,00,000. Calculate the net profit ratio.",
+    "A company has debt of ₹6,00,000 and equity of ₹4,00,000. Calculate the debt-equity ratio.",
+    "A company has net profit of ₹2,00,000 and shareholders' equity of ₹10,00,000. Calculate ROE.",
+    "A company invests ₹5,00,000 and earns ₹75,000 as return. Calculate ROI.",
+    "A company's market price is ₹240 and EPS is ₹20. Calculate the P/E ratio.",
+    "A company has total assets of ₹20,00,000 and sales of ₹30,00,000. Calculate the asset turnover ratio.",
+    "A company has gross profit of ₹4,00,000 and sales of ₹10,00,000. Calculate the gross profit ratio.",
+
+    "What is the difference between liquidity and profitability?",
+    "What is working capital?",
+    "Why is cash flow analysis important?",
+    "What is trend analysis?",
+    "What is common-size financial statement analysis?",
+    "What is comparative financial statement analysis?",
+    "What is sensitivity analysis?",
+    "What is scenario analysis?",
+    "What is the importance of free cash flow for investors?",
+    "How can financial ratios help in investment decisions?",
+    "What are the limitations of financial ratio analysis?",
+    "What is financial leverage?",
+    "How does debt affect shareholder returns?",
+    "What is intrinsic value of a share?",
+    "What is the difference between fundamental analysis and technical analysis?"
+
+  ],
+
+
+  accounting: [
+
+    "What is the accounting equation?",
+    "What is the difference between assets and liabilities?",
+    "What is depreciation?",
+    "What is a trial balance?",
+    "What is the difference between capital expenditure and revenue expenditure?",
+    "What is double-entry bookkeeping?",
+    "What is a balance sheet?",
+    "What is a profit and loss statement?",
+    "What is a cash flow statement?",
+    "What is working capital?",
+
+    "If assets are ₹10,00,000 and liabilities are ₹4,00,000, calculate the owner's capital.",
+    "A company purchases machinery for ₹5,00,000 and pays ₹1,00,000 for installation. Calculate the total cost of machinery.",
+    "A machine costs ₹6,00,000 and has a useful life of 5 years with no scrap value. Calculate annual depreciation using the straight-line method.",
+    "A company has sales of ₹10,00,000 and cost of goods sold of ₹6,00,000. Calculate gross profit.",
+    "A company has gross profit of ₹4,00,000 and operating expenses of ₹1,50,000. Calculate operating profit.",
+    "A business has cash of ₹2,00,000, debtors of ₹3,00,000 and inventory of ₹5,00,000. Calculate total current assets.",
+    "Current assets are ₹8,00,000 and current liabilities are ₹5,00,000. Calculate working capital.",
+    "A company has opening inventory of ₹1,00,000, purchases of ₹5,00,000 and closing inventory of ₹1,50,000. Calculate cost of goods sold.",
+    "A company earns revenue of ₹12,00,000 and incurs expenses of ₹9,00,000. Calculate net profit.",
+    "A company has total assets of ₹15,00,000 and total liabilities of ₹6,00,000. Calculate equity.",
+
+    "What is accrual accounting?",
+    "What is the difference between cash accounting and accrual accounting?",
+    "What is a journal entry?",
+    "What is a ledger?",
+    "What is bank reconciliation statement?",
+    "Why is depreciation charged?",
+    "What is provision for doubtful debts?",
+    "What is the difference between gross profit and net profit?",
+    "What is the importance of a cash flow statement?",
+    "What is the difference between profit and cash flow?",
+    "What are current assets?",
+    "What are current liabilities?",
+    "What is inventory valuation?",
+    "What is the purpose of preparing a trial balance?",
+    "What are the three major financial statements?"
+
+  ],
+
+
+  investment: [
+
+    "What is an IPO?",
+    "What is the difference between primary and secondary markets?",
+    "What is a mutual fund?",
+    "What is diversification?",
+    "What is systematic risk?",
+    "What is unsystematic risk?",
+    "What is an investment portfolio?",
+    "What is the difference between shares and bonds?",
+    "What is market capitalization?",
+    "What factors should an investor consider before investing in an IPO?",
+
+    "An investor purchases 100 shares at ₹200 per share and sells them at ₹250 per share. Calculate the capital gain.",
+    "An investor buys shares for ₹50,000 and earns a dividend of ₹3,000. Calculate the dividend yield.",
+    "An investor purchases a share for ₹100 and receives a dividend of ₹5. Calculate the dividend yield.",
+    "A share is purchased for ₹500 and sold for ₹575. Calculate the percentage capital gain.",
+    "An investor invests ₹1,00,000 and earns ₹12,000 return. Calculate ROI.",
+    "A company has 10 lakh shares outstanding and the market price is ₹150 per share. Calculate market capitalization.",
+    "A company's EPS is ₹15 and its market price is ₹300. Calculate the P/E ratio.",
+    "An investor buys 50 shares at ₹400 and receives a dividend of ₹10 per share. Calculate total dividend income.",
+    "A bond has a face value of ₹1,000 and pays an annual coupon of 8%. Calculate the annual interest.",
+    "An investor has ₹1,00,000 and divides it equally among 5 stocks. How much is invested in each stock?",
+
+    "What is the difference between an IPO and an FPO?",
+    "What is an OFS in the stock market?",
+    "Why do companies issue IPOs?",
+    "What is the purpose of a prospectus in an IPO?",
+    "What is the difference between face value and market value?",
+    "What is dividend?",
+    "What is capital appreciation?",
+    "What is risk-return trade-off?",
+    "What is portfolio diversification?",
+    "What is the difference between equity shares and preference shares?",
+    "What is a bond?",
+    "What is a debenture?",
+    "What is a mutual fund NAV?",
+    "What is SIP?",
+    "What is the difference between market risk and company-specific risk?",
+    "What factors should an investor analyse before buying a stock?",
+    "What is fundamental analysis?",
+    "What is technical analysis?",
+    "Why is diversification important for an investor?",
+    "How does inflation affect investment returns?"
+
+  ]
 
 };
-
 let questions = [];
 let currentQuestion = 0;
 let totalScore = 0;
