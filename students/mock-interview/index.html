@@ -214,7 +214,19 @@ button:hover {
         <div class="question-number" id="questionNumber"></div>
         <h3 id="questionText"></h3>
     </div>
-
+<div id="timerBox" style="
+    margin:15px 0;
+    padding:12px;
+    background:#fff3cd;
+    border:2px solid #d99a00;
+    border-radius:10px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#8a5700;
+">
+    ⏱️ Time Remaining: <span id="timer">60</span> seconds
+</div>
     <label>Your Answer</label>
 
    <textarea id="answer"
@@ -539,6 +551,83 @@ document.addEventListener("paste", function(e) {
 
 document.addEventListener("dragstart", function(e) {
     e.preventDefault();
+});
+// ===============================
+// 60 SECOND INTERVIEW TIMER
+// ===============================
+
+let interviewTimer;
+let timeRemaining = 60;
+
+function startInterviewTimer() {
+
+    clearInterval(interviewTimer);
+
+    timeRemaining = 60;
+
+    document.getElementById("timer").textContent = timeRemaining;
+
+    interviewTimer = setInterval(function() {
+
+        timeRemaining--;
+
+        document.getElementById("timer").textContent = timeRemaining;
+
+        if (timeRemaining <= 10) {
+            document.getElementById("timerBox").style.color = "#b00020";
+            document.getElementById("timerBox").style.borderColor = "#b00020";
+        }
+
+        if (timeRemaining <= 0) {
+
+            clearInterval(interviewTimer);
+
+            alert("⏰ Time is up! Your answer will be submitted automatically.");
+
+            submitAnswer();
+
+        }
+
+    }, 1000);
+}
+// ===============================
+// TAB SWITCH / FOCUS PROTECTION
+// ===============================
+
+let tabSwitches = 0;
+
+document.addEventListener("visibilitychange", function () {
+
+    // Only monitor while interview is running
+    const interviewScreen = document.getElementById("interviewScreen");
+
+    if (
+        document.visibilityState === "hidden" &&
+        interviewScreen &&
+        !interviewScreen.classList.contains("hidden")
+    ) {
+
+        tabSwitches++;
+
+        if (tabSwitches === 1) {
+
+            alert(
+                "⚠️ Warning!\n\n" +
+                "You left the Finance Mock Interview screen.\n\n" +
+                "Please remain on this page during the interview."
+            );
+
+        } else if (tabSwitches === 2) {
+
+            alert(
+                "⚠️ Second warning!\n\n" +
+                "You have left the interview screen twice.\n\n" +
+                "Your current answer will now be submitted."
+            );
+
+            submitAnswer();
+        }
+    }
 });
 </script>
 
