@@ -512,22 +512,9 @@ document.getElementById("reportProgram").innerText =
 
 document.getElementById("reportRole").innerText =
     document.getElementById("role").value || "Job Role";
-document.addEventListener("keydown", function(e) {
 
-    if (e.ctrlKey || e.metaKey) {
-
-        if (
-            e.key.toLowerCase() === "c" ||
-            e.key.toLowerCase() === "v" ||
-            e.key.toLowerCase() === "x" ||
-            e.key.toLowerCase() === "a"
-        ) {
-            e.preventDefault();
-            alert("Copy, Paste and Select All are disabled during the mock interview.");
-        }
-    }
-
-});
+}
+   
 </script>
 
 </body>
