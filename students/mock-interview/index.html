@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Finance Mock Interview | Finance Knowledge Hub</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #e8eef7);
+    color: #222;
+}
+
+.header {
+    background: linear-gradient(135deg, #7a4b00, #d4a017);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+h2 {
+    color: #7a4b00;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button {
+    background: #7a4b00;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #a66a00;
+}
+
+.question-box {
+    background: #fff8e6;
+    border-left: 6px solid #d4a017;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.question-number {
+    font-weight: bold;
+    color: #7a4b00;
+}
+
+.progress {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.score {
+    text-align: center;
+    background: #fff8e6;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.score-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: #7a4b00;
+}
+
+.feedback {
+    margin-top: 20px;
+}
+
+.feedback div {
+    background: #f7f7f7;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🎤 Finance Mock Interview</h1>
+    <p>Finance Career Practice Lab | Finance Knowledge Hub</p>
+</div>
+
+<div class="container">
+
+<!-- START SCREEN -->
+<div class="card" id="startScreen">
+
+    <h2>Welcome to the Finance Mock Interview</h2>
+
+    <p>
+        Practice your interview skills before facing a real placement interview.
+        Questions are selected randomly for every student.
+    </p>
+
+    <label>Select Job Role</label>
+
+    <select id="role">
+        <option value="finance">Finance Executive</option>
+        <option value="banking">Banking</option>
+        <option value="analyst">Financial Analyst</option>
+        <option value="accounting">Accounting</option>
+        <option value="investment">Investment Banking</option>
+    </select>
+
+    <label>Select Difficulty</label>
+
+    <select id="difficulty">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+    </select>
+
+    <button onclick="startInterview()">🚀 Start Mock Interview</button>
+
+</div>
+
+
+<!-- INTERVIEW SCREEN -->
+<div class="card hidden" id="interviewScreen">
+
+    <h2>🎤 Interview in Progress</h2>
+
+    <div class="progress" id="progress"></div>
+
+    <div class="question-box">
+        <div class="question-number" id="questionNumber"></div>
+        <h3 id="questionText"></h3>
+    </div>
+
+    <label>Your Answer</label>
+
+    <textarea id="answer"
+        placeholder="Type your answer here..."></textarea>
+
+    <button onclick="submitAnswer()">Submit Answer ➜</button>
+
+</div>
+
+
+<!-- RESULT SCREEN -->
+<div class="card hidden" id="resultScreen">
+
+    <h2>🏆 Interview Readiness Report</h2>
+
+    <div class="score">
+
+        <div>Your Overall Score</div>
+
+        <div class="score-number" id="finalScore">
+            0%
+        </div>
+
+        <div id="resultMessage"></div>
+
+    </div>
+
+    <div class="feedback">
+
+        <h3>📌 Interview Feedback</h3>
+
+        <div>
+            <strong>✅ Strength:</strong>
+            You completed the interview and demonstrated your finance knowledge.
+        </div>
+
+        <div>
+            <strong>💡 Improvement Area:</strong>
+            Try to provide structured answers with definitions, explanations and practical examples.
+        </div>
+
+        <div>
+            <strong>🎯 Placement Tip:</strong>
+            Use the STAR approach for situation-based questions:
+            Situation → Task → Action → Result.
+        </div>
+
+    </div>
+
+    <button onclick="location.reload()">🔄 Take Another Interview</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+    Developed for Student Career Readiness | Finance Knowledge Hub<br>
+    Dr. Vijay Kumar Kaluvala | Associate Professor – Finance
+</div>
+
+
+<script>
+
+const questionBank = {
+
+finance: [
+"What is working capital? Explain with an example.",
+"What is the difference between debt and equity?",
+"What is the meaning of capital budgeting?",
+"Explain the concept of financial leverage.",
+"What are the major financial statements of a company?",
+"What is the difference between gross profit and net profit?",
+"What is the importance of cash flow management?",
+"What is ROI and how is it calculated?",
+"What is the difference between fixed cost and variable cost?",
+"Why is financial planning important for a business?"
+],
+
+banking: [
+"What is the role of commercial banks in an economy?",
+"What is the difference between NEFT, RTGS and IMPS?",
+"What is a non-performing asset (NPA)?",
+"What is the meaning of bank rate?",
+"What is CRR?",
+"What is SLR?",
+"What is financial inclusion?",
+"What is a credit score?",
+"What is the difference between secured and unsecured loans?",
+"Why is KYC important in banking?"
+],
+
+analyst: [
+"What is financial ratio analysis?",
+"Explain the current ratio.",
+"What is EBITDA?",
+"How would you evaluate the financial performance of a company?",
+"What is discounted cash flow analysis?",
+"What is a P/E ratio?",
+"What is free cash flow?",
+"How would you analyse a company's profitability?",
+"What is financial forecasting?",
+"What factors would you consider before investing in a company?"
+],
+
+accounting: [
+"What is the accounting equation?",
+"What is the difference between assets and liabilities?",
+"What is depreciation?",
+"What is a trial balance?",
+"What is the difference between capital expenditure and revenue expenditure?",
+"What is double-entry bookkeeping?",
+"What is a balance sheet?",
+"What is a profit and loss statement?",
+"What is a cash flow statement?",
+"What is working capital?"
+],
+
+investment: [
+"What is an IPO?",
+"What is the difference between primary and secondary markets?",
+"What is a mutual fund?",
+"What is diversification?",
+"What is systematic risk?",
+"What is unsystematic risk?",
+"What is an investment portfolio?",
+"What is the difference between shares and bonds?",
+"What is market capitalization?",
+"What factors should an investor consider before investing in an IPO?"
+]
+
+};
+
+let questions = [];
+let currentQuestion = 0;
+let totalScore = 0;
+
+function startInterview() {
+
+    const role = document.getElementById("role").value;
+
+    questions = [...questionBank[role]];
+
+    // Randomize questions
+    questions.sort(() => Math.random() - 0.5);
+
+    // Take 5 random questions
+    questions = questions.slice(0,5);
+
+    currentQuestion = 0;
+    totalScore = 0;
+
+    document.getElementById("startScreen").classList.add("hidden");
+
+    document.getElementById("interviewScreen").classList.remove("hidden");
+
+    showQuestion();
+}
+
+
+function showQuestion() {
+
+    document.getElementById("questionNumber").innerText =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+    document.getElementById("progress").innerText =
+        "Interview Progress: " +
+        Math.round((currentQuestion / questions.length) * 100) + "%";
+
+    document.getElementById("questionText").innerText =
+        questions[currentQuestion];
+
+    document.getElementById("answer").value = "";
+}
+
+
+function submitAnswer() {
+
+    const answer = document.getElementById("answer").value.trim();
+
+    if(answer.length < 10) {
+
+        alert("Please provide a little more detail in your answer.");
+
+        return;
+    }
+
+    /*
+       Simple answer evaluation.
+       This is an AI-style prototype and does not require an API.
+    */
+
+    let score = 50;
+
+    if(answer.length > 50) score += 10;
+
+    if(answer.length > 100) score += 10;
+
+    const keywords = [
+        "example",
+        "because",
+        "company",
+        "profit",
+        "cost",
+        "finance",
+        "financial",
+        "risk",
+        "investment",
+        "capital",
+        "cash",
+        "market",
+        "asset",
+        "liability"
+    ];
+
+    keywords.forEach(function(word) {
+
+        if(answer.toLowerCase().includes(word)) {
+
+            score += 2;
+
+        }
+
+    });
+
+    if(score > 100) score = 100;
+
+    totalScore += score;
+
+    currentQuestion++;
+
+    if(currentQuestion < questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        showResults();
+
+    }
+
+}
+
+
+function showResults() {
+
+    document.getElementById("interviewScreen").classList.add("hidden");
+
+    document.getElementById("resultScreen").classList.remove("hidden");
+
+    const finalScore =
+        Math.round(totalScore / questions.length);
+
+    document.getElementById("finalScore").innerText =
+        finalScore + "%";
+
+
+    let message = "";
+
+    if(finalScore >= 80) {
+
+        message =
+        "Excellent! You are demonstrating strong interview readiness.";
+
+    } else if(finalScore >= 60) {
+
+        message =
+        "Good attempt! Continue practising technical and practical questions.";
+
+    } else {
+
+        message =
+        "Keep practising. Focus on finance fundamentals and structured answers.";
+
+    }
+
+    document.getElementById("resultMessage").innerText =
+        message;
+}
+
+</script>
+
+</body>
+</html>
