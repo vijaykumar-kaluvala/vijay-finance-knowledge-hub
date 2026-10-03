@@ -559,13 +559,13 @@ document.addEventListener("dragstart", function(e) {
 // ===============================
 
 let interviewTimer;
-let timeRemaining = 60;
+let timeRemaining = 120;
 
 function startInterviewTimer() {
 
     clearInterval(interviewTimer);
 
-    timeRemaining = 60;
+    timeRemaining = 120;
 
     document.getElementById("timer").textContent = timeRemaining;
 
