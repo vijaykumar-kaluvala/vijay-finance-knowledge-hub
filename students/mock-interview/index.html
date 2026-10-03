@@ -390,11 +390,13 @@ function startInterview() {
     currentQuestion = 0;
     totalScore = 0;
 
-    document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("startScreen").classList.add("hidden");
 
-    document.getElementById("interviewScreen").classList.remove("hidden");
+document.getElementById("interviewScreen").classList.remove("hidden");
 
-    showQuestion();
+showQuestion();
+
+startInterviewTimer();
 }
 
 
