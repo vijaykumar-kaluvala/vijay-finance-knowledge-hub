@@ -163,7 +163,23 @@ button:hover {
         Practice your interview skills before facing a real placement interview.
         Questions are selected randomly for every student.
     </p>
+<label>Student Name</label>
 
+<input
+    type="text"
+    id="studentName"
+    placeholder="Enter your full name"
+    style="width:100%; padding:14px; border:1px solid #ccc; border-radius:10px; font-size:16px;"
+>
+
+<label>Program</label>
+
+<select id="program">
+    <option value="MBA Finance">MBA Finance</option>
+    <option value="MBA">MBA</option>
+    <option value="BBA Finance">BBA Finance</option>
+    <option value="BBA">BBA</option>
+</select>
     <label>Select Job Role</label>
 
     <select id="role">
@@ -213,6 +229,13 @@ button:hover {
 <div class="card hidden" id="resultScreen">
 
     <h2>🏆 Interview Readiness Report</h2>
+    <div id="candidateInfo" style="background:#fff8e6; padding:15px; border-radius:12px; margin:15px 0; font-size:17px;">
+    🎓 Student: <strong id="reportStudentName">Student</strong><br>
+    📚 Program: <strong id="reportProgram">Program</strong><br>
+    🎯 Target Role: <strong id="reportRole">Job Role</strong>
+</div>
+
+
 
     <div class="score">
 
@@ -476,8 +499,15 @@ function showResults() {
 
     document.getElementById("resultMessage").innerText =
         message;
-}
+document.getElementById("reportStudentName").innerText =
+    document.getElementById("studentName").value || "Student";
 
+document.getElementById("reportProgram").innerText =
+    document.getElementById("program").value || "Program";
+
+document.getElementById("reportRole").innerText =
+    document.getElementById("role").value || "Job Role";
+}
 </script>
 
 </body>
