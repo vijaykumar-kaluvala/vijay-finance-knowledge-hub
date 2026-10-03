@@ -570,18 +570,21 @@ function submitAnswer() {
 
     totalScore += score;
 
-    currentQuestion++;
+   currentQuestion++;
 
-    if(currentQuestion < questions.length) {
+if(currentQuestion < questions.length) {
 
-        showQuestion();
-        
-startInterviewTimer();
-    } else {
+    showQuestion();
 
-        showResults();
+    // Start a fresh 120-second timer for the next question
+    startInterviewTimer();
 
-    }
+} else {
+
+    clearInterval(interviewTimer);
+    showResults();
+
+}
 
 }
 
