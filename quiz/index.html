@@ -314,6 +314,12 @@ footer{
         🔄 Try Another Quiz
     </button>
 
+<button
+    class="btn btn-primary"
+    onclick="generateCertificate()">
+    🏆 Generate Certificate
+</button>
+
     <div class="review">
 
         <h3>📋 Answer Review</h3>
@@ -1580,6 +1586,135 @@ function finishQuiz(){
     showReview();
 
 }
+
+  
+/* ================================
+   CERTIFICATE FEATURE
+================================ */
+
+function generateCertificate() {
+    const participantName = prompt(
+        "Enter your full name for the certificate:"
+    );
+
+    if (!participantName || !participantName.trim()) {
+        alert("Please enter your full name to generate the certificate.");
+        return;
+    }
+
+    const scoreText =
+        document.getElementById("finalScore").innerText;
+
+    const percentageText =
+        document.getElementById("percentage").innerText;
+
+    const completionDate =
+        new Date().toLocaleDateString("en-IN");
+
+    const certificateId =
+        "FKH-" + Date.now().toString().slice(-8);
+
+    const certificateWindow = window.open("", "_blank");
+
+    if (!certificateWindow) {
+        alert("Please allow pop-ups to print your certificate.");
+        return;
+    }
+
+    certificateWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Finance Knowledge Hub Certificate</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 30px;
+                    text-align: center;
+                    color: #17365d;
+                }
+                .certificate {
+                    border: 8px double #bd963e;
+                    padding: 35px;
+                    min-height: 420px;
+                }
+                h1 {
+                    color: #bd963e;
+                    font-size: 34px;
+                }
+                .name {
+                    font-size: 30px;
+                    font-weight: bold;
+                    border-bottom: 2px solid #bd963e;
+                    display: inline-block;
+                    padding: 10px 25px;
+                }
+                .score {
+                    font-size: 22px;
+                    margin: 20px;
+                }
+                .details {
+                    margin-top: 30px;
+                    font-size: 14px;
+                }
+                button {
+                    padding: 12px 24px;
+                    background: #1769aa;
+                    color: white;
+                    border: 0;
+                    border-radius: 6px;
+                    cursor: pointer;
+                }
+                @media print {
+                    button { display: none; }
+                    body { padding: 0; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="certificate">
+                <h2>KLH GLOBAL BUSINESS SCHOOL</h2>
+                <h3>KL University</h3>
+                <h1>CERTIFICATE OF ACHIEVEMENT</h1>
+                <p>Finance Knowledge Hub — Finance Quiz Challenge</p>
+                <p>This certificate is presented to</p>
+                <div class="name">
+                    ${escapeCertificateText(participantName.trim())}
+                </div>
+                <p>for completing the Finance Knowledge Hub Quiz.</p>
+                <div class="score">
+                    Score: ${escapeCertificateText(scoreText)}<br>
+                    Percentage: ${escapeCertificateText(percentageText)}
+                </div>
+                <div class="details">
+                    Completion Date: ${completionDate}<br>
+                    Certificate ID: ${certificateId}
+                </div>
+                <p>Dr. Vijay Kumar Kaluvala<br>
+                Finance Knowledge Hub</p>
+                <button onclick="window.print()">
+                    Print / Save as PDF
+                </button>
+            </div>
+        </body>
+        </html>
+    `);
+
+    certificateWindow.document.close();
+}
+
+function escapeCertificateText(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char];
+    });
+}
+  
 
 
 /* =====================================================
