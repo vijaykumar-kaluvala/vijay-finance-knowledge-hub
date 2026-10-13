@@ -987,5 +987,155 @@ function calculateABC() {
 }
 </style>
    
+
+<section id="capitalBudgetingLab" style="padding:40px 7%;background:#eef4ff;font-family:Arial,sans-serif;color:#14213d;">
+  <div style="max-width:1000px;margin:auto;background:white;padding:30px;border-radius:16px;box-shadow:0 5px 20px #0001;">
+    <h2 style="color:#123b70;">📈 Capital Budgeting Simulator</h2>
+    <p>Evaluate an investment project using NPV, IRR, Payback Period and Profitability Index.</p>
+
+    <label>Initial Investment (₹)</label>
+    <input id="cbInvestment" type="number" min="1" value="100000" style="width:100%;padding:12px;margin:8px 0 18px;box-sizing:border-box;">
+
+    <label>Annual Cash Inflow (₹)</label>
+    <input id="cbInflow" type="number" min="0" value="35000" style="width:100%;padding:12px;margin:8px 0 18px;box-sizing:border-box;">
+
+    <label>Project Life (years)</label>
+    <input id="cbYears" type="number" min="1" max="50" step="1" value="4" style="width:100%;padding:12px;margin:8px 0 18px;box-sizing:border-box;">
+
+    <label>Discount Rate (% per year)</label>
+    <input id="cbRate" type="number" min="0" max="100" step="0.5" value="10" style="width:100%;padding:12px;margin:8px 0 18px;box-sizing:border-box;">
+
+    <button type="button" onclick="calculateCapitalBudgeting()" style="background:#123b70;color:white;padding:14px 22px;border:0;border-radius:8px;font-weight:bold;cursor:pointer;">Calculate &amp; Generate Report</button>
+
+    <div id="cbResult" aria-live="polite" style="margin-top:25px;padding:20px;background:#eef5ff;border-radius:10px;">Your results will appear here.</div>
+
+    <button id="cbPrint" type="button" onclick="printCapitalBudgeting()" style="display:none;margin-top:15px;background:#087443;color:white;padding:12px 20px;border:0;border-radius:8px;cursor:pointer;">Print / Save Report as PDF</button>
+  </div>
+</section>
+
+<script>
+function calculateCapitalBudgeting() {
+  const investment = Number(document.getElementById("cbInvestment").value);
+  const inflow = Number(document.getElementById("cbInflow").value);
+  const years = Number(document.getElementById("cbYears").value);
+  const rate = Number(document.getElementById("cbRate").value) / 100;
+  const result = document.getElementById("cbResult");
+  const printButton = document.getElementById("cbPrint");
+
+  if (!Number.isFinite(investment) || investment <= 0 ||
+      !Number.isFinite(inflow) || inflow < 0 ||
+      !Number.isInteger(years) || years < 1 || years > 50 ||
+      !Number.isFinite(rate) || rate < 0 || rate > 1) {
+    result.innerHTML = "<b>Please enter valid values.</b>";
+    printButton.style.display = "none";
+    return;
+  }
+
+  let pvInflows = 0;
+  let cumulative = 0;
+  let payback = null;
+  let cashFlowRows = "";
+
+  for (let year = 1; year <= years; year++) {
+    const pv = inflow / Math.pow(1 + rate, year);
+    pvInflows += pv;
+
+    if (payback === null && cumulative + inflow >= investment) {
+      payback = (year - 1) + (investment - cumulative) / inflow;
+    }
+
+    cumulative += inflow;
+    cashFlowRows += "<tr><td>Year " + year + "</td><td>₹" +
+      inflow.toLocaleString("en-IN") + "</td><td>₹" +
+      pv.toLocaleString("en-IN", {maximumFractionDigits:2}) +
+      "</td></tr>";
+  }
+
+  const npv = pvInflows - investment;
+  const pi = pvInflows / investment;
+
+  // Estimate IRR using bisection for conventional cash flows.
+  function npvAt(r) {
+    let total = -investment;
+    for (let y = 1; y <= years; y++) {
+      total += inflow / Math.pow(1 + r, y);
+    }
+    return total;
+  }
+
+  let low = -0.9999;
+  let high = 10;
+  let irr = null;
+
+  if (inflow * years >= investment) {
+    for (let i = 0; i < 200; i++) {
+      const mid = (low + high) / 2;
+      if (npvAt(mid) > 0) low = mid;
+      else high = mid;
+    }
+    irr = (low + high) / 2;
+  }
+
+  const money = n => "₹" + n.toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
+
+  const paybackText = payback === null
+    ? "Not recovered within the project life"
+    : payback.toFixed(2) + " years";
+
+  const recommendation = npv > 0
+    ? "Acceptable based on NPV, subject to risk and other business factors."
+    : npv < 0
+      ? "Not financially attractive based on NPV at the selected discount rate."
+      : "Break-even based on NPV at the selected discount rate.";
+
+  result.innerHTML =
+    "<h3>Capital Budgeting Analysis Report</h3>" +
+    "<p><b>Initial Investment:</b> " + money(investment) + "</p>" +
+    "<p><b>Total Cash Inflows:</b> " + money(inflow * years) + "</p>" +
+    "<p><b>Present Value of Inflows:</b> " + money(pvInflows) + "</p>" +
+    "<p><b>Net Present Value (NPV):</b> " + money(npv) + "</p>" +
+    "<p><b>Estimated IRR:</b> " +
+      (irr === null ? "No non-negative IRR found for these cash flows" :
+      (irr * 100).toFixed(2) + "%") + "</p>" +
+    "<p><b>Payback Period:</b> " + paybackText + "</p>" +
+    "<p><b>Profitability Index:</b> " + pi.toFixed(3) + "</p>" +
+    "<h3>Year-wise Cash Flow</h3>" +
+    "<table style='width:100%;border-collapse:collapse;text-align:left;'>" +
+    "<tr><th style='padding:8px;border-bottom:1px solid #ccc;'>Year</th>" +
+    "<th style='padding:8px;border-bottom:1px solid #ccc;'>Cash Inflow</th>" +
+    "<th style='padding:8px;border-bottom:1px solid #ccc;'>Present Value</th></tr>" +
+    cashFlowRows + "</table>" +
+    "<h3>Interpretation</h3><p>" + recommendation + "</p>" +
+    "<p><b>Formulas:</b> NPV = Present Value of Cash Inflows − Initial Investment. " +
+    "PI = Present Value of Cash Inflows ÷ Initial Investment. " +
+    "Payback Period uses the fraction of the year in which the investment is recovered.</p>" +
+    "<p><i>Educational model: assumes equal annual cash inflows at year-end and no terminal value.</i></p>";
+
+  printButton.style.display = "inline-block";
+}
+
+function printCapitalBudgeting() {
+  const report = document.getElementById("cbResult");
+  if (!report || report.innerText === "Your results will appear here.") return;
+
+  const w = window.open("", "_blank");
+  if (!w) {
+    alert("Please allow pop-ups to print or save your report.");
+    return;
+  }
+
+  w.document.write("<!DOCTYPE html><html><head><title>Capital Budgeting Report</title>" +
+    "<style>body{font-family:Arial,sans-serif;padding:30px;color:#14213d}" +
+    "table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #ccc;text-align:left}" +
+    "</style></head><body><h1>Finance Practice Lab</h1>" +
+    report.innerHTML + "</body></html>");
+  w.document.close();
+  w.focus();
+  w.print();
+}
+</script>
+
 </body>
 </html>
