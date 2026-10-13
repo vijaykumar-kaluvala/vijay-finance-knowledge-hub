@@ -787,6 +787,205 @@ function calculateReceivablesLab() {
 }
 </style>
     
+
+<section id="inventoryLab" style="padding:40px 7%;background:#eef4ff;font-family:Arial,sans-serif;">
+  <div style="max-width:900px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #0001;">
+    <h2 style="color:#123b70;">📦 Inventory Management Lab</h2>
+    <p>Calculate Economic Order Quantity, inventory costs, reorder level and ABC classification.</p>
+
+    <h3>Part A: Economic Order Quantity (EOQ)</h3>
+    <label>Annual Demand (units)</label>
+    <input id="invDemand" type="number" min="0" value="12000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Ordering Cost per Order (₹)</label>
+    <input id="invOrderCost" type="number" min="0" value="500" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Annual Carrying Cost per Unit (₹)</label>
+    <input id="invCarryCost" type="number" min="0" value="20" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <h3>Part B: Reorder Level</h3>
+    <label>Average Daily Usage (units)</label>
+    <input id="invDaily" type="number" min="0" value="40" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Lead Time (days)</label>
+    <input id="invLead" type="number" min="0" value="7" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Safety Stock (units)</label>
+    <input id="invSafety" type="number" min="0" value="50" style="width:100%;padding:10px;margin:8px 0 20px;box-sizing:border-box;">
+
+    <button onclick="calculateInventoryLab()" style="background:#123b70;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;">Calculate & Generate Report</button>
+
+    <div id="invResult" aria-live="polite" style="margin-top:25px;line-height:1.8;"></div>
+
+    <hr style="margin:25px 0;">
+    <h3>Part C: ABC Inventory Classification</h3>
+    <p>Enter up to three inventory items. Annual consumption value = annual usage × unit price.</p>
+
+    <table style="width:100%;border-collapse:collapse;text-align:left;">
+      <thead>
+        <tr>
+          <th style="padding:8px;border-bottom:1px solid #ddd;">Item</th>
+          <th style="padding:8px;border-bottom:1px solid #ddd;">Annual Usage</th>
+          <th style="padding:8px;border-bottom:1px solid #ddd;">Unit Price (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px;">Item A</td>
+          <td><input id="abcUsage1" type="number" min="0" value="1000" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+          <td><input id="abcPrice1" type="number" min="0" value="100" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px;">Item B</td>
+          <td><input id="abcUsage2" type="number" min="0" value="2000" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+          <td><input id="abcPrice2" type="number" min="0" value="20" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px;">Item C</td>
+          <td><input id="abcUsage3" type="number" min="0" value="5000" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+          <td><input id="abcPrice3" type="number" min="0" value="5" style="width:100%;padding:8px;box-sizing:border-box;"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button onclick="calculateABC()" style="background:#123b70;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;margin-top:15px;">Calculate ABC Analysis</button>
+    <div id="abcResult" aria-live="polite" style="margin-top:20px;line-height:1.8;"></div>
+
+    <button id="invPrint" onclick="window.print()" style="display:none;background:#087443;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;margin-top:15px;">Print / Save Report as PDF</button>
+  </div>
+</section>
+
+<script>
+function calculateInventoryLab() {
+  const ids = ["invDemand","invOrderCost","invCarryCost","invDaily","invLead","invSafety"];
+  const fields = ids.map(id => document.getElementById(id));
+  const v = fields.map(el => Number(el.value));
+  const result = document.getElementById("invResult");
+
+  if (fields.some(el => el.value.trim() === "") ||
+      v.some(n => !Number.isFinite(n) || n < 0)) {
+    result.innerHTML = "<p style='color:#b91c1c;'>Please enter valid non-negative numbers in every field.</p>";
+    document.getElementById("invPrint").style.display = "none";
+    return;
+  }
+
+  const [demand, orderCost, carryCost, dailyUsage, leadTime, safety] = v;
+  if (demand > 0 && carryCost === 0) {
+    result.innerHTML = "<p style='color:#b91c1c;'>Annual carrying cost must be greater than zero to calculate EOQ.</p>";
+    document.getElementById("invPrint").style.display = "none";
+    return;
+  }
+
+  const eoq = demand === 0 ? 0 : Math.sqrt((2 * demand * orderCost) / carryCost);
+  const orders = eoq > 0 ? demand / eoq : 0;
+  const orderingCostTotal = eoq > 0 ? orders * orderCost : 0;
+  const averageCycleStock = eoq / 2;
+  const carryingCostTotal = averageCycleStock * carryCost;
+  const reorderLevel = dailyUsage * leadTime + safety;
+
+  const money = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits:2});
+  const num = n => n.toLocaleString("en-IN", {maximumFractionDigits:2});
+
+  result.innerHTML = `
+    <h3>Inventory Analysis Report</h3>
+    <p><b>Economic Order Quantity (EOQ):</b> ${num(eoq)} units</p>
+    <p><b>Orders per Year (approx.):</b> ${num(orders)}</p>
+    <p><b>Annual Ordering Cost at EOQ:</b> ${money(orderingCostTotal)}</p>
+    <p><b>Annual Carrying Cost at EOQ:</b> ${money(carryingCostTotal)}</p>
+    <p><b>Reorder Level:</b> ${num(reorderLevel)} units</p>
+    <hr>
+    <h3>Formulas and Workings</h3>
+    <p>EOQ = √(2 × Annual Demand × Ordering Cost ÷ Annual Carrying Cost per Unit)</p>
+    <p>= √(2 × ${num(demand)} × ${money(orderCost)} ÷ ${money(carryCost)}) = <b>${num(eoq)} units</b></p>
+    <p>Orders per Year = Annual Demand ÷ EOQ = <b>${num(orders)}</b></p>
+    <p>Annual Ordering Cost = Orders per Year × Cost per Order = <b>${money(orderingCostTotal)}</b></p>
+    <p>Annual Carrying Cost = (EOQ ÷ 2) × Carrying Cost per Unit = <b>${money(carryingCostTotal)}</b></p>
+    <p>Reorder Level = (Average Daily Usage × Lead Time) + Safety Stock</p>
+    <p>= (${num(dailyUsage)} × ${num(leadTime)}) + ${num(safety)} = <b>${num(reorderLevel)} units</b></p>
+    <h3>Interpretation</h3>
+    <p>Under the EOQ assumptions, an order quantity of approximately ${num(eoq)} units balances estimated ordering and cycle-stock carrying costs. The reorder level is ${num(reorderLevel)} units under the supplied usage, lead-time and safety-stock assumptions.</p>
+    <p><i>Educational model: EOQ assumes stable demand, ordering cost and carrying cost. Actual inventory decisions should also consider supplier constraints, quantity discounts and demand uncertainty.</i></p>
+  `;
+  document.getElementById("invPrint").style.display = "inline-block";
+}
+
+function calculateABC() {
+  const result = document.getElementById("abcResult");
+  const items = [
+    {name:"Item A", usageId:"abcUsage1", priceId:"abcPrice1"},
+    {name:"Item B", usageId:"abcUsage2", priceId:"abcPrice2"},
+    {name:"Item C", usageId:"abcUsage3", priceId:"abcPrice3"}
+  ];
+
+  const data = items.map(item => {
+    const usageEl = document.getElementById(item.usageId);
+    const priceEl = document.getElementById(item.priceId);
+    return {
+      name:item.name,
+      usage:Number(usageEl.value),
+      price:Number(priceEl.value),
+      invalid:usageEl.value.trim()==="" || priceEl.value.trim()==="" ||
+        !Number.isFinite(Number(usageEl.value)) || !Number.isFinite(Number(priceEl.value)) ||
+        Number(usageEl.value)<0 || Number(priceEl.value)<0
+    };
+  });
+
+  if (data.some(item => item.invalid)) {
+    result.innerHTML = "<p style='color:#b91c1c;'>Please enter valid non-negative values for every ABC item.</p>";
+    document.getElementById("invPrint").style.display = "none";
+    return;
+  }
+
+  data.forEach(item => item.value = item.usage * item.price);
+  data.sort((a,b) => b.value-a.value);
+  const total = data.reduce((sum,item) => sum+item.value,0);
+
+  let cumulative = 0;
+  data.forEach(item => {
+    cumulative += item.value;
+    item.share = total > 0 ? item.value / total * 100 : 0;
+    item.cumulative = total > 0 ? cumulative / total * 100 : 0;
+    item.category = total === 0 ? "Unclassified" :
+      (item.cumulative <= 80 ? "A" : (item.cumulative - item.share >= 80 ? "C" : "B"));
+  });
+
+  const money = n => "₹" + n.toLocaleString("en-IN",{maximumFractionDigits:2});
+  result.innerHTML = `
+    <h3>ABC Inventory Report</h3>
+    <p><b>Total Annual Consumption Value:</b> ${money(total)}</p>
+    <p>Items are ranked by annual consumption value. The categories use a simplified cumulative-value rule: A up to about 80%, B to about 95%, and C for the remainder.</p>
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;text-align:left;">
+      <thead><tr>
+        <th style="padding:8px;border-bottom:1px solid #ddd;">Item</th>
+        <th style="padding:8px;border-bottom:1px solid #ddd;">Annual Value</th>
+        <th style="padding:8px;border-bottom:1px solid #ddd;">Value Share</th>
+        <th style="padding:8px;border-bottom:1px solid #ddd;">Cumulative Share</th>
+        <th style="padding:8px;border-bottom:1px solid #ddd;">Class</th>
+      </tr></thead>
+      <tbody>${data.map(item => `<tr>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${item.name}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${money(item.value)}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${item.share.toFixed(2)}%</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${item.cumulative.toFixed(2)}%</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;"><b>${item.category}</b></td>
+      </tr>`).join("")}</tbody>
+    </table></div>
+    <p><b>Interpretation:</b> Review Class A items most closely because they account for the largest share of annual consumption value. Class B items require moderate control; Class C items may use simpler controls. These are guidelines, not universal thresholds.</p>
+  `;
+  document.getElementById("invPrint").style.display = "inline-block";
+}
+</script>
+
+<style>
+@media print {
+  body * { visibility: hidden; }
+  #inventoryLab, #inventoryLab * { visibility: visible; }
+  #inventoryLab { position: absolute; left: 0; top: 0; width: 100%; padding: 0 !important; background: white !important; }
+  #inventoryLab button { display: none !important; }
+  #inventoryLab input { border: 0; }
+}
+</style>
    
 </body>
 </html>
