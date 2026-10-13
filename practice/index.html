@@ -659,6 +659,134 @@ function calculateOperatingCycle() {
   #operatingCycleLab input { border: 0; }
 }
 </style>
+
+
+<section id="receivablesLab" style="padding:40px 7%;background:#eef4ff;font-family:Arial,sans-serif;">
+  <div style="max-width:900px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #0001;">
+    <h2 style="color:#123b70;">💳 Receivables Management & Opportunity Cost Lab</h2>
+    <p>Enter annual credit sales and cost assumptions. This educational model assumes a 365-day year.</p>
+
+    <label>Annual Credit Sales (₹)</label>
+    <input id="arSales" type="number" min="0" value="3650000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Average Collection Period (days)</label>
+    <input id="arDays" type="number" min="0" max="365" value="45" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Variable Cost Ratio (% of sales)</label>
+    <input id="arCost" type="number" min="0" max="100" value="70" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Annual Financing Cost (%)</label>
+    <input id="arRate" type="number" min="0" max="100" step="any" value="12" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <hr style="margin:20px 0;">
+    <h3>Compare a Proposed Credit Policy</h3>
+
+    <label>Proposed Annual Credit Sales (₹)</label>
+    <input id="arNewSales" type="number" min="0" value="4000000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Proposed Collection Period (days)</label>
+    <input id="arNewDays" type="number" min="0" max="365" value="30" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Proposed Variable Cost Ratio (%)</label>
+    <input id="arNewCost" type="number" min="0" max="100" value="70" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Additional Annual Bad-Debt Cost (₹)</label>
+    <input id="arBadDebt" type="number" min="0" value="10000" style="width:100%;padding:10px;margin:8px 0 20px;box-sizing:border-box;">
+
+    <button onclick="calculateReceivablesLab()" style="background:#123b70;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;">Calculate & Generate Report</button>
+
+    <div id="arResult" aria-live="polite" style="margin-top:25px;line-height:1.8;"></div>
+    <button id="arPrint" onclick="window.print()" style="display:none;background:#087443;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;margin-top:15px;">Print / Save Report as PDF</button>
+  </div>
+</section>
+
+<script>
+function calculateReceivablesLab() {
+  const ids = ["arSales","arDays","arCost","arRate","arNewSales","arNewDays","arNewCost","arBadDebt"];
+  const values = ids.map(id => Number(document.getElementById(id).value));
+  const result = document.getElementById("arResult");
+  const printButton = document.getElementById("arPrint");
+
+  if (ids.some(id => document.getElementById(id).value.trim() === "") ||
+      values.some(v => !Number.isFinite(v) || v < 0) ||
+      values[1] > 365 || values[2] > 100 || values[3] > 100 ||
+      values[5] > 365 || values[6] > 100) {
+    result.innerHTML = "<p style='color:#b91c1c;'>Please enter valid values. Days must be between 0 and 365, and percentage inputs between 0 and 100.</p>";
+    printButton.style.display = "none";
+    return;
+  }
+
+  const [sales, days, costPct, ratePct, newSales, newDays, newCostPct, badDebt] = values;
+  const rate = ratePct / 100;
+  const costRatio = costPct / 100;
+  const newCostRatio = newCostPct / 100;
+
+  const averageReceivables = sales * days / 365;
+  const debtorTurnover = days === 0 ? null : 365 / days;
+  const receivablesInvestment = averageReceivables * costRatio;
+  const financingCost = receivablesInvestment * rate;
+
+  const newReceivables = newSales * newDays / 365;
+  const newInvestment = newReceivables * newCostRatio;
+  const newFinancingCost = newInvestment * rate;
+
+  const incrementalSales = newSales - sales;
+  const incrementalContribution = incrementalSales * (1 - newCostRatio);
+  const financingSavings = financingCost - newFinancingCost;
+  const netEstimatedBenefit = incrementalContribution + financingSavings - badDebt;
+
+  const money = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits: 2});
+  const turnoverText = debtorTurnover === null ? "Not meaningful when the collection period is zero" : debtorTurnover.toFixed(2) + " times";
+
+  result.innerHTML = `
+    <h3>Receivables Analysis Report</h3>
+    <p><b>Average Accounts Receivable:</b> ${money(averageReceivables)}</p>
+    <p><b>Debtors Turnover Ratio (approx.):</b> ${turnoverText}</p>
+    <p><b>Estimated Funds Invested in Receivables:</b> ${money(receivablesInvestment)}</p>
+    <p><b>Annual Financing Cost:</b> ${money(financingCost)}</p>
+    <hr>
+    <h3>Credit Policy Comparison</h3>
+    <p><b>Proposed Average Receivables:</b> ${money(newReceivables)}</p>
+    <p><b>Proposed Funds Invested in Receivables:</b> ${money(newInvestment)}</p>
+    <p><b>Proposed Annual Financing Cost:</b> ${money(newFinancingCost)}</p>
+    <p><b>Change in Annual Credit Sales:</b> ${money(incrementalSales)}</p>
+    <p><b>Estimated Incremental Contribution:</b> ${money(incrementalContribution)}</p>
+    <p><b>Estimated Financing Cost Saving:</b> ${money(financingSavings)}</p>
+    <p><b>Additional Bad-Debt Cost:</b> ${money(badDebt)}</p>
+    <p><b>Estimated Net Annual Benefit:</b> ${money(netEstimatedBenefit)}</p>
+    <hr>
+    <h3>Formulas and Workings</h3>
+    <p>Average Receivables = Annual Credit Sales × Collection Period ÷ 365</p>
+    <p>= ${money(sales)} × ${days} ÷ 365 = <b>${money(averageReceivables)}</b></p>
+    <p>Debtors Turnover = 365 ÷ Collection Period = <b>${turnoverText}</b></p>
+    <p>Funds Invested = Average Receivables × Variable Cost Ratio</p>
+    <p>= ${money(averageReceivables)} × ${costPct}% = <b>${money(receivablesInvestment)}</b></p>
+    <p>Financing Cost = Funds Invested × Annual Financing Rate</p>
+    <p>= ${money(receivablesInvestment)} × ${ratePct}% = <b>${money(financingCost)}</b></p>
+    <p>Estimated Net Benefit = Incremental Contribution + Financing Cost Saving − Additional Bad-Debt Cost</p>
+    <p><b>Opportunity cost:</b> The financing cost estimates the return or interest cost associated with funds tied up in receivables. It is an estimate, not necessarily an actual cash payment.</p>
+    <h3>Interpretation</h3>
+    <p>${netEstimatedBenefit > 0
+      ? "Under these assumptions, the proposed policy shows a positive estimated annual benefit of " + money(netEstimatedBenefit) + ". Review collection risks and operating costs before deciding."
+      : netEstimatedBenefit < 0
+      ? "Under these assumptions, the proposed policy shows an estimated annual shortfall of " + money(Math.abs(netEstimatedBenefit)) + ". Reconsider the sales, collection, financing, and bad-debt assumptions."
+      : "Under these assumptions, the proposed policy has an estimated net benefit of zero. Consider other risks and strategic factors before deciding."}</p>
+    <p><i>Educational estimate only: this simplified comparison excludes several possible effects, including changes in collection risk, fixed costs, taxes, and the timing of incremental sales. Verify all assumptions before making a business decision.</i></p>
+  `;
+  printButton.style.display = "inline-block";
+}
+</script>
+
+<style>
+@media print {
+  body * { visibility: hidden; }
+  #receivablesLab, #receivablesLab * { visibility: visible; }
+  #receivablesLab { position: absolute; left: 0; top: 0; width: 100%; padding: 0 !important; background: white !important; }
+  #receivablesLab button { display: none !important; }
+  #receivablesLab input { border: 0; }
+}
+</style>
+    
    
 </body>
 </html>
