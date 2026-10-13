@@ -593,6 +593,91 @@ function calculateWorkingCapital(){
         "<br><b>Quick Ratio:</b> " +
         quickRatio.toFixed(2);
 }
+    
 </script>
+ 
+<section id="operatingCycleLab" style="padding:40px 7%;background:#eef4ff;font-family:Arial,sans-serif;">
+  <div style="max-width:900px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #0001;">
+    <h2 style="color:#123b70;">📊 Operating Cycle & Cash Conversion Cycle Lab</h2>
+    <p>Enter the average number of days for each stage of the business cycle.</p>
+
+    <label>Raw Material Storage Period (days)</label>
+    <input id="ocRaw" type="number" min="0" step="any" value="30" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Work-in-Progress Period (days)</label>
+    <input id="ocWip" type="number" min="0" step="any" value="15" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Finished Goods Storage Period (days)</label>
+    <input id="ocFinished" type="number" min="0" step="any" value="20" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Receivables Collection Period (days)</label>
+    <input id="ocReceivables" type="number" min="0" step="any" value="45" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Payables Payment Period (days)</label>
+    <input id="ocPayables" type="number" min="0" step="any" value="30" style="width:100%;padding:10px;margin:8px 0 20px;box-sizing:border-box;">
+
+    <button onclick="calculateOperatingCycle()" style="background:#123b70;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;">Calculate & Generate Report</button>
+
+    <div id="ocResult" aria-live="polite" style="margin-top:25px;line-height:1.8;"></div>
+    <button id="ocPrint" onclick="window.print()" style="display:none;background:#087443;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer;margin-top:15px;">Print / Save Report as PDF</button>
+  </div>
+</section>
+
+<script>
+function calculateOperatingCycle() {
+  const ids = ["ocRaw", "ocWip", "ocFinished", "ocReceivables", "ocPayables"];
+  const values = ids.map(id => Number(document.getElementById(id).value));
+
+  if (ids.some(id => document.getElementById(id).value.trim() === "") ||
+      values.some(v => !Number.isFinite(v) || v < 0)) {
+    document.getElementById("ocResult").innerHTML =
+      "<p style='color:#b91c1c;'>Please enter valid, non-negative numbers in every field.</p>";
+    document.getElementById("ocPrint").style.display = "none";
+    return;
+  }
+
+  const [raw, wip, finished, receivables, payables] = values;
+  const productionPeriod = raw + wip + finished;
+  const operatingCycle = productionPeriod + receivables;
+  const cashCycle = operatingCycle - payables;
+
+  const report = `
+    <h3>Financial Analysis Report</h3>
+    <p><b>1. Production Period:</b> ${productionPeriod.toFixed(2)} days</p>
+    <p><b>2. Operating Cycle:</b> ${operatingCycle.toFixed(2)} days</p>
+    <p><b>3. Cash Conversion Cycle:</b> ${cashCycle.toFixed(2)} days</p>
+    <hr>
+    <h3>Formulas and Workings</h3>
+    <p>Production Period = Raw Material Period + WIP Period + Finished Goods Period</p>
+    <p>= ${raw} + ${wip} + ${finished} = <b>${productionPeriod.toFixed(2)} days</b></p>
+    <p>Operating Cycle = Production Period + Receivables Period</p>
+    <p>= ${productionPeriod.toFixed(2)} + ${receivables} = <b>${operatingCycle.toFixed(2)} days</b></p>
+    <p>Cash Conversion Cycle = Operating Cycle − Payables Period</p>
+    <p>= ${operatingCycle.toFixed(2)} − ${payables} = <b>${cashCycle.toFixed(2)} days</b></p>
+    <hr>
+    <h3>Interpretation</h3>
+    <p>The business takes approximately ${operatingCycle.toFixed(2)} days from the start of its production and inventory cycle until it collects receivables, using the supplied period assumptions.</p>
+    <p>${cashCycle >= 0
+      ? "The cash conversion cycle is " + cashCycle.toFixed(2) + " days. This is the estimated time between paying suppliers and collecting cash from customers, based on these inputs."
+      : "The cash conversion cycle is negative by " + Math.abs(cashCycle).toFixed(2) + " days. Supplier payment timing exceeds the estimated operating cycle; verify that the periods are measured consistently."}</p>
+    <p><b>Possible improvement:</b> Reduce avoidable inventory delays, collect customer payments efficiently, and negotiate suitable supplier credit terms without harming operations.</p>
+    <p><i>Note: This is a simplified educational model. Use consistent period definitions and actual company data for real decisions.</i></p>
+  `;
+
+  document.getElementById("ocResult").innerHTML = report;
+  document.getElementById("ocPrint").style.display = "inline-block";
+}
+</script>
+
+<style>
+@media print {
+  body * { visibility: hidden; }
+  #operatingCycleLab, #operatingCycleLab * { visibility: visible; }
+  #operatingCycleLab { position: absolute; left: 0; top: 0; width: 100%; padding: 0 !important; background: white !important; }
+  #operatingCycleLab button { display: none !important; }
+  #operatingCycleLab input { border: 0; }
+}
+</style>
+   
 </body>
 </html>
