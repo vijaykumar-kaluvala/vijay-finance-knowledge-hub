@@ -1063,18 +1063,24 @@ function calculateCapitalBudgeting() {
     return total;
   }
 
-  let low = -0.9999;
-  let high = 10;
-  let irr = null;
 
-  if (inflow * years >= investment) {
-    for (let i = 0; i < 200; i++) {
-      const mid = (low + high) / 2;
-      if (npvAt(mid) > 0) low = mid;
-      else high = mid;
+let low = -0.9999;
+let high = 10;
+let irr = null;
+
+if (npvAt(low) * npvAt(high) <= 0) {
+  for (let i = 0; i < 200; i++) {
+    const mid = (low + high) / 2;
+
+    if (npvAt(low) * npvAt(mid) <= 0) {
+      high = mid;
+    } else {
+      low = mid;
     }
-    irr = (low + high) / 2;
   }
+
+  irr = (low + high) / 2;
+}
 
   const money = n => "₹" + n.toLocaleString("en-IN", {
     maximumFractionDigits: 2
