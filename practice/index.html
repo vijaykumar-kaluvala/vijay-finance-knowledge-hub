@@ -1659,7 +1659,7 @@ function fsRender(){
   q.o.forEach((option,i)=>{
     const b=document.createElement("button");
     b.textContent=option;
-    b.style.cssText="display:block;width:100%;text-align:left;padding:14px;margin:8px 0;background:#eef2f8;border:0;border-radius:8px;cursor:pointer;";
+  b.style.cssText="display:block;width:100%;text-align:left;padding:14px;margin:8px 0;background:#eef2f8;color:#14213d;border:1px solid #d5deeb;border-radius:8px;cursor:pointer;font-weight:bold;";
     b.onclick=()=>fsAnswer(i);
     box.appendChild(b);
   });
