@@ -1575,7 +1575,127 @@ function spPrintResult(){
 }
 </script>
 
+<!-- FINANCIAL SERVICES PRACTICE LAB -->
+<section id="financialServicesLab" style="padding:35px 5%;background:#eef4ff;font-family:Arial,sans-serif;color:#14213d;">
+  <div style="max-width:1100px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #ddd;">
+    <h2 style="color:#123b70;">🏦 Financial Services Practice Lab</h2>
+    <p>Practise financial services concepts, solve calculations, receive instant feedback and generate a report.</p>
+
+    <label for="fsLevel"><b>Select Level</b></label>
+    <select id="fsLevel" style="display:block;width:100%;padding:12px;margin:10px 0 20px;">
+      <option value="BBA">BBA — Foundation</option>
+      <option value="MBA">MBA — Advanced</option>
+    </select>
+
+    <label for="fsTopic"><b>Select Topic</b></label>
+    <select id="fsTopic" style="display:block;width:100%;padding:12px;margin:10px 0 20px;">
+      <option value="all">All Financial Services</option>
+      <option value="venture">Venture Capital</option>
+      <option value="leasing">Leasing</option>
+      <option value="rating">Credit Rating</option>
+      <option value="insurance">Insurance Services</option>
+      <option value="factoring">Factoring and Forfaiting</option>
+      <option value="discounting">Bill Discounting</option>
+    </select>
+
+    <button onclick="fsStart()" style="background:#123b70;color:white;padding:13px 22px;border:0;border-radius:8px;cursor:pointer;">Start Practice</button>
+
+    <div id="fsQuiz" style="display:none;margin-top:25px;">
+      <p id="fsProgress"></p>
+      <h3 id="fsQuestion"></h3>
+      <div id="fsOptions"></div>
+      <p id="fsFeedback" aria-live="polite"></p>
+      <button id="fsNext" onclick="fsNextQuestion()" style="display:none;background:#123b70;color:white;padding:12px 20px;border:0;border-radius:8px;">Next Question</button>
+    </div>
+
+    <div id="fsResult" style="display:none;margin-top:25px;padding:20px;background:#eef4ff;border-radius:12px;">
+      <h2>Financial Services Practice Report</h2>
+      <p id="fsScore"></p>
+      <div id="fsReview"></div>
+      <button onclick="fsPrint()" style="background:#16804a;color:white;padding:12px 18px;border:0;border-radius:8px;">Print / Save Report as PDF</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const fsQuestions = [
+  {t:"venture",l:"BBA",q:"Which source of finance is commonly used by high-growth startups?",o:["Venture capital","Trade credit only","Bank deposit","Ordinary wages"],a:0,e:"Venture capital provides equity funding to startups with growth potential."},
+  {t:"venture",l:"MBA",q:"A venture capitalist invests ₹20 lakh for a 20% ownership stake. What is the implied post-money valuation?",o:["₹40 lakh","₹80 lakh","₹1 crore","₹1.2 crore"],a:2,e:"Post-money valuation = Investment ÷ Ownership = ₹20 lakh ÷ 0.20 = ₹100 lakh."},
+  {t:"leasing",l:"BBA",q:"In a finance lease, the lessee generally obtains:",o:["Only a one-day service","The right to use an asset over an agreed period","Ownership of the bank","Free equipment permanently"],a:1,e:"A finance lease provides the right to use an asset under a lease agreement."},
+  {t:"leasing",l:"MBA",q:"Annual lease rentals are ₹1,20,000 and annual maintenance paid by the lessor is ₹10,000. What is the annual net rental income before other costs?",o:["₹1,10,000","₹1,20,000","₹1,30,000","₹10,000"],a:0,e:"Net rental income = ₹1,20,000 − ₹10,000 = ₹1,10,000."},
+  {t:"rating",l:"BBA",q:"What is the main purpose of a credit rating?",o:["Guarantee profits","Assess credit risk","Fix share prices","Remove all investment risk"],a:1,e:"A credit rating assesses the creditworthiness and relative risk of debt obligations."},
+  {t:"rating",l:"MBA",q:"Which statement about a credit rating is correct?",o:["It guarantees repayment","It eliminates default risk","It expresses an opinion on credit risk","It guarantees a share-price increase"],a:2,e:"Credit ratings express an opinion about credit risk; they do not guarantee repayment."},
+  {t:"insurance",l:"BBA",q:"The main purpose of insurance is to:",o:["Transfer specified financial risks","Guarantee investment profits","Avoid every loss","Increase a company's sales automatically"],a:0,e:"Insurance transfers specified risks to an insurer in exchange for a premium."},
+  {t:"insurance",l:"MBA",q:"An insured asset is valued at ₹5,00,000 and suffers a covered loss of ₹80,000. With no deductible or underinsurance, what is the claim amount?",o:["₹5,00,000","₹80,000","₹4,20,000","₹0"],a:1,e:"Under the stated assumptions, the covered loss is ₹80,000."},
+  {t:"factoring",l:"BBA",q:"Factoring primarily helps a business finance its:",o:["Accounts receivable","Share capital only","Building depreciation","Employee attendance"],a:0,e:"Factoring involves selling or assigning receivables to obtain finance and/or collection services."},
+  {t:"factoring",l:"MBA",q:"A factor advances 80% against receivables of ₹2,00,000. How much is advanced initially?",o:["₹40,000","₹80,000","₹1,60,000","₹2,00,000"],a:2,e:"Initial advance = ₹2,00,000 × 80% = ₹1,60,000."},
+  {t:"discounting",l:"BBA",q:"Bill discounting enables a business to:",o:["Receive funds before a bill's maturity","Cancel all liabilities","Guarantee future profits","Avoid recording sales"],a:0,e:"The holder receives funds before maturity after the applicable discount is deducted."},
+  {t:"discounting",l:"MBA",q:"A ₹1,00,000 bill is discounted for 90 days at 12% per annum using a 360-day year. What is the simple discount?",o:["₹1,200","₹3,000","₹9,000","₹12,000"],a:1,e:"Discount = ₹1,00,000 × 12% × 90 ÷ 360 = ₹3,000."}
+];
+
+let fsSet=[],fsIndex=0,fsMarks=0,fsWrong=0,fsLog=[];
+
+function fsStart(){
+  const level=document.getElementById("fsLevel").value;
+  const topic=document.getElementById("fsTopic").value;
+  let pool=fsQuestions.filter(q=>(q.l===level||q.l==="BBA")&&(topic==="all"||q.t===topic));
+  if(topic==="all") pool=fsQuestions.filter(q=>q.l===level);
+  if(pool.length===0){alert("No questions available for this selection yet.");return;}
+  fsSet=pool.slice().sort(()=>Math.random()-0.5).slice(0,Math.min(5,pool.length));
+  fsIndex=0;fsMarks=0;fsWrong=0;fsLog=[];
+  document.getElementById("fsResult").style.display="none";
+  document.getElementById("fsQuiz").style.display="block";
+  fsRender();
+}
+
+function fsRender(){
+  const q=fsSet[fsIndex];
+  document.getElementById("fsProgress").textContent="Question "+(fsIndex+1)+" of "+fsSet.length;
+  document.getElementById("fsQuestion").textContent=q.q;
+  document.getElementById("fsFeedback").textContent="";
+  document.getElementById("fsNext").style.display="none";
+  const box=document.getElementById("fsOptions");
+  box.innerHTML="";
+  q.o.forEach((option,i)=>{
+    const b=document.createElement("button");
+    b.textContent=option;
+    b.style.cssText="display:block;width:100%;text-align:left;padding:14px;margin:8px 0;background:#eef2f8;border:0;border-radius:8px;cursor:pointer;";
+    b.onclick=()=>fsAnswer(i);
+    box.appendChild(b);
+  });
+}
+
+function fsAnswer(choice){
+  const q=fsSet[fsIndex];
+  const buttons=document.getElementById("fsOptions").querySelectorAll("button");
+  buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.style.background="#d6f5df";if(i===choice&&i!==q.a)b.style.background="#ffdede";});
+  if(choice===q.a){fsMarks++;document.getElementById("fsFeedback").textContent="✅ Correct! "+q.e;}
+  else{fsWrong++;document.getElementById("fsFeedback").textContent="❌ Not quite. "+q.e;}
+  fsLog.push({q:q.q,chosen:q.o[choice],correct:q.o[q.a],explanation:q.e,ok:choice===q.a});
+  document.getElementById("fsNext").textContent=fsIndex===fsSet.length-1?"View Report":"Next Question";
+  document.getElementById("fsNext").style.display="inline-block";
+}
+
+function fsNextQuestion(){
+  fsIndex++;
+  if(fsIndex<fsSet.length){fsRender();return;}
+  document.getElementById("fsQuiz").style.display="none";
+  document.getElementById("fsResult").style.display="block";
+  document.getElementById("fsScore").textContent="Level: "+document.getElementById("fsLevel").value+" | Score: "+fsMarks+"/"+fsSet.length+" | Percentage: "+Math.round(fsMarks/fsSet.length*100)+"% | Incorrect answers: "+fsWrong;
+  document.getElementById("fsReview").innerHTML="<h3>Answer Review</h3>"+fsLog.map((r,i)=>"<p><b>"+(i+1)+". "+r.q+"</b><br>Your answer: "+r.chosen+"<br>Correct answer: "+r.correct+"<br>"+r.explanation+"</p>").join("");
+}
+
+function fsPrint(){
+  const report=document.getElementById("fsResult");
+  const w=window.open("","_blank");
+  if(!w){alert("Please allow pop-ups to print or save the report.");return;}
+  w.document.write("<!DOCTYPE html><html><head><title>Financial Services Practice Report</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#14213d}p{line-height:1.5}</style></head><body><h1>Financial Services Practice Lab</h1>"+report.innerHTML+"</body></html>");
+  w.document.close();w.focus();w.print();
+}
+</script>
 </body>
 </html>
+
+
 
 
