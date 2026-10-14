@@ -1296,6 +1296,167 @@ function printFinancialAnalysis() {
   w.print();
 }
 </script>
+
+<!-- COMPANY COMPARISON LAB -->
+<section style="padding:35px 5%;background:#eef4ff;font-family:Arial,sans-serif;color:#14213d;">
+  <div style="max-width:1100px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #ddd;">
+    <h2 style="color:#123b70;">🏢 Company A vs Company B — Financial Comparison Lab</h2>
+    <p>Enter financial data for two companies to compare liquidity, profitability and debt.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+      <div style="padding:18px;background:#f5f8ff;border-radius:12px;">
+        <h3>Company A</h3>
+        <label>Current Assets (₹)</label>
+        <input id="cmpAAssets" type="number" min="0" value="600000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Inventory (₹)</label>
+        <input id="cmpAInventory" type="number" min="0" value="150000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Current Liabilities (₹)</label>
+        <input id="cmpALiabilities" type="number" min="1" value="300000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Net Profit After Tax (₹)</label>
+        <input id="cmpAProfit" type="number" value="120000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Net Sales (₹)</label>
+        <input id="cmpASales" type="number" min="1" value="1500000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Total Debt (₹)</label>
+        <input id="cmpADebt" type="number" min="0" value="400000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Shareholders' Equity (₹)</label>
+        <input id="cmpAEquity" type="number" min="1" value="500000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+      </div>
+
+      <div style="padding:18px;background:#f5fff8;border-radius:12px;">
+        <h3>Company B</h3>
+        <label>Current Assets (₹)</label>
+        <input id="cmpBAssets" type="number" min="0" value="800000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Inventory (₹)</label>
+        <input id="cmpBInventory" type="number" min="0" value="200000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Current Liabilities (₹)</label>
+        <input id="cmpBLiabilities" type="number" min="1" value="500000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Net Profit After Tax (₹)</label>
+        <input id="cmpBProfit" type="number" value="180000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Net Sales (₹)</label>
+        <input id="cmpBSales" type="number" min="1" value="2000000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Total Debt (₹)</label>
+        <input id="cmpBDebt" type="number" min="0" value="300000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+        <label>Shareholders' Equity (₹)</label>
+        <input id="cmpBEquity" type="number" min="1" value="900000" style="width:100%;padding:10px;margin:8px 0 14px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <button onclick="runCompanyComparison()" style="background:#123b70;color:white;border:0;padding:14px 22px;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:20px;">Calculate & Compare</button>
+    <button id="cmpPrint" onclick="printCompanyComparison()" style="display:none;background:#16804a;color:white;border:0;padding:14px 22px;border-radius:8px;font-weight:bold;cursor:pointer;margin:20px 0 0 8px;">Print / Save PDF</button>
+
+    <div id="cmpResult" style="margin-top:24px;"></div>
+    <canvas id="cmpChart" width="900" height="300" style="width:100%;max-width:900px;margin-top:20px;"></canvas>
+    <p style="font-size:13px;color:#555;">Educational tool: compare results with industry benchmarks and investigate the reasons behind differences before making business decisions.</p>
+  </div>
+</section>
+
+<script>
+function runCompanyComparison() {
+  const get = id => Number(document.getElementById(id).value);
+  const ids = [
+    "cmpAAssets","cmpAInventory","cmpALiabilities","cmpAProfit","cmpASales","cmpADebt","cmpAEquity",
+    "cmpBAssets","cmpBInventory","cmpBLiabilities","cmpBProfit","cmpBSales","cmpBDebt","cmpBEquity"
+  ];
+
+  if (ids.some(id => document.getElementById(id).value.trim() === "" || !Number.isFinite(get(id)))) {
+    alert("Please enter valid numbers in every field.");
+    return;
+  }
+
+  const a = {
+    current: get("cmpAAssets"), inventory: get("cmpAInventory"),
+    liabilities: get("cmpALiabilities"), profit: get("cmpAProfit"),
+    sales: get("cmpASales"), debt: get("cmpADebt"), equity: get("cmpAEquity")
+  };
+  const b = {
+    current: get("cmpBAssets"), inventory: get("cmpBInventory"),
+    liabilities: get("cmpBLiabilities"), profit: get("cmpBProfit"),
+    sales: get("cmpBSales"), debt: get("cmpBDebt"), equity: get("cmpBEquity")
+  };
+
+  if ([a,b].some(c => c.liabilities <= 0 || c.sales <= 0 || c.equity <= 0 ||
+      c.inventory > c.current || c.current < 0 || c.inventory < 0 || c.debt < 0)) {
+    alert("Please check the figures. Liabilities, sales and equity must be above zero; inventory cannot exceed current assets.");
+    return;
+  }
+
+  const ratios = c => ({
+    "Current Ratio": c.current / c.liabilities,
+    "Quick Ratio": (c.current - c.inventory) / c.liabilities,
+    "Net Profit Margin (%)": c.profit / c.sales * 100,
+    "Debt–Equity Ratio": c.debt / c.equity
+  });
+
+  const ra = ratios(a), rb = ratios(b);
+  const fmt = n => n.toLocaleString("en-IN", {minimumFractionDigits:2, maximumFractionDigits:2});
+  const rows = Object.keys(ra).map(name =>
+    `<tr>
+      <td style="padding:10px;border-bottom:1px solid #ddd;">${name}</td>
+      <td style="padding:10px;border-bottom:1px solid #ddd;">${fmt(ra[name])}${name.includes("(%)") ? "%" : ""}</td>
+      <td style="padding:10px;border-bottom:1px solid #ddd;">${fmt(rb[name])}${name.includes("(%)") ? "%" : ""}</td>
+      <td style="padding:10px;border-bottom:1px solid #ddd;">${name === "Debt–Equity Ratio"
+        ? (ra[name] < rb[name] ? "A has lower debt relative to equity" : ra[name] > rb[name] ? "B has lower debt relative to equity" : "Both are equal")
+        : (ra[name] > rb[name] ? "A is higher" : ra[name] < rb[name] ? "B is higher" : "Both are equal")}</td>
+    </tr>`
+  ).join("");
+
+  document.getElementById("cmpResult").innerHTML =
+    `<div id="cmpReport">
+      <h2>Company Comparison Report</h2>
+      <table style="width:100%;border-collapse:collapse;text-align:left;">
+        <thead><tr><th style="padding:10px;">Ratio</th><th style="padding:10px;">Company A</th><th style="padding:10px;">Company B</th><th style="padding:10px;">Comparison</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <h3>Interpretation</h3>
+      <p>Compare liquidity using the current and quick ratios, profitability using net profit margin, and financial risk using the debt–equity ratio. A higher ratio is not automatically better in every case; consider industry standards, cash flows and business circumstances.</p>
+    </div>`;
+
+  document.getElementById("cmpPrint").style.display = "inline-block";
+
+  const canvas = document.getElementById("cmpChart");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const items = [
+    {name:"Current Ratio",a:ra["Current Ratio"],b:rb["Current Ratio"]},
+    {name:"Quick Ratio",a:ra["Quick Ratio"],b:rb["Quick Ratio"]},
+    {name:"Net Profit Margin (%)",a:ra["Net Profit Margin (%)"],b:rb["Net Profit Margin (%)"]},
+    {name:"Debt–Equity Ratio",a:ra["Debt–Equity Ratio"],b:rb["Debt–Equity Ratio"]}
+  ];
+  const max = Math.max(1,...items.flatMap(x=>[x.a,x.b])) * 1.15;
+  ctx.font = "16px Arial";
+  items.forEach((x,i) => {
+    const y = 35 + i*68;
+    ctx.fillStyle = "#14213d";
+    ctx.fillText(x.name, 8, y+5);
+    const start = 250, width = 540;
+    ctx.fillStyle = "#1f77b4";
+    ctx.fillRect(start,y+12,Math.max(0,x.a/max*width),14);
+    ctx.fillStyle = "#2a9d62";
+    ctx.fillRect(start,y+30,Math.max(0,x.b/max*width),14);
+    ctx.fillStyle = "#14213d";
+    ctx.fillText("A: "+fmt(x.a), start+width+8, y+24);
+    ctx.fillText("B: "+fmt(x.b), start+width+8, y+43);
+  });
+  ctx.fillStyle="#1f77b4"; ctx.fillRect(8,290,14,10);
+  ctx.fillStyle="#14213d"; ctx.fillText("Company A",28,300);
+  ctx.fillStyle="#2a9d62"; ctx.fillRect(150,290,14,10);
+  ctx.fillStyle="#14213d"; ctx.fillText("Company B",170,300);
+}
+
+function printCompanyComparison() {
+  const report = document.getElementById("cmpReport");
+  if (!report) { alert("Please calculate the comparison first."); return; }
+  const chart = document.getElementById("cmpChart").toDataURL("image/png");
+  const w = window.open("", "_blank");
+  if (!w) { alert("Please allow pop-ups to print or save your report."); return; }
+  w.document.write("<!DOCTYPE html><html><head><title>Company Comparison Report</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#14213d}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:8px;text-align:left}img{max-width:100%}</style></head><body><h1>Finance Practice Lab</h1>" +
+    report.innerHTML + "<h2>Ratio Comparison Chart</h2><img src='" + chart + "'></body></html>");
+  w.document.close();
+  w.focus();
+  w.print();
+}
+</script>
+
 </body>
 </html>
 
