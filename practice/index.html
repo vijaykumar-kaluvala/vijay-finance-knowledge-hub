@@ -1457,6 +1457,118 @@ function printCompanyComparison() {
 }
 </script>
 
+
+<!-- FINANCE STUDENT PRACTICE MODE -->
+<section id="studentPracticeLab" style="padding:35px 5%;background:#eef4ff;font-family:Arial,sans-serif;color:#14213d;">
+  <div style="max-width:1000px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #ddd;">
+    <h2 style="color:#123b70;">🎓 Finance Student Practice Mode</h2>
+    <p>Practise finance calculations, receive instant feedback and check your score.</p>
+
+    <label><b>Select your level</b></label>
+    <select id="spLevel" style="display:block;width:100%;padding:12px;margin:10px 0 18px;">
+      <option value="BBA">BBA — Foundation</option>
+      <option value="MBA">MBA — Advanced</option>
+    </select>
+
+    <button onclick="spStart()" style="background:#123b70;color:white;padding:12px 20px;border:0;border-radius:8px;cursor:pointer;">Start Practice</button>
+
+    <div id="spQuiz" style="display:none;margin-top:25px;">
+      <p id="spProgress"></p>
+      <h3 id="spQuestion"></h3>
+      <div id="spOptions"></div>
+      <button id="spCheck" onclick="spCheckAnswer()" style="background:#16804a;color:white;padding:11px 18px;border:0;border-radius:8px;margin-top:15px;cursor:pointer;">Check Answer</button>
+      <button id="spHint" onclick="spShowHint()" style="background:#e9eef7;padding:11px 18px;border:0;border-radius:8px;margin:15px 5px 0;cursor:pointer;">Show Hint</button>
+      <p id="spFeedback" aria-live="polite"></p>
+      <button id="spNext" onclick="spNextQuestion()" style="display:none;background:#123b70;color:white;padding:11px 18px;border:0;border-radius:8px;cursor:pointer;">Next Question</button>
+    </div>
+
+    <div id="spResult" style="display:none;margin-top:25px;padding:20px;background:#eef4ff;border-radius:12px;"></div>
+    <button id="spPrint" onclick="spPrintResult()" style="display:none;background:#16804a;color:white;padding:12px 18px;border:0;border-radius:8px;margin-top:15px;cursor:pointer;">Print / Save Result as PDF</button>
+  </div>
+</section>
+
+<script>
+const spQuestions = {
+  BBA: [
+    {q:"Current assets are ₹6,00,000 and current liabilities are ₹3,00,000. What is the current ratio?",o:["1:1","2:1","3:1","0.5:1"],a:1,h:"Current Ratio = Current Assets ÷ Current Liabilities.",e:"₹6,00,000 ÷ ₹3,00,000 = 2:1."},
+    {q:"Fixed cost is ₹1,00,000 and contribution per unit is ₹20. What is the break-even quantity?",o:["2,000 units","5,000 units","10,000 units","20,000 units"],a:1,h:"Break-even quantity = Fixed Cost ÷ Contribution per Unit.",e:"₹1,00,000 ÷ ₹20 = 5,000 units."},
+    {q:"Find simple interest on ₹10,000 at 8% per year for 2 years.",o:["₹800","₹1,600","₹2,000","₹3,200"],a:1,h:"Simple Interest = Principal × Rate × Time ÷ 100.",e:"₹10,000 × 8 × 2 ÷ 100 = ₹1,600."},
+    {q:"Annual demand is 1,000 units, ordering cost ₹100 per order and annual carrying cost ₹5 per unit. Approximate EOQ?",o:["100 units","200 units","283 units","500 units"],a:2,h:"EOQ = √(2 × Annual Demand × Ordering Cost ÷ Carrying Cost).",e:"√(2 × 1,000 × 100 ÷ 5) ≈ 200 units."},
+    {q:"Sales are ₹5,00,000 and net profit is ₹50,000. What is the net profit margin?",o:["5%","10%","15%","20%"],a:1,h:"Net Profit Margin = Net Profit ÷ Sales × 100.",e:"₹50,000 ÷ ₹5,00,000 × 100 = 10%."},
+    {q:"Current assets are ₹4,00,000 and current liabilities are ₹2,50,000. Find working capital.",o:["₹1,00,000","₹1,50,000","₹2,50,000","₹6,50,000"],a:1,h:"Working Capital = Current Assets − Current Liabilities.",e:"₹4,00,000 − ₹2,50,000 = ₹1,50,000."}
+  ],
+  MBA: [
+    {q:"An investment costs ₹1,00,000. Present value of inflows is ₹1,15,000. Find NPV.",o:["−₹15,000","₹0","₹15,000","₹1,15,000"],a:2,h:"NPV = Present Value of Inflows − Initial Investment.",e:"₹1,15,000 − ₹1,00,000 = ₹15,000."},
+    {q:"Annual credit sales are ₹36,50,000 and the collection period is 36.5 days. Approximate average receivables using a 365-day year?",o:["₹1,00,000","₹3,65,000","₹36,500","₹10,00,000"],a:1,h:"Average Receivables = Annual Credit Sales ÷ 365 × Collection Days.",e:"₹36,50,000 ÷ 365 × 36.5 = ₹3,65,000."},
+    {q:"A project requires ₹2,00,000 and generates ₹50,000 per year. What is its simple payback period?",o:["2 years","3 years","4 years","5 years"],a:2,h:"Payback Period = Initial Investment ÷ Annual Cash Inflow.",e:"₹2,00,000 ÷ ₹50,000 = 4 years."},
+    {q:"Net profit is ₹2,40,000 and sales are ₹30,00,000. Find the net profit margin.",o:["6%","8%","10%","12%"],a:1,h:"Net Profit Margin = Net Profit ÷ Sales × 100.",e:"₹2,40,000 ÷ ₹30,00,000 × 100 = 8%."},
+    {q:"Total debt is ₹6,00,000 and equity is ₹10,00,000. Find the debt–equity ratio.",o:["0.4:1","0.6:1","1.6:1","2:1"],a:1,h:"Debt–Equity Ratio = Total Debt ÷ Shareholders' Equity.",e:"₹6,00,000 ÷ ₹10,00,000 = 0.6:1."},
+    {q:"A project has a positive NPV, assuming reliable cash-flow estimates and an appropriate discount rate. What does this generally indicate?",o:["It destroys value","It may add value","It has no cash inflows","Its payback is zero"],a:1,h:"A positive NPV means discounted inflows exceed the initial investment.",e:"A positive NPV generally supports acceptance, subject to risk and strategic considerations."}
+  ]
+};
+
+let spSet=[], spIndex=0, spScore=0, spAnswered=false, spWrong=0;
+
+function spStart(){
+  const level=document.getElementById("spLevel").value;
+  spSet=[...spQuestions[level]].sort(()=>Math.random()-0.5).slice(0,5);
+  spIndex=0;spScore=0;spWrong=0;
+  document.getElementById("spResult").style.display="none";
+  document.getElementById("spPrint").style.display="none";
+  document.getElementById("spQuiz").style.display="block";
+  spRender();
+}
+
+function spRender(){
+  spAnswered=false;
+  const q=spSet[spIndex];
+  document.getElementById("spProgress").textContent="Question "+(spIndex+1)+" of "+spSet.length;
+  document.getElementById("spQuestion").textContent=q.q;
+  document.getElementById("spOptions").innerHTML=q.o.map((option,i)=>
+    `<label style="display:block;padding:12px;margin:8px 0;background:#f3f6fb;border-radius:8px;cursor:pointer;"><input type="radio" name="spAnswer" value="${i}"> ${option}</label>`
+  ).join("");
+  document.getElementById("spFeedback").textContent="";
+  document.getElementById("spCheck").style.display="inline-block";
+  document.getElementById("spNext").style.display="none";
+}
+
+function spCheckAnswer(){
+  if(spAnswered)return;
+  const selected=document.querySelector('input[name="spAnswer"]:checked');
+  if(!selected){alert("Please select an answer first.");return;}
+  spAnswered=true;
+  const q=spSet[spIndex], correct=Number(selected.value)===q.a;
+  if(correct)spScore++;else spWrong++;
+  document.getElementById("spFeedback").innerHTML=
+    (correct?"✅ Correct! ":"❌ Not quite. ")+q.e;
+  document.getElementById("spCheck").style.display="none";
+  document.getElementById("spNext").style.display="inline-block";
+}
+
+function spShowHint(){
+  alert("Hint: "+spSet[spIndex].h);
+}
+
+function spNextQuestion(){
+  spIndex++;
+  if(spIndex<spSet.length){spRender();return;}
+  document.getElementById("spQuiz").style.display="none";
+  const pct=Math.round(spScore/spSet.length*100);
+  document.getElementById("spResult").innerHTML=
+    `<h2>Practice Result</h2><p><b>Level:</b> ${document.getElementById("spLevel").value}</p><p><b>Score:</b> ${spScore} / ${spSet.length}</p><p><b>Percentage:</b> ${pct}%</p><p><b>Incorrect answers:</b> ${spWrong}</p><p>${pct>=80?"Excellent work!":pct>=60?"Good effort! Review the formulas and try again.":"Keep practising and use the hints to improve."}</p>`;
+  document.getElementById("spResult").style.display="block";
+  document.getElementById("spPrint").style.display="inline-block";
+}
+
+function spPrintResult(){
+  const result=document.getElementById("spResult");
+  const w=window.open("","_blank");
+  if(!w){alert("Please allow pop-ups to print or save your result.");return;}
+  w.document.write("<!DOCTYPE html><html><head><title>Finance Practice Result</title><style>body{font-family:Arial,sans-serif;padding:35px;color:#14213d}</style></head><body><h1>Finance Practice Lab</h1>"+result.innerHTML+"<p>Educational practice result.</p></body></html>");
+  w.document.close();w.focus();w.print();
+}
+</script>
+
 </body>
 </html>
 
