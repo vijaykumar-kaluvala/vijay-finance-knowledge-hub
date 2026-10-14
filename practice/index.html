@@ -1147,5 +1147,156 @@ function printCapitalBudgeting() {
 }
 </script>
 
+<!-- FINANCIAL STATEMENT ANALYSIS LAB -->
+<section id="financialAnalysisLab" style="padding:40px 5%;background:#eef4ff;font-family:Arial,sans-serif;color:#14213d;">
+  <div style="max-width:1000px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #0001;">
+    <h2 style="color:#123b70;">📊 Financial Statement Analysis Lab</h2>
+    <p>Enter company financial data to calculate six important financial ratios and generate an analysis report.</p>
+
+    <h3>Company Financial Data (₹)</h3>
+
+    <label>Current Assets</label>
+    <input id="faAssets" type="number" min="0" value="600000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Inventory</label>
+    <input id="faInventory" type="number" min="0" value="150000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Current Liabilities</label>
+    <input id="faLiabilities" type="number" min="0" value="300000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Total Debt</label>
+    <input id="faDebt" type="number" min="0" value="400000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Shareholders' Equity</label>
+    <input id="faEquity" type="number" min="0" value="500000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Net Sales</label>
+    <input id="faSales" type="number" min="0" value="1500000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Cost of Goods Sold</label>
+    <input id="faCOGS" type="number" min="0" value="900000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Net Profit After Tax</label>
+    <input id="faProfit" type="number" value="120000" style="width:100%;padding:10px;margin:8px 0 15px;box-sizing:border-box;">
+
+    <label>Capital Employed</label>
+    <input id="faCapital" type="number" min="0" value="900000" style="width:100%;padding:10px;margin:8px 0 20px;box-sizing:border-box;">
+
+    <button type="button" onclick="calculateFinancialAnalysis()" style="background:#123b70;color:white;padding:13px 20px;border:0;border-radius:8px;cursor:pointer;font-weight:bold;">
+      Calculate &amp; Generate Report
+    </button>
+
+    <div id="faResult" style="margin-top:25px;padding:20px;background:#eef4ff;border-radius:10px;">
+      Your financial analysis report will appear here.
+    </div>
+
+    <button id="faPrint" type="button" onclick="printFinancialAnalysis()" style="display:none;background:#087443;color:white;padding:12px 18px;border:0;border-radius:8px;margin-top:15px;cursor:pointer;">
+      Print / Save Report as PDF
+    </button>
+  </div>
+</section>
+
+<script>
+function calculateFinancialAnalysis() {
+  const ids = [
+    "faAssets", "faInventory", "faLiabilities", "faDebt",
+    "faEquity", "faSales", "faCOGS", "faProfit", "faCapital"
+  ];
+
+  const v = {};
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el.value.trim() === "" || !Number.isFinite(Number(el.value))) {
+      alert("Please enter valid numbers in every field.");
+      return;
+    }
+    v[id] = Number(el.value);
+    if (v[id] < 0 && id !== "faProfit") {
+      alert("Please enter zero or a positive value in every field except Net Profit.");
+      return;
+    }
+  }
+
+  if (v.faInventory > v.faAssets ||
+      v.faCOGS > v.faSales ||
+      v.faLiabilities === 0 && v.faAssets === 0) {
+    alert("Please check that Inventory does not exceed Current Assets and COGS does not exceed Sales.");
+    return;
+  }
+
+  const ratio = (n, d) => d === 0 ? null : n / d;
+  const current = ratio(v.faAssets, v.faLiabilities);
+  const quick = ratio(v.faAssets - v.faInventory, v.faLiabilities);
+  const debtEquity = ratio(v.faDebt, v.faEquity);
+  const gross = ratio(v.faSales - v.faCOGS, v.faSales);
+  const net = ratio(v.faProfit, v.faSales);
+  const roce = ratio(v.faProfit, v.faCapital);
+
+  const fmt = n => n === null ? "Not calculable (denominator is zero)" : n.toFixed(2);
+  const pct = n => n === null ? "Not calculable (denominator is zero)" : (n * 100).toFixed(2) + "%";
+  const money = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits:2});
+
+  const rows = [
+    ["Current Ratio", fmt(current), "Current Assets ÷ Current Liabilities",
+      current === null ? "Cannot be calculated." : current >= 1.5 ? "The short-term liquidity position may be comfortable; compare with industry norms." : current >= 1 ? "Current assets cover current liabilities, but monitor liquidity." : "Current liabilities exceed current assets; review short-term funding."],
+    ["Quick Ratio", fmt(quick), "(Current Assets − Inventory) ÷ Current Liabilities",
+      quick === null ? "Cannot be calculated." : quick >= 1 ? "Quick assets cover current liabilities under this measure." : "Quick assets are below current liabilities; examine cash and collections."],
+    ["Debt–Equity Ratio", fmt(debtEquity), "Total Debt ÷ Shareholders' Equity",
+      debtEquity === null ? "Cannot be calculated." : debtEquity > 2 ? "Leverage is relatively high under this illustrative benchmark." : "Compare leverage with industry norms and debt-servicing capacity."],
+    ["Gross Profit Ratio", pct(gross), "(Sales − COGS) ÷ Sales × 100",
+      gross === null ? "Cannot be calculated." : "Review pricing, production costs and the trend over time."],
+    ["Net Profit Ratio", pct(net), "Net Profit After Tax ÷ Sales × 100",
+      net === null ? "Cannot be calculated." : net < 0 ? "The company reports a net loss; investigate expenses and revenue." : "Review the margin alongside previous periods and industry peers."],
+    ["Return on Capital Employed (ROCE)", pct(roce), "Net Profit After Tax ÷ Capital Employed × 100 (simplified model)",
+      roce === null ? "Cannot be calculated." : "Compare the return with prior periods and the company's cost of capital."]
+  ];
+
+  const report = `
+    <h2>Financial Statement Analysis Report</h2>
+    <p><b>Current Assets:</b> ${money(v.faAssets)} |
+       <b>Current Liabilities:</b> ${money(v.faLiabilities)}</p>
+    <p><b>Net Sales:</b> ${money(v.faSales)} |
+       <b>Net Profit After Tax:</b> ${money(v.faProfit)}</p>
+    <h3>Ratio Analysis and Interpretation</h3>
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;background:white;">
+      <thead><tr>
+        <th style="text-align:left;padding:9px;border-bottom:1px solid #ccc;">Ratio</th>
+        <th style="text-align:left;padding:9px;border-bottom:1px solid #ccc;">Result</th>
+        <th style="text-align:left;padding:9px;border-bottom:1px solid #ccc;">Formula</th>
+        <th style="text-align:left;padding:9px;border-bottom:1px solid #ccc;">Interpretation</th>
+      </tr></thead>
+      <tbody>${rows.map(r => `<tr>${r.map(c => `<td style="padding:9px;border-bottom:1px solid #ddd;vertical-align:top;">${c}</td>`).join("")}</tr>`).join("")}</tbody>
+    </table></div>
+    <h3>Overall Review</h3>
+    <p>${current !== null && current < 1 ? "Liquidity needs attention because current liabilities exceed current assets. " : "Review liquidity against industry benchmarks. "}
+    ${net !== null && net < 0 ? "The net loss needs investigation. " : "Assess profitability using historical and industry comparisons. "}
+    Review leverage, operating performance and cash flows before making business decisions.</p>
+    <p><i>Educational model: interpretations are indicative, not universal standards. ROCE here uses net profit after tax as a simplified proxy; conventional ROCE often uses operating profit (EBIT). Use consistent definitions and verified company data.</i></p>
+  `;
+
+  document.getElementById("faResult").innerHTML = report;
+  document.getElementById("faPrint").style.display = "inline-block";
+}
+
+function printFinancialAnalysis() {
+  const report = document.getElementById("faResult");
+  if (!report || report.innerText.includes("Your financial analysis report will appear here.")) {
+    alert("Please calculate the report first.");
+    return;
+  }
+  const w = window.open("", "_blank");
+  if (!w) {
+    alert("Please allow pop-ups to print or save your report.");
+    return;
+  }
+  w.document.write("<!DOCTYPE html><html><head><title>Financial Statement Analysis Report</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#14213d}table{font-size:12px}h2,h3{color:#123b70}@media print{body{padding:0}}</style></head><body><h1>Finance Practice Lab</h1>" + report.innerHTML + "</body></html>");
+  w.document.close();
+  w.focus();
+  w.print();
+}
+</script>
 </body>
 </html>
+
+
