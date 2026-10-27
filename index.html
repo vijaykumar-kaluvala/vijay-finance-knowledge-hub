@@ -171,25 +171,36 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 @media(max-width:850px){.learning-themes,.feature-grid{grid-template-columns:1fr 1fr}.hero{padding:55px 6%}}
 @media(max-width:560px){.learning-themes,.feature-grid{grid-template-columns:1fr}.hero{padding:45px 5%}section{padding:42px 5%}.editorial-intro{padding:20px 5% 5px}}
 
+
+/* Clickable learning cards and topic detail panel */
+.topic-mini,.theme-card,.feature-card,.rich-card,.student-card,.market-topic-card{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.topic-mini:hover,.theme-card:hover,.feature-card:hover,.rich-card:hover,.student-card:hover,.market-topic-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #173d3516;border-color:#c8ddce}
+.topic-mini:focus-visible,.theme-card:focus-visible,.feature-card:focus-visible,.rich-card:focus-visible,.student-card:focus-visible,.market-topic-card:focus-visible{outline:3px solid #e9a23b;outline-offset:3px}
+.topic-detail-modal{display:none;position:fixed;inset:0;background:#071a32b8;z-index:100;overflow:auto;padding:22px}
+.topic-detail-panel{max-width:760px;margin:5vh auto;background:#fff;border:1px solid #e4e9df;border-radius:20px;padding:28px;box-shadow:0 24px 70px #0003;position:relative}
+.topic-detail-panel h2{color:#173d35;margin:5px 42px 12px 0;font-size:clamp(24px,3vw,32px)}
+.topic-detail-panel p{color:#52645c;line-height:1.75}
+.topic-detail-panel .detail-highlight{padding:16px 18px;background:#f3f7ef;border-left:4px solid #e9a23b;border-radius:9px;margin:18px 0;color:#354a40}
+.topic-detail-panel .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.topic-detail-panel .detail-actions a{display:inline-block;padding:10px 15px;border-radius:999px;background:#173d35;color:#fff;text-decoration:none;font-weight:700;font-size:13px}
+.topic-detail-panel .detail-actions a.secondary{background:#eef5ee;color:#173d35;border:1px solid #dce8dc}
+.ticker-track.is-loading{animation:none;padding-left:20px}
+@media(max-width:650px){.topic-detail-modal{padding:8px}.topic-detail-panel{padding:22px 16px;margin:2vh auto}.ticker-label{font-size:11px;padding:9px 10px}.ticker-item{margin-right:25px}}
+
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<div class="market-ticker" aria-label="Finance and market updates">
-
-<div class="ticker-label">📢 FINANCE UPDATE</div>
-<div class="ticker-window">
-  <div class="ticker-track">
-    <a class="ticker-link" href="https://www.nseindia.com/market-data/all-upcoming-issues-ipo" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>IPO:</b> NSE official IPO & primary-market updates →</span></a>
-    <a class="ticker-link" href="https://www.reuters.com/world/india/rbi-bond-sales-fx-intervention-help-halve-indias-cash-overhang-2026-09-22/" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>RBI:</b> Banking-system liquidity update →</span></a>
-    <a class="ticker-link" href="https://www.business-standard.com/amp/markets/capital-market-news/national-stock-exchange-of-india-make-muted-debut-126092400322_1.html" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>MARKET:</b> NSE listing/debut report →</span></a>
-    <a class="ticker-link" href="https://www.nseindia.com/" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>NSE:</b> Official market dashboard & market data →</span></a>
-    <a class="ticker-link" href="https://www.sebi.gov.in/Curation_Links_for_Securities_Market_Data.html" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>SEBI:</b> Securities-market data links →</span></a>
-    <a class="ticker-link" href="https://www.nseindia.com/market-data/all-upcoming-issues-ipo" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>LEARNING:</b> Click any update to read the source →</span></a>
+<div class="market-ticker" aria-label="Latest market and finance headlines">
+  <div class="ticker-label" id="tickerLabel">📢 LATEST MARKETS</div>
+  <div class="ticker-window" aria-live="polite">
+    <div class="ticker-track" id="tickerTrack">
+      <a class="ticker-link" href="https://www.business-standard.com/markets" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>MARKET NEWS:</b> Open the latest market headlines →</span></a>
+      <a class="ticker-link" href="https://www.nseindia.com/market-data/live-equity-market" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>NSE:</b> Official live equity market data →</span></a>
+      <a class="ticker-link" href="https://www.sebi.gov.in/" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>SEBI:</b> Official market regulator updates →</span></a>
+    </div>
   </div>
-</div>
-
 </div>
 
 <header>
@@ -426,11 +437,11 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 <section>
 <div class="section-head"><div><h2>📰 Market & Finance Updates</h2><p>A dedicated space for current finance information.</p></div></div>
 <div class="grid">
-<div class="topic"><div class="icon">📈</div><h3>Stock Market</h3><p>Index movements, important market events and company-related developments.</p></div>
-<div class="topic"><div class="icon">🚀</div><h3>IPO Watch</h3><p>Upcoming IPOs, issue details, price bands, subscription and listing information.</p></div>
-<div class="topic"><div class="icon">🏦</div><h3>Finance News</h3><p>Banking, RBI, interest rates, regulations, FinTech and financial-sector updates.</p></div>
+<div class="topic market-topic-card" data-market-url="https://www.nseindia.com/market-data/live-equity-market"><div class="icon">📈</div><h3>Stock Market</h3><p>Index movements, important market events and company-related developments.</p></div>
+<div class="topic market-topic-card" data-market-url="https://www.nseindia.com/market-data/all-upcoming-issues-ipo"><div class="icon">🚀</div><h3>IPO Watch</h3><p>Upcoming IPOs, issue details, price bands, subscription and listing information.</p></div>
+<div class="topic market-topic-card" data-market-url="https://www.business-standard.com/markets"><div class="icon">🏦</div><h3>Finance News</h3><p>Banking, RBI, interest rates, regulations, FinTech and financial-sector updates.</p></div>
 </div>
-<p class="source-note">🔗 Clickable updates open the original source in a new browser tab.</p><p style="color:#667085;font-size:13px;margin-top:18px">Note: The current ticker contains sample categories. For genuinely live market/news data, the published website should be connected to a reliable market/news API or data provider rather than hard-coding prices.</p>
+<p class="source-note">🔗 Headlines are fetched from the Business Standard Markets RSS feed via RSS2JSON when the page loads and refreshed periodically. If the feed service is unavailable, the ticker shows official market links instead.</p>
 </section>
 
 <section id="students">
@@ -728,6 +739,24 @@ A company needs ₹100 crore to build a solar power project. If the financing is
 </div>
 
 
+
+<div class="topic-detail-modal" id="topicDetailModal" role="dialog" aria-modal="true" aria-labelledby="topicDetailTitle">
+  <div class="topic-detail-panel">
+    <button class="close" onclick="closeTopicDetail()" aria-label="Close topic details">×</button>
+    <span class="badge" id="topicDetailKicker">FINANCE LEARNING</span>
+    <h2 id="topicDetailTitle">Finance topic</h2>
+    <p id="topicDetailDescription"></p>
+    <div class="detail-highlight" id="topicDetailExtra"></div>
+    <p id="topicDetailExample"></p>
+    <div class="detail-actions">
+      <a href="practice/index.html">Open Practice Lab →</a>
+      <a class="secondary" href="students/index.html">Student Zone →</a>
+      <a class="secondary" href="quiz/index.html">Finance Quiz →</a>
+      <a class="secondary" id="topicDetailSource" href="https://www.nseindia.com/" target="_blank" rel="noopener noreferrer" style="display:none">Open official source →</a>
+    </div>
+  </div>
+</div>
+
 <footer>
 <div class="footer-grid">
 <div><h4>Vijay Finance Hub</h4><p>Learn smart. Apply finance. Understand markets. A growing knowledge platform for students, educators and finance learners.</p></div>
@@ -786,6 +815,138 @@ function fmQuiz(correct){
  el.style.marginTop='10px';el.style.fontWeight='700';
 }
 window.addEventListener('click',function(e){if(e.target===document.getElementById('fmModal'))closeFM()})
+
+
+/* Latest market headlines: refresh from Business Standard's public RSS via RSS2JSON. */
+const marketRssUrl = 'https://www.business-standard.com/rss/markets-106.rss';
+const marketFallbackItems = [
+  {title:'Open the latest market headlines', link:'https://www.business-standard.com/markets', source:'Business Standard Markets'},
+  {title:'View official live equity-market data', link:'https://www.nseindia.com/market-data/live-equity-market', source:'NSE India'},
+  {title:'Check official market-regulator updates', link:'https://www.sebi.gov.in/', source:'SEBI'}
+];
+function makeTickerItem(item, sourceLabel){
+  const a=document.createElement('a');
+  a.className='ticker-link';
+  let safeUrl='https://www.business-standard.com/markets';
+  try { const u=new URL(item.link || safeUrl); if(u.protocol==='https:' || u.protocol==='http:') safeUrl=u.href; } catch(e) {}
+  a.href=safeUrl; a.target='_blank'; a.rel='noopener noreferrer';
+  const span=document.createElement('span'); span.className='ticker-item';
+  const b=document.createElement('b');
+  const dateText=item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-IN',{day:'2-digit',month:'short'}) : '';
+  b.textContent=(dateText ? 'MARKET • '+dateText : 'MARKET')+': ';
+  span.appendChild(b);
+  span.appendChild(document.createTextNode((item.title || 'Latest finance update')+' — '+(sourceLabel || 'Business Standard')+' →'));
+  a.appendChild(span); return a;
+}
+function renderMarketTicker(items, sourceLabel){
+  const track=document.getElementById('tickerTrack'); if(!track) return;
+  track.innerHTML='';
+  const selected=(items && items.length ? items.slice(0,10) : marketFallbackItems);
+  selected.forEach(item=>track.appendChild(makeTickerItem(item,sourceLabel || item.source || 'Market News')));
+  // Duplicate the run for a smooth continuous marquee.
+  selected.forEach(item=>track.appendChild(makeTickerItem(item,sourceLabel || item.source || 'Market News')));
+  track.classList.remove('is-loading');
+  document.getElementById('tickerLabel').textContent=items && items.length ? '📈 LATEST MARKETS' : '📢 MARKET LINKS';
+}
+async function loadMarketTicker(){
+  try{
+    const apiUrl='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(marketRssUrl);
+    const response=await fetch(apiUrl,{cache:'no-store'});
+    if(!response.ok) throw new Error('Market feed request failed');
+    const data=await response.json();
+    if(data.status!=='ok' || !Array.isArray(data.items) || !data.items.length) throw new Error('No market headlines returned');
+    renderMarketTicker(data.items,'Business Standard');
+  }catch(error){
+    // Fallback remains useful and does not display invented or stale headlines.
+    renderMarketTicker(marketFallbackItems,'Official Source');
+  }
+}
+loadMarketTicker();
+window.setInterval(loadMarketTicker,30*60*1000);
+
+/* Add a reusable detail view to cards that previously had no click action. */
+const financeTopicDetails={
+  'Financial Decisions':['Investment, financing, dividend and working-capital decisions are linked. Evaluate each decision by considering expected return, risk, liquidity and long-term value.','Classroom task: Ask students to decide whether a small business should buy equipment, borrow funds or retain earnings.'],
+  'Time Value of Money':['Cash available today can earn a return, so it is not directly equivalent to the same amount received later. Discount future cash flows to compare them on a common date.','Core formula: Present Value = Future Value ÷ (1 + r)^n.'],
+  'Capital Budgeting':['Capital budgeting compares long-term investment projects using cash-flow estimates and methods such as Payback, ARR, NPV, PI and IRR.','Decision practice: Calculate NPV using the project’s expected cash flows and required rate of return; positive NPV generally supports acceptance, subject to project constraints.'],
+  'Cost of Capital':['Cost of capital is the required return associated with the funds used to finance a business. It is used in investment appraisal and financing decisions.','Key idea: WACC combines the after-tax cost of debt and the costs of equity and other capital sources using their financing weights.'],
+  'Capital Structure':['Capital structure is the mix of debt and equity used to finance assets and operations. More debt can increase financial risk as well as affect the overall cost of capital.','Classroom task: Compare two companies with similar operating profits but different debt levels.'],
+  'Working Capital':['Working capital management helps a firm meet short-term obligations while managing cash, inventory, receivables and payables efficiently.','Core formula: Net Working Capital = Current Assets − Current Liabilities.'],
+  'Equity Shares':['An equity share represents ownership in a company. Returns may come from dividends and changes in market price, but both returns and capital are uncertain.','Classroom task: Compare two listed companies using official filings, business performance and risk factors—not price movement alone.'],
+  'IPO':['An Initial Public Offering allows a company to offer shares to public investors. A Fresh Issue raises funds for the company; an Offer for Sale allows existing shareholders to sell shares.','Use official offer documents and exchange announcements to study price band, issue dates, allotment basis and listing details.'],
+  'Bonds':['A bond is a debt instrument. Important features include face value, coupon, maturity, yield and the issuer’s credit risk. Bond prices can move when market interest rates change.','Classroom task: Compare a government security and a corporate bond by maturity, yield and credit risk.'],
+  'Mutual Funds':['Mutual funds pool money from investors and invest according to a stated objective. Review the scheme information, risk level, costs, portfolio and time horizon before comparing funds.','Key terms: NAV, expense ratio, diversification and riskometer.'],
+  'Risk & Return':['Risk describes uncertainty in outcomes; return measures the gain or loss on an investment. Higher expected return is not guaranteed and should be assessed alongside risk.','Classroom task: Compare two investments with different expected returns and volatility.'],
+  'Portfolio Basics':['A portfolio combines assets. Diversification can reduce concentration risk, although it cannot eliminate all market risk or guarantee profits.','Classroom task: Discuss why holding different asset types can produce a different risk profile from holding one share.'],
+  'Commercial Banks':['Commercial banks accept deposits, provide loans and payment services, and support financial intermediation. Their operations are governed by applicable banking regulation.','Observation task: Visit a bank branch and map the deposit, cash, loan enquiry and digital-banking services available to customers.'],
+  'Central Banking':['A central bank influences monetary and financial conditions through policy tools, liquidity operations, regulation and oversight functions assigned by law.','For India, consult official RBI policy statements and publications for current policy information.'],
+  'Credit & Loans':['Loan assessment considers repayment capacity, income, existing obligations, credit history, collateral where applicable, and the terms of the product.','Classroom task: Compare EMI, total interest and repayment period for two hypothetical loan offers.'],
+  'Credit Rating':['Credit ratings express an agency’s opinion of credit risk under its rating methodology; they are not a guarantee of repayment and can change.','Classroom task: Compare a rating rationale with the issuer’s financial statements and debt obligations.'],
+  'NPA Concepts':['A non-performing asset is a loan or advance classified as non-performing under applicable prudential rules. NPAs affect income recognition, provisioning and bank asset quality.','Classroom task: Explain how rising stressed loans can affect a bank’s profitability and lending capacity.'],
+  'Financial Markets':['Financial markets connect participants who raise and invest funds. Primary markets issue new securities; secondary markets enable trading in existing securities.','Compare money markets, capital markets, primary markets and secondary markets by maturity, instruments and purpose.'],
+  'Environmental':['Environmental factors can include energy use, emissions, water, waste, pollution and biodiversity impacts. Their financial relevance depends on the business and context.','Classroom task: Identify three environmental risks for a manufacturing company and possible indicators to monitor.'],
+  'Social':['Social factors include workforce safety, labour practices, inclusion, customer responsibility, human rights and community impacts.','Classroom task: Suggest measurable indicators for employee safety and customer grievance handling.'],
+  'Governance':['Governance covers leadership, board oversight, ethics, internal controls, transparency, audit and shareholder rights.','Classroom task: Discuss how weak controls or poor disclosure can affect investor confidence.'],
+  'Green Bonds':['Green bonds are debt instruments intended to finance or refinance eligible environmental projects under a stated framework, with appropriate allocation and reporting practices.','Classroom task: Identify the use of proceeds, eligible projects and reporting information needed for a proposed green bond.'],
+  'Sustainable Finance':['Sustainable finance considers relevant environmental and social factors alongside financial risks, returns and governance. Definitions and product standards vary by framework.','Classroom task: Compare the financing terms and intended outcomes of a conventional loan and a sustainability-linked loan.'],
+  'ESG Reporting':['ESG reporting communicates information about environmental, social and governance performance. Useful reporting depends on materiality, consistent measures, evidence and transparent methods.','Classroom task: Select three material ESG indicators for a bank or manufacturing company and explain why each matters.'],
+  'Digital Payments':['Digital payments move money electronically through channels such as UPI, cards, internet banking and mobile wallets. Security, access, reliability and user protection matter.','Classroom task: Map a digital payment and identify possible fraud-prevention checks.'],
+  'Digital Lending':['Digital lending uses technology in applications, assessment, disbursal, servicing and repayment. Responsible lending still requires transparency, privacy and appropriate borrower assessment.','Classroom task: Review a hypothetical loan app for disclosures, fees, data permissions and grievance channels.'],
+  'AI in Finance':['AI can assist forecasting, fraud detection, customer service and analysis, but outputs require validation against reliable data and human review.','Classroom task: Identify one useful AI application and two risks, such as bias, privacy or incorrect outputs.'],
+  'Blockchain':['Blockchain is a type of distributed ledger in which records are linked and shared under a protocol. Possible finance uses include shared records and settlement workflows, subject to design and regulation.','Classroom task: Compare a shared ledger with a conventional central database for a specific banking process.'],
+  'Cybersecurity':['Financial institutions must protect systems, transactions and personal data against threats such as phishing, credential theft and unauthorized access.','Classroom task: Create a checklist for a student to secure a mobile-banking account.'],
+  'Financial Inclusion':['Financial inclusion means access to useful and affordable financial services, including payments, savings, credit and insurance, supported by suitable consumer protection.','Classroom task: Discuss how digital payments and assisted banking can help underserved customers while managing access and fraud risks.'],
+  'Financial Statements':['The balance sheet shows financial position, the income statement reports performance over a period, and the cash-flow statement explains cash movements.','Classroom task: Explain why profit and operating cash flow may differ in the same period.'],
+  'Ratio Analysis':['Ratio analysis evaluates liquidity, profitability, solvency and operating efficiency. Ratios are more useful when compared over time and with suitable peers.','Examples: Current Ratio = Current Assets ÷ Current Liabilities; Net Profit Margin = Net Profit ÷ Revenue × 100%.'],
+  'Cost Accounting':['Cost accounting classifies and assigns costs to products, services or activities to support cost control and decisions.','Classroom task: Separate fixed, variable and semi-variable costs for a small café.'],
+  'Management Accounting':['Management accounting provides internal information for planning, control, budgeting, performance evaluation and managerial decisions.','Classroom task: Compare actual costs with a budget and identify possible reasons for the variance.'],
+  'Cash Flow':['Cash-flow analysis groups cash movements into operating, investing and financing activities. Positive profit does not always mean positive cash flow.','Classroom task: Classify buying machinery, collecting from customers and repaying a loan by cash-flow category.'],
+  'Budgeting':['A budget translates plans into expected income, spending, cash needs and operational targets. Actual results should be compared with the budget to understand variances.','Classroom task: Build a simple monthly budget and explain how to respond to a negative cash variance.'],
+  'Question Banks':['Question banks support recall, application and analysis through definitions, short answers, numerical problems and case-based questions.','Study approach: Attempt questions first, check the explanation, then revisit the topic where mistakes occurred.'],
+  'Case Studies':['Case studies ask learners to apply concepts to a realistic situation, identify relevant evidence, compare alternatives and justify a decision.','Study approach: Define the problem, list facts and assumptions, compare options, then recommend and defend a course of action.'],
+  'Quizzes':['Quizzes provide quick feedback on understanding. A score is useful as a learning signal, not a complete measure of finance competence.','Study approach: Review every incorrect answer and explain why the correct option is better than the alternatives.'],
+  'Calculators':['Finance calculators help test formulas and assumptions. Always verify inputs, units, timing and outputs before relying on a result.','Practice: Use the Finance Practice Lab to compare scenarios and understand how changing one assumption affects the result.'],
+  'Activities':['Finance activities turn concepts into decisions through simulations, group work, data collection and presentations.','Classroom task: Assign teams a market, banking or ESG problem and ask each team to present evidence and a recommendation.']
+};
+function openTopicDetail(card){
+  const titleEl=card.querySelector('h2,h3,h4,b,strong');
+  const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
+  const p=card.querySelector('p');
+  const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
+  const detail=financeTopicDetails[title];
+  const modal=document.getElementById('topicDetailModal');
+  document.getElementById('topicDetailTitle').textContent=title;
+  document.getElementById('topicDetailDescription').textContent=description;
+  document.getElementById('topicDetailKicker').textContent=card.closest('#elite-finance-challenge') ? 'ELITE FINANCE CHALLENGE' : (card.closest('#learning-roadmap') ? 'LEARNING ROADMAP' : 'FINANCE KNOWLEDGE HUB');
+  document.getElementById('topicDetailExtra').textContent=detail ? detail[0] : 'Use this topic to build the concept, identify its practical application, and check your understanding with an example or short question.';
+  document.getElementById('topicDetailExample').textContent=detail ? detail[1] : 'Suggested next step: write one real-world example, identify the key finance concept, and explain what information would be needed to make a sound decision.';
+  const sourceLink=document.getElementById('topicDetailSource');
+  if(card.dataset.marketUrl){sourceLink.href=card.dataset.marketUrl;sourceLink.style.display='inline-block';}
+  else {sourceLink.style.display='none';}
+  modal.style.display='block'; document.body.style.overflow='hidden';
+}
+function closeTopicDetail(){const m=document.getElementById('topicDetailModal');if(m)m.style.display='none';document.body.style.overflow='auto'}
+window.addEventListener('click',function(e){if(e.target===document.getElementById('topicDetailModal'))closeTopicDetail()});
+window.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopicDetail()});
+function wireLearningCards(){
+  const selectors=['.topic-mini','.theme-card','.feature-card','.rich-card','.student-card','.market-topic-card'];
+  document.querySelectorAll(selectors.join(',')).forEach(card=>{
+    if(card.closest('.topic-detail-modal,.fm-modal,.esg-modal,.ipo-modal,.student-modal') || card.dataset.cardWired==='1') return;
+    // Feature cards retain their existing text link; the rest of each card also opens its detail view.
+    const hasInteractiveChild=!!card.querySelector('a,button,input,select,textarea');
+    if(hasInteractiveChild && !card.classList.contains('feature-card')) return;
+    card.dataset.cardWired='1'; card.setAttribute('role','button'); card.setAttribute('tabindex','0');
+    card.addEventListener('click',function(e){if(e.target.closest('a,button,input,select,textarea'))return;openTopicDetail(card)});
+    card.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ') && !e.target.closest('a,button,input,select,textarea')){e.preventDefault();openTopicDetail(card)}});
+  });
+  document.querySelectorAll('#topicGrid .topic[role="button"]').forEach(card=>{
+    if(card.dataset.keyboardWired==='1') return; card.dataset.keyboardWired='1';
+    card.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ') && typeof card.onclick==='function'){e.preventDefault();card.click()}});
+  });
+}
+document.addEventListener('DOMContentLoaded',wireLearningCards);
+wireLearningCards();
+
 </script>
 </body>
 </html>
