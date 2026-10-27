@@ -913,7 +913,19 @@ function openTopicDetail(card){
   const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
   const p=card.querySelector('p');
   const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
-  const detail=financeTopicDetails[title];
+  const normaliseTopic = value => value
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+const topicKey = Object.keys(financeTopicDetails).find(key => {
+    const a = normaliseTopic(key);
+    const b = normaliseTopic(title);
+   return a === b || (b.length > 5 && (a.includes(b) || b.includes(a)));
+});
+
+const detail = topicKey ? financeTopicDetails[topicKey] : null;
   const modal=document.getElementById('topicDetailModal');
   document.getElementById('topicDetailTitle').textContent=title;
   document.getElementById('topicDetailDescription').textContent=description;
