@@ -307,11 +307,7 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 <div class="topic-mini"><h4>Capital Structure</h4><p>Study the mix of debt and equity and its relationship with risk, cost and financial leverage.</p></div>
 <div class="topic-mini"><h4>Working Capital</h4><p>Manage cash, inventory, receivables and short-term obligations while maintaining smooth operations.</p></div>
 </div>
-<div class="formula-box"><b>Key starter formulas:</b><br>
-Net Working Capital = Current Assets − Current Liabilities<br>
-Current Ratio = Current Assets ÷ Current Liabilities<br>
-Future Value = Present Value × (1 + r)<sup>n</sup><br>
-NPV = Present Value of Cash Inflows − Initial Investment</div>
+
 
 <h3 id="investment-content">📈 Investment & Stock Market</h3>
 <div class="topic-mini-grid">
@@ -424,22 +420,7 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 </div>
 </section>
 
-<section id="tools" class="tools">
-<div class="section-head"><div><h2>Finance Tools</h2><p>Simple calculators for classroom demonstrations.</p></div></div>
-<div class="calculator">
-<h3>Simple Compound Interest Calculator</h3>
-<div class="row">
-<div class="field"><label>Principal (₹)</label><input id="p" type="number" value="10000"></div>
-<div class="field"><label>Annual Rate (%)</label><input id="r" type="number" value="8"></div>
-</div>
-<div class="row" style="margin-top:14px">
-<div class="field"><label>Time (years)</label><input id="t" type="number" value="5"></div>
-<div class="field"><label>Compounding / year</label><input id="n" type="number" value="1"></div>
-</div>
-<button class="calcbtn" onclick="calculate()">Calculate</button>
-<div class="result" id="result">Enter values and calculate.</div>
-</div>
-</section>
+
 
 
 <section>
@@ -611,7 +592,7 @@ Management is considering a new manufacturing project costing ₹6 crore. It mus
 <div class="student-grid">
 <div class="student-card"><h3>Working Capital</h3><p>Current Assets − Current Liabilities</p></div>
 <div class="student-card"><h3>Simple Interest</h3><p>Practice principal, rate and time calculations.</p></div>
-<div class="student-card"><h3>Compound Interest</h3><p>Use the calculator already available in the Finance Tools section.</p></div>
+<div class="student-card"><h3>Compound Interest</h3><p>Open the Finance Practice Lab to practise compound-interest calculations.</p></div>
 <div class="student-card"><h3>Financial Ratios</h3><p>Current ratio, quick ratio, debt-equity and profitability ratios.</p></div>
 <div class="student-card"><h3>IPO Profit/Loss</h3><p>Compare issue price with listing or market price.</p></div>
 <div class="student-card"><h3>Capital Budgeting</h3><p>Practice NPV, IRR and investment decision problems.</p></div>
@@ -760,12 +741,6 @@ A company needs ₹100 crore to build a solar power project. If the financing is
 function filterTopics(){
  const q=document.getElementById('search').value.toLowerCase();
  document.querySelectorAll('#topicGrid .topic').forEach(c=>c.style.display=c.dataset.key?.includes(q)||!c.dataset.key?'':'none');
-}
-function calculate(){
- const p=+document.getElementById('p').value,r=+document.getElementById('r').value,t=+document.getElementById('t').value,n=+document.getElementById('n').value;
- if(!p||n<=0){document.getElementById('result').textContent='Please enter valid values.';return}
- const a=p*Math.pow(1+r/100/n,n*t), interest=a-p;
- document.getElementById('result').textContent=`Future Value: ₹${a.toLocaleString('en-IN',{maximumFractionDigits:2})} | Interest Earned: ₹${interest.toLocaleString('en-IN',{maximumFractionDigits:2})}`;
 }
 
 function openIPO(){document.getElementById('ipoModal').style.display='block';document.body.style.overflow='hidden'}
