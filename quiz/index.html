@@ -1592,6 +1592,7 @@ function finishQuiz(){
    CERTIFICATE FEATURE
 ================================ */
 
+
 function generateCertificate() {
     const participantName = prompt(
         "Enter your full name for the certificate:"
@@ -1602,17 +1603,10 @@ function generateCertificate() {
         return;
     }
 
-    const scoreText =
-        document.getElementById("finalScore").innerText;
-
-    const percentageText =
-        document.getElementById("percentage").innerText;
-
-    const completionDate =
-        new Date().toLocaleDateString("en-IN");
-
-    const certificateId =
-        "FKH-" + Date.now().toString().slice(-8);
+    const scoreText = document.getElementById("finalScore").innerText;
+    const percentageText = document.getElementById("percentage").innerText;
+    const completionDate = new Date().toLocaleDateString("en-IN");
+    const certificateId = "FKH-" + Date.now().toString().slice(-8);
 
     const certificateWindow = window.open("", "_blank");
 
@@ -1622,85 +1616,283 @@ function generateCertificate() {
     }
 
     certificateWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Finance Knowledge Hub Certificate</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    padding: 30px;
-                    text-align: center;
-                    color: #17365d;
-                }
-                .certificate {
-                    border: 8px double #bd963e;
-                    padding: 35px;
-                    min-height: 420px;
-                }
-                h1 {
-                    color: #bd963e;
-                    font-size: 34px;
-                }
-                .name {
-                    font-size: 30px;
-                    font-weight: bold;
-                    border-bottom: 2px solid #bd963e;
-                    display: inline-block;
-                    padding: 10px 25px;
-                }
-                .score {
-                    font-size: 22px;
-                    margin: 20px;
-                }
-                .details {
-                    margin-top: 30px;
-                    font-size: 14px;
-                }
-                button {
-                    padding: 12px 24px;
-                    background: #1769aa;
-                    color: white;
-                    border: 0;
-                    border-radius: 6px;
-                    cursor: pointer;
-                }
-                @media print {
-                    button { display: none; }
-                    body { padding: 0; }
-                }
-            </style>
-        </head>
-        <body>
-            <div class="certificate">
-                <h2>KLH GLOBAL BUSINESS SCHOOL</h2>
-                <h3>KL University</h3>
-                <h1>CERTIFICATE OF ACHIEVEMENT</h1>
-                <p>Finance Knowledge Hub — Finance Quiz Challenge</p>
-                <p>This certificate is presented to</p>
-                <div class="name">
-                    ${escapeCertificateText(participantName.trim())}
-                </div>
-                <p>for completing the Finance Knowledge Hub Quiz.</p>
-                <div class="score">
-                    Score: ${escapeCertificateText(scoreText)}<br>
-                    Percentage: ${escapeCertificateText(percentageText)}
-                </div>
-                <div class="details">
-                    Completion Date: ${completionDate}<br>
-                    Certificate ID: ${certificateId}
-                </div>
-                <p>Dr. Vijay Kumar Kaluvala<br>
-                Finance Knowledge Hub</p>
-                <button onclick="window.print()">
-                    Print / Save as PDF
-                </button>
-            </div>
-        </body>
-        </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Knowledge Hub - Certificate</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 24px;
+    background: #edf1f5;
+    color: #17352f;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.certificate {
+    position: relative;
+    max-width: 1100px;
+    min-height: 730px;
+    margin: 0 auto;
+    padding: 18px;
+    background: #fff;
+    border: 3px solid #b9913e;
+    box-shadow: 0 12px 35px rgba(20, 40, 35, .12);
+}
+
+.inner {
+    min-height: 680px;
+    border: 1px solid #d7bd7a;
+    padding: 35px 55px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eyebrow {
+    color: #17352f;
+    font: bold 15px Arial, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.school {
+    margin: 12px 0 0;
+    font: bold 28px Arial, sans-serif;
+    color: #17352f;
+}
+
+.university {
+    margin: 8px 0 24px;
+    font: 17px Arial, sans-serif;
+    color: #52645f;
+}
+
+.rule {
+    width: 100px;
+    height: 3px;
+    background: #b9913e;
+    margin: 0 auto 18px;
+}
+
+h1 {
+    margin: 0;
+    color: #b18a35;
+    font: bold 38px Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    margin: 14px 0 22px;
+    font: 17px Arial, sans-serif;
+    color: #53645f;
+}
+
+.presented {
+    margin: 4px 0 10px;
+    font: 16px Arial, sans-serif;
+}
+
+.name {
+    display: inline-block;
+    max-width: 100%;
+    margin: 6px 0 12px;
+    padding: 0 24px 10px;
+    border-bottom: 2px solid #b9913e;
+    color: #17352f;
+    font: bold 32px Arial, sans-serif;
+    overflow-wrap: anywhere;
+}
+
+.completion {
+    margin: 4px 0 20px;
+    font: 17px Arial, sans-serif;
+}
+
+.score-panel {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    width: min(600px, 100%);
+    padding: 18px;
+    background: #f3f7f4;
+    border: 1px solid #dce8df;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.score-label {
+    color: #62716b;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-value {
+    margin-top: 7px;
+    color: #17352f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.details {
+    margin-top: 22px;
+    color: #52645f;
+    font: 13px/1.8 Arial, sans-serif;
+}
+
+.signature {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 50px;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 35px;
+    font-family: Arial, sans-serif;
+}
+
+.sign-block {
+    width: 250px;
+    max-width: 45%;
+    border-top: 1px solid #b9913e;
+    padding-top: 10px;
+    color: #17352f;
+    font-size: 14px;
+}
+
+.sign-block strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+button {
+    display: block;
+    margin: 24px auto 0;
+    padding: 13px 25px;
+    border: 0;
+    border-radius: 6px;
+    background: #17352f;
+    color: white;
+    font: bold 15px Arial, sans-serif;
+    cursor: pointer;
+}
+
+@media (max-width: 650px) {
+    body { padding: 8px; }
+    .certificate { padding: 8px; }
+    .inner { padding: 25px 15px; }
+    h1 { font-size: 27px; }
+    .school { font-size: 22px; }
+    .name { font-size: 25px; }
+    .score-panel { gap: 20px; }
+    .score-value { font-size: 21px; }
+    .signature { gap: 18px; }
+    .sign-block { font-size: 12px; }
+}
+
+@page {
+    size: A4 landscape;
+    margin: 8mm;
+}
+
+@media print {
+    body {
+        padding: 0;
+        background: white;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .certificate {
+        max-width: none;
+        min-height: 0;
+        height: 185mm;
+        padding: 10px;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .inner {
+        min-height: 0;
+        height: 100%;
+        padding: 20px 40px;
+    }
+
+    h1 { font-size: 32px; }
+    .school { font-size: 25px; }
+    .subtitle { margin-bottom: 12px; }
+    .score-panel { padding: 12px; }
+    .details { margin-top: 15px; }
+    .signature { padding-top: 22px; }
+    button { display: none !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="certificate">
+  <div class="inner">
+    <div class="eyebrow">Finance Knowledge Hub</div>
+    <div class="school">KLH Global Business School</div>
+    <div class="university">KL University</div>
+    <div class="rule"></div>
+
+    <h1>CERTIFICATE OF ACHIEVEMENT</h1>
+    <p class="subtitle">Finance Quiz Challenge</p>
+    <p class="presented">This certificate is proudly presented to</p>
+
+    <div class="name">
+      ${escapeCertificateText(participantName.trim())}
+    </div>
+
+    <p class="completion">
+      For successfully completing the Finance Knowledge Hub Quiz.
+    </p>
+
+    <div class="score-panel">
+      <div>
+        <div class="score-label">Quiz Score</div>
+        <div class="score-value">${escapeCertificateText(scoreText)}</div>
+      </div>
+      <div>
+        <div class="score-label">Percentage</div>
+        <div class="score-value">${escapeCertificateText(percentageText)}</div>
+      </div>
+    </div>
+
+    <div class="details">
+      Completion Date: ${completionDate}<br>
+      Certificate ID: ${certificateId}
+    </div>
+
+    <div class="signature">
+      <div class="sign-block">
+        <strong>Dr. Vijay Kumar Kaluvala</strong>
+        Finance Knowledge Hub
+      </div>
+      <div class="sign-block">
+        <strong>Participant</strong>
+        Certificate Recipient
+      </div>
+    </div>
+  </div>
+</div>
+
+<button onclick="window.print()">Print / Save as PDF</button>
+</body>
+</html>
     `);
 
     certificateWindow.document.close();
+}
+
 }
 
 function escapeCertificateText(value) {
