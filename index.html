@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,9 +7,13 @@
 <style>
 :root{--navy:#0b1f3a;--blue:#1769aa;--gold:#d89b22;--light:#f4f7fb;--text:#182334;--muted:#667085;--white:#fff}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:var(--light);line-height:1.6}
+.skip-link{position:absolute;left:-9999px;top:8px;background:white;color:var(--navy);padding:10px;z-index:100}.skip-link:focus{left:8px}
 header{background:linear-gradient(135deg,#071a32,#124d78);color:white;padding:18px 6%;position:sticky;top:0;z-index:5;box-shadow:0 3px 15px #0002}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:22px;font-weight:800}.brand span{color:#f2c35b}
-nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}nav a:hover{color:#f2c35b}
+nav{display:flex;align-items:center;justify-content:flex-end;gap:18px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:14px;white-space:nowrap}nav a:hover{color:#f2c35b}
+.topic-link{display:block;color:inherit;text-decoration:none}
+.topic-link:focus-visible,nav a:focus-visible,.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .hero{padding:72px 6%;background:white;display:grid;grid-template-columns:1.35fr .65fr;gap:40px;align-items:center}
 .badge{display:inline-block;background:#eaf3fb;color:var(--blue);padding:7px 13px;border-radius:20px;font-weight:700;font-size:13px}
 h1{font-size:48px;line-height:1.1;margin:18px 0 15px;color:var(--navy)}h1 span{color:var(--blue)}
@@ -20,7 +24,7 @@ section{padding:55px 6%}.section-head{display:flex;justify-content:space-between
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.topic{background:white;padding:23px;border-radius:14px;border:1px solid #e5eaf0;transition:.2s}.topic:hover{transform:translateY(-3px);box-shadow:0 8px 25px #0b1f3a12}.icon{font-size:28px}.topic h3{margin:10px 0 5px}.topic p{color:var(--muted);font-size:14px;margin:0}.tag{display:inline-block;margin-top:13px;background:#f2f6fa;color:var(--blue);padding:4px 9px;border-radius:5px;font-size:12px;font-weight:700}
 .tools{background:#eef5fb}.calculator{background:white;padding:25px;border-radius:14px;max-width:650px;border:1px solid #dce7f0}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field input{width:100%;padding:11px;border:1px solid #ccd5df;border-radius:7px}.calcbtn{margin-top:15px;padding:11px 18px;border:0;border-radius:7px;background:var(--navy);color:white;font-weight:700;cursor:pointer}.result{margin-top:16px;padding:14px;background:#edf8f1;border-radius:8px;font-weight:700;color:#17633b}
 footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}footer strong{color:white}
-@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}nav{display:none}h1{font-size:38px}}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.nav{align-items:flex-start;flex-direction:column}nav{justify-content:flex-start;gap:12px}h1{font-size:38px}}
 @media(max-width:560px){.grid,.row{grid-template-columns:1fr}.hero{padding-top:45px}section{padding:40px 5%}}
 
 .ipo-modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;overflow:auto;padding:30px}
@@ -99,7 +103,7 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
 .section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--blue);font-weight:800;margin-bottom:5px}
 .rich-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .rich-card{position:relative;background:white;border:1px solid #e1e8ef;border-radius:16px;padding:24px;min-height:205px;box-shadow:0 8px 25px #0b1f3a0b;transition:.2s}
-.rich-card:hover{transform:translateY(-4px);box-shadow:0 15px 30px #0b1f3a16}
+.rich-card:hover{box-shadow:0 10px 27px #0b1f3a12}
 .rich-card .r-icon{font-size:31px}.rich-card h3{margin:10px 0 7px;color:var(--navy)}.rich-card p{font-size:14px;color:var(--muted);margin:0 0 12px}.rich-card ul{margin:0;padding-left:18px;color:#596779;font-size:13px}.rich-card .open-label{position:absolute;right:18px;bottom:17px;color:var(--blue);font-size:12px;font-weight:800}
 .feature-band{background:linear-gradient(135deg,#0b1f3a,#1769aa);color:white;border-radius:18px;padding:28px;margin-top:25px;display:grid;grid-template-columns:1.4fr .6fr;gap:20px;align-items:center}
 .feature-band h2{margin:0 0 8px;color:white}.feature-band p{margin:0;color:#d9e7f3}.feature-pill{background:#ffffff18;border:1px solid #ffffff35;padding:18px;border-radius:12px}.feature-pill b{display:block;color:#f5c85b}
@@ -135,9 +139,42 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
 @media(max-width:900px){.career-grid,.ai-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.career-grid,.ai-grid{grid-template-columns:1fr}}
 
+
+/* ShraFIZ-inspired editorial redesign: clean, warm, image-led finance learning */
+:root{--navy:#143b35;--blue:#237a67;--gold:#e9a23b;--light:#f7f7f2;--text:#24332f;--muted:#687670;--white:#fff}
+body{background:#fbfbf7;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+header{background:#fff;color:#173d35;padding:16px 6%;box-shadow:0 2px 18px #173d350d;border-bottom:1px solid #e8eee8}
+.brand{font-size:21px;color:#173d35;letter-spacing:-.4px}.brand span{color:#d78c26}
+nav a{color:#31584e;font-weight:650}nav a:hover{color:#d78c26}
+.market-ticker{background:#173d35;border-bottom:0}.ticker-label{background:#e9a23b;color:#173d35}
+.hero{background:linear-gradient(115deg,#f6f5e9 0%,#fff 58%,#eaf4ed 100%);padding:76px 7%;grid-template-columns:1.2fr .8fr;gap:48px;min-height:390px}
+.hero:after{background:#237a670b;box-shadow:0 0 0 70px #237a6705}
+.badge{background:#e3f1e8;color:#1e6b55;border-radius:999px;letter-spacing:.4px}
+h1{font-size:clamp(38px,4.4vw,58px);letter-spacing:-1.8px;color:#173d35}h1 span{color:#237a67}
+.hero p{font-size:18px;line-height:1.8;color:#5e6e66}.btn{background:#237a67;border-radius:999px;padding:13px 22px;box-shadow:0 7px 18px #237a6722}.btn:hover{background:#185b4d}
+.cardbox{background:linear-gradient(145deg,#173d35,#287a65);border-radius:24px;box-shadow:0 20px 45px #173d3522;padding:28px}
+section{padding:58px 7%}.section-head h2{color:#173d35;letter-spacing:-.5px}.section-kicker{color:#bf7d20}
+.grid{gap:20px}.topic{border-radius:18px;border:1px solid #e4eae2;box-shadow:0 8px 24px #173d3507;padding:24px}.topic:hover{transform:translateY(-4px);box-shadow:0 14px 32px #173d3512;border-color:#c9dfd1}.topic h3{color:#173d35}.tag{background:#e8f3eb;color:#237a67;border-radius:999px}
+#elite-finance-challenge{background:#f4f6ef}#elite-finance-challenge>.cardbox{background:linear-gradient(140deg,#173d35,#236d59)}
+.tools{background:#edf5ee}.calculator{border-radius:18px}.calcbtn{background:#173d35;border-radius:999px}
+.content-hub{background:#f3f5ed;border-color:#e3e8dc;border-radius:20px}.topic-mini{border-radius:14px;border-color:#e4e9df}.formula-box{background:#173d35;border-radius:14px}
+.profile-card{background:linear-gradient(135deg,#173d35,#287a65);border-radius:20px}
+footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
+/* Editorial learning themes */
+.learning-themes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:30px 7% 46px;background:#fff}
+.theme-card{border:1px solid #e8ece4;border-radius:20px;padding:25px;background:#fff;box-shadow:0 8px 25px #173d3508;min-height:190px;transition:.2s}
+.theme-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px #173d3513}
+.theme-art{height:72px;width:72px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:35px;margin-bottom:17px;background:linear-gradient(135deg,#e5f3e7,#fff1d7)}
+.theme-card h2{font-size:23px;margin:0 0 8px;color:#173d35}.theme-card p{font-size:14px;color:#687670;margin:0;line-height:1.7}
+.editorial-intro{max-width:1100px;margin:0 auto;padding:18px 7% 5px;text-align:center}.editorial-intro h2{font-size:30px;letter-spacing:-.7px;color:#173d35;margin:0 0 8px}.editorial-intro p{color:#687670;margin:0}
+.featured-learning{padding-top:28px;background:#f8f8f2}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.feature-card{overflow:hidden;background:#fff;border:1px solid #e5e9e0;border-radius:18px;box-shadow:0 8px 25px #173d3508}.feature-visual{height:150px;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,#dceee1,#f9e9c9)}.feature-card:nth-child(2) .feature-visual{background:linear-gradient(135deg,#e3e8f8,#e0f2e9)}.feature-card:nth-child(3) .feature-visual{background:linear-gradient(135deg,#f6e6d5,#dceee1)}.feature-copy{padding:21px}.feature-copy .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.3px;font-weight:800;color:#b87921}.feature-copy h3{font-size:19px;color:#173d35;margin:8px 0}.feature-copy p{font-size:14px;color:#687670;margin:0 0 14px}.feature-copy a{font-size:13px;color:#237a67;text-decoration:none;font-weight:800}.feature-copy a:hover{text-decoration:underline}
+@media(max-width:850px){.learning-themes,.feature-grid{grid-template-columns:1fr 1fr}.hero{padding:55px 6%}}
+@media(max-width:560px){.learning-themes,.feature-grid{grid-template-columns:1fr}.hero{padding:45px 5%}section{padding:42px 5%}.editorial-intro{padding:20px 5% 5px}}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <div class="market-ticker" aria-label="Finance and market updates">
 
@@ -147,7 +184,6 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
     <a class="ticker-link" href="https://www.nseindia.com/market-data/all-upcoming-issues-ipo" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>IPO:</b> NSE official IPO & primary-market updates →</span></a>
     <a class="ticker-link" href="https://www.reuters.com/world/india/rbi-bond-sales-fx-intervention-help-halve-indias-cash-overhang-2026-09-22/" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>RBI:</b> Banking-system liquidity update →</span></a>
     <a class="ticker-link" href="https://www.business-standard.com/amp/markets/capital-market-news/national-stock-exchange-of-india-make-muted-debut-126092400322_1.html" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>MARKET:</b> NSE listing/debut report →</span></a>
-    <a class="ticker-link" href="https://www.business-standard.com/markets/capital-market-news/sonaselection-india-jumps-on-debut-126092400413_1.html" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>IPO:</b> Sona Selection India listing report →</span></a>
     <a class="ticker-link" href="https://www.nseindia.com/" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>NSE:</b> Official market dashboard & market data →</span></a>
     <a class="ticker-link" href="https://www.sebi.gov.in/Curation_Links_for_Securities_Market_Data.html" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>SEBI:</b> Securities-market data links →</span></a>
     <a class="ticker-link" href="https://www.nseindia.com/market-data/all-upcoming-issues-ipo" target="_blank" rel="noopener noreferrer"><span class="ticker-item"><b>LEARNING:</b> Click any update to read the source →</span></a>
@@ -155,32 +191,22 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
 </div>
 
 </div>
-</div>
 
 <header>
 <div class="nav">
-<div class="brand">Finance <span>Knowledge Hub</span></div>
+<div class="brand">Vijay <span>Finance Hub</span></div>
 <nav>
 <a href="#topics">Topics</a><a href="practice/index.html">Practice Lab</a><a href="students/index.html">Student Zone</a><a href="#about">About</a>
 </nav>
 </div>
 </header>
-
-<div class="quick-strip">
-<div class="quick-item"><b>📘 Learn Finance</b><span>Concepts • Examples • Notes</span></div>
-<div class="quick-item"><b>📈 Markets</b><span>IPO • Stocks • Banking • Investment</span></div>
-<div class="quick-item"><b>🧮 Practice</b><span>Calculators • Problems • Quizzes</span></div>
-<div class="quick-item"><b>🔬 Research</b><span>FinTech • ESG • Finance research</span></div><div class="quick-item"><b>🎓 Career & AI</b><span>Certifications • AI tools • Skills</span></div>
-</div>
-
-
-<main>
+<main id="main-content">
 <section class="hero">
 <div>
-<span class="badge">LEARN • APPLY • RESEARCH</span>
-<h1>Finance, explained from <span>Basics to Advanced</span>.</h1>
-<p>A growing finance knowledge platform by <b>Dr. Vijay Kumar</b> — built for students, teachers, researchers and finance learners.</p>
-<a class="btn" href="./students/">Explore Finance Topics →</a>
+<span class="badge">FINANCIAL INSIGHTS • PRACTICAL LEARNING • RESEARCH</span>
+<h1>Make smarter money decisions with <span>finance that makes sense.</span></h1>
+<p>Welcome to the Finance Knowledge Hub by <b>Dr. Vijay Kumar Kaluvala</b>. Explore finance concepts, Indian markets, banking, FinTech and green finance through clear explanations, practical tools and student-friendly learning resources.</p>
+<a class="btn" href="#topics">Explore the Knowledge Hub →</a> <a class="btn" href="#about" style="background:#fff;color:#237a67;border:1px solid #d7e7dc;box-shadow:none;margin-left:7px">Meet the Creator</a>
 </div>
 <div class="cardbox">
 <h3>What you can learn here</h3>
@@ -190,6 +216,19 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
 <div class="stat"><span>🎓 Students</span><b>Notes & activities</b></div>
 <div class="stat"><span>🔬 Research</span><b>Ideas & resources</b></div>
 </div>
+</section>
+<section class="learning-themes" aria-label="Three ways to learn finance">
+  <article class="theme-card"><div class="theme-art">🧠</div><h2>Learn Smart</h2><p>Build a strong foundation with simple explanations, classroom notes, finance concepts and real-life examples.</p></article>
+  <article class="theme-card"><div class="theme-art">💳</div><h2>Apply Smart</h2><p>Practise calculations, understand banking and markets, and use financial tools to solve practical problems.</p></article>
+  <article class="theme-card"><div class="theme-art">📈</div><h2>Grow Smart</h2><p>Explore investing, FinTech, ESG and green finance while strengthening analytical and research skills.</p></article>
+</section>
+<div class="editorial-intro"><h2>Explore ideas that connect finance with everyday life</h2><p>Study the basics, understand what is happening in markets, and build confidence one topic at a time.</p></div>
+<section class="featured-learning" aria-label="Featured learning paths">
+  <div class="feature-grid">
+    <article class="feature-card"><div class="feature-visual">💰</div><div class="feature-copy"><div class="eyebrow">Start with the basics</div><h3>Understand Financial Management</h3><p>Learn financial decisions, objectives, time value of money and working capital with classroom-friendly explanations.</p><a href="#topics">Explore finance topics →</a></div></article>
+    <article class="feature-card"><div class="feature-visual">📊</div><div class="feature-copy"><div class="eyebrow">India's financial markets</div><h3>Follow Markets & IPOs</h3><p>Understand stock markets, primary issues, banking, market institutions and important financial terminology.</p><a href="#topics">Explore markets →</a></div></article>
+    <article class="feature-card"><div class="feature-visual">🌱</div><div class="feature-copy"><div class="eyebrow">Finance for the future</div><h3>Discover FinTech & Green Finance</h3><p>Explore digital lending, financial inclusion, AI in finance, ESG principles and sustainable investment.</p><a href="#topics">Explore future finance →</a></div></article>
+  </div>
 </section>
 <!-- ELITE FINANCE CHALLENGE -->
 <section id="elite-finance-challenge">
@@ -234,43 +273,20 @@ footer{background:var(--navy);color:#d8e1ec;padding:35px 6%;text-align:center}fo
   </div>
 </section>
 <!-- END ELITE FINANCE CHALLENGE -->
-
-
-
-
-
-<section id="finance-overview">
-<div class="section-head">
-<div><div class="section-kicker">Explore the Hub</div><h2>Finance Knowledge — at a Glance</h2><p>Short, practical learning paths across the major areas of finance.</p></div>
-</div>
-<div class="rich-grid">
-<div class="rich-card"><div class="r-icon">💰</div><h3>Financial Management</h3><p>Learn how organizations plan, raise and use funds.</p><ul><li>Financial decisions</li><li>Capital budgeting</li><li>Working capital</li></ul><span class="open-label">Unit 1 available →</span></div>
-<div class="rich-card"><div class="r-icon">🚀</div><h3>IPO & Primary Market</h3><p>Understand how companies raise capital from public investors.</p><ul><li>Book building & price band</li><li>Fresh Issue vs OFS</li><li>Allotment & listing</li></ul><span class="open-label">Interactive lesson →</span></div>
-<div class="rich-card"><div class="r-icon">🌱</div><h3>ESG & Green Finance</h3><p>Connect sustainability concepts with financial decision-making.</p><ul><li>E • S • G dimensions</li><li>Green bonds & loans</li><li>Sustainable finance</li></ul><span class="open-label">Interactive lesson →</span></div>
-<div class="rich-card"><div class="r-icon">📒</div><h3>Accounting</h3><p>Build a foundation for reading and interpreting financial information.</p><ul><li>Financial accounting</li><li>Cost accounting</li><li>Management accounting</li></ul><span class="open-label">Coming next →</span></div>
-<div class="rich-card"><div class="r-icon">🏦</div><h3>Banking & Credit</h3><p>Explore banks, credit, lending and financial institutions.</p><ul><li>Loans & interest</li><li>Credit rating</li><li>NPA & banking concepts</li></ul><span class="open-label">Coming next →</span></div>
-<div class="rich-card"><div class="r-icon">🤖</div><h3>FinTech & Digital Finance</h3><p>Understand how technology is transforming financial services.</p><ul><li>Digital lending</li><li>AI in finance</li><li>Financial inclusion</li></ul><span class="open-label">Coming next →</span></div>
-</div>
-<div class="feature-band">
-<div><h2>Learn → Practice → Test → Apply</h2><p>Every topic can grow into notes, formulas, solved examples, classroom activities, case studies, calculators and quizzes.</p></div>
-<div class="feature-pill"><b>Built for BBA & MBA learners</b><span>and finance teachers, researchers and lifelong learners.</span></div>
-</div>
-</section>
-
 <section id="topics">
 <div class="section-head"><div><div class="section-kicker">Knowledge Library</div><h2>Explore Finance Topics</h2><p>Choose a subject and move from simple concepts to practical application.</p></div></div>
 <input class="search" id="search" placeholder="🔍 Search topics — e.g., IPO, NPV, ESG, banking..." oninput="filterTopics()">
 <div class="grid" id="topicGrid">
-<div class="topic" data-key="financial management working capital capital budgeting cost of capital dividend"><div class="icon">💰</div><h3>Financial Management</h3><p>Capital budgeting, working capital, cost of capital, leverage, dividend decisions and more.</p><span class="tag">Core Finance</span></div>
-<div class="topic" data-key="financial management capital budgeting working capital cost of capital capital structure dividend leverage" onclick="openFM()" style="cursor:pointer"><div class="icon">💰</div><h3>Financial Management</h3><p>Unit 1: fundamentals, objectives, finance manager, financial decisions and wealth maximization.</p><span class="tag">Unit 1 →</span></div>
-<div class="topic" data-key="accounting financial accounting management accounting cost accounting"><div class="icon">📒</div><h3>Accounting</h3><p>Financial accounting, management accounting, cost accounting and practical problems.</p><span class="tag">Accounting</span></div>
-<div class="topic" data-key="stock market shares equity trading investment"><div class="icon">📈</div><h3>Stock Market</h3><p>Equity, indices, trading basics, valuation concepts, market terminology and investing.</p><span class="tag">Markets</span></div>
-<div class="topic" data-key="ipo initial public offering book building bid price ofs fpo" onclick="openIPO()" style="cursor:pointer"><div class="icon">🚀</div><h3>IPO & Primary Market</h3><p>IPO, book building, bid price, OFS, FPO, allotment and classroom-ready examples.</p><span class="tag">IPO</span></div>
-<div class="topic" data-key="banking banks credit rating loans interest npa"><div class="icon">🏦</div><h3>Banking & Credit</h3><p>Banking operations, loans, interest, credit ratings, NPAs and financial institutions.</p><span class="tag">Banking</span></div>
-<div class="topic" data-key="fintech digital lending financial inclusion ai finance"><div class="icon">🤖</div><h3>FinTech & Digital Finance</h3><p>Digital lending, payments, AI in finance, financial inclusion and emerging technologies.</p><span class="tag">FinTech</span></div>
-<div class="topic" data-key="esg green finance sustainability sustainable finance" onclick="openESG()" style="cursor:pointer"><div class="icon">🌱</div><h3>ESG & Green Finance</h3><p>ESG, sustainable finance, green bonds, climate finance and responsible investment.</p><span class="tag">Sustainability</span></div>
-<div class="topic" data-key="financial markets institutions money market capital market"><div class="icon">🌐</div><h3>Financial Markets</h3><p>Money market, capital market, institutions, instruments and market structure.</p><span class="tag">Markets</span></div>
-<div class="topic" data-key="research finance phd paper methodology data"><div class="icon">🔬</div><h3>Finance Research</h3><p>Research ideas, methodologies, paper development, datasets and academic resources.</p><span class="tag">Research</span></div>
+
+<div class="topic" data-key="financial management capital budgeting working capital cost of capital capital structure dividend leverage" onclick="openFM()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFM()}" style="cursor:pointer"><div class="icon">💰</div><h3>Financial Management</h3><p>Unit 1: fundamentals, objectives, finance manager, financial decisions and wealth maximization.</p><span class="tag">Unit 1 →</span></div>
+<a class="topic topic-link" data-key="accounting financial accounting management accounting cost accounting" href="#accounting-content"><div class="icon">📒</div><h3>Accounting</h3><p>Financial accounting, management accounting, cost accounting and practical problems.</p><span class="tag">Explore Accounting →</span></a>
+<a class="topic topic-link" data-key="stock market shares equity trading investment" href="#investment-content"><div class="icon">📈</div><h3>Stock Market</h3><p>Equity, indices, trading basics, valuation concepts, market terminology and investing.</p><span class="tag">Explore Markets →</span></a>
+<div class="topic" data-key="ipo initial public offering book building bid price ofs fpo" onclick="openIPO()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openIPO()}" style="cursor:pointer"><div class="icon">🚀</div><h3>IPO & Primary Market</h3><p>IPO, book building, bid price, OFS, FPO, allotment and classroom-ready examples.</p><span class="tag">IPO</span></div>
+<a class="topic topic-link" data-key="banking banks credit rating loans interest npa" href="#banking-content"><div class="icon">🏦</div><h3>Banking & Credit</h3><p>Banking operations, loans, interest, credit ratings, NPAs and financial institutions.</p><span class="tag">Explore Banking →</span></a>
+<a class="topic topic-link" data-key="fintech digital lending financial inclusion ai finance" href="#fintech-content"><div class="icon">🤖</div><h3>FinTech & Digital Finance</h3><p>Digital lending, payments, AI in finance, financial inclusion and emerging technologies.</p><span class="tag">Explore FinTech →</span></a>
+<div class="topic" data-key="esg green finance sustainability sustainable finance" onclick="openESG()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openESG()}" style="cursor:pointer"><div class="icon">🌱</div><h3>ESG & Green Finance</h3><p>ESG, sustainable finance, green bonds, climate finance and responsible investment.</p><span class="tag">Sustainability</span></div>
+<a class="topic topic-link" data-key="financial markets institutions money market capital market" href="#investment-content"><div class="icon">🌐</div><h3>Financial Markets</h3><p>Money market, capital market, institutions, instruments and market structure.</p><span class="tag">Explore Financial Markets →</span></a>
+<a class="topic topic-link" data-key="research finance phd paper methodology data" href="#learning-roadmap"><div class="icon">🔬</div><h3>Finance Research</h3><p>Research ideas, methodologies, paper development, datasets and academic resources.</p><span class="tag">Explore Learning Roadmap →</span></a>
 </div>
 </section>
 
@@ -297,7 +313,7 @@ Current Ratio = Current Assets ÷ Current Liabilities<br>
 Future Value = Present Value × (1 + r)<sup>n</sup><br>
 NPV = Present Value of Cash Inflows − Initial Investment</div>
 
-<h3>📈 Investment & Stock Market</h3>
+<h3 id="investment-content">📈 Investment & Stock Market</h3>
 <div class="topic-mini-grid">
 <div class="topic-mini"><h4>Equity Shares</h4><p>Understand ownership, market price, dividends, capital gains, risk and return.</p></div>
 <div class="topic-mini"><h4>IPO</h4><p>Learn Fresh Issue, OFS, price band, book building, bids, allotment and listing.</p></div>
@@ -307,7 +323,7 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 <div class="topic-mini"><h4>Portfolio Basics</h4><p>Combine assets with different characteristics to manage concentration risk.</p></div>
 </div>
 
-<h3>🏦 Banking & Financial Institutions</h3>
+<h3 id="banking-content">🏦 Banking & Financial Institutions</h3>
 <div class="topic-mini-grid">
 <div class="topic-mini"><h4>Commercial Banks</h4><p>Deposits, lending, payment services and financial intermediation.</p></div>
 <div class="topic-mini"><h4>Central Banking</h4><p>Role of monetary policy, liquidity and financial-system stability.</p></div>
@@ -317,7 +333,7 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 <div class="topic-mini"><h4>Financial Markets</h4><p>Primary and secondary markets, money market and capital market basics.</p></div>
 </div>
 
-<h3>🌱 ESG & Green Finance</h3>
+<h3 id="esg-content">🌱 ESG & Green Finance</h3>
 <div class="topic-mini-grid">
 <div class="topic-mini"><h4>Environmental</h4><p>Climate, emissions, energy, water, waste, pollution and biodiversity.</p></div>
 <div class="topic-mini"><h4>Social</h4><p>Employees, human rights, safety, inclusion, communities and customer responsibility.</p></div>
@@ -327,7 +343,7 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 <div class="topic-mini"><h4>ESG Reporting</h4><p>Understand the importance of reliable sustainability information, metrics and disclosure.</p></div>
 </div>
 
-<h3>🤖 FinTech & Digital Finance</h3>
+<h3 id="fintech-content">🤖 FinTech & Digital Finance</h3>
 <div class="topic-mini-grid">
 <div class="topic-mini"><h4>Digital Payments</h4><p>Technology-enabled payments and changing customer experiences.</p></div>
 <div class="topic-mini"><h4>Digital Lending</h4><p>Technology in credit origination, assessment, servicing and financial inclusion.</p></div>
@@ -337,7 +353,7 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 <div class="topic-mini"><h4>Financial Inclusion</h4><p>How digital channels can improve access to useful and affordable financial services.</p></div>
 </div>
 
-<h3>📊 Accounting & Financial Analysis</h3>
+<h3 id="accounting-content">📊 Accounting & Financial Analysis</h3>
 <div class="topic-mini-grid">
 <div class="topic-mini"><h4>Financial Statements</h4><p>Balance sheet, income statement and cash-flow statement basics.</p></div>
 <div class="topic-mini"><h4>Ratio Analysis</h4><p>Liquidity, solvency, activity and profitability measures.</p></div>
@@ -439,14 +455,14 @@ NPV = Present Value of Cash Inflows − Initial Investment</div>
 <section id="students">
 <div class="section-head"><div><h2>Student Zone</h2><p>Learn → Practice → Test → Apply.</p></div></div>
 <div class="grid">
-<div class="topic" onclick="openStudents()" style="cursor:pointer"><div class="icon">🎓</div><h3>Open Student Zone</h3><p>Study materials, question banks, quizzes, practice lab, activities, cases and challenges.</p><span class="tag">Explore →</span></div>
+<a class="topic topic-link" href="students/index.html"><div class="icon">🎓</div><h3>Open Student Zone</h3><p>Study materials, question banks, quizzes, practice lab, activities, cases and challenges.</p><span class="tag">Open Student Zone →</span></a>
 <div class="topic"><div class="icon">📝</div><h3>Question Banks</h3><p>Unit-wise questions, MCQs, case studies and application-based practice.</p></div>
 <div class="topic"><div class="icon">🧮</div><h3>Finance Practice Lab</h3><p>Practice finance calculations and apply concepts to realistic situations.</p></div>
 </div>
 </section>
 
 <section id="about">
-<div class="section-head"><div><h2>About the Creator</h2><p>Academic profile and finance education resources.</p></div></div>
+<div class="section-head"><div><h2>Meet the Creator</h2><p>Finance education, practical learning and research resources by an academic.</p></div></div>
 <div class="topic">
 <h3>Dr. Vijay Kumar Kaluvala</h3>
 <p>Associate Professor at KLH Global Business School (KLH GBS), MBA Department. This hub brings together finance concepts, classroom examples, practical tools, research resources and continuously updated learning material.</p>
@@ -733,7 +749,7 @@ A company needs ₹100 crore to build a solar power project. If the financing is
 
 <footer>
 <div class="footer-grid">
-<div><h4>Dr. Vijay Finance Knowledge Hub</h4><p>A growing learning platform for finance education, practical application and research.</p></div>
+<div><h4>Vijay Finance Hub</h4><p>Learn smart. Apply finance. Understand markets. A growing knowledge platform for students, educators and finance learners.</p></div>
 <div><h4>Core Areas</h4><ul><li>Financial Management</li><li>IPO & Markets</li><li>ESG & Green Finance</li><li>FinTech</li></ul></div>
 <div><h4>Creator</h4><p><b>Dr. Vijay Kumar Kaluvala</b><br>Associate Professor<br>KLH GBS • MBA Department</p><p>📧 vijay.kumar.k@klh.edu.in</p></div>
 </div>
@@ -743,7 +759,7 @@ A company needs ₹100 crore to build a solar power project. If the financing is
 <script>
 function filterTopics(){
  const q=document.getElementById('search').value.toLowerCase();
- document.querySelectorAll('.topic').forEach(c=>c.style.display=c.dataset.key?.includes(q)||!c.dataset.key?'':'none');
+ document.querySelectorAll('#topicGrid .topic').forEach(c=>c.style.display=c.dataset.key?.includes(q)||!c.dataset.key?'':'none');
 }
 function calculate(){
  const p=+document.getElementById('p').value,r=+document.getElementById('r').value,t=+document.getElementById('t').value,n=+document.getElementById('n').value;
@@ -795,7 +811,6 @@ function fmQuiz(correct){
  el.style.marginTop='10px';el.style.fontWeight='700';
 }
 window.addEventListener('click',function(e){if(e.target===document.getElementById('fmModal'))closeFM()})
-
 </script>
 </body>
 </html>
