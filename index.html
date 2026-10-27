@@ -910,6 +910,10 @@ const financeTopicDetails={
 };
 function openTopicDetail(card){
   const titleEl=card.querySelector('h2,h3,h4,b,strong');
+  if (titleEl && titleEl.textContent.trim() === 'Financial Analysis') {
+    window.location.href = './financial-analysis.html';
+    return;
+}
   const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
   const p=card.querySelector('p');
   const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
