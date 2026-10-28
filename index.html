@@ -918,6 +918,10 @@ function openTopicDetail(card){
     window.location.href = './investment-decisions.html';
     return;
 }
+  if (titleEl && titleEl.textContent.trim() === 'Portfolio Analysis') {
+    window.location.href = './portfolio-analysis-lab.html';
+    return;
+}
   const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
   const p=card.querySelector('p');
   const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
