@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investment Decisions Lab | Vijay Finance Hub</title>
+<style>
+:root{--green:#173d35;--green2:#237a67;--gold:#e9a23b;--cream:#f7f7f2;--ink:#24332f;--muted:#687670;--line:#dce8dd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial, sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,var(--green),var(--green2));color:white;padding:28px max(22px,calc((100% - 1120px)/2))}
+header a{color:#ffe0a0;text-decoration:none;font-weight:bold}
+header h1{font-size:clamp(30px,5vw,46px);margin:18px 0 6px}
+header p{max-width:780px;margin:0;color:#edf5f0}
+main{max-width:1120px;margin:28px auto;padding:0 18px}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 8px 25px #173d3509}
+h2{color:var(--green);margin:0 0 8px}
+h3{color:var(--green);margin:0 0 12px}
+.sub{color:var(--muted);margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field label{display:block;font-weight:bold;font-size:14px;margin-bottom:5px}
+input,select{width:100%;padding:11px;border:1px solid #c9d9ce;border-radius:9px;font-size:16px;background:#fff;color:var(--ink)}
+button{border:0;border-radius:24px;padding:12px 18px;background:var(--green);color:white;font-weight:bold;cursor:pointer;margin:5px 5px 5px 0}
+button.secondary{background:#eaf3ec;color:var(--green);border:1px solid var(--line)}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
+.result{background:#fafbf8;border:1px solid var(--line);border-radius:12px;padding:16px}
+.result small{display:block;color:var(--muted);font-weight:bold;text-transform:uppercase}
+.value{font-size:25px;font-weight:bold;color:var(--green);margin:6px 0}
+.note{background:#f3f7ef;border-left:4px solid var(--gold);padding:14px;border-radius:9px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+th{background:#f0f5ee}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:18px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.panel{padding:16px}header{padding:24px 18px}table{font-size:13px}}
+@media print{button,.no-print,header a{display:none!important}body{background:white}.panel{box-shadow:none;break-inside:avoid}main{max-width:none}}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html">← Back to Vijay Finance Hub</a>
+<p style="margin-top:20px;color:#ffe0a0;font-weight:bold;letter-spacing:2px">ELITE FINANCE CHALLENGE</p>
+<h1>Investment Decisions Lab</h1>
+<p>Explore investment returns, risk, valuation, portfolio choices and capital markets through interactive calculations and practical financial interpretation.</p>
+</header>
+
+<main>
+<section class="panel">
+<h2>How to use this lab</h2>
+<p class="sub">Enter your figures, select Calculate, and review the results. Use the sample values to practise before entering your own data.</p>
+<button onclick="calculateAll()">Calculate all results</button>
+<button class="secondary" onclick="loadSample()">Load sample data</button>
+<button class="secondary" onclick="clearInputs()">Clear inputs</button>
+<button class="secondary" onclick="window.print()">Print / Save report</button>
+<div id="status" class="note">Ready. Calculations run in your browser; your entries are not uploaded to a server.</div>
+</section>
+
+<section class="panel">
+<h2>1. Investment Return</h2>
+<p class="sub">Calculate holding-period return, including income received during the period.</p>
+<div class="grid">
+<div class="field"><label for="buy">Purchase price (₹)</label><input id="buy" type="number" min="0" step="any" value="100"></div>
+<div class="field"><label for="sell">Selling / current price (₹)</label><input id="sell" type="number" min="0" step="any" value="115"></div>
+<div class="field"><label for="income">Income received (₹)</label><input id="income" type="number" step="any" value="5"></div>
+</div>
+<div class="results">
+<div class="result"><small>Holding-period return</small><div class="value" id="holding">—</div><span id="holdingText">Enter valid figures.</span></div>
+<div class="result"><small>Gain / loss per unit</small><div class="value" id="gain">—</div><span>Price change plus income.</span></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>2. Risk and Expected Return (CAPM)</h2>
+<p class="sub">CAPM estimates expected return using the risk-free rate, beta and expected market return. Enter rates as percentages.</p>
+<div class="grid">
+<div class="field"><label for="rf">Risk-free rate (%)</label><input id="rf" type="number" step="any" value="6"></div>
+<div class="field"><label for="beta">Stock beta</label><input id="beta" type="number" step="any" value="1.2"></div>
+<div class="field"><label for="market">Expected market return (%)</label><input id="market" type="number" step="any" value="12"></div>
+</div>
+<div class="results">
+<div class="result"><small>Market risk premium</small><div class="value" id="premium">—</div><span>Market return minus risk-free rate.</span></div>
+<div class="result"><small>CAPM expected return</small><div class="value" id="capm">—</div><span>Risk-free rate + beta × market risk premium.</span></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>3. Portfolio Expected Return</h2>
+<p class="sub">Enter each asset's portfolio weight and expected return. Weights should total 100% for a fully invested portfolio.</p>
+<div class="grid">
+<div class="field"><label for="w1">Asset A weight (%)</label><input id="w1" type="number" step="any" value="50"></div>
+<div class="field"><label for="r1">Asset A expected return (%)</label><input id="r1" type="number" step="any" value="10"></div>
+<div class="field"><label for="w2">Asset B weight (%)</label><input id="w2" type="number" step="any" value="30"></div>
+<div class="field"><label for="r2">Asset B expected return (%)</label><input id="r2" type="number" step="any" value="14"></div>
+<div class="field"><label for="w3">Asset C weight (%)</label><input id="w3" type="number" step="any" value="20"></div>
+<div class="field"><label for="r3">Asset C expected return (%)</label><input id="r3" type="number" step="any" value="7"></div>
+</div>
+<div class="results">
+<div class="result"><small>Total portfolio weight</small><div class="value" id="weightTotal">—</div><span id="weightText">Check that weights total 100%.</span></div>
+<div class="result"><small>Weighted expected return</small><div class="value" id="portfolioReturn">—</div><span id="portfolioText">Weighted average of asset returns.</span></div>
+</div>
+<div class="note">This calculates expected portfolio return, not portfolio volatility. Measuring portfolio risk also requires information about asset risk and how their returns move together.</div>
+</section>
+
+<section class="panel">
+<h2>4. Share Valuation — Dividend Growth Model</h2>
+<p class="sub">Estimate share value when dividends are expected to grow at a constant rate forever.</p>
+<div class="grid">
+<div class="field"><label for="dividend">Expected dividend next year (₹)</label><input id="dividend" type="number" min="0" step="any" value="5"></div>
+<div class="field"><label for="required">Required return (%)</label><input id="required" type="number" step="any" value="12"></div>
+<div class="field"><label for="growth">Constant dividend growth (%)</label><input id="growth" type="number" step="any" value="5"></div>
+<div class="field"><label for="sharePrice">Current market price (₹, optional)</label><input id="sharePrice" type="number" min="0" step="any" value="65"></div>
+</div>
+<div class="results">
+<div class="result"><small>Estimated intrinsic value</small><div class="value" id="intrinsic">—</div><span id="valueText">Based on the dividend growth model.</span></div>
+<div class="result"><small>Value vs market price</small><div class="value" id="valuation">—</div><span id="valuationText">Enter market price to compare.</span></div>
+</div>
+<div class="note">Model: Value = next year's dividend ÷ (required return − growth rate). It is only valid when the required return is greater than the growth rate.</div>
+</section>
+
+<section class="panel">
+<h2>5. Bond Pricing and Interest Rates</h2>
+<p class="sub">Estimate the price of a plain fixed-coupon bond using annual coupon payments and annual discounting.</p>
+<div class="grid">
+<div class="field"><label for="face">Face value (₹)</label><input id="face" type="number" min="0" step="any" value="1000"></div>
+<div class="field"><label for="coupon">Annual coupon rate (%)</label><input id="coupon" type="number" min="0" step="any" value="8"></div>
+<div class="field"><label for="yieldRate">Required yield (%)</label><input id="yieldRate" type="number" min="0" step="any" value="10"></div>
+<div class="field"><label for="years">Years to maturity</label><input id="years" type="number" min="1" max="100" step="1" value="5"></div>
+</div>
+<div class="results">
+<div class="result"><small>Estimated bond price</small><div class="value" id="bondPrice">—</div><span id="bondText">Present value of coupons and principal.</span></div>
+<div class="result"><small>Price category</small><div class="value" id="bondCategory">—</div><span id="bondCategoryText">Compared with face value.</span></div>
+</div>
+<div class="note">This simplified model assumes annual coupon payments, annual compounding and no default. Actual bond prices may also reflect accrued interest, taxes, liquidity and credit risk.</div>
+</section>
+
+<section class="panel">
+<h2>6. Investment Decision Checklist</h2>
+<p>Before making a decision, students should consider:</p>
+<ul>
+<li>What return is expected, and over what time period?</li>
+<li>What market, business, inflation and liquidity risks could affect the investment?</li>
+<li>Are the valuation assumptions reasonable and supported by evidence?</li>
+<li>Is the portfolio diversified, and are the weights consistent with the investor's goals?</li>
+<li>How sensitive is the result to changes in interest rates, growth assumptions or selling price?</li>
+</ul>
+<h3>Formula guide</h3>
+<table>
+<thead><tr><th>Measure</th><th>Formula</th></tr></thead>
+<tbody>
+<tr><td>Holding-period return</td><td>(Selling price − purchase price + income) ÷ purchase price × 100</td></tr>
+<tr><td>CAPM expected return</td><td>Risk-free rate + beta × (market return − risk-free rate)</td></tr>
+<tr><td>Portfolio expected return</td><td>Sum of (asset weight × asset expected return)</td></tr>
+<tr><td>Dividend growth value</td><td>Next year's dividend ÷ (required return − growth rate)</td></tr>
+<tr><td>Bond price</td><td>Present value of coupons + present value of face value</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="panel">
+<strong>Educational-use note:</strong> This tool supports classroom practice. Outputs depend on the assumptions and figures entered. They are estimates, not guarantees, personal investment recommendations or professional financial advice.
+</section>
+<footer>Vijay Finance Hub · Investment Decisions Lab</footer>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>{const v=$(id).value.trim();return v===""?NaN:Number(v)};
+const fmt=(n,d=2)=>Number.isFinite(n)?n.toLocaleString("en-IN",{minimumFractionDigits:d,maximumFractionDigits:d}):"Unavailable";
+const put=(id,value)=>$(id).textContent=value;
+function calculateAll(){
+ const buy=num("buy"),sell=num("sell"),income=num("income");
+ if(buy>0&&Number.isFinite(sell)&&Number.isFinite(income)){
+  const gain=sell-buy+income,ret=gain/buy*100;
+  put("gain","₹"+fmt(gain));put("holding",fmt(ret)+"%");
+  put("holdingText",ret>=0?"Positive holding-period return.":"Negative holding-period return.");
+ }else{put("gain","Unavailable");put("holding","Unavailable");put("holdingText","Purchase price must be greater than zero; complete the other fields.");}
+ const rf=num("rf"),beta=num("beta"),market=num("market");
+ if([rf,beta,market].every(Number.isFinite)){
+  const prem=market-rf;put("premium",fmt(prem)+"%");put("capm",fmt(rf+beta*prem)+"%");
+ }else{put("premium","Unavailable");put("capm","Unavailable");}
+ const ws=[num("w1"),num("w2"),num("w3")],rs=[num("r1"),num("r2"),num("r3")];
+ if([...ws,...rs].every(Number.isFinite)){
+  const total=ws.reduce((a,b)=>a+b,0),pr=ws.reduce((s,w,i)=>s+w*rs[i]/100,0);
+  put("weightTotal",fmt(total)+"%");
+  put("weightText",Math.abs(total-100)<0.01?"Weights total 100%.":"Weights do not total 100%; interpret the result carefully.");
+  put("portfolioReturn",fmt(pr)+"%");
+  put("portfolioText",Math.abs(total-100)<0.01?"Weighted expected return for the fully weighted portfolio.":"Weighted contribution using the entered weights.");
+ }else{put("weightTotal","Unavailable");put("portfolioReturn","Unavailable");put("weightText","Complete all weight and return fields.");}
+ const div=num("dividend"),req=num("required"),growth=num("growth"),sp=num("sharePrice");
+ if([div,req,growth].every(Number.isFinite)&&req>growth&&div>=0){
+  const iv=div/((req-growth)/100);put("intrinsic","₹"+fmt(iv));put("valueText","Estimated value using constant dividend growth.");
+  if(Number.isFinite(sp)&&sp>0){put("valuation",iv>sp?"Above market":iv<sp?"Below market":"At market");put("valuationText","Model value minus market price: ₹"+fmt(iv-sp)+".");}
+  else{put("valuation","—");put("valuationText","Enter a positive market price to compare.");}
+ }else{put("intrinsic","Unavailable");put("valueText","Required return must exceed growth; dividend cannot be negative.");put("valuation","Unavailable");put("valuationText","Review the valuation inputs.");}
+ const face=num("face"),coupon=num("coupon")/100,yieldR=num("yieldRate")/100,years=num("years");
+ if([face,coupon,yieldR,years].every(Number.isFinite)&&face>0&&coupon>=0&&yieldR>=0&&Number.isInteger(years)&&years>=1){
+  const c=face*coupon;let price=0;
+  for(let t=1;t<=years;t++)price+=c/Math.pow(1+yieldR,t);
+  price+=face/Math.pow(1+yieldR,years);
+  put("bondPrice","₹"+fmt(price));
+  const cat=Math.abs(price-face)<0.01?"At par":price>face?"Premium":"Discount";
+  put("bondCategory",cat);put("bondCategoryText",cat==="Premium"?"Price is above face value.":cat==="Discount"?"Price is below face value.":"Price equals face value.");
+ }else{put("bondPrice","Unavailable");put("bondCategory","Unavailable");put("bondCategoryText","Check the bond inputs.");}
+ put("status","Calculations updated. Review the assumptions and interpretations before drawing conclusions.");
+}
+function loadSample(){
+ const sample={buy:100,sell:115,income:5,rf:6,beta:1.2,market:12,w1:50,r1:10,w2:30,r2:14,w3:20,r3:7,dividend:5,required:12,growth:5,sharePrice:65,face:1000,coupon:8,yieldRate:10,years:5};
+ Object.entries(sample).forEach(([id,v])=>$(id).value=v);
+ calculateAll();
+}
+function clearInputs(){
+ document.querySelectorAll('input').forEach(i=>i.value="");
+ ["holding","gain","premium","capm","weightTotal","portfolioReturn","intrinsic","valuation","bondPrice","bondCategory"].forEach(id=>put(id,"—"));
+ ["holdingText","weightText","portfolioText","valueText","valuationText","bondText","bondCategoryText"].forEach(id=>put(id,"Enter valid figures."));
+ put("status","Inputs cleared. Enter values, then click Calculate all results.");
+}
+calculateAll();
+</script>
+</body>
+</html>
