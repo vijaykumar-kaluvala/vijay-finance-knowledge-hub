@@ -926,6 +926,12 @@ function openTopicDetail(card){
     window.location.href = './portfolio-analysis-lab.html';
     return;
 }
+  
+if (titleEl && titleEl.textContent.trim() === 'FinTech & ESG') {
+    window.location.href = './fintech-esg-lab.html';
+    return;
+}
+
   const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
   const p=card.querySelector('p');
   const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
