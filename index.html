@@ -914,6 +914,10 @@ function openTopicDetail(card){
    window.location.href = './financial-analysis-v2.html';
     return;
 }
+  if (titleEl && titleEl.textContent.trim() === 'Investment Decisions') {
+    window.location.href = './investment-decisions.html';
+    return;
+}
   const title=titleEl ? titleEl.textContent.trim() : 'Finance learning topic';
   const p=card.querySelector('p');
   const description=p ? p.textContent.trim() : 'Explore this topic through explanations, examples and practice.';
