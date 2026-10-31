@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Research Centre | Vijay Finance Hub</title>
+<style>
+:root {
+  --navy:#10233f;
+  --blue:#204d78;
+  --gold:#d5a63c;
+  --bg:#f3f6fa;
+  --text:#253449;
+  --muted:#68778b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+a{text-decoration:none;color:inherit}
+header{background:var(--navy);color:white;border-bottom:4px solid var(--gold)}
+.topbar{max-width:1200px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:800}
+.brand span{color:var(--gold)}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-size:14px;font-weight:bold}
+nav a:hover{color:var(--gold)}
+.hero{background:linear-gradient(120deg,#10233f,#28547e);color:white;text-align:center;padding:65px 20px}
+.eyebrow{color:var(--gold);font-weight:bold;letter-spacing:2px;font-size:13px}
+.hero h1{font-size:clamp(32px,5vw,48px);margin:12px 0}
+.hero p{max-width:760px;margin:auto;color:#e1e9f3}
+.container{max-width:1180px;margin:auto;padding:42px 20px}
+.section-title{color:var(--navy);font-size:28px;margin-bottom:7px}
+.subtext{color:var(--muted);margin-bottom:24px}
+.intro{background:white;padding:25px;border-radius:10px;border-left:5px solid var(--gold);margin-bottom:35px}
+.intro h2{color:var(--navy);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0 40px}
+.stat{background:white;border:1px solid #e1e7ef;border-radius:9px;padding:20px;text-align:center}
+.stat strong{display:block;color:var(--navy);font-size:27px}
+.stat span{font-size:13px;color:var(--muted)}
+.archive-heading{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin-bottom:18px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.filters input,.filters select{padding:12px;border:1px solid #ccd5e1;border-radius:7px;background:white;font-size:14px}
+.filters input{flex:1;min-width:210px}
+.filters select{min-width:165px}
+.year-block{margin:35px 0}
+.year-heading{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.year-number{background:var(--navy);color:white;padding:9px 17px;border-radius:7px;font-size:22px;font-weight:bold}
+.year-heading h3{color:var(--navy);font-size:22px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:white;border:1px solid #e1e7ef;border-radius:10px;padding:22px;box-shadow:0 3px 12px #10233f08}
+.card:hover{border-color:var(--gold);box-shadow:0 7px 20px #10233f12}
+.label{display:inline-block;padding:4px 9px;border-radius:4px;background:#fff2d4;color:#825d10;font-size:11px;font-weight:bold;text-transform:uppercase;margin-bottom:10px}
+.label.original{background:#e5f1ff;color:#174f82}
+.card h3{color:var(--navy);font-size:19px;line-height:1.4;margin-bottom:9px}
+.meta{font-size:13px;color:var(--muted);margin-bottom:10px}
+.card p{font-size:14px;color:#536176;margin-bottom:13px}
+.card details{border-top:1px solid #e6ebf1;padding-top:11px;margin-top:12px}
+.card summary{color:#1d5484;font-weight:bold;cursor:pointer;font-size:14px}
+.card details p{margin-top:12px}
+.doi{display:inline-block;color:#165b91;font-weight:bold;font-size:13px;margin-top:8px}
+.original-section{margin-top:60px;padding-top:35px;border-top:2px solid #dce3ec}
+.notice{background:#fff7e5;border-left:4px solid var(--gold);padding:15px;margin:20px 0;border-radius:5px;font-size:14px}
+.no-results{display:none;background:white;padding:25px;text-align:center;border-radius:8px;color:var(--muted)}
+.audience{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:45px}
+.audience div{background:var(--navy);color:white;padding:25px;border-radius:10px}
+.audience h3{color:var(--gold);margin-bottom:8px}
+footer{background:#0b192d;color:#d1dbe8;text-align:center;padding:28px 15px;font-size:13px;margin-top:30px}
+footer strong{color:var(--gold)}
+@media(max-width:700px){
+ .cards,.stats,.audience{grid-template-columns:1fr}
+ .topbar{justify-content:center}
+ nav{justify-content:center;gap:12px}
+ .container{padding:30px 15px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="topbar">
+  <div class="brand">VIJAY <span>FINANCE HUB</span></div>
+  <nav>
+   <a href="index.html">Home</a>
+   <a href="knowledge-hub.html">Knowledge Hub</a>
+   <a href="#published">Published Research</a>
+   <a href="#original">Original Articles</a>
+   <a href="students/index.html">Student Zone</a>
+  </nav>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="eyebrow">RESEARCH • KNOWLEDGE • INNOVATION</div>
+ <h1>Finance Research Centre</h1>
+ <p>A dedicated academic platform for published finance research, original academic articles, student research projects and scholarly development.</p>
+</section>
+
+<main class="container">
+
+ <section class="intro">
+  <h2>Welcome to the Finance Research Centre</h2>
+  <p>Explore peer-reviewed finance research and original academic contributions covering financial markets, corporate finance, FinTech, banking, investment, ESG and sustainable finance. This platform supports academic learning, critical thinking and research development.</p>
+ </section>
+
+ <div class="stats">
+  <div class="stat"><strong>2</strong><span>Research Collections</span></div>
+  <div class="stat"><strong>4</strong><span>Publication Years Covered</span></div>
+  <div class="stat"><strong>8+</strong><span>Research Topic Areas</span></div>
+ </div>
+
+ <section id="published">
+  <div class="archive-heading">
+   <div>
+    <h2 class="section-title">Published Journal Research Archive</h2>
+    <p class="subtext">Selected published research with traceable journal and DOI information.</p>
+   </div>
+  </div>
+
+  <div class="filters">
+   <input type="search" id="search" placeholder="Search title, author, journal or keyword...">
+   <select id="yearFilter">
+    <option value="all">All publication years</option>
+    <option value="2026">2026</option>
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+    <option value="2023">2023</option>
+   </select>
+   <select id="typeFilter">
+    <option value="all">All collections</option>
+    <option value="published">Published journal research</option>
+    <option value="original">Original academic articles</option>
+   </select>
+  </div>
+
+  <div id="publishedArticles">
+
+   <section class="year-block" data-year="2026">
+    <div class="year-heading"><span class="year-number">2026</span><h3>Recent Research</h3></div>
+    <div class="cards">
+
+     <article class="card" data-year="2026" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Do Corporate Strategies in Fintech and Green Finance Enhance ESG Performance? The Moderating Role of Government Policies</h3>
+      <div class="meta">Mandella Osei-Assibey Bonsu | Business Strategy and the Environment | 2026</div>
+      <p>Examines the relationship between FinTech, green finance, government policies and ESG performance using bank data from China and the United Kingdom.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research focus:</strong> FinTech, green finance, government policy and corporate ESG performance.</p>
+       <p><strong>Method:</strong> Panel-data analysis covering 2014–2024, using advanced regression approaches.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1002/bse.70498" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+    </div>
+   </section>
+
+   <section class="year-block" data-year="2025">
+    <div class="year-heading"><span class="year-number">2025</span><h3>FinTech, ESG and Sustainable Finance</h3></div>
+    <div class="cards">
+
+     <article class="card" data-year="2025" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Bridging Digital Finance and ESG Success: The Role of Financing Constraints, Innovation, and Governance</h3>
+      <div class="meta">International Journal of Financial Studies | 2025 | 13(2), 109</div>
+      <p>Studies how digital finance influences corporate ESG performance and examines the roles of financing constraints, digital transformation and internal control quality.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research focus:</strong> Digital finance and corporate ESG outcomes.</p>
+       <p><strong>Data:</strong> Chinese listed companies covering 2011–2022.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.3390/ijfs13020109" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2025" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>ESG Lending</h3>
+      <div class="meta">Journal of Financial Economics | Volume 173 | 2025</div>
+      <p>Examines sustainability-linked loans, disclosure transparency, borrower ESG performance and the risk of greenwashing.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research focus:</strong> Sustainability-linked lending, transparency and corporate ESG behaviour.</p>
+       <p><strong>Academic relevance:</strong> Useful for research on green finance, credit markets and sustainable corporate financing.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1016/j.jfineco.2025.104150" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2025" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Financial Technology and Environmental, Social, and Governance in Sustainable Finance: A Bibliometric and Thematic Content Analysis</h3>
+      <div class="meta">Jewel Kumar Roy and László Vasa | Discover Sustainability | 2025</div>
+      <p>Maps research themes and scholarly developments at the intersection of FinTech, ESG and sustainable finance.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research approach:</strong> Bibliometric and thematic content analysis.</p>
+       <p><strong>Research use:</strong> Helpful for identifying literature gaps and developing review papers.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1007/s43621-025-00934-2" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2025" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Does the Integration of Fintech and Green Finance Enhance Sustainability Performance in the Banking Sector?</h3>
+      <div class="meta">Business Strategy and the Environment | 2025</div>
+      <p>Investigates the relationship between FinTech, green finance, IT governance and sustainability performance in banking institutions.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research approach:</strong> Survey of 611 banking institutions across Nigeria, Ghana and Cameroon, analysed using PLS-SEM and PROCESS models.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1002/bse.70071" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+    </div>
+   </section>
+
+   <section class="year-block" data-year="2024">
+    <div class="year-heading"><span class="year-number">2024</span><h3>Digital Finance, AI and Financial Inclusion</h3></div>
+    <div class="cards">
+
+     <article class="card" data-year="2024" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Digital Finance and Sustainable Development: Evidence from Developing Nations</h3>
+      <div class="meta">Walid Bakry and co-authors | 2024</div>
+      <p>Examines whether digital finance contributes to environmental sustainability across developing economies.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research coverage:</strong> 52 developing economies over 2010–2019.</p>
+       <p><strong>Method:</strong> Instrumental Variable Generalized Method of Moments (IV-GMM).</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1177/00368504241278823" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2024" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Environmental, Social, and Governance (ESG) and Artificial Intelligence in Finance: State-of-the-Art and Research Takeaways</h3>
+      <div class="meta">Tristan Lim | Artificial Intelligence Review | 2024</div>
+      <p>Reviews the developing research landscape connecting ESG issues and artificial intelligence applications in finance.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Research use:</strong> Literature review, identification of emerging themes and future research directions.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1007/s10462-024-10708-3" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2024" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>The Nonlinear Effects of Digital Finance on Corporate ESG Performance: Evidence from China</h3>
+      <div class="meta">Qingmin Yin, Nan Su and Chenhui Ding | Sustainability | 2024</div>
+      <p>Investigates nonlinear relationships and mechanisms connecting digital finance and corporate ESG performance.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Data:</strong> Chinese listed companies from 2011–2021.</p>
+       <p><strong>Research focus:</strong> Digital finance, ESG outcomes and moderating factors.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.3390/su16188274" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2024" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Sectoral Comparison of Sustainable Digital Financial Inclusion of Women Workforce</h3>
+      <div class="meta">Minu Gupta and Ravi Kiran | SAGE Open | 2024</div>
+      <p>Examines digital banking adoption intention and sustainable digital financial inclusion among women employees in banking and IT sectors.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Method:</strong> Survey of 257 respondents using UTAUT2 and PLS-SEM.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1177/21582440241258288" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+    </div>
+   </section>
+
+   <section class="year-block" data-year="2023">
+    <div class="year-heading"><span class="year-number">2023</span><h3>Capital Structure and Banking Risk</h3></div>
+    <div class="cards">
+
+     <article class="card" data-year="2023" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>Behaviour of Capital and Risk Under Basel Regulations: A Simultaneous Equations Model Study of Indian Commercial Banks</h3>
+      <div class="meta">Pallavi Mehrotra, Vidhisha Vyas and Pramod Kumar Naik | 2023</div>
+      <p>Examines how banking regulations influence capital and risk behaviour in Indian commercial banks.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Data:</strong> 27 public-sector and 31 private-sector banks, covering 2002–2021.</p>
+       <p><strong>Research relevance:</strong> Banking regulation, capital adequacy and financial risk.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1177/09721509221146059" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2023" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>The Capital Structure Decisions of Banks: An Evidence From MENA Region</h3>
+      <div class="meta">Shoaib Khan, Usman Bashir and co-authors | 2023</div>
+      <p>Investigates the determinants of capital structure decisions among banks operating in the MENA region.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Data:</strong> 132 banks across 15 countries, with 891 bank-year observations.</p>
+       <p><strong>Method:</strong> Two-step system GMM.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1177/21582440231204600" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+     <article class="card" data-year="2023" data-type="published">
+      <span class="label">Published Research</span>
+      <h3>How Capital Structure and Bank Liquidity Affect Bank Performance: Evidence from the Bayesian Approach</h3>
+      <div class="meta">Published online September 2023 | Cogent Economics & Finance</div>
+      <p>Studies the effects of leverage and bank funding liquidity on commercial bank performance.</p>
+      <details><summary>View research details</summary>
+       <p><strong>Data:</strong> 463 annual bank-year observations from 37 Vietnamese commercial banks, covering 2003–2020.</p>
+       <p><strong>Method:</strong> Bayesian estimation and robustness analysis using GLS.</p>
+      </details>
+      <a class="doi" href="https://doi.org/10.1080/23322039.2023.2260243" target="_blank" rel="noopener">View DOI / Journal Article ↗</a>
+     </article>
+
+    </div>
+   </section>
+
+  </div>
+
+  <div class="no-results" id="noResults">No matching research articles found. Try another keyword or filter.</div>
+ </section>
+
+ <section class="original-section" id="original">
+  <h2 class="section-title">Vijay Finance Hub – Original Academic Articles</h2>
+  <p class="subtext">Original educational research contributions and research-development articles.</p>
+
+  <div class="notice">
+   <strong>Academic transparency:</strong> These are original articles prepared for this learning platform. They are not represented as peer-reviewed journal publications. Any empirical results must be supported by actual data and analysis before publication.
+  </div>
+
+  <div class="cards">
+
+   <article class="card" data-year="2026" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>AI-Driven Financial Decision-Making: Opportunities, Risks and Governance in Indian Financial Institutions</h3>
+    <div class="meta">Vijay Finance Hub | 2026 | FinTech and Corporate Finance</div>
+    <p>Examines the potential of AI in credit assessment, fraud detection, financial forecasting and institutional decision-making.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Examine AI applications, assess decision-making benefits, identify governance challenges and develop recommendations for responsible adoption.</p>
+     <p><strong>Suggested methodology:</strong> Literature review, institutional case studies and interviews with finance professionals.</p>
+     <p><strong>Keywords:</strong> Artificial intelligence, financial decision-making, banking, governance, FinTech.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2026" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>Digital Lending and Financial Inclusion in India: Opportunities and Challenges for MSMEs</h3>
+    <div class="meta">Vijay Finance Hub | 2026 | Digital Finance</div>
+    <p>Explores the role of digital lending platforms in improving access to credit for micro, small and medium enterprises.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Examine digital credit access, identify borrower challenges and assess the role of technology in MSME finance.</p>
+     <p><strong>Suggested methodology:</strong> Survey of MSMEs, descriptive statistics and comparative analysis.</p>
+     <p><strong>Keywords:</strong> Digital lending, MSMEs, financial inclusion, credit access, FinTech.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2026" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>ESG Investment Adoption Among Indian Investors: Behavioural Factors and Financial Awareness</h3>
+    <div class="meta">Vijay Finance Hub | 2026 | ESG and Investment Behaviour</div>
+    <p>Develops a research framework to examine investor awareness, trust, perceived returns and ESG investment adoption.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Measure ESG awareness, examine behavioural influences and identify barriers to sustainable investment.</p>
+     <p><strong>Suggested methodology:</strong> Structured questionnaire, sampling of individual investors and regression analysis.</p>
+     <p><strong>Keywords:</strong> ESG, investor behaviour, sustainable investment, financial literacy.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2025" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>FinTech-Driven Market Efficiency and Arbitrage Opportunities in Indian Capital Markets</h3>
+    <div class="meta">Vijay Finance Hub | 2025 | Financial Markets</div>
+    <p>Proposes a framework to study price differences, information flow, trading technology and market efficiency.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Evaluate market efficiency, identify potential arbitrage conditions and assess the influence of technology.</p>
+     <p><strong>Suggested methodology:</strong> Historical NSE and BSE price data, transaction-cost analysis and statistical testing.</p>
+     <p><strong>Keywords:</strong> Arbitrage, market efficiency, FinTech, NSE, BSE.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2025" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>Green Finance Adoption in Indian Banking: Drivers, Barriers and Sustainability Outcomes</h3>
+    <div class="meta">Vijay Finance Hub | 2025 | Green Finance</div>
+    <p>Examines green lending, sustainable banking products, regulatory influences and environmental financing priorities.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Identify adoption drivers, evaluate barriers and propose measures to strengthen green finance.</p>
+     <p><strong>Suggested methodology:</strong> Bank-level secondary data, case studies and expert interviews.</p>
+     <p><strong>Keywords:</strong> Green finance, banking, sustainable lending, ESG.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2024" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>Financial Literacy and Investment Decision-Making Among Young Indian Investors</h3>
+    <div class="meta">Vijay Finance Hub | 2024 | Investment Behaviour</div>
+    <p>Explores the association between financial literacy, risk perception, investment preferences and investor decisions.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Assess financial literacy, identify preferred investment avenues and analyse risk tolerance.</p>
+     <p><strong>Suggested methodology:</strong> Questionnaire-based survey and descriptive or inferential statistical analysis.</p>
+     <p><strong>Keywords:</strong> Financial literacy, investment behaviour, risk, young investors.</p>
+    </details>
+   </article>
+
+   <article class="card" data-year="2023" data-type="original">
+    <span class="label original">Original Academic Article</span>
+    <h3>Capital Structure and Financial Performance of Selected Indian Companies</h3>
+    <div class="meta">Vijay Finance Hub | 2023 | Corporate Finance</div>
+    <p>Develops a framework for analysing leverage, profitability, liquidity and shareholder value across selected companies.</p>
+    <details><summary>View article outline</summary>
+     <p><strong>Objectives:</strong> Examine capital structure patterns and assess their relationship with financial performance.</p>
+     <p><strong>Suggested methodology:</strong> Annual-report data, ratio analysis, correlation and regression.</p>
+     <p><strong>Keywords:</strong> Capital structure, leverage, ROA, ROE, corporate finance.</p>
+    </details>
+   </article>
+
+  </div>
+ </section>
+
+ <section class="audience">
+  <div>
+   <h3>Student Research Corner</h3>
+   <p>Develop research questions, prepare mini-projects, understand questionnaires, analyse data and present research findings.</p>
+  </div>
+  <div>
+   <h3>Research Scholar Corner</h3>
+   <p>Explore literature review methods, research gaps, hypotheses, sampling, econometric methods and scholarly writing.</p>
+  </div>
+ </section>
+
+ <section style="margin-top:40px">
+  <h2 class="section-title">Research and Citation Resources</h2>
+  <p class="subtext">Use reliable scholarly databases to discover and verify publications.</p>
+  <div class="cards">
+   <article class="card">
+    <h3>Crossref</h3>
+    <p>Verify DOI metadata and publication details.</p>
+    <a class="doi" href="https://search.crossref.org/" target="_blank" rel="noopener">Explore Crossref ↗</a>
+   </article>
+   <article class="card">
+    <h3>Google Scholar</h3>
+    <p>Discover academic papers, authors and citation information.</p>
+    <a class="doi" href="https://scholar.google.com/" target="_blank" rel="noopener">Explore Google Scholar ↗</a>
+   </article>
+  </div>
+ </section>
+
+</main>
+
+<footer>
+ <p><strong>VIJAY FINANCE HUB – FINANCE RESEARCH CENTRE</strong></p>
+ <p>Academic initiative of Dr. Vijay Kumar Kaluvala | Associate Professor of Finance</p>
+ <p>KLH Global Business School, Hyderabad</p>
+ <p>© 2026 Vijay Finance Hub. Academic learning and research development.</p>
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const yearFilter = document.getElementById("yearFilter");
+const typeFilter = document.getElementById("typeFilter");
+
+function filterResearch(){
+ const keyword = search.value.toLowerCase().trim();
+ const year = yearFilter.value;
+ const type = typeFilter.value;
+ const cards = document.querySelectorAll("#publishedArticles .card, #original .card");
+ let count = 0;
+
+ cards.forEach(card => {
+  const matchesText = card.innerText.toLowerCase().includes(keyword);
+  const matchesYear = year === "all" || card.dataset.year === year;
+  const matchesType = type === "all" || card.dataset.type === type;
+  const show = matchesText && matchesYear && matchesType;
+  card.style.display = show ? "" : "none";
+  if(show) count++;
+ });
+
+ document.querySelectorAll(".year-block").forEach(block => {
+  const visible = block.querySelectorAll(".card:not([style*='display: none'])").length;
+  block.style.display = visible ? "" : "none";
+ });
+
+ document.getElementById("noResults").style.display = count ? "none" : "block";
+}
+
+search.addEventListener("input", filterResearch);
+yearFilter.addEventListener("change", filterResearch);
+typeFilter.addEventListener("change", filterResearch);
+</script>
+</body>
+</html>
