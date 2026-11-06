@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Decision Simulator | Vijay Finance Hub</title>
+<style>
+:root{--navy:#103c35;--green:#21816c;--gold:#d89b22;--bg:#f4f7f1;--ink:#183234;--muted:#647477;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(120deg,#0b302b,#176b5c);color:white;padding:18px max(5%,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-size:21px;font-weight:800}.brand span{color:#f0b63e}header a{color:white;text-decoration:none;font-weight:700}
+main{max-width:1180px;margin:34px auto;padding:0 20px}.eyebrow{color:#b87510;font-weight:800;letter-spacing:2px;font-size:12px}
+h1{font-size:clamp(30px,4vw,44px);line-height:1.15;margin:8px 0 10px;color:var(--navy)}.intro{color:var(--muted);max-width:820px;font-size:17px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}.panel{background:white;border:1px solid #dce7df;border-radius:18px;padding:24px;box-shadow:0 12px 30px #173d350d}
+h2{margin:0 0 16px;color:var(--navy);font-size:22px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:9px;font:inherit;color:var(--ink)}input:focus{outline:2px solid #8bc8b7;border-color:var(--green)}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}.cashflows{margin-top:15px}
+button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font-weight:800;font-size:15px;cursor:pointer;margin-top:18px}button:hover{background:var(--navy)}.secondary{background:#e8f3ed;color:var(--navy);margin-left:8px}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{background:#f0f6f1;border-radius:12px;padding:14px}.metric small{display:block;color:var(--muted);font-weight:700}.metric strong{display:block;font-size:22px;color:var(--navy);margin-top:5px;overflow-wrap:anywhere}
+.status{padding:13px 15px;border-radius:10px;margin-top:14px;font-weight:700;background:#f5f1e5;color:#75500b}.status.good{background:#e8f5ed;color:#17633f}.status.bad{background:#fff0eb;color:#9a3c24}
+.table-wrap{overflow-x:auto;margin-top:16px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:right;padding:9px;border-bottom:1px solid #e5ece7}th:first-child,td:first-child{text-align:left}th{color:var(--muted)}
+.explain{margin-top:22px}.formula{background:#f4f7f1;padding:13px 15px;border-radius:10px;font-family:Georgia,serif;overflow-wrap:anywhere}
+footer{text-align:center;color:var(--muted);padding:30px 15px;font-size:13px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}.field-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.field-grid{grid-template-columns:1fr}main{margin-top:22px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Vijay <span>Finance Hub</span></div><a href="index.html">← Back to Home</a></header>
+<main>
+<div class="eyebrow">FINANCE PRACTICE LAB · CAPITAL BUDGETING</div>
+<h1>Investment Decision Simulator</h1>
+<p class="intro">Enter a project's initial investment, annual cash inflows and required rate of return. The simulator calculates Net Present Value (NPV), Internal Rate of Return (IRR) and Payback Period, then gives a simple decision interpretation.</p>
+<div class="layout">
+<section class="panel">
+<h2>1. Project assumptions</h2>
+<div class="field-grid">
+<div><label for="initial">Initial investment (₹)</label><input id="initial" type="number" min="1" step="1000" value="1000000"></div>
+<div><label for="rate">Required return / discount rate (%)</label><input id="rate" type="number" min="0" max="100" step="0.1" value="10"></div>
+</div>
+<div class="cashflows"><label for="flows">Annual cash inflows (₹), one per year</label><input id="flows" type="text" value="300000, 350000, 400000, 450000"><div class="hint">Example: 300000, 350000, 400000, 450000 represents four annual inflows.</div></div>
+<button id="calculate">Calculate project returns</button><button class="secondary" id="example" type="button">Load example</button>
+<div class="explain"><h2>How to use</h2><ol><li>Enter the amount invested at Year 0.</li><li>Enter expected cash inflows for each year, separated by commas.</li><li>Enter the required rate of return.</li><li>Select Calculate to view the results and interpretation.</li></ol></div>
+</section>
+<section class="panel">
+<h2>2. Results and decision support</h2>
+<div class="result-grid">
+<div class="metric"><small>Net Present Value</small><strong id="npv">—</strong></div>
+<div class="metric"><small>Internal Rate of Return</small><strong id="irr">—</strong></div>
+<div class="metric"><small>Payback Period</small><strong id="payback">—</strong></div>
+</div>
+<div id="decision" class="status" aria-live="polite">Enter project details and calculate to see the decision interpretation.</div>
+<div class="table-wrap"><table><thead><tr><th>Year</th><th>Cash flow (₹)</th><th>Discount factor</th><th>Present value (₹)</th></tr></thead><tbody id="schedule"><tr><td colspan="4" style="text-align:center">Your project schedule will appear here.</td></tr></tbody></table></div>
+</section>
+</div>
+<section class="panel explain">
+<h2>3. Understand the financial concepts</h2>
+<p><b>Net Present Value (NPV):</b> Present value of expected cash inflows minus the initial investment. A positive NPV indicates that the project is expected to earn more than the required return.</p>
+<div class="formula">NPV = Σ [Cash Flow<sub>t</sub> ÷ (1 + r)<sup>t</sup>] − Initial Investment</div>
+<p><b>Internal Rate of Return (IRR):</b> The discount rate at which the project's NPV becomes zero. Compare IRR with the required rate of return.</p>
+<div class="formula">0 = Σ [Cash Flow<sub>t</sub> ÷ (1 + IRR)<sup>t</sup>] − Initial Investment</div>
+<p><b>Payback Period:</b> Time required for cumulative cash inflows to recover the initial investment. This simple measure does not consider the time value of money.</p>
+<p class="hint">Learning note: This tool assumes annual end-of-year cash flows and a conventional project with one initial outflow followed by non-negative inflows. IRR may not be meaningful for unusual cash-flow patterns; use NPV as the primary value-based decision measure.</p>
+</section>
+</main>
+<footer>Vijay Finance Hub · Academic learning tool · Verify assumptions before making real investment decisions.</footer>
+<script>
+const $=id=>document.getElementById(id);
+function money(x){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(x)}
+function parseInputs(){
+ const initial=Number($('initial').value), rate=Number($('rate').value)/100;
+ const flows=$('flows').value.split(',').map(v=>Number(v.trim()));
+ if(!Number.isFinite(initial)||initial<=0) throw Error('Enter an initial investment greater than zero.');
+ if(!Number.isFinite(rate)||rate<0||rate>1) throw Error('Enter a discount rate between 0% and 100%.');
+ if(!flows.length||flows.some(v=>!Number.isFinite(v)||v<0)) throw Error('Enter valid non-negative annual cash inflows separated by commas.');
+ return {initial,rate,flows};
+}
+function npvAt(rate,initial,flows){return -initial+flows.reduce((s,cf,i)=>s+cf/Math.pow(1+rate,i+1),0)}
+function findIRR(initial,flows){
+ let low=-0.9999, high=10, fLow=npvAt(low,initial,flows), fHigh=npvAt(high,initial,flows);
+ if(fLow*fHigh>0) return null;
+ for(let i=0;i<250;i++){let mid=(low+high)/2, fMid=npvAt(mid,initial,flows);if(Math.abs(fMid)<0.000001)return mid;if(fLow*fMid>0){low=mid;fLow=fMid}else{high=mid;fHigh=fMid}}
+ return (low+high)/2;
+}
+function payback(initial,flows){
+ let cumulative=0;
+ for(let i=0;i<flows.length;i++){if(cumulative+flows[i]>=initial){if(flows[i]===0)return null;return i+(initial-cumulative)/flows[i]}cumulative+=flows[i]}
+ return null;
+}
+function calculate(){
+ try{
+  const {initial,rate,flows}=parseInputs(), npv=npvAt(rate,initial,flows), irr=findIRR(initial,flows), pb=payback(initial,flows);
+  $('npv').textContent=money(npv);$('irr').textContent=irr===null?'Not available':(irr*100).toFixed(2)+'%';$('payback').textContent=pb===null?'Not recovered':pb.toFixed(2)+' years';
+  const decision=$('decision');decision.className='status '+(npv>0?'good':npv<0?'bad':'');decision.textContent=npv>0?'Accept financially, subject to risk and strategic review: NPV is positive at the required return.':npv<0?'Do not accept on NPV grounds: the project does not meet the required return.':'The project is at the break-even point at the required return.';
+  let rows=`<tr><td>0</td><td>(${money(initial)})</td><td>1.0000</td><td>(${money(initial)})</td></tr>`;
+  flows.forEach((cf,i)=>{let factor=1/Math.pow(1+rate,i+1);rows+=`<tr><td>${i+1}</td><td>${money(cf)}</td><td>${factor.toFixed(4)}</td><td>${money(cf*factor)}</td></tr>`});
+  $('schedule').innerHTML=rows;
+ }catch(e){$('decision').className='status bad';$('decision').textContent=e.message}
+}
+$('calculate').addEventListener('click',calculate);
+$('example').addEventListener('click',()=>{$('initial').value=1000000;$('rate').value=10;$('flows').value='300000, 350000, 400000, 450000';calculate()});
+calculate();
+</script>
+</body>
+</html>
