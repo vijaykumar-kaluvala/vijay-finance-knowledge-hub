@@ -206,8 +206,14 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 .action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .action-card{display:flex;flex-direction:column;gap:9px;padding:20px;background:#fff;border:1px solid #e1e9df;border-radius:16px;text-decoration:none;transition:.2s;min-height:205px}
 .action-card:hover{transform:translateY(-4px);box-shadow:0 12px 25px #173d3512;border-color:#c8ddce}
-.action-icon{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:27px}
-.icon-invest{background:#fff1d9}.icon-market{background:#e5efff}.icon-digital{background:#e5f3ef}.icon-green{background:#e8f2df}
+.action-visual{height:118px;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.action-visual svg{width:100%;height:100%;max-width:230px;display:block}
+.visual-invest{background:linear-gradient(135deg,#fff0d5,#f8dca8)}
+.visual-market{background:linear-gradient(135deg,#e4edff,#d8e5fa)}
+.visual-digital{background:linear-gradient(135deg,#dff3ef,#c9e8e2)}
+.visual-green{background:linear-gradient(135deg,#e7f3df,#d3e8c8)}
+.action-card:hover .action-visual svg{transform:scale(1.045);transition:transform .25s ease}
+.action-visual svg{transition:transform .25s ease}
 .action-card-title{font-size:17px;font-weight:800;color:#173d35}.action-card-text{font-size:13px;color:#687670;line-height:1.6}.action-link{margin-top:auto;font-size:12px;font-weight:800;color:#237a67}
 @media(max-width:850px){.action-grid{grid-template-columns:1fr 1fr}.action-feature{grid-template-columns:1fr}}
 @media(max-width:560px){.action-grid{grid-template-columns:1fr}.action-image{min-height:230px}.action-feature{padding:14px}}
@@ -351,10 +357,26 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 </div>
 </div>
 <div class="action-grid">
-<a class="action-card" href="modules/capital-budgeting.html"><span class="action-icon icon-invest">🧮</span><span class="action-card-title">Investment Decisions</span><span class="action-card-text">Evaluate projects using cash flows, NPV, IRR and risk.</span><span class="action-link">Explore capital budgeting →</span></a>
-<a class="action-card" href="modules/financial-markets.html"><span class="action-icon icon-market">📊</span><span class="action-card-title">Markets &amp; Institutions</span><span class="action-card-text">Understand exchanges, instruments, market structure and regulation.</span><span class="action-link">Explore financial markets →</span></a>
-<a class="action-card" href="modules/digital-lending.html"><span class="action-icon icon-digital">💳</span><span class="action-card-title">Digital Finance</span><span class="action-card-text">Discover digital payments, lending models and financial inclusion.</span><span class="action-link">Explore digital lending →</span></a>
-<a class="action-card" href="modules/sustainable-finance.html"><span class="action-icon icon-green">🌱</span><span class="action-card-title">Sustainable Finance</span><span class="action-card-text">Connect ESG priorities, green capital and responsible investment.</span><span class="action-link">Explore sustainable finance →</span></a>
+<a class="action-card" href="modules/capital-budgeting.html" aria-label="Explore Investment Decisions">
+<span class="action-visual visual-invest" aria-hidden="true">
+<svg viewBox="0 0 240 118" role="img"><rect x="28" y="18" width="184" height="82" rx="12" fill="#fff" opacity=".82"/><path d="M52 78h136" stroke="#e4c58e" stroke-width="2"/><path d="M60 70l28-20 25 10 37-29 27 9" fill="none" stroke="#c47a19" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="150" cy="31" r="5" fill="#173d35"/><path d="M164 20l13 8-13 8" fill="none" stroke="#237a67" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="120" y="93" text-anchor="middle" font-size="10" font-weight="700" fill="#8a642b">NPV • IRR • RETURNS</text></svg>
+</span>
+<span class="action-card-title">Investment Decisions</span><span class="action-card-text">Evaluate projects using cash flows, NPV, IRR and risk.</span><span class="action-link">Explore capital budgeting →</span></a>
+<a class="action-card" href="modules/financial-markets.html" aria-label="Explore Markets and Institutions">
+<span class="action-visual visual-market" aria-hidden="true">
+<svg viewBox="0 0 240 118" role="img"><rect x="28" y="18" width="184" height="82" rx="12" fill="#fff" opacity=".84"/><path d="M52 43h136M60 43v42m30-42v42m30-42v42m30-42v42m30-42v42M50 87h140" stroke="#416a9c" stroke-width="4" stroke-linecap="round"/><path d="M48 37l72-20 72 20" fill="none" stroke="#237a67" stroke-width="5" stroke-linejoin="round"/><path d="M72 70l20-12 18 7 22-22 20 9 22-17" fill="none" stroke="#e09a32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span>
+<span class="action-card-title">Markets &amp; Institutions</span><span class="action-card-text">Understand exchanges, instruments, market structure and regulation.</span><span class="action-link">Explore financial markets →</span></a>
+<a class="action-card" href="modules/digital-lending.html" aria-label="Explore Digital Finance">
+<span class="action-visual visual-digital" aria-hidden="true">
+<svg viewBox="0 0 240 118" role="img"><rect x="75" y="10" width="90" height="98" rx="15" fill="#173d35"/><rect x="82" y="19" width="76" height="80" rx="9" fill="#fff"/><rect x="91" y="31" width="58" height="12" rx="4" fill="#dceee8"/><rect x="91" y="51" width="58" height="30" rx="6" fill="#d9eff0"/><path d="M100 66h40" stroke="#237a67" stroke-width="4" stroke-linecap="round"/><circle cx="120" cy="90" r="3" fill="#e9a23b"/><path d="M47 49h20m-10-10 10 10-10 10M173 69h20m-10-10 10 10-10 10" fill="none" stroke="#237a67" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span>
+<span class="action-card-title">Digital Finance</span><span class="action-card-text">Discover digital payments, lending models and financial inclusion.</span><span class="action-link">Explore digital lending →</span></a>
+<a class="action-card" href="modules/sustainable-finance.html" aria-label="Explore Sustainable Finance">
+<span class="action-visual visual-green" aria-hidden="true">
+<svg viewBox="0 0 240 118" role="img"><circle cx="120" cy="58" r="39" fill="#fff" opacity=".82"/><path d="M120 88V52" stroke="#397b50" stroke-width="5" stroke-linecap="round"/><path d="M120 59C87 60 82 36 87 27c23-2 37 9 33 32Z" fill="#64a96a"/><path d="M120 69c1-28 25-39 39-32 2 22-13 36-39 32Z" fill="#2e8961"/><path d="M120 88c-17 0-27 6-33 13h66c-6-7-16-13-33-13Z" fill="#a97846"/><path d="M58 91h124" stroke="#8dbb79" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="28" r="5" fill="#e9a23b"/><circle cx="181" cy="34" r="4" fill="#237a67"/></svg>
+</span>
+<span class="action-card-title">Sustainable Finance</span><span class="action-card-text">Connect ESG priorities, green capital and responsible investment.</span><span class="action-link">Explore sustainable finance →</span></a>
 </div>
 </section>
 <div class="content-hub">
