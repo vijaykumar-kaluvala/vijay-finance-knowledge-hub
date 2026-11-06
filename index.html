@@ -187,6 +187,30 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 .ticker-track.is-loading{animation:none;padding-left:20px}
 @media(max-width:650px){.topic-detail-modal{padding:8px}.topic-detail-panel{padding:22px 16px;margin:2vh auto}.ticker-label{font-size:11px;padding:9px 10px}.ticker-item{margin-right:25px}}
 
+
+.student-tools-link{margin:10px 0 22px;color:#52645c}.student-tools-link a{color:#237a67;font-weight:800;text-decoration:none}.student-tools-link a:hover{text-decoration:underline}
+
+/* Finance in Action: distinct visual learning section */
+.finance-in-action{background:#f2f6ef;border-top:1px solid #e4eadf;border-bottom:1px solid #e4eadf}
+.action-feature{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;background:#fff;border:1px solid #e1e9df;border-radius:22px;padding:22px;margin-bottom:20px;box-shadow:0 10px 28px #173d3509}
+.action-image{min-height:270px;position:relative;overflow:hidden;border-radius:17px;background:radial-gradient(circle at 50% 48%,#fff7df 0 13%,transparent 14%),linear-gradient(135deg,#dceee2,#e9f0df 48%,#f8e8c9);display:flex;align-items:center;justify-content:center}
+.image-core{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:#173d35;color:#f5c85b;font-size:48px;font-weight:800;box-shadow:0 12px 30px #173d3533;z-index:2}
+.image-orbit{position:absolute;border:1px solid #237a6740;border-radius:50%;width:210px;height:210px}
+.orbit-two{width:290px;height:290px;border-style:dashed;transform:rotate(35deg)}
+.float-icon{position:absolute;width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:#fff;box-shadow:0 8px 20px #173d3518;font-size:27px}
+.fi-chart{top:15%;left:18%}.fi-bank{top:17%;right:17%}.fi-leaf{bottom:15%;left:20%}.fi-ai{bottom:15%;right:19%}
+.image-caption{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:2px;font-weight:800;color:#42685a}
+.action-copy{padding:12px 18px}.action-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:#bf7d20}
+.action-copy h3{font-size:clamp(23px,3vw,34px);line-height:1.2;color:#173d35;margin:12px 0}
+.action-copy p{color:#687670;line-height:1.8}.action-button{display:inline-block;margin-top:12px;padding:12px 19px;background:#237a67;color:#fff;border-radius:999px;text-decoration:none;font-weight:800;font-size:13px}
+.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.action-card{display:flex;flex-direction:column;gap:9px;padding:20px;background:#fff;border:1px solid #e1e9df;border-radius:16px;text-decoration:none;transition:.2s;min-height:205px}
+.action-card:hover{transform:translateY(-4px);box-shadow:0 12px 25px #173d3512;border-color:#c8ddce}
+.action-icon{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:27px}
+.icon-invest{background:#fff1d9}.icon-market{background:#e5efff}.icon-digital{background:#e5f3ef}.icon-green{background:#e8f2df}
+.action-card-title{font-size:17px;font-weight:800;color:#173d35}.action-card-text{font-size:13px;color:#687670;line-height:1.6}.action-link{margin-top:auto;font-size:12px;font-weight:800;color:#237a67}
+@media(max-width:850px){.action-grid{grid-template-columns:1fr 1fr}.action-feature{grid-template-columns:1fr}}
+@media(max-width:560px){.action-grid{grid-template-columns:1fr}.action-image{min-height:230px}.action-feature{padding:14px}}
 </style>
 </head>
 <body>
@@ -249,14 +273,6 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 </div>
 </div>
 </section>
-<div class="editorial-intro"><h2>Explore ideas that connect finance with everyday life</h2><p>Study the basics, understand what is happening in markets, and build confidence one topic at a time.</p></div>
-<section aria-label="Featured learning paths" class="featured-learning">
-<div class="feature-grid">
-<article class="feature-card"><div class="feature-visual">💰</div><div class="feature-copy"><div class="eyebrow">Start with the basics</div><h3>Understand Financial Management</h3><p>Learn financial decisions, objectives, time value of money and working capital with classroom-friendly explanations.</p><a href="#topics">Explore finance topics →</a></div></article>
-<article class="feature-card"><div class="feature-visual">📊</div><div class="feature-copy"><div class="eyebrow">India's financial markets</div><h3>Follow Markets &amp; IPOs</h3><p>Understand stock markets, primary issues, banking, market institutions and important financial terminology.</p><a href="#topics">Explore markets →</a></div></article>
-<article class="feature-card"><div class="feature-visual">🌱</div><div class="feature-copy"><div class="eyebrow">Finance for the future</div><h3>Discover FinTech &amp; Green Finance</h3><p>Explore digital lending, financial inclusion, AI in finance, ESG principles and sustainable investment.</p><a href="#topics">Explore future finance →</a></div></article>
-</div>
-</section>
 <!-- ELITE FINANCE CHALLENGE -->
 <section id="elite-finance-challenge">
 <div class="section-head">
@@ -310,6 +326,37 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 </div>
 </section>
 <section id="complete-content">
+
+<section class="finance-in-action" id="finance-in-action">
+<div class="section-head">
+<div>
+<div class="section-kicker">Finance beyond the textbook</div>
+<h2>Explore Finance in Action</h2>
+<p>Connect financial concepts with the decisions, institutions and innovations shaping business today.</p>
+</div>
+</div>
+<div class="action-feature">
+<div aria-label="Illustration of financial markets, banking, investment analysis and sustainable finance" class="action-image" role="img">
+<div class="image-orbit orbit-one"></div><div class="image-orbit orbit-two"></div>
+<div class="image-core">₹</div>
+<span class="float-icon fi-chart">📈</span><span class="float-icon fi-bank">🏦</span>
+<span class="float-icon fi-leaf">🌿</span><span class="float-icon fi-ai">🤖</span>
+<span class="image-caption">FINANCE • INNOVATION • IMPACT</span>
+</div>
+<div class="action-copy">
+<span class="action-label">A practical learning experience</span>
+<h3>From financial decisions to real-world impact</h3>
+<p>Explore how companies raise capital, how investors assess opportunities, how banks manage credit and how technology is changing financial services.</p>
+<a class="action-button" href="knowledge-hub.html">Explore the Knowledge Hub →</a>
+</div>
+</div>
+<div class="action-grid">
+<a class="action-card" href="modules/capital-budgeting.html"><span class="action-icon icon-invest">🧮</span><span class="action-card-title">Investment Decisions</span><span class="action-card-text">Evaluate projects using cash flows, NPV, IRR and risk.</span><span class="action-link">Explore capital budgeting →</span></a>
+<a class="action-card" href="modules/financial-markets.html"><span class="action-icon icon-market">📊</span><span class="action-card-title">Markets &amp; Institutions</span><span class="action-card-text">Understand exchanges, instruments, market structure and regulation.</span><span class="action-link">Explore financial markets →</span></a>
+<a class="action-card" href="modules/digital-lending.html"><span class="action-icon icon-digital">💳</span><span class="action-card-title">Digital Finance</span><span class="action-card-text">Discover digital payments, lending models and financial inclusion.</span><span class="action-link">Explore digital lending →</span></a>
+<a class="action-card" href="modules/sustainable-finance.html"><span class="action-icon icon-green">🌱</span><span class="action-card-title">Sustainable Finance</span><span class="action-card-text">Connect ESG priorities, green capital and responsible investment.</span><span class="action-link">Explore sustainable finance →</span></a>
+</div>
+</section>
 <div class="content-hub">
 <div class="section-kicker">Complete Content Plan</div>
 <p class="source-note">Select a topic card to open its dedicated learning module with concept notes, practical examples, classroom cases, BBA/MBA activities and a topic quiz.</p><h2>📚 Finance Knowledge — Core Content</h2>
@@ -389,30 +436,9 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 <div class="ai-card"><div class="aicon">🔍</div><h4>AI Research Workflow</h4><p>Students can combine an AI assistant with official filings, annual reports, exchange data and regulator publications to create a traceable research workflow.</p><a class="ext-link" href="https://www.nseindia.com/" rel="noopener noreferrer" target="_blank">Start with NSE official data →</a></div>
 </div>
 <div class="ai-note"><b>🎓 Classroom rule:</b> AI should assist analysis, not replace financial judgement. Always check the original annual report, exchange filing, regulator source or dataset before presenting an important financial conclusion.</div>
-<h3>🎓 Student Learning Tools</h3>
-<div class="topic-mini-grid">
-<div class="topic-mini"><h4>Notes</h4><p>Short explanations followed by examples and detailed chapters.</p></div>
-<div class="topic-mini"><h4>Question Banks</h4><p>MCQs, short answers, numerical problems and application-based questions.</p></div>
-<div class="topic-mini"><h4>Case Studies</h4><p>Realistic business situations for analysis and classroom discussion.</p></div>
-<div class="topic-mini"><h4>Quizzes</h4><p>Instant feedback to help students test their understanding.</p></div>
-<div class="topic-mini"><h4>Calculators</h4><p>Finance calculations for practice and classroom demonstrations.</p></div>
-<div class="topic-mini"><h4>Activities</h4><p>IPO simulation, portfolio exercise, ESG audit and finance decision games.</p></div>
-</div>
-<h3>📖 Finance Glossary — Quick Reference</h3>
-<div class="glossary">
-<div><b>Asset:</b> A resource expected to provide future economic benefit.</div>
-<div><b>Liability:</b> An obligation that may require future settlement.</div>
-<div><b>Equity:</b> Ownership interest in a business.</div>
-<div><b>Liquidity:</b> Ability to meet short-term obligations.</div>
-<div><b>Leverage:</b> Use of fixed-cost financing or operating costs to influence returns and risk.</div>
-<div><b>Dividend:</b> Distribution of earnings to shareholders, subject to company policy and applicable rules.</div>
-<div><b>IPO:</b> Initial Public Offering of securities to public investors.</div>
-<div><b>OFS:</b> Offer for Sale, where existing shareholders sell shares.</div>
-<div><b>NPV:</b> Present value of expected cash inflows less initial investment.</div>
-<div><b>WACC:</b> Weighted average cost of the firm's sources of capital.</div>
-<div><b>ESG:</b> Environmental, Social and Governance factors.</div>
-<div><b>FinTech:</b> Technology applied to financial products and services.</div>
-</div>
+
+<p class="student-tools-link">Access notes, question banks, case studies, quizzes, calculators and classroom activities in the <a href="students/index.html">Student Zone</a>.</p>
+
 </div>
 </section>
 <section id="learning-roadmap">
@@ -423,23 +449,8 @@ footer{background:#173d35;color:#d9e7df}footer strong{color:#fff}
 <div class="rich-card"><div class="r-icon">3️⃣</div><h3>Advanced</h3><p>Connect finance with modern business challenges.</p><ul><li>FinTech &amp; AI</li><li>ESG &amp; green finance</li><li>Research &amp; case analysis</li></ul></div>
 </div>
 </section>
-<section>
-<div class="section-head"><div><h2>📰 Market &amp; Finance Updates</h2><p>A dedicated space for current finance information.</p></div></div>
-<div class="grid">
-<div class="topic market-topic-card" data-market-url="https://www.nseindia.com/market-data/live-equity-market"><div class="icon">📈</div><h3>Stock Market</h3><p>Index movements, important market events and company-related developments.</p></div>
-<div class="topic market-topic-card" data-market-url="https://www.nseindia.com/market-data/all-upcoming-issues-ipo"><div class="icon">🚀</div><h3>IPO Watch</h3><p>Upcoming IPOs, issue details, price bands, subscription and listing information.</p></div>
-<div class="topic market-topic-card" data-market-url="https://www.business-standard.com/markets"><div class="icon">🏦</div><h3>Finance News</h3><p>Banking, RBI, interest rates, regulations, FinTech and financial-sector updates.</p></div>
-</div>
-<p class="source-note">🔗 Headlines are fetched from the Business Standard Markets RSS feed via RSS2JSON when the page loads and refreshed periodically. If the feed service is unavailable, the ticker shows official market links instead.</p>
-</section>
-<section id="students">
-<div class="section-head"><div><h2>Student Zone</h2><p>Learn → Practice → Test → Apply.</p></div></div>
-<div class="grid">
-<a class="topic topic-link" href="students/index.html"><div class="icon">🎓</div><h3>Open Student Zone</h3><p>Study materials, question banks, quizzes, practice lab, activities, cases and challenges.</p><span class="tag">Open Student Zone →</span></a>
-<div class="topic"><div class="icon">📝</div><h3>Question Banks</h3><p>Unit-wise questions, MCQs, case studies and application-based practice.</p></div>
-<div class="topic"><div class="icon">🧮</div><h3>Finance Practice Lab</h3><p>Practice finance calculations and apply concepts to realistic situations.</p></div>
-</div>
-</section>
+
+
 <section id="about">
 <div class="section-head"><div><h2>Meet the Creator</h2><p>Finance education, practical learning and research resources by an academic.</p></div></div>
 <div class="topic">
