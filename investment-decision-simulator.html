@@ -13,7 +13,7 @@ main{max-width:1180px;margin:34px auto;padding:0 20px}.eyebrow{color:#b87510;fon
 h1{font-size:clamp(30px,4vw,44px);line-height:1.15;margin:8px 0 10px;color:var(--navy)}.intro{color:var(--muted);max-width:820px;font-size:17px}
 .layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}.panel{background:white;border:1px solid #dce7df;border-radius:18px;padding:24px;box-shadow:0 12px 30px #173d350d}
 h2{margin:0 0 16px;color:var(--navy);font-size:22px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:9px;font:inherit;color:var(--ink)}input:focus{outline:2px solid #8bc8b7;border-color:var(--green)}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:9px;font:inherit;color:var(--ink)}input:focus,select:focus{outline:2px solid #8bc8b7;border-color:var(--green)}
 .hint{font-size:12px;color:var(--muted);margin-top:4px}.cashflows{margin-top:15px}
 button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font-weight:800;font-size:15px;cursor:pointer;margin-top:18px}button:hover{background:var(--navy)}.secondary{background:#e8f3ed;color:var(--navy);margin-left:8px}
 .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{background:#f0f6f1;border-radius:12px;padding:14px}.metric small{display:block;color:var(--muted);font-weight:700}.metric strong{display:block;font-size:22px;color:var(--navy);margin-top:5px;overflow-wrap:anywhere}
@@ -39,7 +39,7 @@ footer{text-align:center;color:var(--muted);padding:30px 15px;font-size:13px}
 <div><label for="rate">Required return / discount rate (%)</label><input id="rate" type="number" min="0" max="100" step="0.1" value="10"></div>
 </div>
 <div class="cashflows"><label for="flows">Annual cash inflows (₹), one per year</label><input id="flows" type="text" value="300000, 350000, 400000, 450000"><div class="hint">Example: 300000, 350000, 400000, 450000 represents four annual inflows.</div></div>
-<button id="calculate">Calculate project returns</button><button class="secondary" id="example" type="button">Load example</button>
+<button id="calculate">Calculate project returns</button><button class="secondary" id="example" type="button">Load example</button><button class="secondary" id="downloadReport" type="button">Download project report</button>
 <div class="explain"><h2>How to use</h2><ol><li>Enter the amount invested at Year 0.</li><li>Enter expected cash inflows for each year, separated by commas.</li><li>Enter the required rate of return.</li><li>Select Calculate to view the results and interpretation.</li></ol></div>
 </section>
 <section class="panel">
@@ -61,6 +61,19 @@ footer{text-align:center;color:var(--muted);padding:30px 15px;font-size:13px}
 <div class="formula">0 = Σ [Cash Flow<sub>t</sub> ÷ (1 + IRR)<sup>t</sup>] − Initial Investment</div>
 <p><b>Payback Period:</b> Time required for cumulative cash inflows to recover the initial investment. This simple measure does not consider the time value of money.</p>
 <p class="hint">Learning note: This tool assumes annual end-of-year cash flows and a conventional project with one initial outflow followed by non-negative inflows. IRR may not be meaningful for unusual cash-flow patterns; use NPV as the primary value-based decision measure.</p>
+</section>
+
+<section class="panel explain" id="practiceExercise">
+ <h2>4. Student Practice Exercise</h2>
+ <p><b>Case:</b> A small manufacturing unit is considering a machine costing <b>₹5,00,000</b>. Expected annual cash inflows are ₹1,80,000, ₹2,00,000, ₹2,20,000 and ₹2,40,000 over four years. The required return is <b>12%</b>.</p>
+ <p>Calculate the NPV using the assumptions above, then enter your answer and select the appropriate decision.</p>
+ <div class="field-grid">
+  <div><label for="practiceNpv">Your calculated NPV (₹)</label><input id="practiceNpv" type="number" step="1" placeholder="Enter NPV"></div>
+  <div><label for="practiceDecision">Your decision</label><select id="practiceDecision" style="width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:9px;font:inherit"><option value="">Choose a decision</option><option value="accept">Accept financially</option><option value="reject">Reject on NPV grounds</option></select></div>
+ </div>
+ <button id="checkPractice" type="button">Check my answer</button>
+ <div id="practiceFeedback" class="status" aria-live="polite">Complete the calculation and check your answer.</div>
+ <p class="hint">Practice answer is checked against the NPV calculated at a 12% discount rate. A small rounding difference is allowed.</p>
 </section>
 </main>
 <footer>Vijay Finance Hub · Academic learning tool · Verify assumptions before making real investment decisions.</footer>
@@ -97,6 +110,35 @@ function calculate(){
   $('schedule').innerHTML=rows;
  }catch(e){$('decision').className='status bad';$('decision').textContent=e.message}
 }
+
+function getCurrentResults(){
+ const {initial,rate,flows}=parseInputs();
+ const value=npvAt(rate,initial,flows), irr=findIRR(initial,flows), pb=payback(initial,flows);
+ const rows=[{year:0,cashFlow:-initial,discountFactor:1,presentValue:-initial}];
+ flows.forEach((cf,i)=>{const factor=1/Math.pow(1+rate,i+1);rows.push({year:i+1,cashFlow:cf,discountFactor:factor,presentValue:cf*factor})});
+ const interpretation=value>0?'Accept financially, subject to risk and strategic review: NPV is positive at the required return.':value<0?'Do not accept on NPV grounds: the project does not meet the required return.':'The project is at the break-even point at the required return.';
+ return {initial,rate,flows,npv:value,irr,payback:pb,rows,interpretation};
+}
+$('downloadReport').addEventListener('click',()=>{
+ try{
+  const r=getCurrentResults();
+  const fmt=x=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(x);
+  const table=r.rows.map(x=>`<tr><td>${x.year}</td><td>${fmt(x.cashFlow)}</td><td>${x.discountFactor.toFixed(4)}</td><td>${fmt(x.presentValue)}</td></tr>`).join('');
+  const report=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Project Analysis Report</title><style>body{font-family:Arial,sans-serif;max-width:900px;margin:35px auto;padding:0 20px;color:#183234;line-height:1.6}h1,h2{color:#103c35}table{width:100%;border-collapse:collapse;margin-top:18px}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:right}th:first-child,td:first-child{text-align:left}.metric{display:inline-block;background:#f0f6f1;padding:12px 18px;margin:5px;border-radius:8px} .note{color:#647477;font-size:13px}@media print{button{display:none}}</style></head><body><h1>Investment Project Analysis Report</h1><p>Vijay Finance Hub · Academic learning report</p><h2>Project assumptions</h2><p>Initial investment: <b>${fmt(r.initial)}</b><br>Required return: <b>${(r.rate*100).toFixed(2)}%</b><br>Annual cash inflows: <b>${r.flows.map(fmt).join(', ')}</b></p><h2>Results</h2><div class="metric">NPV<br><b>${fmt(r.npv)}</b></div><div class="metric">IRR<br><b>${r.irr===null?'Not available':(r.irr*100).toFixed(2)+'%'}</b></div><div class="metric">Payback<br><b>${r.payback===null?'Not recovered':r.payback.toFixed(2)+' years'}</b></div><p><b>Decision interpretation:</b> ${r.interpretation}</p><h2>Cash-flow and present-value schedule</h2><table><thead><tr><th>Year</th><th>Cash flow</th><th>Discount factor</th><th>Present value</th></tr></thead><tbody>${table}</tbody></table><h2>Formulae</h2><p>NPV = Σ [Cash Flowₜ ÷ (1 + r)ᵗ] − Initial Investment<br>IRR is the discount rate at which NPV equals zero.<br>Payback period is the time required for cumulative cash inflows to recover the initial investment.</p><p class="note">Learning note: The simulator assumes annual end-of-year cash flows. Payback does not account for the time value of money. This report is for academic learning and is not investment advice.</p><button onclick="window.print()">Print / Save as PDF</button></body></html>`;
+  const blob=new Blob([report],{type:'text/html;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url;a.download='Vijay-Finance-Hub-Project-Analysis-Report.html';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ }catch(e){$('decision').className='status bad';$('decision').textContent=e.message}
+});
+$('checkPractice').addEventListener('click',()=>{
+ const entered=Number($('practiceNpv').value), decision=$('practiceDecision').value, target=npvAt(.12,500000,[180000,200000,220000,240000]);
+ const box=$('practiceFeedback');
+ if($('practiceNpv').value.trim()===''||!Number.isFinite(entered)||!decision){box.className='status bad';box.textContent='Please enter your NPV and select a decision.';return}
+ const numericOK=Math.abs(entered-target)<=Math.max(100,Math.abs(target)*.02);
+ const decisionOK=target>0?decision==='accept':decision==='reject';
+ if(numericOK&&decisionOK){box.className='status good';box.textContent='Excellent! Your NPV and investment decision are correct. NPV = '+money(target)+'.'}
+ else{box.className='status bad';box.textContent='Not quite. Recheck the discounting of each annual cash inflow. The correct NPV is '+money(target)+', so the project is '+(target>0?'financially acceptable on NPV grounds':'not acceptable on NPV grounds')+'.'}
+});
+
 $('calculate').addEventListener('click',calculate);
 $('example').addEventListener('click',()=>{$('initial').value=1000000;$('rate').value=10;$('flows').value='300000, 350000, 400000, 450000';calculate()});
 calculate();
