@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Analysis Lab | Finance Knowledge Hub</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;line-height:1.65}
+header{background:linear-gradient(135deg,#061b33,#0b426d,#087f8c);color:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:700}.logo span{color:#ffd166}
+nav{display:flex;gap:20px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-weight:700}
+.hero{padding:52px 7%;background:linear-gradient(135deg,#09233f,#145a75);color:#fff}
+.hero h1{font-size:clamp(30px,4vw,44px);margin-bottom:12px}.hero p{max-width:900px;color:#e7f3f7}
+.wrap{max-width:1180px;margin:30px auto;padding:0 20px}
+h2{color:#0b3555;margin:30px 0 14px;font-size:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e1e8f0;border-radius:15px;padding:22px;box-shadow:0 5px 18px #0b35550d}
+.card h3{color:#103c5d;margin-bottom:8px}.card p,.card li{color:#526174}
+.card ul{padding-left:20px;margin:10px 0}.card a,.link{color:#087f8c;font-weight:700;text-decoration:none}
+.card a:hover,.link:hover{text-decoration:underline}
+.notice{background:#fff7df;border-left:5px solid #e5a92d;padding:15px 18px;border-radius:10px;margin:18px 0}
+.steps{counter-reset:step}.step{background:#fff;border:1px solid #e1e8f0;border-radius:12px;padding:16px;margin:10px 0}
+.pill{display:inline-block;background:#e8f3f5;color:#07566b;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:10px}
+.btn{display:inline-block;background:#087f8c;color:#fff!important;padding:10px 15px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px 8px 0 0}
+table{width:100%;border-collapse:collapse;background:#fff;margin:12px 0}
+th,td{padding:11px;border:1px solid #dce5ed;text-align:left}th{background:#e8f3f5;color:#103c5d}
+footer{text-align:center;padding:25px;background:#061b33;color:#dbe8f0;margin-top:40px}
+footer a{color:#ffd166}
+@media(max-width:650px){header{flex-direction:column;align-items:flex-start}.hero{padding:38px 6%}.wrap{padding:0 14px}table{font-size:13px}}
+</style></head><body>
+<header><div class="logo">Finance <span>Knowledge Hub</span></div><nav><a href="index.html">Student Zone</a><a href="../index.html">Home</a><a href="markets.html">Markets</a><a href="research.html">Research</a></nav></header>
+<section class="hero"><h1>📊 Financial Analysis Lab</h1><p>Learn to read company accounts, calculate financial ratios, compare business performance and write evidence-based analyst reports.</p><a class="btn" href="index.html">← Back to Student Zone</a></section>
+<main class="wrap">
+<div class="notice"><b>Learning approach:</b> Use actual annual reports and exchange filings for live company work. The worked example below is illustrative only; do not treat it as the financial performance of a real company.</div>
+<h2>1. Company financial statement analysis</h2>
+<div class="grid">
+<div class="card"><span class="pill">Task A · Profitability</span><h3>Read the income statement</h3><p>Identify revenue, cost of goods sold, EBITDA, depreciation, finance cost, tax and profit after tax. Compare at least two financial years.</p><ul><li>Revenue growth = (Current revenue − Previous revenue) / Previous revenue</li><li>Net profit margin = PAT / Revenue × 100</li><li>Operating margin = EBIT / Revenue × 100</li></ul></div>
+<div class="card"><span class="pill">Task B · Liquidity</span><h3>Assess short-term strength</h3><p>Use current assets and current liabilities to understand whether a company can meet near-term obligations.</p><ul><li>Current ratio = Current assets / Current liabilities</li><li>Quick ratio = (Current assets − Inventory) / Current liabilities</li><li>Discuss the quality and ageing of receivables.</li></ul></div>
+<div class="card"><span class="pill">Task C · Solvency</span><h3>Study capital structure</h3><p>Review borrowings, equity, interest cost and cash flows. Explain whether debt appears manageable.</p><ul><li>Debt-equity ratio = Total debt / Shareholders’ equity</li><li>Interest coverage = EBIT / Finance cost</li><li>Debt service capacity should also consider cash flow.</li></ul></div>
+</div>
+<h2>2. Mini worked example (illustrative ₹ crore)</h2>
+<table><tr><th>Item</th><th>Year 1</th><th>Year 2</th></tr><tr><td>Revenue</td><td>500</td><td>600</td></tr><tr><td>EBIT</td><td>60</td><td>78</td></tr><tr><td>Profit after tax</td><td>30</td><td>39</td></tr><tr><td>Current assets</td><td>180</td><td>210</td></tr><tr><td>Current liabilities</td><td>120</td><td>140</td></tr><tr><td>Total debt</td><td>100</td><td>110</td></tr><tr><td>Equity</td><td>200</td><td>230</td></tr></table>
+<div class="card"><h3>Interpretation questions</h3><ol><li>Calculate revenue growth and net profit margin for both years.</li><li>Calculate current ratio and debt-equity ratio.</li><li>Has profitability improved faster than revenue? Explain.</li><li>What additional information would you need before recommending the company as an investment?</li></ol></div>
+<h2>3. Student practical assignments</h2>
+<div class="steps"><div class="step"><b>Assignment 1:</b> Select one NSE/BSE listed company. Download its latest annual report and extract five-year revenue, EBIT, PAT, total assets, debt and equity.</div><div class="step"><b>Assignment 2:</b> Compare two companies in the same industry using profitability, liquidity, efficiency and solvency ratios.</div><div class="step"><b>Assignment 3:</b> Prepare a two-page analyst note with business model, financial trend, key risks, peer comparison and a reasoned conclusion.</div></div>
+<h2>4. Download the Excel practice workbook</h2>
+<p>The workbook contains a clearly labelled fictional sample dataset, formula-driven ratios and a dashboard students can adapt for their selected listed company.</p>
+<a class="btn" href="finance-analysis-practice.xlsx" download>Download Financial Analysis Excel Workbook ↓</a>
+<h2>5. Where to obtain company source documents</h2>
+<div class="grid"><div class="card"><h3>NSE corporate filings</h3><p>Use company announcements, financial results and annual reports filed with the exchange.</p><a href="https://www.nseindia.com/companies-listing/corporate-filings-financial-results" target="_blank" rel="noopener">Open NSE financial results →</a></div><div class="card"><h3>BSE corporate announcements</h3><p>Find company announcements, results and disclosures.</p><a href="https://www.bseindia.com/corporates/ann.html" target="_blank" rel="noopener">Open BSE announcements →</a></div><div class="card"><h3>Company investor relations</h3><p>Always cross-check with the company’s own investor relations website and audited annual report.</p><a href="https://www.nseindia.com/" target="_blank" rel="noopener">Find listed companies on NSE →</a></div></div>
+</main>
+<footer><p><b>Finance Knowledge Hub</b> | Practical learning for students</p><p>Educational resource. Verify original data and cite sources in submitted work.</p></footer>
+</body></html>
