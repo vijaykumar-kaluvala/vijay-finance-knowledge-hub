@@ -244,6 +244,89 @@ footer{background:linear-gradient(105deg,#061a34,#003c4a);color:#dce8f2;padding:
 @media(max-width:850px){.site-top{flex-wrap:wrap;padding:10px 0}.uni-brand{min-width:0}.photo-grid{grid-template-columns:repeat(2,1fr)}.promo-row{grid-template-columns:1fr}.profile-showcase{grid-template-columns:140px 1fr}.profile-col{border-left:0;padding:8px 0}.profile-showcase img{width:130px;height:145px}.quick-strip{grid-template-columns:1fr 1fr}.quick-item:nth-child(2){border-right:0}}
 @media(max-width:560px){.site-brand{font-size:22px}.site-brand .brand-icon{font-size:34px}.uni-brand{width:100%;border-radius:8px}.hero{padding:38px 5%;min-height:320px}.hero h1{font-size:35px}.photo-grid{gap:9px}.photo-tile{height:112px}.photo-tile span{font-size:11px}.photo-title{font-size:21px}.photo-title:before,.photo-title:after{width:25px;margin:0 8px}.profile-showcase{grid-template-columns:1fr;text-align:center}.profile-showcase img{margin:auto}.profile-col{text-align:left}.quick-item{padding:6px}.quick-item b{font-size:13px}.footer-grid{grid-template-columns:1fr}}
 
+
+
+/* ==========================================================
+   FINANCE HUB — SCREENSHOT-MATCHED COLOUR SYSTEM
+   Visual-only layer: preserves existing content, links and JS.
+   ========================================================== */
+:root{
+  --fh-teal:#003f43;
+  --fh-teal-deep:#00343b;
+  --fh-navy:#092d56;
+  --fh-blue:#e8f1ff;
+  --fh-peach:#fff0e2;
+  --fh-green:#eaf4ed;
+  --fh-gold:#f0ad23;
+  --fh-page:#f4f7fb;
+  --fh-ink:#10233b;
+}
+body{background:var(--fh-page);color:var(--fh-ink)}
+header{background:linear-gradient(105deg,#00343b,#004e62 64%,#071b36);border-bottom:3px solid var(--fh-gold)}
+nav{background:#061a32}
+nav a{color:#fff!important}
+nav a:hover{background:var(--fh-gold);color:#08233b!important}
+.market-ticker{background:#f8fafc;color:#09213a;border-top:1px solid #d9e3ec;border-bottom:1px solid #d9e3ec}
+.ticker-label{background:#00805f;color:#fff}
+.ticker-item b{color:#073b60}
+.hero{background:linear-gradient(90deg,#071a37 0%,#071a37ed 34%,#071a3770 61%,#071a3710 100%),url('images/hero-finance.jpg') center/cover no-repeat;color:#fff}
+.hero h1{color:#fff}
+.hero h1 span,.hero .badge{color:#ffc43c}
+.hero .btn{background:#f6b82d;color:#08233b;border-radius:30px}
+.quick-strip{background:#edf4f9;border-radius:0 0 8px 8px}
+.quick-item{background:transparent;border-right:1px solid #b7c6d2;box-shadow:none}
+.quick-item b{color:#073a42}
+.photo-section{background:#fff}
+.photo-title{color:#063c43}
+.photo-title:before,.photo-title:after{background:var(--fh-gold)}
+.photo-tile{border-radius:14px;box-shadow:0 4px 12px #0a24351c}
+.photo-tile span{background:#003e42ed;color:#fff}
+.promo-row{background:#fff}
+.promo-card{background:var(--fh-blue);color:var(--fh-ink)}
+.promo-card:nth-child(2){background:var(--fh-peach)}
+.promo-card:nth-child(3){background:var(--fh-green)}
+.promo-card h3{color:var(--fh-navy)}
+.promo-card b{background:#006258;color:#fff}
+section{background:#fff}
+section:nth-of-type(even){background:#f4f7fb}
+.section-head h2,.content-hub h2,.topic h3,.topic-mini h4{color:var(--fh-navy)}
+.section-kicker{color:#bd801c}
+.topic,.rich-card,.career-card,.ai-card,.topic-mini,.theme-card,.feature-card,.action-card,.calculator{
+  background:#fff;border:1px solid #e0e8ef;border-radius:14px;
+  box-shadow:0 5px 18px #0a24350d
+}
+.topic:hover,.rich-card:hover,.career-card:hover,.ai-card:hover,.topic-mini:hover,.theme-card:hover,.feature-card:hover,.action-card:hover{
+  box-shadow:0 12px 26px #0a24351a;border-color:#c5d9e5
+}
+.tag{background:#e8f1ff;color:#075b70}
+.tools,.finance-in-action,#elite-finance-challenge{background:#edf4fa}
+.content-hub{background:#eef4fb;border:1px solid #dce7f0}
+.topic-mini{background:#fff}
+.formula-box{background:linear-gradient(135deg,#003f43,#075b70);color:#fff}
+.feature-band{background:linear-gradient(110deg,#003f43,#075b70 65%,#092d56);color:#fff}
+.feature-band h2,.feature-band p{color:#fff}
+.profile-card{background:linear-gradient(110deg,#003f43,#075b70 65%,#092d56)}
+.profile-showcase{background:#fff;border:1px solid #e0e8ef}
+.profile-col h3{background:#f5c34b;color:#17334b}
+.action-feature{background:#fff;border:1px solid #dfe8ed}
+.visual-invest{background:linear-gradient(135deg,#fff0d5,#f8dca8)}
+.visual-market{background:linear-gradient(135deg,#e4edff,#d8e5fa)}
+.visual-digital{background:linear-gradient(135deg,#dff3ef,#c9e8e2)}
+.visual-green{background:linear-gradient(135deg,#e7f3df,#d3e8c8)}
+.action-button,.action-link,.ext-link{color:#006258}
+.action-button{background:#006258;color:#fff}
+footer{background:linear-gradient(105deg,#061a34,#003c4a);color:#dce8f2}
+footer h4{color:#ffc43c}
+button,.calcbtn{background:#006258}
+.result{background:#eaf4ed;color:#17633b}
+.example,.case,.fm-example{background:#fff4df;border-left-color:#e6a72b}
+.quiz,.challenge,.fm-activity,.esg-quiz{background:#eaf4ed}
+.qbox,.fm-quiz{background:#e8f1ff}
+@media(max-width:850px){
+ .quick-strip{background:#edf4f9}
+ .photo-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
