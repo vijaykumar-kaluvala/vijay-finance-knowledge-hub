@@ -1,0 +1,72 @@
+/* Vijay Finance Hub – shared green, gold and cream theme */
+:root {
+  --vfh-green: #064b32;
+  --vfh-deep: #033a28;
+  --vfh-gold: #df9a2f;
+  --vfh-orange: #a9430c;
+  --vfh-cream: #fbf5e9;
+  --vfh-pale: #f3efe2;
+  --vfh-ink: #102b20;
+  --vfh-muted: #59675f;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--vfh-cream) !important;
+  color: var(--vfh-ink) !important;
+}
+header {
+  background: linear-gradient(110deg, var(--vfh-deep), var(--vfh-green)) !important;
+  color: #fff !important;
+  border-bottom: 3px solid var(--vfh-gold) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.14) !important;
+}
+header a { color: #fff !important; }
+header a:hover { color: #ffd27c !important; }
+h1, h2, h3, .section-head h2 { color: var(--vfh-green) !important; }
+a { accent-color: var(--vfh-gold); }
+button, .btn, .calcbtn, input[type="submit"] {
+  background: linear-gradient(135deg, var(--vfh-green), #08704a) !important;
+  color: #fff !important;
+  border: 1px solid var(--vfh-gold) !important;
+  border-radius: 22px !important;
+}
+.cardbox, .panel, .topic, .calculator, .ipo-panel, .esg-panel,
+.ipo-step, .esg-card, .card, .module-card, .resource-card {
+  border-radius: 15px !important;
+  box-shadow: 0 5px 18px rgba(20,55,38,.09);
+}
+.topic, .calculator, .ipo-panel, .esg-panel, .ipo-step, .esg-card {
+  border-color: #e7d9bd !important;
+}
+.topic:hover, .card:hover, .module-card:hover, .resource-card:hover {
+  box-shadow: 0 9px 24px rgba(20,55,38,.14) !important;
+}
+section { background-color: transparent; }
+.tools, .result, .quiz { background-color: #edf3e9 !important; }
+footer {
+  background: linear-gradient(110deg, var(--vfh-deep), var(--vfh-green)) !important;
+  color: #f7f2e8 !important;
+  border-top: 3px solid var(--vfh-gold);
+}
+footer strong { color: #ffd27c !important; }
+/* Compact university logo on secondary pages */
+header:not(:has(.site-top)) {
+  position: relative;
+  padding-right: 230px !important;
+  min-height: 78px;
+}
+header:not(:has(.site-top))::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 190px;
+  height: 74px;
+  background: #fff url("images/klu-university-logo.png") center / contain no-repeat;
+  border-radius: 5px;
+}
+@media (max-width: 700px) {
+  header:not(:has(.site-top)) { padding-right: 16px !important; padding-bottom: 82px !important; }
+  header:not(:has(.site-top))::after { top: auto; bottom: 4px; right: 12px; transform: none; width: 150px; height: 58px; }
+}
