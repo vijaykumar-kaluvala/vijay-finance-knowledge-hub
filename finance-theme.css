@@ -1,4 +1,4 @@
-/* Vijay Finance Hub – shared green, gold and cream theme */
+/* Vijay Finance Hub â€“ shared green, gold and cream theme */
 :root {
   --vfh-green: #064b32;
   --vfh-deep: #033a28;
@@ -63,10 +63,11 @@ header:not(:has(.site-top))::after {
   transform: translateY(-50%);
   width: 190px;
   height: 74px;
-  background: #fff url("images/klu-university-logo.png") center / contain no-repeat;
+  background: #fff url("images/vijay-finance-hub-logo.png") center / contain no-repeat;
   border-radius: 5px;
 }
 @media (max-width: 700px) {
   header:not(:has(.site-top)) { padding-right: 16px !important; padding-bottom: 82px !important; }
   header:not(:has(.site-top))::after { top: auto; bottom: 4px; right: 12px; transform: none; width: 150px; height: 58px; }
 }
+
