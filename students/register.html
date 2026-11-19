@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Hub - Student Registration</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#edf5f8;color:#173b35}
+header{background:#06452f;color:white;padding:22px;text-align:center;border-bottom:4px solid #d8a629}
+.container{max-width:520px;margin:45px auto;padding:30px;background:white;border-radius:16px;box-shadow:0 8px 25px #0002}
+h2{text-align:center;color:#07563c}
+p{text-align:center;color:#52636b}
+label{display:block;margin-top:15px;font-weight:bold}
+input,select{width:100%;padding:12px;margin-top:7px;border:1px solid #ccd6d5;border-radius:7px;font-size:15px}
+button{width:100%;padding:14px;margin-top:22px;background:#07563c;color:white;border:0;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer}
+button:hover{background:#08734e}
+#message{margin-top:18px;text-align:center;font-weight:bold;line-height:1.5}
+a{color:#08734e}
+</style>
+</head>
+<body>
+<header>
+<h2 style="color:#f5c64b">Vijay Finance Hub</h2>
+<p style="color:white">Student Registration</p>
+</header>
+
+<div class="container">
+<h2>Create Your Account</h2>
+<p>Register to access Finance Hub learning resources.</p>
+
+<form id="registerForm">
+<label>Full Name</label>
+<input id="fullName" type="text" required>
+
+<label>Email Address</label>
+<input id="email" type="email" required>
+
+<label>Create Password</label>
+<input id="password" type="password" minlength="8" required>
+
+<label>Register As</label>
+<select id="userType" required>
+<option value="">Select user type</option>
+<option value="Student">Student</option>
+<option value="External Visitor">External Visitor</option>
+</select>
+
+<label>College / Institution</label>
+<input id="institution" type="text" required>
+
+<button type="submit" id="registerButton">Register Now</button>
+</form>
+
+<div id="message"></div>
+<p>Already registered? <a href="login.html">Login here</a></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://ktmgqpzmxtnjaqpbiydg.supabase.co";
+const SUPABASE_KEY = 'sb_publishable_87DB-YBBVSjYziqYekWZfQ_jAfOzo_F';
+
+document.getElementById("registerForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const button = document.getElementById("registerButton");
+  const message = document.getElementById("message");
+  button.disabled = true;
+  button.textContent = "Registering...";
+  message.textContent = "";
+
+  const fullName = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const userType = document.getElementById("userType").value;
+  const institution = document.getElementById("institution").value.trim();
+
+  try {
+    const {data, error} = await db.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: window.location.origin + "/vijay-finance-knowledge-hub/students/",
+        data: {
+          full_name: fullName,
+          user_type: userType,
+          institution: institution
+        }
+      }
+    });
+
+    if(error) throw error;
+
+    message.style.color = "green";
+    message.textContent = data.session
+      ? "Registration successful! Your account is ready."
+      : "Registration submitted! Please check your email to confirm your account.";
+
+    document.getElementById("registerForm").reset();
+
+  } catch(error) {
+    message.style.color = "red";
+    message.textContent = error.message;
+  }
+
+  button.disabled = false;
+  button.textContent = "Register Now";
+});
+</script>
+</body>
+</html>
