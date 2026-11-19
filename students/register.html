@@ -61,7 +61,10 @@ a{color:#08734e}
 <script>
 const SUPABASE_URL = "https://ktmgqpzmxtnjaqpbiydg.supabase.co";
 const SUPABASE_KEY = 'sb_publishable_87DB-YBBVSjYziqYekWZfQ_jAfOzo_F';
-
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 document.getElementById("registerForm").addEventListener("submit", async function(e){
   e.preventDefault();
 
