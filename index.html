@@ -1057,5 +1057,35 @@ document.addEventListener('DOMContentLoaded',wireLearningCards);
 wireLearningCards();
 
 </script>
+
+<!-- Supabase Finance Hub Visitor Tracking -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://ktmgqpzmxtnjaqpbiydg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_87DB-YBBVSjYziqYekWZfQ_jAfOzo_F';
+
+const financeHubDB = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function recordFinanceHubVisit() {
+  const { error } = await financeHubDB
+    .from('hub_visits')
+    .insert({
+      page_path: window.location.pathname,
+      user_id: null
+    });
+
+  if (error) {
+    console.error('Visitor tracking error:', error.message);
+  } else {
+    console.log('Finance Hub visit recorded successfully.');
+  }
+}
+
+recordFinanceHubVisit();
+</script>
+
 </body>
 </html>
