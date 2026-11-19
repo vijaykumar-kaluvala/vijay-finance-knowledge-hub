@@ -1057,7 +1057,13 @@ document.addEventListener('DOMContentLoaded',wireLearningCards);
 wireLearningCards();
 
 </script>
-
+<section style="text-align:center; padding:20px; margin:20px auto; background:#eaf3f8; border-radius:12px;">
+  <h3 style="color:#0b1f3a;">Finance Hub Visitors</h3>
+  <p style="font-size:28px; font-weight:bold; color:#b8860b;">
+    <span id="visitor-count">Loading...</span>
+  </p>
+  <p>Total visits to our Finance Knowledge Hub</p>
+</section>
 <!-- Supabase Finance Hub Visitor Tracking -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -1083,7 +1089,20 @@ async function recordFinanceHubVisit() {
     console.log('Finance Hub visit recorded successfully.');
   }
 }
+async function displayTotalVisits() {
+    const { data: totalVisits, error: countError } =
+        await financeHubDB.rpc('get_total_visits');
 
+    if (!countError) {
+        document.getElementById('visitor-count').textContent =
+            Number(totalVisits).toLocaleString('en-IN');
+    } else {
+        document.getElementById('visitor-count').textContent = 'Unavailable';
+        console.error('Visitor count error:', countError.message);
+    }
+}
+
+displayTotalVisits();
 recordFinanceHubVisit();
 </script>
 
