@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Finance Research Lab | Finance Knowledge Hub</title>
+<meta name="description" content="Interactive financial calculators, investment simulations, AI-assisted learning tools and student research resources.">
+<style>
+:root{--navy:#08152d;--navy2:#10264a;--blue:#2563eb;--cyan:#22d3ee;--purple:#8b5cf6;--pink:#ec4899;--gold:#f4c76b;--green:#10b981;--ink:#17243a;--muted:#64748b;--paper:#f3f6fc;--white:#fff;--line:#e3e9f3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}
+header{position:sticky;top:0;z-index:20;background:rgba(8,21,45,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(244,199,107,.55);color:#fff}
+.nav{max-width:1240px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:850;letter-spacing:.3px;color:var(--gold);font-size:17px}.brand span{display:block;font-size:9px;letter-spacing:2.3px;color:#cbd5e1;margin-top:3px}
+.navlinks{display:flex;gap:17px;align-items:center;font-size:12px;color:#e5edf9}.navlinks a:hover{color:var(--gold)}
+.menu{display:none;background:transparent;border:1px solid #64748b;color:#fff;border-radius:8px;padding:8px}
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(circle at 12% 20%,rgba(34,211,238,.22),transparent 30%),radial-gradient(circle at 85% 10%,rgba(139,92,246,.30),transparent 28%),linear-gradient(120deg,#08152d,#122b55 55%,#251653);padding:78px 22px 68px}
+.hero:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-130px;bottom:-270px;box-shadow:0 0 0 45px rgba(255,255,255,.025),0 0 0 90px rgba(255,255,255,.02)}
+.hero-inner{max-width:1160px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:38px;position:relative;z-index:1}
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--gold);font-weight:800}.hero h1{font-size:clamp(36px,5vw,62px);line-height:1.05;margin:17px 0}.hero h1 em{font-style:normal;color:var(--gold)}.hero p{color:#dbeafe;line-height:1.8;max-width:650px;font-size:16px}
+.hero-img{width:100%;height:330px;object-fit:cover;border-radius:22px;border:1px solid rgba(255,255,255,.25);box-shadow:0 24px 65px #02081780}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{border:0;border-radius:9px;padding:12px 18px;background:linear-gradient(100deg,var(--gold),#ffe3a0);color:#17243a;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}.btn.outline{background:transparent;border:1px solid #8ca4c8;color:white}.btn.blue{background:linear-gradient(100deg,#2563eb,#22d3ee);color:white}.btn.purple{background:linear-gradient(100deg,#7c3aed,#c084fc);color:white}.btn.green{background:linear-gradient(100deg,#059669,#34d399);color:#052e2b}.btn.small{padding:9px 13px;font-size:13px}
+.container{max-width:1200px;margin:auto;padding:48px 22px}.section-head{text-align:center;margin:0 auto 28px;max-width:760px}.section-head .eyebrow{color:#7c5bd6}.section-head h2{margin:8px 0;color:var(--navy);font-size:clamp(25px,3vw,34px)}.section-head p{color:var(--muted);line-height:1.7;margin:0}
+.stats{max-width:1160px;margin:-28px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:3}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px;text-align:center;box-shadow:0 12px 30px #10264a12}.stat strong{display:block;font-size:25px;color:#7654d6}.stat span{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px #10264a0a;transition:.2s}.feature:hover{transform:translateY(-4px);box-shadow:0 16px 35px #10264a18}.feature-link{display:block;color:inherit;cursor:pointer}.feature-link:focus{outline:3px solid #8b5cf6;outline-offset:3px}.card-action{display:inline-block;margin-top:5px;color:#5b45c5;font-weight:800;font-size:12px}.feature img{width:100%;height:155px;object-fit:cover;display:block}.feature-body{padding:19px}.feature h3{margin:0 0 8px;color:var(--navy)}.feature p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 12px}.tag{display:inline-block;background:#eef2ff;color:#5940b6;border-radius:30px;padding:5px 9px;font-size:10px;font-weight:800;letter-spacing:.4px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:23px;box-shadow:0 8px 25px #10264a09}.panel h3{margin:0 0 7px;color:var(--navy)}.panel>p{color:var(--muted);font-size:13px;line-height:1.65}
+.tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.tool-grid>*{min-width:0}.tool{border-top:4px solid var(--blue)}.tool.purp{border-top-color:var(--purple)}.tool.greenline{border-top-color:var(--green)}.tool.goldline{border-top-color:#d6a63c}
+label{display:block;font-size:12px;font-weight:750;color:#334155;margin:11px 0 5px}input,select,textarea{min-width:0;max-width:100%;width:100%;border:1px solid #d5deeb;border-radius:8px;padding:10px 11px;background:#fbfdff;color:#17243a;outline:none}input:focus,select:focus,textarea:focus{border-color:#7c5bd6;box-shadow:0 0 0 3px #8b5cf622}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.result{display:none;margin-top:14px;padding:14px;border-radius:10px;background:linear-gradient(110deg,#eef6ff,#f3efff);border-left:4px solid var(--purple);font-size:13px;line-height:1.75}.result strong{color:#192c50}.note{font-size:11px;color:#718096;line-height:1.6;margin-top:12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid #d7dfec;background:#fff;color:#42526b;border-radius:30px;padding:9px 13px;font-size:12px;font-weight:750;cursor:pointer}.tab.active{background:#172b50;color:white;border-color:#172b50}
+.sim-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.sim-layout>*{min-width:0}.chartbox{background:#0d1b35;border-radius:15px;padding:18px;color:white;min-height:280px}.chartbox h3{color:white}.chartbox canvas{display:block;width:100%;max-width:100%;height:220px}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left}th{background:#edf2fb;color:#20365c}
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.project{background:linear-gradient(145deg,#fff,#f1f5ff);border:1px solid var(--line);border-left:4px solid var(--gold);padding:17px;border-radius:12px}.project h4{margin:0 0 7px;color:#182d50}.project p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.banner{border-radius:20px;padding:30px;background:linear-gradient(110deg,#10264a,#43317e 65%,#087f8c);color:white;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.banner h2{margin:0 0 8px}.banner p{margin:0;color:#dbeafe;line-height:1.7;font-size:13px}
+footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font-size:12px;line-height:1.9}footer strong{color:var(--gold)}
+.hidden{display:none!important}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#dcfce7;color:#047857;font-size:10px;font-weight:800}
+@media(max-width:1100px){.sim-layout{grid-template-columns:1fr}.navlinks{gap:11px}.navlinks a{white-space:nowrap}}\n@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.hero-img{height:250px}.grid{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none;position:absolute;top:60px;left:0;right:0;background:#08152d;padding:20px;flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu{display:block}}
+@media(max-width:600px){.grid,.tool-grid,.sim-layout,.project-grid{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.fields{grid-template-columns:1fr}.hero{padding:55px 18px}.container{padding:38px 17px}.banner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><nav class="nav">
+ <a class="brand" href="#top">AI & FINANCE RESEARCH LAB<span>FINANCE KNOWLEDGE HUB</span></a>
+ <button class="menu" onclick="document.querySelector('.navlinks').classList.toggle('show')">☰ Menu</button>
+ <div class="navlinks">
+  <a href="../index.html">Finance Hub Home</a><a href="#research">Research</a><a href="#tools">AI Tools</a><a href="#intelligence">AI Dashboard</a><a href="#simulations">Simulations</a><a href="#students">Students</a><a href="#publications">Publications</a>
+ </div>
+</nav></header>
+<section class="hero" id="top"><div class="hero-inner">
+ <div><div class="eyebrow">RESEARCH • FINANCIAL INTELLIGENCE • INNOVATION</div>
+ <h1>AI & <em>FINANCE</em><br>RESEARCH LAB</h1>
+ <p>A vibrant academic environment to explore financial analytics, investment decisions, AI-assisted research and practical market simulations. Learn by analysing, testing and experimenting.</p>
+ <div class="actions"><a class="btn" href="#tools">Explore Financial Tools ↗</a><a class="btn outline" href="#simulations">Enter Simulation Centre</a></div>
+ </div>
+ <img class="hero-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1100&q=85" alt="Digital financial market analytics dashboard">
+</div></section>
+<div class="stats">
+ <div class="stat"><strong>06+</strong><span>Research themes</span></div><div class="stat"><strong>08</strong><span>Financial calculators</span></div><div class="stat"><strong>05</strong><span>Learning simulations</span></div><div class="stat"><strong>100%</strong><span>Open learning access</span></div>
+</div>
+<section class="container" id="research">
+ <div class="section-head"><div class="eyebrow">DISCOVER • INVESTIGATE • INNOVATE</div><h2>Explore Our Research Universe</h2><p>Research themes connecting finance, technology, markets and sustainable development. Select a card to explore related student research themes.</p></div>
+ <div class="grid">
+  <a class="feature feature-link" href="#students"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=85" alt="Stock market charts"><div class="feature-body"><span class="tag">CAPITAL MARKETS</span><h3>AI in Stock Market Analysis ↗</h3><p>Explore market indicators, investment analytics, forecasting methods and market efficiency.</p><span class="card-action">Explore related projects →</span></div></a>
+  <a class="feature feature-link" href="#students"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=85" alt="Digital banking and fintech"><div class="feature-body"><span class="tag">FINTECH</span><h3>AI in Banking & Lending ↗</h3><p>Investigate credit assessment, digital lending, fraud analytics and financial inclusion.</p><span class="card-action">Explore related projects →</span></div></a>
+  <a class="feature feature-link" href="#students"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=85" alt="Green energy and sustainability"><div class="feature-body"><span class="tag">SUSTAINABILITY</span><h3>AI, ESG & Green Finance ↗</h3><p>Study ESG analytics, sustainable investment and responsible financial decisions.</p><span class="card-action">Explore related projects →</span></div></a>
+ </div>
+</section>
+
+<section class="container" id="tools">
+ <div class="section-head"><div class="eyebrow">CALCULATE • COMPARE • INTERPRET</div><h2>Interactive Financial Intelligence Studio</h2><p>Use these educational tools to practise core financial management and investment calculations. Outputs are model-based calculations, not autonomous AI advice.</p></div>
+ <div class="tool-grid">
+  <div class="panel tool"><h3>📊 Financial Ratio Analyzer</h3><p>Calculate liquidity, leverage and profitability indicators.</p>
+   <div class="fields"><div><label>Current Assets (₹)</label><input id="ra" type="number" value="500000"></div><div><label>Current Liabilities (₹)</label><input id="rl" type="number" value="250000"></div><div><label>Total Debt (₹)</label><input id="rd" type="number" value="400000"></div><div><label>Equity (₹)</label><input id="re" type="number" value="800000"></div><div><label>Net Profit (₹)</label><input id="rp" type="number" value="120000"></div><div><label>Revenue (₹)</label><input id="rr" type="number" value="1000000"></div></div>
+   <button class="btn blue small" onclick="ratioTool()">Analyse Ratios</button><div class="result" id="ratioOut"></div>
+  </div>
+  <div class="panel tool purp"><h3>🏠 Loan EMI & Amortisation</h3><p>Estimate monthly instalments and total interest payable.</p>
+   <div class="fields"><div><label>Loan Amount (₹)</label><input id="emiP" type="number" value="1000000"></div><div><label>Annual Interest (%)</label><input id="emiR" type="number" value="9"></div><div><label>Tenure (years)</label><input id="emiY" type="number" value="5"></div></div>
+   <button class="btn purple small" onclick="emiTool()">Calculate EMI</button><div class="result" id="emiOut"></div>
+  </div>
+  <div class="panel tool greenline"><h3>💹 NPV Calculator</h3><p>Evaluate a project using discounted future cash flows.</p>
+   <div class="fields"><div><label>Initial Investment (₹)</label><input id="npvI" type="number" value="500000"></div><div><label>Discount Rate (%)</label><input id="npvR" type="number" value="12"></div></div>
+   <label>Annual Cash Flows (comma-separated ₹)</label><input id="npvC" value="150000,170000,190000,200000">
+   <button class="btn green small" onclick="npvTool()">Calculate NPV</button><div class="result" id="npvOut"></div>
+  </div>
+  <div class="panel tool goldline"><h3>📈 IRR Estimator</h3><p>Estimate the internal rate of return from project cash flows.</p>
+   <label>Cash flows (first value should be negative)</label><input id="irrC" value="-500000,150000,170000,190000,200000">
+   <button class="btn small" onclick="irrTool()">Estimate IRR</button><div class="result" id="irrOut"></div>
+  </div>
+  <div class="panel tool purp"><h3>⚖️ WACC Calculator</h3><p>Estimate weighted average cost of capital.</p>
+   <div class="fields"><div><label>Equity (₹)</label><input id="wE" type="number" value="700000"></div><div><label>Debt (₹)</label><input id="wD" type="number" value="300000"></div><div><label>Cost of Equity (%)</label><input id="wKe" type="number" value="15"></div><div><label>Cost of Debt (%)</label><input id="wKd" type="number" value="9"></div><div><label>Tax Rate (%)</label><input id="wT" type="number" value="25"></div></div>
+   <button class="btn purple small" onclick="waccTool()">Calculate WACC</button><div class="result" id="waccOut"></div>
+  </div>
+  <div class="panel tool greenline"><h3>🎯 Break-even Analyzer</h3><p>Calculate break-even units and margin of safety.</p>
+   <div class="fields"><div><label>Fixed Cost (₹)</label><input id="beF" type="number" value="200000"></div><div><label>Selling Price / Unit (₹)</label><input id="beS" type="number" value="500"></div><div><label>Variable Cost / Unit (₹)</label><input id="beV" type="number" value="300"></div><div><label>Expected Sales (units)</label><input id="beQ" type="number" value="1500"></div></div>
+   <button class="btn green small" onclick="beTool()">Analyse Break-even</button><div class="result" id="beOut"></div>
+  </div>
+  <div class="panel tool"><h3>🔄 Working Capital Analyzer</h3><p>Estimate net working capital and current ratio.</p>
+   <div class="fields"><div><label>Current Assets (₹)</label><input id="wcA" type="number" value="800000"></div><div><label>Current Liabilities (₹)</label><input id="wcL" type="number" value="450000"></div><div><label>Inventory (₹)</label><input id="wcI" type="number" value="180000"></div><div><label>Receivables (₹)</label><input id="wcR" type="number" value="120000"></div></div>
+   <button class="btn blue small" onclick="wcTool()">Analyse Working Capital</button><div class="result" id="wcOut"></div>
+  </div>
+  <div class="panel tool goldline"><h3>💰 Compound Investment Calculator</h3><p>Project future value using annual compounding.</p>
+   <div class="fields"><div><label>Initial Investment (₹)</label><input id="ciP" type="number" value="100000"></div><div><label>Annual Return (%)</label><input id="ciR" type="number" value="12"></div><div><label>Period (years)</label><input id="ciY" type="number" value="5"></div></div>
+   <button class="btn small" onclick="compoundTool()">Project Value</button><div class="result" id="ciOut"></div>
+  </div>
+ </div>
+ <p class="note">Educational use only. Check assumptions, units and source data before using calculations in academic or business decisions.</p>
+</section>
+<section class="container" id="intelligence">
+ <div class="section-head"><div class="eyebrow">ANALYSE • INTERPRET • DECIDE</div><h2>AI Financial Intelligence Dashboard</h2><p>Interactive financial analysis workspace. Enter company figures to generate transparent, rule-based insights and a downloadable classroom report. This browser-based version does not send data to an AI service.</p></div>
+ <div class="panel" style="border-top:4px solid #8b5cf6">
+  <h3>🧠 Financial Statement Analysis Studio</h3>
+  <p>Enter figures from a company's financial statements. The dashboard calculates key indicators and produces a plain-language interpretation.</p>
+  <div class="fields">
+   <div><label>Company / Case Name</label><input id="aiCompany" type="text" value="Sample Company"></div>
+   <div><label>Financial Year</label><input id="aiYear" type="text" value="2025-26"></div>
+   <div><label>Revenue (₹)</label><input id="aiRevenue" type="number" value="2500000"></div>
+   <div><label>Operating Profit (₹)</label><input id="aiOperating" type="number" value="400000"></div>
+   <div><label>Net Profit (₹)</label><input id="aiNet" type="number" value="220000"></div>
+   <div><label>Total Assets (₹)</label><input id="aiAssets" type="number" value="1800000"></div>
+   <div><label>Total Debt (₹)</label><input id="aiDebt" type="number" value="600000"></div>
+   <div><label>Shareholders' Equity (₹)</label><input id="aiEquity" type="number" value="900000"></div>
+   <div><label>Current Assets (₹)</label><input id="aiCA" type="number" value="750000"></div>
+   <div><label>Current Liabilities (₹)</label><input id="aiCL" type="number" value="400000"></div>
+  </div>
+  <div class="actions"><button class="btn purple" onclick="runFinancialIntelligence()">Generate Financial Analysis</button><button class="btn blue" onclick="downloadFinancialReport()">Download Analysis Report</button></div>
+  <div id="aiAnalysisOutput" class="result" aria-live="polite"></div>
+  <p class="note">Method: deterministic ratio calculations and rule-based commentary. This is an educational analytical assistant, not a generative AI model, audit opinion or investment recommendation.</p>
+ </div>
+ <div class="tool-grid" style="margin-top:18px">
+  <div class="panel tool"><h3>🏢 Company Performance Comparison</h3><p>Compare two companies using revenue, net profit and total assets entered by you.</p>
+   <div class="fields"><div><label>Company A</label><input id="cmpNameA" value="Company A"></div><div><label>Company B</label><input id="cmpNameB" value="Company B"></div><div><label>A: Revenue (₹)</label><input id="cmpRevA" type="number" value="2000000"></div><div><label>B: Revenue (₹)</label><input id="cmpRevB" type="number" value="2500000"></div><div><label>A: Net Profit (₹)</label><input id="cmpProfitA" type="number" value="180000"></div><div><label>B: Net Profit (₹)</label><input id="cmpProfitB" type="number" value="220000"></div><div><label>A: Assets (₹)</label><input id="cmpAssetsA" type="number" value="1500000"></div><div><label>B: Assets (₹)</label><input id="cmpAssetsB" type="number" value="1800000"></div></div>
+   <button class="btn blue small" onclick="compareCompanies()">Compare Companies</button><div id="compareOutput" class="result"></div>
+  </div>
+  <div class="panel tool greenline"><h3>🔭 Revenue Forecasting Exercise</h3><p>Build a simple trend projection using a starting revenue and assumed annual growth rate.</p>
+   <div class="fields"><div><label>Current Revenue (₹)</label><input id="forecastBase" type="number" value="1000000"></div><div><label>Annual Growth Assumption (%)</label><input id="forecastGrowth" type="number" value="8"></div><div><label>Forecast Period (years)</label><input id="forecastYears" type="number" value="3"></div></div>
+   <button class="btn green small" onclick="forecastRevenue()">Generate Forecast</button><div id="forecastOutput" class="result"></div>
+  </div>
+ </div>
+</section>
+
+<section class="container" id="simulations">
+ <div class="section-head"><div class="eyebrow">EXPERIMENT • TEST • LEARN</div><h2>Financial Market Simulation Centre</h2><p>Interactive, hypothetical exercises for understanding investment risk, diversification, credit decisions and financial behaviour.</p></div>
+ <div class="sim-layout">
+  <div class="panel"><h3>📉 Portfolio Return Simulator</h3><p>Change hypothetical asset allocations and returns to see the portfolio result.</p>
+   <div class="fields"><div><label>Asset A allocation (₹)</label><input id="pa" type="number" value="40000"></div><div><label>Asset A return (%)</label><input id="prA" type="number" value="12"></div><div><label>Asset B allocation (₹)</label><input id="pb" type="number" value="35000"></div><div><label>Asset B return (%)</label><input id="prB" type="number" value="7"></div><div><label>Asset C allocation (₹)</label><input id="pc" type="number" value="25000"></div><div><label>Asset C return (%)</label><input id="prC" type="number" value="-5"></div></div>
+   <button class="btn blue small" onclick="portfolioSim()">Run Portfolio Simulation</button><div class="result" id="portOut"></div>
+  </div>
+  <div class="chartbox"><h3>Portfolio Allocation Visual</h3><canvas id="portChart" width="520" height="250"></canvas><p class="note" style="color:#b8c5dc">Illustrative allocation chart based on your entered amounts.</p></div>
+  <div class="panel"><h3>🎲 Monte Carlo Return Experiment</h3><p>Explore a range of possible outcomes using random annual returns around your assumptions. This is a simplified classroom model.</p>
+   <div class="fields"><div><label>Starting Capital (₹)</label><input id="mcP" type="number" value="100000"></div><div><label>Average Annual Return (%)</label><input id="mcR" type="number" value="10"></div><div><label>Annual Volatility (%)</label><input id="mcV" type="number" value="18"></div><div><label>Years</label><input id="mcY" type="number" value="5"></div></div>
+   <button class="btn purple small" onclick="monteCarlo()">Run 500 Scenarios</button><div class="result" id="mcOut"></div>
+  </div>
+  <div class="chartbox"><h3>Scenario Outcomes</h3><canvas id="mcChart" width="520" height="250"></canvas><p class="note" style="color:#b8c5dc">Illustrative outcomes generated in your browser, not forecasts.</p></div>
+  <div class="panel"><h3>🏦 Credit Risk Classroom Exercise</h3><p>Apply a simple rule-based scorecard to a fictional borrower profile.</p>
+   <div class="fields"><div><label>Monthly Income (₹)</label><input id="crIncome" type="number" value="60000"></div><div><label>Monthly Debt Payments (₹)</label><input id="crDebt" type="number" value="15000"></div><div><label>Credit History (years)</label><input id="crHistory" type="number" value="5"></div><div><label>Missed Payments (last year)</label><input id="crMiss" type="number" value="0"></div></div>
+   <button class="btn green small" onclick="creditSim()">Assess Sample Profile</button><div class="result" id="creditOut"></div>
+  </div>
+  <div class="panel"><h3>🛡️ Transaction Anomaly Exercise</h3><p>Explore simple rule-based flags using fictional transaction details.</p>
+   <div class="fields"><div><label>Transaction Amount (₹)</label><input id="frAmount" type="number" value="85000"></div><div><label>Usual Transaction (₹)</label><input id="frUsual" type="number" value="10000"></div><div><label>Transactions in 10 minutes</label><input id="frCount" type="number" value="4"></div><div><label>New device?</label><select id="frDevice"><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+   <button class="btn small" onclick="fraudSim()">Check Rule-based Flags</button><div class="result" id="fraudOut"></div>
+  </div>
+ </div>
+ <p class="note">These are educational simulations, not validated credit-scoring or fraud-detection systems. A flagged transaction is not proof of fraud.</p>
+</section>
+<section class="container" id="students">
+ <div class="section-head"><div class="eyebrow">STUDENT INQUIRY & DISCOVERY</div><h2>Student Research & Innovation Projects</h2><p>Suggested BBA and MBA research themes for classroom projects, dissertations and guided investigation.</p></div>
+ <div class="project-grid">
+  <div class="project"><h4>01 · AI-based Credit Risk</h4><p>Examine how data-driven indicators may support borrower risk assessment.</p></div>
+  <div class="project"><h4>02 · Digital Lending</h4><p>Study digital credit access, borrower experience and financial inclusion.</p></div>
+  <div class="project"><h4>03 · AI in Investment Decisions</h4><p>Compare traditional analysis with AI-assisted research workflows.</p></div>
+  <div class="project"><h4>04 · ESG Investment Analytics</h4><p>Explore ESG indicators and their use in investment evaluation.</p></div>
+  <div class="project"><h4>05 · Financial Fraud Analytics</h4><p>Investigate transaction patterns and explainable anomaly flags.</p></div>
+  <div class="project"><h4>06 · Market Efficiency</h4><p>Study how information technology may affect price discovery.</p></div>
+ </div>
+ <div class="panel" style="margin-top:20px"><h3>📝 Student Research Proposal Builder</h3><p>Prepare a proposal summary and download it as a text document for academic discussion.</p>
+  <div class="fields"><div><label>Student Name</label><input id="sName" placeholder="Enter name"></div><div><label>Programme</label><select id="sCourse"><option>BBA</option><option>MBA</option><option>Other</option></select></div></div>
+  <label>Research Title</label><input id="sTitle" placeholder="Enter research title"><label>Research Objectives</label><textarea id="sObj" rows="3" placeholder="List the proposed objectives"></textarea>
+  <button class="btn purple small" onclick="proposalDownload()">Download Proposal</button>
+ </div>
+</section>
+<section class="container" id="publications">
+ <div class="section-head"><div class="eyebrow">KNOWLEDGE • EVIDENCE • SCHOLARSHIP</div><h2>Research Publications & Datasets</h2><p>A growing repository for verified academic outputs and learning datasets. Select a card to open its repository information.</p></div>
+ <div class="grid">
+  <a class="feature feature-link" href="#articleLibrary"><img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=800&q=85" alt="Academic research and reports"><div class="feature-body"><span class="tag">ACADEMIC OUTPUT</span><h3>Research Articles ↗</h3><p>Curated articles on AI in Finance, FinTech, capital markets and sustainable finance.</p><span class="card-action">Open article repository →</span></div></a>
+  <a class="feature feature-link" href="#workingPaperLibrary"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=85" alt="Research notes and writing"><div class="feature-body"><span class="tag">RESEARCH MATERIAL</span><h3>Working Papers ↗</h3><p>Concept notes, research-in-progress and empirical study summaries.</p><span class="card-action">Open working paper repository →</span></div></a>
+  <a class="feature feature-link" href="#datasetLibrary"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=85" alt="Financial data dashboard"><div class="feature-body"><span class="tag">DATA & METHODS</span><h3>Financial Datasets ↗</h3><p>Learning datasets and documented data sources for classroom analysis.</p><span class="card-action">Open dataset repository →</span></div></a>
+ </div>
+ <div class="panel" id="articleLibrary" style="margin-top:18px"><h3>📚 Research Articles Repository</h3><p>Repository area for verified journal articles, publication metadata, DOI or publisher links and author details. No article links are displayed until verified records are added.</p><span class="pill">Repository ready for verified entries</span></div>
+ <div class="panel" id="workingPaperLibrary" style="margin-top:14px"><h3>📝 Working Papers Repository</h3><p>Repository area for research proposals, conceptual papers, literature reviews and working papers. Add only material that you have permission to share.</p><span class="pill">Repository ready for approved papers</span></div>
+ <div class="panel" id="datasetLibrary" style="margin-top:14px"><h3>🗃️ Financial Dataset Centre</h3><p>Download a small illustrative dataset for classroom practice. It is synthetic sample data, not actual company or market data.</p><button class="btn blue small" onclick="downloadSampleDataset()">Download Sample Finance Dataset (CSV)</button></div>
+ <div class="panel" style="margin-top:14px"><h3>Repository publication policy</h3><p>Research papers and datasets should be added only after checking authorship, publication details, permissions, source attribution and applicable licence terms. No publication or dataset is represented as available until it is uploaded and verified.</p></div>
+</section>
+<section class="container"><div class="banner"><div><h2>Build the Future of Financial Research</h2><p>Explore financial questions, test assumptions and develop evidence-based thinking through interactive learning.</p></div><a class="btn" href="../index.html">← Return to Finance Hub</a></div></section>
+</main>
+<footer><strong>AI & FINANCE RESEARCH LAB</strong><br>Finance Knowledge Hub · Research · Innovation · Financial Analytics · Education<br>Educational demonstrations only. Not investment, lending or legal advice.</footer>
+<script>
+const val=id=>Number(document.getElementById(id).value);
+const fmt=n=>'₹'+Number(n).toLocaleString('en-IN',{maximumFractionDigits:2});
+function show(id,html){const e=document.getElementById(id);e.style.display='block';e.innerHTML=html}
+function validNonnegative(ids){return ids.every(id=>Number.isFinite(val(id))&&val(id)>=0)}
+function ratioTool(){if(!validNonnegative(['ra','rl','rd','re','rp','rr'])||val('rl')===0||val('re')===0||val('rr')===0){alert('Enter valid non-negative figures. Liabilities, equity and revenue must be above zero.');return}let cr=val('ra')/val('rl'),de=val('rd')/val('re'),pm=val('rp')/val('rr')*100;show('ratioOut',`<b>Current ratio:</b> ${cr.toFixed(2)}:1<br><b>Debt-equity:</b> ${de.toFixed(2)}:1<br><b>Net profit margin:</b> ${pm.toFixed(2)}%<br><br><b>Learning insight:</b> Compare these measures with previous periods and relevant industry benchmarks before drawing conclusions.`)}
+function emiTool(){let p=val('emiP'),r=val('emiR')/1200,n=val('emiY')*12;if(p<=0||n<=0||val('emiR')<0){alert('Enter a positive loan amount and tenure, with a non-negative interest rate.');return}let e=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);show('emiOut',`Monthly EMI: <b>${fmt(e)}</b><br>Total payment: <b>${fmt(e*n)}</b><br>Total interest: <b>${fmt(e*n-p)}</b>`)}
+function npvTool(){let p=val('npvI'),r=val('npvR')/100,c=document.getElementById('npvC').value.split(',').map(x=>Number(x.trim()));if(p<0||r<=-1||!c.length||c.some(x=>!Number.isFinite(x))){alert('Check initial investment, discount rate and cash flows.');return}let pv=c.reduce((s,x,i)=>s+x/Math.pow(1+r,i+1),0),n=pv-p;show('npvOut',`Present value of inflows: <b>${fmt(pv)}</b><br>Net present value: <b>${fmt(n)}</b><br>${n>0?'Positive NPV under the entered assumptions.':'Zero or negative NPV under the entered assumptions.'}`)}
+function irrTool(){let c=document.getElementById('irrC').value.split(',').map(x=>Number(x.trim()));if(c.length<2||c.some(x=>!Number.isFinite(x))||!c.some(x=>x<0)||!c.some(x=>x>0)){alert('Enter at least two valid cash flows including one negative and one positive.');return}function npv(r){return c.reduce((s,x,i)=>s+x/Math.pow(1+r,i),0)}let lo=-.999,hi=1;while(npv(lo)*npv(hi)>0&&hi<100)hi*=2;if(npv(lo)*npv(hi)>0){show('irrOut','Could not find a single IRR in the tested range. Cash-flow patterns can produce multiple or no meaningful IRRs.');return}for(let i=0;i<250;i++){let mid=(lo+hi)/2;if(npv(lo)*npv(mid)<=0)hi=mid;else lo=mid}show('irrOut',`Estimated IRR: <b>${((lo+hi)/2*100).toFixed(2)}%</b><br><span class="note">IRR can be ambiguous for unconventional cash-flow patterns. Verify before interpretation.</span>`)}
+function waccTool(){if(!validNonnegative(['wE','wD','wKe','wKd','wT'])||val('wE')+val('wD')===0||val('wT')>100){alert('Enter valid capital values and rates. Tax rate must not exceed 100%.');return}let e=val('wE'),d=val('wD'),total=e+d,w=(e/total*val('wKe'))+(d/total*val('wKd')*(1-val('wT')/100));show('waccOut',`Weighted Average Cost of Capital: <b>${w.toFixed(2)}%</b><br>Equity weight: ${(e/total*100).toFixed(1)}% · Debt weight: ${(d/total*100).toFixed(1)}%`)}
+function beTool(){if(!validNonnegative(['beF','beS','beV','beQ'])||val('beS')<=val('beV')){alert('Selling price must exceed variable cost, and values must be non-negative.');return}let cm=val('beS')-val('beV'),units=val('beF')/cm,mos=val('beQ')-units;show('beOut',`Contribution per unit: <b>${fmt(cm)}</b><br>Break-even quantity: <b>${units.toFixed(2)} units</b><br>Margin of safety: <b>${mos.toFixed(2)} units (${(mos/val('beQ')*100).toFixed(2)}%)</b>`)}
+function wcTool(){if(!validNonnegative(['wcA','wcL','wcI','wcR'])||val('wcL')===0){alert('Enter valid values and current liabilities above zero.');return}show('wcOut',`Net working capital: <b>${fmt(val('wcA')-val('wcL'))}</b><br>Current ratio: <b>${(val('wcA')/val('wcL')).toFixed(2)}:1</b><br>Quick assets (simple estimate): <b>${fmt(val('wcA')-val('wcI'))}</b><br>Receivables entered: ${fmt(val('wcR'))}`)}
+function compoundTool(){let p=val('ciP'),r=val('ciR')/100,y=val('ciY');if(p<=0||y<=0||r<=-1){alert('Enter positive principal and period; annual return must be greater than -100%.');return}let f=p*Math.pow(1+r,y);show('ciOut',`Projected future value: <b>${fmt(f)}</b><br>Estimated gain/loss: <b>${fmt(f-p)}</b><br><span class="note">Assumes a constant annual rate and annual compounding.</span>`)}
+function drawBars(canvasId,items){let c=document.getElementById(canvasId),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);let max=Math.max(...items.map(x=>x.v),1),colors=['#22d3ee','#a78bfa','#f4c76b','#34d399','#fb7185'];items.forEach((it,i)=>{let x=35+i*160,bh=it.v/max*150;ctx.fillStyle=colors[i%colors.length];ctx.fillRect(x,h-35-bh,75,bh);ctx.fillStyle='#e7efff';ctx.font='13px Arial';ctx.fillText(it.name,x,h-13);ctx.fillText(it.label||'',x,h-43-bh)})}
+function portfolioSim(){let ids=['pa','pb','pc','prA','prB','prC'];if(!validNonnegative(['pa','pb','pc'])||['prA','prB','prC'].some(x=>!Number.isFinite(val(x))||val(x)<-100)){alert('Enter non-negative allocations and returns above -100%.');return}let a=val('pa'),b=val('pb'),c=val('pc'),t=a+b+c;if(t<=0){alert('Enter a positive total allocation.');return}let g=a*val('prA')/100+b*val('prB')/100+c*val('prC')/100;show('portOut',`Total allocation: <b>${fmt(t)}</b><br>Weighted portfolio return: <b>${(g/t*100).toFixed(2)}%</b><br>Gain/loss: <b>${fmt(g)}</b><br>Illustrative ending value: <b>${fmt(t+g)}</b>`);drawBars('portChart',[{name:'Asset A',v:a,label:fmt(a)},{name:'Asset B',v:b,label:fmt(b)},{name:'Asset C',v:c,label:fmt(c)}])}
+function monteCarlo(){let p=val('mcP'),mu=val('mcR')/100,sd=val('mcV')/100,y=val('mcY');if(p<=0||sd<0||y<1||y>40||![mu,sd].every(Number.isFinite)){alert('Enter positive capital, non-negative volatility and 1–40 years.');return}let outcomes=[];for(let i=0;i<500;i++){let x=p;for(let j=0;j<y;j++){let u=Math.random(),v=Math.random(),z=Math.sqrt(-2*Math.log(Math.max(u,1e-10)))*Math.cos(2*Math.PI*v);let ret=Math.max(-.95,mu+sd*z);x*=1+ret}outcomes.push(x)}outcomes.sort((a,b)=>a-b);let med=outcomes[249],low=outcomes[24],high=outcomes[474];show('mcOut',`After ${y} years (500 hypothetical paths):<br>5th percentile: <b>${fmt(low)}</b><br>Median outcome: <b>${fmt(med)}</b><br>95th percentile: <b>${fmt(high)}</b><br><span class="note">Random model outcomes depend on assumed average return and volatility; they are not probability-calibrated forecasts.</span>`);drawBars('mcChart',[{name:'5th pct.',v:low,label:fmt(low)},{name:'Median',v:med,label:fmt(med)},{name:'95th pct.',v:high,label:fmt(high)}])}
+function creditSim(){let income=val('crIncome'),debt=val('crDebt'),hist=val('crHistory'),miss=val('crMiss');if(income<=0||debt<0||hist<0||miss<0||![income,debt,hist,miss].every(Number.isFinite)){alert('Enter valid borrower details.');return}let dti=debt/income*100,score=0;score+=dti<30?40:dti<45?25:10;score+=hist>=5?30:hist>=2?20:10;score+=miss===0?30:miss<=2?15:0;let band=score>=80?'Lower risk indicators in this simplified exercise':score>=55?'Moderate risk indicators in this simplified exercise':'Higher risk indicators in this simplified exercise';show('creditOut',`Debt-to-income ratio: <b>${dti.toFixed(1)}%</b><br>Illustrative score: <b>${score}/100</b><br>Result: <b>${band}</b><br><span class="note">This classroom scorecard is not a real credit score and must not be used for lending decisions.</span>`)}
+function fraudSim(){let a=val('frAmount'),u=val('frUsual'),n=val('frCount'),device=document.getElementById('frDevice').value;if(a<0||u<=0||n<0||![a,u,n].every(Number.isFinite)){alert('Enter valid transaction details.');return}let flags=[];if(a>u*5)flags.push('Amount is more than five times the usual transaction.');if(n>=4)flags.push('Four or more transactions occurred in ten minutes.');if(device==='yes')flags.push('Transaction uses a new device.');show('fraudOut',flags.length?`<b>${flags.length} rule-based flag(s):</b><br>• ${flags.join('<br>• ')}<br><br>Review context before deciding whether further investigation is needed.`:'No configured rule was triggered. This does not establish that a transaction is safe.')}
+function proposalDownload(){let n=document.getElementById('sName').value.trim(),c=document.getElementById('sCourse').value,t=document.getElementById('sTitle').value.trim(),o=document.getElementById('sObj').value.trim();if(!n||!t||!o){alert('Complete all proposal fields.');return}let text=`AI & FINANCE RESEARCH LAB\nSTUDENT RESEARCH PROPOSAL\n\nStudent: ${n}\nProgramme: ${c}\nTitle: ${t}\n\nResearch Objectives:\n${o}\n\nPrepared for academic discussion.`;let blob=new Blob([text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Student_Research_Proposal.txt';a.click();URL.revokeObjectURL(url)}
+
+let lastFinancialReport='';
+function runFinancialIntelligence(){
+ const ids=['aiRevenue','aiOperating','aiNet','aiAssets','aiDebt','aiEquity','aiCA','aiCL'];
+ const v={};ids.forEach(id=>v[id]=Number(document.getElementById(id).value));
+ if(ids.some(id=>!Number.isFinite(v[id])||v[id]<0)||v.aiRevenue<=0||v.aiAssets<=0||v.aiEquity<=0||v.aiCL<=0){alert('Enter valid non-negative figures. Revenue, assets, equity and current liabilities must be above zero.');return}
+ const opm=v.aiOperating/v.aiRevenue*100,npm=v.aiNet/v.aiRevenue*100,roa=v.aiNet/v.aiAssets*100,de=v.aiDebt/v.aiEquity,cr=v.aiCA/v.aiCL;
+ const observations=[];
+ observations.push(opm>=15?'Operating margin is at least 15% in this case; compare it with the company’s industry and prior years.':'Operating margin is below 15% in this case; examine operating costs and industry context.');
+ observations.push(npm>=10?'Net profit margin is at least 10% in this case.':'Net profit margin is below 10% in this case; review interest, tax and operating cost components.');
+ observations.push(cr>=1.5?'Current ratio indicates current assets exceed current liabilities by a useful margin in this simple screen.':cr>=1?'Current assets exceed current liabilities, but the liquidity buffer may be limited.':'Current liabilities exceed current assets; short-term liquidity deserves attention.');
+ observations.push(de<=1?'Debt is no greater than equity in this case.':'Debt exceeds equity; assess borrowing cost, repayment capacity and sector norms.');
+ const company=document.getElementById('aiCompany').value.trim()||'Unnamed company',year=document.getElementById('aiYear').value.trim();
+ lastFinancialReport=`AI & FINANCE RESEARCH LAB\nFINANCIAL ANALYSIS REPORT\nCompany: ${company}\nFinancial year: ${year}\n\nINPUTS\nRevenue: ${fmt(v.aiRevenue)}\nOperating profit: ${fmt(v.aiOperating)}\nNet profit: ${fmt(v.aiNet)}\nTotal assets: ${fmt(v.aiAssets)}\nTotal debt: ${fmt(v.aiDebt)}\nEquity: ${fmt(v.aiEquity)}\nCurrent assets: ${fmt(v.aiCA)}\nCurrent liabilities: ${fmt(v.aiCL)}\n\nCALCULATED INDICATORS\nOperating margin: ${opm.toFixed(2)}%\nNet profit margin: ${npm.toFixed(2)}%\nReturn on assets: ${roa.toFixed(2)}%\nDebt-equity ratio: ${de.toFixed(2)}:1\nCurrent ratio: ${cr.toFixed(2)}:1\n\nRULE-BASED OBSERVATIONS\n- ${observations.join('\n- ')}\n\nDisclaimer: Educational calculations and rule-based commentary only. Not an audit opinion, generative AI output, or investment recommendation.`;
+ show('aiAnalysisOutput',`<b>Financial Analysis: ${company}</b><br>Operating margin: <b>${opm.toFixed(2)}%</b><br>Net profit margin: <b>${npm.toFixed(2)}%</b><br>Return on assets: <b>${roa.toFixed(2)}%</b><br>Debt-equity ratio: <b>${de.toFixed(2)}:1</b><br>Current ratio: <b>${cr.toFixed(2)}:1</b><br><br><b>Analytical observations</b><br>• ${observations.join('<br>• ')}<br><br><span class="note">Rule-based analysis using your entries. Download the report for a copy.</span>`);
+}
+function downloadFinancialReport(){if(!lastFinancialReport){runFinancialIntelligence();if(!lastFinancialReport)return}const blob=new Blob([lastFinancialReport],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Financial_Analysis_Report.txt';a.click();URL.revokeObjectURL(url)}
+function compareCompanies(){
+ const fields=['cmpRevA','cmpRevB','cmpProfitA','cmpProfitB','cmpAssetsA','cmpAssetsB'];
+ if(fields.some(id=>!Number.isFinite(val(id))||val(id)<=0)){alert('Enter positive values for revenue, profit and assets for both companies.');return}
+ const a=document.getElementById('cmpNameA').value||'Company A',b=document.getElementById('cmpNameB').value||'Company B';
+ const npmA=val('cmpProfitA')/val('cmpRevA')*100,npmB=val('cmpProfitB')/val('cmpRevB')*100,roaA=val('cmpProfitA')/val('cmpAssetsA')*100,roaB=val('cmpProfitB')/val('cmpAssetsB')*100;
+ show('compareOutput',`<b>${a}</b> — Net margin ${npmA.toFixed(2)}%; ROA ${roaA.toFixed(2)}%<br><b>${b}</b> — Net margin ${npmB.toFixed(2)}%; ROA ${roaB.toFixed(2)}%<br><br>Higher net margin: <b>${npmA===npmB?'Equal':npmA>npmB?a:b}</b><br>Higher ROA: <b>${roaA===roaB?'Equal':roaA>roaB?a:b}</b><br><span class="note">Comparison is based only on the figures entered. Consider accounting policies, business models and industry differences.</span>`);
+}
+function forecastRevenue(){
+ const p=val('forecastBase'),g=val('forecastGrowth')/100,y=val('forecastYears');
+ if(p<=0||g<=-1||!Number.isInteger(y)||y<1||y>10){alert('Enter positive revenue, growth greater than -100%, and a whole number of years from 1 to 10.');return}
+ let rows=[];for(let i=1;i<=y;i++)rows.push(`Year ${i}: <b>${fmt(p*Math.pow(1+g,i))}</b>`);
+ show('forecastOutput',`<b>Illustrative revenue projection</b><br>${rows.join('<br>')}<br><span class="note">Assumes a constant growth rate. This is a scenario, not a prediction.</span>`);
+}
+function downloadSampleDataset(){
+ const csv='Company,Year,Revenue_INR,Operating_Profit_INR,Net_Profit_INR,Total_Assets_INR,Debt_INR,Equity_INR\nSample A,2024,1200000,180000,95000,900000,300000,500000\nSample A,2025,1400000,220000,125000,1050000,320000,600000\nSample B,2024,1600000,210000,110000,1300000,500000,650000\nSample B,2025,1750000,250000,145000,1450000,520000,730000\n';
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Illustrative_Finance_Dataset.csv';a.click();URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
