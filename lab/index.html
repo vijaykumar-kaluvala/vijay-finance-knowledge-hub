@@ -54,6 +54,24 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
 .year-chart{width:100%;height:270px;display:block;background:#0d1b35;border-radius:13px;margin-top:14px}
 @media(max-width:700px){.year-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.year-actions .btn{width:100%}}
 
+
+.research-workspace{background:linear-gradient(135deg,#f8fbff,#f4f0ff);border:1px solid #dfe7f5;border-radius:18px;padding:20px}
+.research-step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+.research-step h3{display:flex;align-items:center;gap:9px}
+.step-no{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#172b50;color:#fff;font-size:12px}
+.topic-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.topic-pick{background:#fff;border:1px solid #dce5f0;border-radius:11px;padding:13px;text-align:left;cursor:pointer;color:#243653}
+.topic-pick:hover{border-color:#8b5cf6;box-shadow:0 5px 18px #8b5cf622}
+.topic-pick b{display:block;color:#182d50;font-size:12px;margin-bottom:5px}
+.topic-pick span{font-size:11px;line-height:1.5;color:#64748b}
+.research-output{display:none;background:#fff;border:1px solid #dbe4f0;border-left:5px solid #8b5cf6;border-radius:13px;padding:20px;margin-top:16px;line-height:1.7}
+.research-output h3{margin:0 0 8px;color:#172b50}
+.research-output h4{margin:16px 0 5px;color:#5940b6}
+.research-output ul{margin:5px 0;padding-left:20px}
+.workspace-note{background:#fff8e7;border:1px solid #f5dfaa;border-radius:10px;padding:12px;color:#72531b;font-size:12px;line-height:1.6;margin-top:12px}
+@media(max-width:850px){.topic-picks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.topic-picks{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -61,7 +79,7 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
  <a class="brand" href="#top">AI & FINANCE RESEARCH LAB<span>FINANCE KNOWLEDGE HUB</span></a>
  <button class="menu" onclick="document.querySelector('.navlinks').classList.toggle('show')">☰ Menu</button>
  <div class="navlinks">
-  <a href="../index.html">Finance Hub Home</a><a href="#research">Research</a><a href="#tools">AI Tools</a><a href="#intelligence">AI Dashboard</a><a href="#three-year">3-Year Analysis</a><a href="#simulations">Simulations</a><a href="#students">Students</a><a href="#publications">Publications</a>
+  <a href="../index.html">Finance Hub Home</a><a href="#research">Research</a><a href="#tools">AI Tools</a><a href="#intelligence">AI Dashboard</a><a href="#three-year">3-Year Analysis</a><a href="#project-workspace">Research Workspace</a><a href="#simulations">Simulations</a><a href="#students">Students</a><a href="#publications">Publications</a>
  </div>
 </nav></header>
 <section class="hero" id="top"><div class="hero-inner">
@@ -242,6 +260,88 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
  </div>
  <p class="note">These are educational simulations, not validated credit-scoring or fraud-detection systems. A flagged transaction is not proof of fraud.</p>
 </section>
+
+<section class="container" id="project-workspace">
+ <div class="section-head">
+  <div class="eyebrow">PLAN • FRAME • INVESTIGATE • REPORT</div>
+  <h2>Financial Research Project Workspace</h2>
+  <p>A guided project-planning studio for BBA, MBA students and research scholars. Build a research outline, identify variables, frame hypotheses and prepare a project brief.</p>
+ </div>
+ <div class="research-workspace">
+  <div class="panel">
+   <h3>💡 Start with a research idea</h3>
+   <p>Select an example topic to prefill the project builder, or create your own topic below.</p>
+   <div class="topic-picks">
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('FinTech and Financial Inclusion','To examine how the adoption of digital financial services is associated with access to formal financial products among selected users.','FinTech adoption','Financial inclusion','FinTech adoption is positively associated with financial inclusion.')"><b>📱 FinTech & Financial Inclusion</b><span>Digital payments, lending access and financial service usage</span></button>
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('ESG Performance and Corporate Financial Performance','To examine the association between ESG performance and selected financial performance indicators of listed companies.','ESG performance score','Corporate financial performance','ESG performance is significantly associated with corporate financial performance.')"><b>🌱 ESG & Corporate Finance</b><span>ESG scores, profitability and market performance</span></button>
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('AI Adoption in Investment Decision-Making','To study how the use of AI-enabled financial tools relates to the quality and confidence of investment decisions among individual investors.','AI tool adoption','Investment decision-making quality','AI tool adoption is positively associated with investment decision-making quality.')"><b>🤖 AI & Investment Decisions</b><span>AI tools, investor behaviour and decision quality</span></button>
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('Digital Lending and Credit Accessibility','To analyse the relationship between digital lending platform usage and perceived access to credit among eligible borrowers.','Digital lending usage','Credit accessibility','Digital lending usage is positively associated with perceived credit accessibility.')"><b>🏦 Digital Lending & Credit</b><span>Platform use, credit access and borrower experience</span></button>
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('Financial Literacy and Investment Behaviour','To assess the relationship between financial literacy and investment behaviour among young working professionals.','Financial literacy','Investment behaviour','Financial literacy is positively associated with informed investment behaviour.')"><b>📊 Financial Literacy</b><span>Knowledge, risk perception and investment choices</span></button>
+    <button class="topic-pick" type="button" onclick="loadResearchTopic('Working Capital Management and Profitability','To examine the relationship between working capital management indicators and profitability across selected firms.','Working capital management efficiency','Firm profitability','Working capital management efficiency is significantly associated with firm profitability.')"><b>💼 Working Capital & Profitability</b><span>Receivables, inventory, liquidity and returns</span></button>
+   </div>
+  </div>
+  <div class="research-step">
+   <h3><span class="step-no">1</span> Project details</h3>
+   <div class="fields">
+    <div><label for="rwTitle">Research topic / title</label><input id="rwTitle" placeholder="Enter your research title"></div>
+    <div><label for="rwDomain">Research area</label><select id="rwDomain"><option>Finance</option><option>FinTech</option><option>Banking</option><option>Investment and Capital Markets</option><option>ESG and Green Finance</option><option>Corporate Finance</option><option>Financial Behaviour</option><option>Accounting and Auditing</option></select></div>
+    <div><label for="rwLevel">Academic level</label><select id="rwLevel"><option>BBA</option><option>MBA</option><option>Research Scholar</option><option>Faculty Research</option></select></div>
+    <div><label for="rwPopulation">Study population / sample</label><input id="rwPopulation" placeholder="e.g. Individual investors in Hyderabad"></div>
+   </div>
+   <label for="rwProblem">Research problem / background</label>
+   <textarea id="rwProblem" rows="3" placeholder="Describe the issue, context or research gap you want to investigate."></textarea>
+   <label for="rwAim">Main research aim</label>
+   <textarea id="rwAim" rows="2" placeholder="What is the overall purpose of this study?"></textarea>
+  </div>
+  <div class="research-step">
+   <h3><span class="step-no">2</span> Research objectives and questions</h3>
+   <label for="rwObjectives">Specific research objectives (one per line)</label>
+   <textarea id="rwObjectives" rows="4" placeholder="To identify the level of ...&#10;To examine the relationship between ...&#10;To assess the influence of ..."></textarea>
+   <label for="rwQuestions">Research questions (one per line)</label>
+   <textarea id="rwQuestions" rows="3" placeholder="What is the level of ...?&#10;Is there a relationship between ...?"></textarea>
+  </div>
+  <div class="research-step">
+   <h3><span class="step-no">3</span> Identify research variables</h3>
+   <div class="fields">
+    <div><label for="rwIV">Independent variable (IV)</label><input id="rwIV" placeholder="Possible influencing / explanatory variable"></div>
+    <div><label for="rwDV">Dependent variable (DV)</label><input id="rwDV" placeholder="Outcome variable being studied"></div>
+   </div>
+   <label for="rwOther">Other variables (optional)</label>
+   <input id="rwOther" placeholder="e.g. Age, income, firm size, education, risk tolerance">
+   <div class="year-intro"><b>Remember:</b> An independent variable is a proposed explanatory or predictor variable. A dependent variable is the outcome being examined. The correct classification depends on your research question and conceptual framework; association alone does not establish causation.</div>
+  </div>
+  <div class="research-step">
+   <h3><span class="step-no">4</span> Hypothesis development</h3>
+   <label for="rwH1">Alternative hypothesis (H1)</label>
+   <textarea id="rwH1" rows="2" placeholder="There is a significant relationship between ... and ..."></textarea>
+   <label for="rwH0">Null hypothesis (H0)</label>
+   <textarea id="rwH0" rows="2" placeholder="There is no significant relationship between ... and ..."></textarea>
+   <p class="note">The workspace offers a drafting aid only. Check that each hypothesis is measurable, testable and aligned with your research design.</p>
+  </div>
+  <div class="research-step">
+   <h3><span class="step-no">5</span> Research methodology plan</h3>
+   <div class="fields">
+    <div><label for="rwApproach">Research approach</label><select id="rwApproach"><option>Quantitative</option><option>Qualitative</option><option>Mixed methods</option></select></div>
+    <div><label for="rwDesign">Research design</label><select id="rwDesign"><option>Descriptive</option><option>Exploratory</option><option>Correlational</option><option>Explanatory</option><option>Comparative</option><option>Case study</option></select></div>
+    <div><label for="rwData">Data source</label><select id="rwData"><option>Primary data</option><option>Secondary data</option><option>Both primary and secondary data</option></select></div>
+    <div><label for="rwSampling">Sampling technique</label><select id="rwSampling"><option>Convenience sampling</option><option>Simple random sampling</option><option>Stratified sampling</option><option>Purposive sampling</option><option>Systematic sampling</option><option>To be determined</option></select></div>
+    <div><label for="rwSampleSize">Proposed sample size</label><input id="rwSampleSize" type="number" min="1" placeholder="e.g. 150"></div>
+    <div><label for="rwAnalysis">Proposed analysis</label><select id="rwAnalysis"><option>Descriptive statistics</option><option>Correlation and regression</option><option>t-test / ANOVA</option><option>Financial ratio and trend analysis</option><option>Content / thematic analysis</option><option>To be determined</option></select></div>
+   </div>
+   <label for="rwSources">Potential data sources / references</label>
+   <textarea id="rwSources" rows="3" placeholder="List annual reports, databases, survey sources, official publications or academic references to verify."></textarea>
+  </div>
+  <div class="year-actions">
+   <button class="btn purple" type="button" onclick="generateResearchBrief()">Generate Research Project Brief</button>
+   <button class="btn blue" type="button" onclick="downloadResearchBrief()">Download Project Brief (.txt)</button>
+   <button class="btn green" type="button" onclick="downloadResearchDataTemplate()">Download Data Collection Template (.csv)</button>
+   <button class="btn outline" style="color:#17243a;border-color:#9aaac1" type="button" onclick="clearResearchWorkspace()">Clear Form</button>
+  </div>
+  <div id="rwOutput" class="research-output" aria-live="polite"></div>
+  <div class="workspace-note"><b>Public-access version:</b> This workspace runs in your browser. It does not create student accounts or save projects to a central server. Students should download their project brief and keep a backup. Individual login and cloud-based project saving can be added in a later phase with a secure database and access controls.</div>
+ </div>
+</section>
+
 <section class="container" id="students">
  <div class="section-head"><div class="eyebrow">STUDENT INQUIRY & DISCOVERY</div><h2>Student Research & Innovation Projects</h2><p>Suggested BBA and MBA research themes for classroom projects, dissertations and guided investigation.</p></div>
  <div class="project-grid">
@@ -509,6 +609,61 @@ function downloadThreeYearReport(){
  win.document.close();
 }
 document.getElementById('threeYearFile').addEventListener('change',e=>importThreeYearFile(e.target.files[0]));
+
+
+function loadResearchTopic(title,problem,iv,dv,h1){
+ document.getElementById('rwTitle').value=title;
+ document.getElementById('rwProblem').value=problem;
+ document.getElementById('rwAim').value=problem;
+ document.getElementById('rwIV').value=iv;
+ document.getElementById('rwDV').value=dv;
+ document.getElementById('rwH1').value=h1;
+ document.getElementById('rwH0').value='There is no significant relationship between '+iv.toLowerCase()+' and '+dv.toLowerCase()+'.';
+ document.getElementById('rwObjectives').value='To describe the current level or pattern of '+iv.toLowerCase()+'.\nTo examine the relationship between '+iv.toLowerCase()+' and '+dv.toLowerCase()+'.\nTo identify relevant factors that may influence '+dv.toLowerCase()+'.';
+ document.getElementById('rwQuestions').value='What is the current level or pattern of '+iv.toLowerCase()+'?\nIs there a significant relationship between '+iv.toLowerCase()+' and '+dv.toLowerCase()+'?';
+ document.getElementById('rwOutput').style.display='none';
+ document.getElementById('rwTitle').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function rwVal(id){return document.getElementById(id).value.trim()}
+function rwList(id){return rwVal(id).split(/\r?\n/).map(s=>s.trim()).filter(Boolean)}
+function rwEscape(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function researchBriefText(){
+ return `AI & FINANCE RESEARCH LAB\nFINANCIAL RESEARCH PROJECT BRIEF\n\nTITLE\n${rwVal('rwTitle')||'Not entered'}\n\nPROJECT PROFILE\nResearch area: ${rwVal('rwDomain')}\nAcademic level: ${rwVal('rwLevel')}\nStudy population / sample: ${rwVal('rwPopulation')||'Not specified'}\n\nRESEARCH PROBLEM / BACKGROUND\n${rwVal('rwProblem')||'Not entered'}\n\nMAIN AIM\n${rwVal('rwAim')||'Not entered'}\n\nRESEARCH OBJECTIVES\n${rwList('rwObjectives').map((x,i)=>(i+1)+'. '+x).join('\n')||'Not entered'}\n\nRESEARCH QUESTIONS\n${rwList('rwQuestions').map((x,i)=>(i+1)+'. '+x).join('\n')||'Not entered'}\n\nVARIABLES\nIndependent variable: ${rwVal('rwIV')||'Not entered'}\nDependent variable: ${rwVal('rwDV')||'Not entered'}\nOther variables: ${rwVal('rwOther')||'Not specified'}\n\nHYPOTHESES\nH1: ${rwVal('rwH1')||'Not entered'}\nH0: ${rwVal('rwH0')||'Not entered'}\n\nMETHODOLOGY PLAN\nApproach: ${rwVal('rwApproach')}\nResearch design: ${rwVal('rwDesign')}\nData source: ${rwVal('rwData')}\nSampling technique: ${rwVal('rwSampling')}\nProposed sample size: ${rwVal('rwSampleSize')||'Not specified'}\nProposed analysis: ${rwVal('rwAnalysis')}\n\nPOTENTIAL DATA SOURCES / REFERENCES\n${rwVal('rwSources')||'Not entered'}\n\nACADEMIC CHECKLIST\n- Confirm that the research problem is supported by a literature review.\n- Ensure objectives, questions, variables and hypotheses are aligned.\n- Justify the sampling method and sample size.\n- Obtain ethics approval / informed consent where required.\n- Cite and verify every data source and reference.\n- Do not claim causation from correlation alone.\n\nDrafting aid only. This project brief is not a completed research proposal and requires academic review.`;
+}
+function generateResearchBrief(){
+ if(!rwVal('rwTitle')){alert('Please enter a research topic or select an example topic first.');document.getElementById('rwTitle').focus();return}
+ const title=rwEscape(rwVal('rwTitle'));
+ const objectives=rwList('rwObjectives'),questions=rwList('rwQuestions');
+ const output=document.getElementById('rwOutput');
+ output.innerHTML=`<h3>Research Project Brief: ${title}</h3>
+ <p><b>Area:</b> ${rwEscape(rwVal('rwDomain'))} &nbsp; <b>Level:</b> ${rwEscape(rwVal('rwLevel'))}</p>
+ <h4>Research aim</h4><p>${rwEscape(rwVal('rwAim')||'Not entered')}</p>
+ <h4>Objectives</h4><ul>${(objectives.length?objectives:['Objectives not entered']).map(x=>'<li>'+rwEscape(x)+'</li>').join('')}</ul>
+ <h4>Research questions</h4><ul>${(questions.length?questions:['Questions not entered']).map(x=>'<li>'+rwEscape(x)+'</li>').join('')}</ul>
+ <h4>Variables</h4><p><b>Independent variable:</b> ${rwEscape(rwVal('rwIV')||'Not entered')}<br><b>Dependent variable:</b> ${rwEscape(rwVal('rwDV')||'Not entered')}<br><b>Other variables:</b> ${rwEscape(rwVal('rwOther')||'Not specified')}</p>
+ <h4>Hypotheses</h4><p><b>H1:</b> ${rwEscape(rwVal('rwH1')||'Not entered')}<br><b>H0:</b> ${rwEscape(rwVal('rwH0')||'Not entered')}</p>
+ <h4>Methodology snapshot</h4><p>${rwEscape(rwVal('rwApproach'))} approach; ${rwEscape(rwVal('rwDesign'))} design; ${rwEscape(rwVal('rwData'))}; ${rwEscape(rwVal('rwSampling'))}; sample size: ${rwEscape(rwVal('rwSampleSize')||'not specified')}; analysis: ${rwEscape(rwVal('rwAnalysis'))}.</p>
+ <p class="note">Review the research gap, operational definitions, measurement scales, sampling justification and ethics requirements with your supervisor.</p>`;
+ output.style.display='block';
+ output.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function downloadResearchBrief(){
+ if(!rwVal('rwTitle')){alert('Please enter a research title or select an example topic first.');return}
+ const blob=new Blob([researchBriefText()],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Financial_Research_Project_Brief.txt';a.click();URL.revokeObjectURL(url);
+}
+function downloadResearchDataTemplate(){
+ const headers=['Respondent_ID','Date','Independent_Variable','Dependent_Variable','Control_Variable_1','Control_Variable_2','Source_or_Notes'];
+ const csv=headers.join(',')+'\r\n';
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Financial_Research_Data_Collection_Template.csv';a.click();URL.revokeObjectURL(url);
+}
+function clearResearchWorkspace(){
+ if(!confirm('Clear all research workspace fields? Download your project brief first if you need to keep it.'))return;
+ ['rwTitle','rwPopulation','rwProblem','rwAim','rwObjectives','rwQuestions','rwIV','rwDV','rwOther','rwH1','rwH0','rwSampleSize','rwSources'].forEach(id=>document.getElementById(id).value='');
+ ['rwDomain','rwLevel','rwApproach','rwDesign','rwData','rwSampling','rwAnalysis'].forEach(id=>document.getElementById(id).selectedIndex=0);
+ document.getElementById('rwOutput').style.display='none';
+}
 
 </script>
 </body>
