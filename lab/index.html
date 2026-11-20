@@ -36,6 +36,24 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
 .hidden{display:none!important}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#dcfce7;color:#047857;font-size:10px;font-weight:800}
 @media(max-width:1100px){.sim-layout{grid-template-columns:1fr}.navlinks{gap:11px}.navlinks a{white-space:nowrap}}\n@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.hero-img{height:250px}.grid{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none;position:absolute;top:60px;left:0;right:0;background:#08152d;padding:20px;flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu{display:block}}
 @media(max-width:600px){.grid,.tool-grid,.sim-layout,.project-grid{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.fields{grid-template-columns:1fr}.hero{padding:55px 18px}.container{padding:38px 17px}.banner{grid-template-columns:1fr}}
+
+.year-intro{background:linear-gradient(110deg,#eef5ff,#f5efff);border:1px solid #dfe7f5;border-radius:12px;padding:15px;margin:14px 0;color:#314260;font-size:13px;line-height:1.65}
+.year-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}
+.year-table{min-width:720px;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.year-table th{background:#12264a;color:#fff;padding:12px;text-align:left}
+.year-table td{padding:9px;border-bottom:1px solid var(--line);background:#fff}
+.year-table td:first-child{font-weight:750;color:#334155;min-width:165px}
+.year-table input{min-width:145px}
+.year-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.upload-zone{border:2px dashed #9aaed0;border-radius:13px;padding:18px;background:#f8faff;margin-top:14px}
+.upload-zone input[type=file]{background:#fff}
+.year-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.year-kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px}
+.year-kpi strong{display:block;color:#6d4bd0;font-size:19px;margin-top:4px}
+.year-kpi span{font-size:11px;color:var(--muted)}
+.year-chart{width:100%;height:270px;display:block;background:#0d1b35;border-radius:13px;margin-top:14px}
+@media(max-width:700px){.year-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.year-actions .btn{width:100%}}
+
 </style>
 </head>
 <body>
@@ -43,7 +61,7 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
  <a class="brand" href="#top">AI & FINANCE RESEARCH LAB<span>FINANCE KNOWLEDGE HUB</span></a>
  <button class="menu" onclick="document.querySelector('.navlinks').classList.toggle('show')">☰ Menu</button>
  <div class="navlinks">
-  <a href="../index.html">Finance Hub Home</a><a href="#research">Research</a><a href="#tools">AI Tools</a><a href="#intelligence">AI Dashboard</a><a href="#simulations">Simulations</a><a href="#students">Students</a><a href="#publications">Publications</a>
+  <a href="../index.html">Finance Hub Home</a><a href="#research">Research</a><a href="#tools">AI Tools</a><a href="#intelligence">AI Dashboard</a><a href="#three-year">3-Year Analysis</a><a href="#simulations">Simulations</a><a href="#students">Students</a><a href="#publications">Publications</a>
  </div>
 </nav></header>
 <section class="hero" id="top"><div class="hero-inner">
@@ -138,6 +156,68 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
  </div>
 </section>
 
+
+<section class="container" id="three-year">
+ <div class="section-head">
+  <div class="eyebrow">LEARN • ENTER DATA • COMPARE • INTERPRET</div>
+  <h2>Three-Year Financial Performance Analysis Studio</h2>
+  <p>Learn financial statement data entry manually or use the Excel workbook template. Both methods generate the same three-year comparison.</p>
+ </div>
+ <div class="panel" style="border-top:4px solid #d6a63c">
+  <h3>📘 Step 1 — Understand the data-entry process</h3>
+  <div class="year-intro">
+   <b>For students:</b> Use figures from the same company's published annual reports and keep the unit consistent (for example, all amounts in ₹ lakh or all amounts in ₹ crore). Enter each financial year in its own column. Do not mix standalone and consolidated statements.
+   <br><b>Required figures:</b> Revenue, operating profit, net profit, total assets, total debt, shareholders' equity, current assets and current liabilities.
+  </div>
+  <div class="year-actions">
+   <button class="btn" onclick="downloadThreeYearTemplate()">⬇ Download Excel Template (.xlsx)</button>
+   <button class="btn outline" style="color:#17243a;border-color:#9aaac1" onclick="loadThreeYearExample()">Load Classroom Example</button>
+  </div>
+  <div class="upload-zone">
+   <b>📤 Step 2 — Upload the completed Excel template</b>
+   <p class="note">Complete the “Financial Data” sheet in the downloaded workbook, save it, then upload the .xlsx file here. Keep the Metric names unchanged so the system can identify each figure.</p>
+   <input id="threeYearFile" type="file" accept=".xlsx,.xls,.csv">
+   <div id="threeYearUploadStatus" class="note" aria-live="polite">No file uploaded yet. You can also enter figures manually below.</div>
+  </div>
+ </div>
+ <div class="panel" style="margin-top:18px;border-top:4px solid #2563eb">
+  <h3>✍ Step 3 — Manual Financial Data Entry</h3>
+  <p>Enter figures for all three years below. The manual form and Excel upload use the same data structure.</p>
+  <div class="fields">
+   <div><label>Company / Case Name</label><input id="tyCompany" value="Sample Company"></div>
+   <div><label>Unit used for all amounts</label><select id="tyUnit"><option value="₹">Rupees (₹)</option><option value="₹ lakh">₹ lakh</option><option value="₹ crore">₹ crore</option></select></div>
+  </div>
+  <div class="year-table-wrap">
+   <table class="year-table">
+    <thead><tr><th>Financial statement item</th><th><input id="tyYear1" value="2023-24" aria-label="First financial year"></th><th><input id="tyYear2" value="2024-25" aria-label="Second financial year"></th><th><input id="tyYear3" value="2025-26" aria-label="Third financial year"></th></tr></thead>
+    <tbody>
+     <tr><td>Revenue</td><td><input type="number" min="0" id="ty_revenue_0" value="1800000"></td><td><input type="number" min="0" id="ty_revenue_1" value="2100000"></td><td><input type="number" min="0" id="ty_revenue_2" value="2500000"></td></tr>
+     <tr><td>Operating Profit</td><td><input type="number" min="0" id="ty_operating_0" value="250000"></td><td><input type="number" min="0" id="ty_operating_1" value="320000"></td><td><input type="number" min="0" id="ty_operating_2" value="400000"></td></tr>
+     <tr><td>Net Profit</td><td><input type="number" min="0" id="ty_net_0" value="120000"></td><td><input type="number" min="0" id="ty_net_1" value="170000"></td><td><input type="number" min="0" id="ty_net_2" value="220000"></td></tr>
+     <tr><td>Total Assets</td><td><input type="number" min="0" id="ty_assets_0" value="1400000"></td><td><input type="number" min="0" id="ty_assets_1" value="1600000"></td><td><input type="number" min="0" id="ty_assets_2" value="1800000"></td></tr>
+     <tr><td>Total Debt</td><td><input type="number" min="0" id="ty_debt_0" value="550000"></td><td><input type="number" min="0" id="ty_debt_1" value="580000"></td><td><input type="number" min="0" id="ty_debt_2" value="600000"></td></tr>
+     <tr><td>Shareholders' Equity</td><td><input type="number" min="0" id="ty_equity_0" value="650000"></td><td><input type="number" min="0" id="ty_equity_1" value="780000"></td><td><input type="number" min="0" id="ty_equity_2" value="900000"></td></tr>
+     <tr><td>Current Assets</td><td><input type="number" min="0" id="ty_ca_0" value="520000"></td><td><input type="number" min="0" id="ty_ca_1" value="630000"></td><td><input type="number" min="0" id="ty_ca_2" value="750000"></td></tr>
+     <tr><td>Current Liabilities</td><td><input type="number" min="0" id="ty_cl_0" value="390000"></td><td><input type="number" min="0" id="ty_cl_1" value="410000"></td><td><input type="number" min="0" id="ty_cl_2" value="400000"></td></tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="year-actions">
+   <button class="btn purple" onclick="analyseThreeYears()">📊 Analyse Three-Year Performance</button>
+   <button class="btn blue" onclick="downloadThreeYearReport()">Create Comparative PDF Report</button>
+   <button class="btn green" onclick="downloadThreeYearCSV()">Download Entered Data (CSV)</button>
+  </div>
+  <div id="threeYearOutput" class="result" aria-live="polite"></div>
+ </div>
+ <div class="panel" style="margin-top:18px">
+  <h3>📈 Three-Year Performance Visualisation</h3>
+  <p>Charts are generated from the figures currently entered in the manual table or imported from Excel.</p>
+  <canvas id="threeYearChart" class="year-chart" width="1100" height="270" aria-label="Three-year revenue and net profit chart"></canvas>
+  <div id="threeYearChartNote" class="note">Run the analysis to display the three-year revenue and net profit trend.</div>
+ </div>
+ <p class="note">Academic note: This module calculates simple growth rates and ratios from entered values. It does not verify source statements, adjust for accounting policy changes or provide investment advice. Students should cite the annual report and page number used for each observation.</p>
+</section>
+
 <section class="container" id="simulations">
  <div class="section-head"><div class="eyebrow">EXPERIMENT • TEST • LEARN</div><h2>Financial Market Simulation Centre</h2><p>Interactive, hypothetical exercises for understanding investment risk, diversification, credit decisions and financial behaviour.</p></div>
  <div class="sim-layout">
@@ -193,6 +273,7 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
 <section class="container"><div class="banner"><div><h2>Build the Future of Financial Research</h2><p>Explore financial questions, test assumptions and develop evidence-based thinking through interactive learning.</p></div><a class="btn" href="../index.html">← Return to Finance Hub</a></div></section>
 </main>
 <footer><strong>AI & FINANCE RESEARCH LAB</strong><br>Finance Knowledge Hub · Research · Innovation · Financial Analytics · Education<br>Educational demonstrations only. Not investment, lending or legal advice.</footer>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 const val=id=>Number(document.getElementById(id).value);
 const fmt=n=>'₹'+Number(n).toLocaleString('en-IN',{maximumFractionDigits:2});
@@ -271,6 +352,156 @@ function downloadSampleDataset(){
  const csv='Company,Year,Revenue_INR,Operating_Profit_INR,Net_Profit_INR,Total_Assets_INR,Debt_INR,Equity_INR\nSample A,2024,1200000,180000,95000,900000,300000,500000\nSample A,2025,1400000,220000,125000,1050000,320000,600000\nSample B,2024,1600000,210000,110000,1300000,500000,650000\nSample B,2025,1750000,250000,145000,1450000,520000,730000\n';
  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Illustrative_Finance_Dataset.csv';a.click();URL.revokeObjectURL(url);
 }
+
+const threeYearMetrics=[
+ ['revenue','Revenue'],['operating','Operating Profit'],['net','Net Profit'],
+ ['assets','Total Assets'],['debt','Total Debt'],['equity',"Shareholders' Equity"],
+ ['ca','Current Assets'],['cl','Current Liabilities']
+];
+let latestThreeYearReport='';
+function threeYearRead(){
+ const years=[0,1,2].map(i=>document.getElementById('tyYear'+(i+1)).value.trim()||('Year '+(i+1)));
+ const values={};
+ threeYearMetrics.forEach(([key])=>values[key]=[0,1,2].map(i=>Number(document.getElementById('ty_'+key+'_'+i).value)));
+ return {years,values,company:document.getElementById('tyCompany').value.trim()||'Unnamed company',unit:document.getElementById('tyUnit').value};
+}
+function threeYearValidate(d){
+ for(const [key,label] of threeYearMetrics){
+  if(d.values[key].some(v=>!Number.isFinite(v)||v<0)){alert('Please enter valid non-negative values for '+label+' in all three years.');return false}
+ }
+ for(let i=0;i<3;i++){
+  if(d.values.revenue[i]<=0||d.values.assets[i]<=0||d.values.equity[i]<=0||d.values.cl[i]<=0){alert('Revenue, total assets, shareholders’ equity and current liabilities must be above zero for all three years.');return false}
+ }
+ return true;
+}
+function loadThreeYearExample(){
+ const data={revenue:[1800000,2100000,2500000],operating:[250000,320000,400000],net:[120000,170000,220000],assets:[1400000,1600000,1800000],debt:[550000,580000,600000],equity:[650000,780000,900000],ca:[520000,630000,750000],cl:[390000,410000,400000]};
+ Object.entries(data).forEach(([k,arr])=>arr.forEach((v,i)=>document.getElementById('ty_'+k+'_'+i).value=v));
+ document.getElementById('tyCompany').value='Sample Company';
+ document.getElementById('threeYearUploadStatus').textContent='Classroom example loaded. These are illustrative figures, not actual company data.';
+ analyseThreeYears();
+}
+function downloadThreeYearTemplate(){
+ if(!window.XLSX){alert('The Excel workbook library did not load. Please check your internet connection and refresh the page.');return}
+ const instructions=[
+  ['AI & FINANCE RESEARCH LAB — THREE-YEAR FINANCIAL DATA TEMPLATE'],
+  ['How to use: Enter one company’s figures in the three year columns on the Financial Data sheet.'],
+  ['Use the same unit for all amounts (₹, ₹ lakh or ₹ crore). Do not mix units.'],
+  ['Keep the Metric labels unchanged. Enter numbers only, without commas or currency symbols.'],
+  ['Use figures from the same reporting basis (standalone or consolidated) across all years.'],
+  ['Record the annual report source and page references in your research notes.'],
+  ['This template is for academic analysis and does not verify the uploaded data.']
+ ];
+ const rows=[['Metric','2023-24','2024-25','2025-26'],
+  ['Revenue',1800000,2100000,2500000],
+  ['Operating Profit',250000,320000,400000],
+  ['Net Profit',120000,170000,220000],
+  ['Total Assets',1400000,1600000,1800000],
+  ['Total Debt',550000,580000,600000],
+  ["Shareholders' Equity",650000,780000,900000],
+  ['Current Assets',520000,630000,750000],
+  ['Current Liabilities',390000,410000,400000]];
+ const wb=XLSX.utils.book_new();
+ const ws1=XLSX.utils.aoa_to_sheet(instructions);ws1['!cols']=[{wch:110}];
+ const ws2=XLSX.utils.aoa_to_sheet(rows);ws2['!cols']=[{wch:26},{wch:18},{wch:18},{wch:18}];
+ XLSX.utils.book_append_sheet(wb,ws1,'Instructions');XLSX.utils.book_append_sheet(wb,ws2,'Financial Data');
+ XLSX.writeFile(wb,'AI_Finance_Three_Year_Template.xlsx');
+}
+function importThreeYearFile(file){
+ const status=document.getElementById('threeYearUploadStatus');
+ if(!file)return;
+ const ext=file.name.toLowerCase().split('.').pop();
+ if(ext==='csv'){
+  const reader=new FileReader();reader.onload=()=>{try{const rows=reader.result.trim().split(/\r?\n/).map(line=>line.split(','));applyThreeYearRows(rows,file.name)}catch(e){status.textContent='Could not read CSV. Please use the provided template.'}};reader.readAsText(file);return;
+ }
+ if(!window.XLSX){status.textContent='Excel reader did not load. Refresh the page and try again.';return}
+ const reader=new FileReader();
+ reader.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});const sheet=wb.Sheets['Financial Data']||wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(sheet,{header:1,defval:''});applyThreeYearRows(rows,file.name)}catch(err){status.textContent='Unable to read this workbook. Please use the downloadable template.'}};
+ reader.readAsArrayBuffer(file);
+}
+function applyThreeYearRows(rows,fileName){
+ const status=document.getElementById('threeYearUploadStatus');
+ if(!rows||rows.length<2){status.textContent='No financial data rows found.';return}
+ const head=rows[0].map(x=>String(x).trim());
+ if(head.length<4){status.textContent='Template needs four columns: Metric and three financial years.';return}
+ const years=head.slice(1,4).map(String);
+ const map={
+  'revenue':'revenue','operating profit':'operating','net profit':'net','total assets':'assets','total debt':'debt',
+  "shareholders' equity":'equity','shareholders equity':'equity','current assets':'ca','current liabilities':'cl'
+ };
+ const found={};rows.slice(1).forEach(row=>{const k=map[String(row[0]||'').trim().toLowerCase()];if(k)found[k]=row.slice(1,4).map(Number)});
+ const missing=threeYearMetrics.filter(([k])=>!found[k]);
+ if(missing.length){status.textContent='Missing rows: '+missing.map(x=>x[1]).join(', ')+'. Keep the template metric labels unchanged.';return}
+ if( Object.values(found).some(a=>a.length!==3||a.some(v=>!Number.isFinite(v)||v<0))){status.textContent='Some cells are blank or contain invalid numbers. Enter non-negative numeric values for all three years.';return}
+ years.forEach((y,i)=>document.getElementById('tyYear'+(i+1)).value=y);
+ Object.entries(found).forEach(([k,arr])=>arr.forEach((v,i)=>document.getElementById('ty_'+k+'_'+i).value=v));
+ document.getElementById('tyCompany').value=fileName.replace(/\.(xlsx|xls|csv)$/i,'').replace(/[_-]+/g,' ');
+ status.textContent='Successfully imported '+fileName+'. Review the company name and year headings, then click Analyse Three-Year Performance.';
+ analyseThreeYears();
+}
+function analyseThreeYears(){
+ const d=threeYearRead();if(!threeYearValidate(d))return;
+ const v=d.values,fmtY=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:2}).format(n);
+ const growth=(arr,i)=>arr[i-1]===0?null:(arr[i]/arr[i-1]-1)*100;
+ const metrics=d.years.map((year,i)=>({
+  year,revenue:v.revenue[i],opm:v.operating[i]/v.revenue[i]*100,npm:v.net[i]/v.revenue[i]*100,
+  roa:v.net[i]/v.assets[i]*100,de:v.debt[i]/v.equity[i],cr:v.ca[i]/v.cl[i]
+ }));
+ const revenueGrowth=growth(v.revenue,2),profitGrowth=growth(v.net,2);
+ const observations=[];
+ observations.push(revenueGrowth===null?'Revenue growth cannot be calculated because the previous-year revenue is zero.':`Revenue changed by ${revenueGrowth.toFixed(2)}% from ${d.years[1]} to ${d.years[2]}.`);
+ observations.push(profitGrowth===null?'Net profit growth cannot be calculated because the previous-year profit is zero.':`Net profit changed by ${profitGrowth.toFixed(2)}% from ${d.years[1]} to ${d.years[2]}.`);
+ observations.push(`Net profit margin moved from ${metrics[0].npm.toFixed(2)}% to ${metrics[2].npm.toFixed(2)}% across the three years.`);
+ observations.push(`Current ratio moved from ${metrics[0].cr.toFixed(2)} to ${metrics[2].cr.toFixed(2)}; interpret with working-capital composition and sector context.`);
+ observations.push(`Debt-equity ratio in the latest year is ${metrics[2].de.toFixed(2)}:1; compare with the company’s funding model and industry.`);
+ const lines=metrics.map(m=>`${m.year}: Revenue ${fmtY(m.revenue)} ${d.unit}; Operating margin ${m.opm.toFixed(2)}%; Net margin ${m.npm.toFixed(2)}%; ROA ${m.roa.toFixed(2)}%; Debt-equity ${m.de.toFixed(2)}:1; Current ratio ${m.cr.toFixed(2)}:1`);
+ latestThreeYearReport=`AI & FINANCE RESEARCH LAB\nTHREE-YEAR FINANCIAL PERFORMANCE REPORT\nCompany: ${d.company}\nAmounts expressed in: ${d.unit}\n\nYEAR-WISE PERFORMANCE\n${lines.join('\n')}\n\nGROWTH ANALYSIS\nRevenue growth (${d.years[1]} to ${d.years[2]}): ${revenueGrowth===null?'Not available':revenueGrowth.toFixed(2)+'%'}\nNet profit growth (${d.years[1]} to ${d.years[2]}): ${profitGrowth===null?'Not available':profitGrowth.toFixed(2)+'%'}\n\nANALYTICAL OBSERVATIONS\n- ${observations.join('\n- ')}\n\nData source: User-entered / uploaded figures. Students should record annual report title, URL and page references separately.\nDisclaimer: Educational calculations only. Not an audit opinion or investment recommendation.`;
+ const table=`<div class="tablewrap"><table><thead><tr><th>Indicator</th>${d.years.map(y=>`<th>${y}</th>`).join('')}</tr></thead><tbody>
+ <tr><td>Revenue (${d.unit})</td>${metrics.map(m=>`<td>${fmtY(m.revenue)}</td>`).join('')}</tr>
+ <tr><td>Operating margin</td>${metrics.map(m=>`<td>${m.opm.toFixed(2)}%</td>`).join('')}</tr>
+ <tr><td>Net profit margin</td>${metrics.map(m=>`<td>${m.npm.toFixed(2)}%</td>`).join('')}</tr>
+ <tr><td>Return on assets</td>${metrics.map(m=>`<td>${m.roa.toFixed(2)}%</td>`).join('')}</tr>
+ <tr><td>Debt-equity</td>${metrics.map(m=>`<td>${m.de.toFixed(2)}:1</td>`).join('')}</tr>
+ <tr><td>Current ratio</td>${metrics.map(m=>`<td>${m.cr.toFixed(2)}:1</td>`).join('')}</tr></tbody></table></div>`;
+ show('threeYearOutput',`<b>Three-year analysis: ${d.company}</b><br>Amounts: ${d.unit}<br>${table}<br><b>Growth &amp; analytical observations</b><br>• ${observations.join('<br>• ')}<br><span class="note">Rule-based educational analysis. Compare like-for-like reporting periods and investigate unusual movements.</span>`);
+ drawThreeYearChart(d);
+}
+function drawThreeYearChart(d){
+ const c=document.getElementById('threeYearChart'),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
+ const rev=d.values.revenue,net=d.values.net,max=Math.max(...rev,...net,1)*1.15;
+ ctx.fillStyle='#0d1b35';ctx.fillRect(0,0,w,h);
+ ctx.strokeStyle='#334766';ctx.lineWidth=1;for(let i=0;i<5;i++){let y=25+i*(h-65)/4;ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-25,y);ctx.stroke()}
+ const xs=[180,w/2,w-180],base=h-35;
+ function series(arr,color){ctx.strokeStyle=color;ctx.lineWidth=5;ctx.beginPath();arr.forEach((v,i)=>{let y=base-(v/max)*(h-85);i?ctx.lineTo(xs[i],y):ctx.moveTo(xs[i],y)});ctx.stroke();arr.forEach((v,i)=>{let y=base-(v/max)*(h-85);ctx.fillStyle=color;ctx.beginPath();ctx.arc(xs[i],y,8,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='16px Arial';ctx.fillText(new Intl.NumberFormat('en-IN',{notation:'compact'}).format(v),xs[i]-28,y-15)})}
+ series(rev,'#22d3ee');series(net,'#f4c76b');
+ ctx.fillStyle='#dbeafe';ctx.font='15px Arial';d.years.forEach((y,i)=>ctx.fillText(y,xs[i]-32,h-10));
+ ctx.fillStyle='#22d3ee';ctx.fillRect(65,15,16,5);ctx.fillStyle='#fff';ctx.fillText('Revenue',88,23);ctx.fillStyle='#f4c76b';ctx.fillRect(190,15,16,5);ctx.fillStyle='#fff';ctx.fillText('Net Profit',213,23);
+ document.getElementById('threeYearChartNote').textContent='Illustrative trend chart based on entered figures. Revenue and net profit share a common scale; smaller net profit values may appear close to the baseline.';
+}
+function downloadThreeYearCSV(){
+ const d=threeYearRead();if(!threeYearValidate(d))return;
+ const rows=[['Metric',...d.years],...threeYearMetrics.map(([k,label])=>[label,...d.values[k]])];
+ const csv=rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Three_Year_Financial_Data.csv';a.click();URL.revokeObjectURL(url);
+}
+function downloadThreeYearReport(){
+ analyseThreeYears();if(!latestThreeYearReport)return;
+ const d=threeYearRead(),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const win=window.open('','_blank');if(!win){alert('Please allow pop-ups to create the comparative PDF report.');return}
+ win.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(d.company)} - Three-Year Analysis</title><style>
+ @page{size:A4 landscape;margin:14mm}*{box-sizing:border-box}body{font:12px/1.5 Arial,sans-serif;color:#17243a;margin:0}
+ header{background:#101d35;color:#fff;padding:20px 25px;border-bottom:5px solid #e9bd62}header h1{font-size:20px;margin:0}header p{color:#e9bd62;font-size:10px;letter-spacing:1px;margin:4px 0 0}
+ main{padding:22px 25px}h2{color:#243c68;font-size:15px;margin:18px 0 8px}.meta{display:flex;justify-content:space-between;border-bottom:1px solid #dbe3ef;padding-bottom:12px}
+ table{width:100%;border-collapse:collapse;margin:10px 0 18px}th{background:#172b50;color:white}th,td{padding:9px;border:1px solid #dbe3ef;text-align:left}pre{white-space:pre-wrap;font:11px/1.6 Arial}.foot{border-top:1px solid #dbe3ef;padding-top:10px;color:#64748b;font-size:10px}
+ .print{position:fixed;right:18px;top:15px;background:#2563eb;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:bold}@media print{.print{display:none}}
+ </style></head><body><button class="print" onclick="window.print()">Print / Save as PDF</button><header><h1>AI &amp; FINANCE RESEARCH LAB</h1><p>THREE-YEAR FINANCIAL PERFORMANCE ANALYSIS</p></header><main>
+ <div class="meta"><b>Company: ${esc(d.company)}</b><b>Units: ${esc(d.unit)}</b></div><h2>Comparative Analysis</h2>
+ <pre>${esc(latestThreeYearReport)}</pre><div class="foot">Prepared for educational use from user-entered or uploaded data. Verify against published annual reports before academic citation or decision-making.</div>
+ </main><script>window.addEventListener('load',()=>setTimeout(()=>window.print(),350));<\/script></body></html>`);
+ win.document.close();
+}
+document.getElementById('threeYearFile').addEventListener('change',e=>importThreeYearFile(e.target.files[0]));
+
 </script>
 </body>
 </html>
