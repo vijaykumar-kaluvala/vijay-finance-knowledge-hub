@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Finance Research Lab | Finance Knowledge Hub</title>
+<meta name="description" content="AI-powered financial research, financial analytics, market simulation and student research projects.">
+<style>
+:root {
+  --navy:#101d36;
+  --navy2:#172b4d;
+  --gold:#d6b66f;
+  --bg:#f4f6fa;
+  --white:#fff;
+  --text:#263449;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+header{background:var(--navy);color:white;position:sticky;top:0;z-index:10;border-bottom:2px solid var(--gold)}
+.nav{max-width:1200px;margin:auto;padding:15px 22px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{font-size:18px;font-weight:bold;color:var(--gold)}
+.navlinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:13px}
+.navlinks a:hover{color:var(--gold)}
+.menu{display:none;background:transparent;color:white;border:1px solid #66748a;padding:8px;border-radius:6px}
+.hero{background:linear-gradient(125deg,#101d36,#203e65);color:white;padding:85px 22px 65px;text-align:center}
+.hero .tag{color:var(--gold);letter-spacing:3px;font-size:12px;font-weight:bold}
+.hero h1{font-size:clamp(32px,5vw,54px);margin:20px 0 12px}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:760px;margin:0 auto;color:#d5dfed;line-height:1.8;font-size:16px}
+.hero-buttons{margin-top:28px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{padding:12px 21px;border-radius:7px;background:var(--gold);color:#14223a;font-weight:bold;border:0;cursor:pointer}
+.btn.secondary{background:transparent;border:1px solid #d6b66f;color:white}
+.container{max-width:1150px;margin:auto;padding:45px 22px}
+.section-title{text-align:center;margin-bottom:30px}
+.section-title h2{color:var(--navy);font-size:29px;margin:0 0 10px}
+.section-title p{color:var(--muted);line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:-28px;position:relative}
+.stat{background:white;padding:22px;border-radius:10px;text-align:center;box-shadow:0 5px 20px #14223a12}
+.stat strong{font-size:27px;color:#b18a37;display:block}
+.stat span{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:white;border:1px solid #e4e9f0;border-radius:12px;padding:23px;box-shadow:0 4px 15px #14223a08}
+.card:hover{transform:translateY(-3px);transition:.2s;box-shadow:0 8px 22px #14223a14}
+.card .symbol{font-size:30px}
+.card h3{color:var(--navy);margin:14px 0 9px}
+.card p{color:var(--muted);line-height:1.7;font-size:14px}
+.card a{color:#9b772c;font-weight:bold;font-size:13px}
+.panel{background:white;border-radius:12px;padding:28px;border:1px solid #e3e8ef;margin-bottom:22px}
+.panel h3{color:var(--navy);margin-top:0}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:6px;margin:7px 0 15px;font-size:14px}
+label{font-weight:bold;font-size:13px;color:#34445c}
+.result{background:#edf4fb;border-left:4px solid #b18a37;padding:15px;border-radius:5px;margin-top:15px;line-height:1.7}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:12px;border-bottom:1px solid #e5eaf0;text-align:left}
+th{background:#edf2f8;color:var(--navy)}
+.project-list{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.project{padding:17px;background:#f5f7fa;border-radius:8px;border-left:4px solid var(--gold)}
+.project h4{margin:0 0 8px;color:var(--navy)}
+.project p{font-size:13px;color:var(--muted);line-height:1.6}
+footer{background:var(--navy);color:#d5dfed;text-align:center;padding:30px 15px;font-size:13px;line-height:1.8}
+footer a{color:var(--gold)}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:800px){
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .navlinks{display:none;position:absolute;top:58px;left:0;width:100%;background:var(--navy);padding:20px;flex-direction:column;align-items:flex-start}
+ .navlinks.show{display:flex}
+ .menu{display:block}
+}
+@media(max-width:550px){
+ .grid,.tool-grid,.project-list{grid-template-columns:1fr}
+ .hero{padding:55px 17px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <nav class="nav">
+  <div class="brand">AI & FINANCE RESEARCH LAB</div>
+  <button class="menu" onclick="document.querySelector('.navlinks').classList.toggle('show')">☰ Menu</button>
+  <div class="navlinks">
+   <a href="../index.html">Finance Hub Home</a>
+   <a href="#research">AI Research</a>
+   <a href="#tools">AI Tools</a>
+   <a href="#simulation">Simulation</a>
+   <a href="#students">Student Research</a>
+   <a href="#publications">Publications</a>
+  </div>
+ </nav>
+</header>
+
+<section class="hero">
+ <div class="tag">FINANCIAL INNOVATION • RESEARCH • TECHNOLOGY</div>
+ <h1>AI & <span>FINANCE</span><br>RESEARCH LAB</h1>
+ <p>Exploring the future of finance through Artificial Intelligence, financial analytics, market innovation and academic research. A learning and experimentation platform for students, researchers and finance professionals.</p>
+ <div class="hero-buttons">
+  <a href="#research" class="btn">Explore Research</a>
+  <a href="#tools" class="btn secondary">Explore AI Tools</a>
+ </div>
+</section>
+
+<main>
+<section class="container">
+ <div class="stats">
+  <div class="stat"><strong>AI</strong><span>Financial Research</span></div>
+  <div class="stat"><strong>FINTECH</strong><span>Financial Innovation</span></div>
+  <div class="stat"><strong>DATA</strong><span>Analytics & Insights</span></div>
+  <div class="stat"><strong>LEARN</strong><span>Student Projects</span></div>
+ </div>
+</section>
+
+<section class="container" id="about">
+ <div class="section-title">
+  <h2>About the Research Lab</h2>
+  <p>Bringing artificial intelligence and financial knowledge together.</p>
+ </div>
+ <div class="panel">
+  <h3>Our Vision</h3>
+  <p>To develop an academic platform that encourages innovative thinking, practical financial experimentation and interdisciplinary research at the intersection of Artificial Intelligence and Finance.</p>
+  <h3>Our Mission</h3>
+  <p>To support students and researchers through financial AI applications, research projects, data-driven analysis, market simulation and the development of practical financial knowledge.</p>
+  <h3>Research Focus Areas</h3>
+  <p>Financial Technology | Algorithmic Trading | Investment Banking | Financial Inclusion | AI-based Financial Analysis | ESG and Green Finance | Market Efficiency | Digital Lending.</p>
+ </div>
+</section>
+
+<section class="container" id="research">
+ <div class="section-title">
+  <h2>AI Research Projects</h2>
+  <p>Explore emerging research opportunities in Artificial Intelligence and Financial Management.</p>
+ </div>
+ <div class="grid">
+  <div class="card"><div class="symbol">📈</div><h3>AI in Stock Market Analysis</h3><p>Study how machine learning and predictive analytics can support stock market research and investment decisions.</p><a href="#students">Explore research →</a></div>
+  <div class="card"><div class="symbol">🤖</div><h3>Algorithmic Trading</h3><p>Explore automated trading strategies, arbitrage opportunities and quantitative investment models.</p><a href="#students">Explore research →</a></div>
+  <div class="card"><div class="symbol">🏦</div><h3>AI in Banking</h3><p>Examine AI applications in credit assessment, digital lending, fraud detection and financial inclusion.</p><a href="#students">Explore research →</a></div>
+  <div class="card"><div class="symbol">🌱</div><h3>AI & Green Finance</h3><p>Investigate AI-enabled ESG assessment, sustainable investment and green financial management.</p><a href="#students">Explore research →</a></div>
+  <div class="card"><div class="symbol">📊</div><h3>Financial Forecasting</h3><p>Explore predictive analytics for financial performance, cash flows, revenue and risk management.</p><a href="#students">Explore research →</a></div>
+  <div class="card"><div class="symbol">🔐</div><h3>Financial Risk Analytics</h3><p>Study credit risk, portfolio risk, fraud analytics and AI-supported financial decision-making.</p><a href="#students">Explore research →</a></div>
+ </div>
+</section>
+
+<section class="container" id="tools">
+ <div class="section-title">
+  <h2>Interactive Financial AI Tools</h2>
+  <p>Practical financial analytics tools for learning and experimentation.</p>
+ </div>
+ <div class="tool-grid">
+  <div class="panel">
+   <h3>Financial Ratio Analyzer</h3>
+   <label>Current Assets (₹)</label><input type="number" id="ca" placeholder="Example: 500000">
+   <label>Current Liabilities (₹)</label><input type="number" id="cl" placeholder="Example: 250000">
+   <label>Total Debt (₹)</label><input type="number" id="debt" placeholder="Example: 400000">
+   <label>Shareholders' Equity (₹)</label><input type="number" id="equity" placeholder="Example: 800000">
+   <button class="btn" onclick="calculateRatios()">Analyse Financial Ratios</button>
+   <div id="ratioResult" class="result" style="display:none"></div>
+  </div>
+  <div class="panel">
+   <h3>Investment Return Calculator</h3>
+   <label>Initial Investment (₹)</label><input type="number" id="investment" placeholder="100000">
+   <label>Expected Annual Return (%)</label><input type="number" id="rate" placeholder="12">
+   <label>Investment Period (Years)</label><input type="number" id="years" placeholder="5">
+   <button class="btn" onclick="calculateInvestment()">Calculate Returns</button>
+   <div id="investmentResult" class="result" style="display:none"></div>
+  </div>
+ </div>
+ <p class="small">Educational calculators. Outputs are mathematical estimates, not AI predictions or investment recommendations.</p>
+</section>
+
+<section class="container" id="simulation">
+ <div class="section-title">
+  <h2>Financial Market Simulation Lab</h2>
+  <p>Learn investment decision-making through a hypothetical virtual portfolio.</p>
+ </div>
+ <div class="panel">
+  <h3>Virtual Investment Portfolio</h3>
+  <p>Start with ₹1,00,000 in virtual capital. Enter hypothetical investment allocations and evaluate your portfolio.</p>
+  <label>Amount allocated to Investment A (₹)</label>
+  <input type="number" id="assetA" value="40000">
+  <label>Amount allocated to Investment B (₹)</label>
+  <input type="number" id="assetB" value="30000">
+  <label>Amount allocated to Investment C (₹)</label>
+  <input type="number" id="assetC" value="30000">
+  <label>Hypothetical return on A (%)</label>
+  <input type="number" id="returnA" value="10">
+  <label>Hypothetical return on B (%)</label>
+  <input type="number" id="returnB" value="8">
+  <label>Hypothetical return on C (%)</label>
+  <input type="number" id="returnC" value="-3">
+  <button class="btn" onclick="simulatePortfolio()">Run Portfolio Simulation</button>
+  <div id="simulationResult" class="result" style="display:none"></div>
+  <p class="small">This is a fictional classroom simulation. The investments and returns are not actual market data.</p>
+ </div>
+</section>
+
+<section class="container" id="students">
+ <div class="section-title">
+  <h2>Student Research & Innovation</h2>
+  <p>Research opportunities and practical projects for BBA and MBA students.</p>
+ </div>
+ <div class="project-list">
+  <div class="project"><h4>01. AI-Based Credit Risk Assessment</h4><p>Study how financial institutions can use data analytics to assess borrower risk.</p></div>
+  <div class="project"><h4>02. Digital Lending & Financial Inclusion</h4><p>Examine the role of digital lending platforms in expanding financial access.</p></div>
+  <div class="project"><h4>03. AI in Investment Decisions</h4><p>Compare traditional investment analysis with AI-assisted analytical approaches.</p></div>
+  <div class="project"><h4>04. ESG Investment Analytics</h4><p>Examine the relationship between ESG performance and investment decisions.</p></div>
+  <div class="project"><h4>05. Financial Fraud Detection</h4><p>Investigate analytical methods for identifying unusual financial transactions.</p></div>
+  <div class="project"><h4>06. AI & Financial Market Efficiency</h4><p>Explore the impact of AI technologies on financial market information and efficiency.</p></div>
+ </div>
+ <div class="panel" style="margin-top:22px">
+  <h3>Student Project Proposal</h3>
+  <p>Use this form to prepare a project proposal for academic discussion.</p>
+  <label>Student Name</label><input id="studentName" placeholder="Enter student name">
+  <label>Course</label>
+  <select id="studentCourse"><option>BBA</option><option>MBA</option><option>Other</option></select>
+  <label>Research Project Title</label><input id="studentTitle" placeholder="Enter proposed research title">
+  <label>Research Objectives</label><textarea id="studentObjectives" rows="3" placeholder="Write your research objectives"></textarea>
+  <button class="btn" onclick="downloadProposal()">Download Proposal</button>
+  <p class="small">This creates a local proposal document. It does not submit or store student information on a server.</p>
+ </div>
+</section>
+
+<section class="container" id="publications">
+ <div class="section-title">
+  <h2>Research Publications & Datasets</h2>
+  <p>A developing knowledge repository for financial research.</p>
+ </div>
+ <div class="grid">
+  <div class="card"><div class="symbol">📚</div><h3>Research Articles</h3><p>Academic research on AI, FinTech, financial markets, investment and financial management.</p><a href="#publicationNote">View repository details →</a></div>
+  <div class="card"><div class="symbol">📑</div><h3>Working Papers</h3><p>Research ideas, conceptual papers, empirical studies and ongoing academic work.</p><a href="#publicationNote">View repository details →</a></div>
+  <div class="card"><div class="symbol">🗂️</div><h3>Financial Datasets</h3><p>Organised datasets for financial statement analysis, investment research and classroom exercises.</p><a href="#publicationNote">View repository details →</a></div>
+ </div>
+ <div class="panel" id="publicationNote" style="margin-top:22px">
+  <h3>Research Repository</h3>
+  <p>Research papers and datasets will be added here after verification of publication details, ownership and usage permissions.</p>
+  <p><strong>Suggested research themes:</strong> AI in Finance, Digital Lending, Arbitrage Trading, ESG Analytics, Financial Inclusion and Investment Banking.</p>
+  <p class="small">No publications or datasets are claimed to be available until they are actually uploaded and verified.</p>
+ </div>
+</section>
+
+<section class="container" id="contact">
+ <div class="section-title">
+  <h2>Research & Academic Collaboration</h2>
+  <p>Connect, explore research ideas and develop financial innovation.</p>
+ </div>
+ <div class="panel" style="text-align:center">
+  <h3>Building the Future of Financial Research</h3>
+  <p>Students, academicians and finance researchers are encouraged to explore research opportunities and practical financial applications through this platform.</p>
+  <a class="btn" href="../index.html">Return to Finance Knowledge Hub</a>
+ </div>
+</section>
+</main>
+
+<footer>
+ <strong style="color:#d6b66f">AI & FINANCE RESEARCH LAB</strong><br>
+ An initiative of Finance Knowledge Hub<br>
+ Research • Innovation • Financial Analytics • Education<br><br>
+ © 2026 Finance Knowledge Hub. Educational and research purposes only.
+</footer>
+
+<script>
+function numberValue(id){
+ return Number(document.getElementById(id).value);
+}
+function money(n){
+ return "₹"+n.toLocaleString("en-IN",{maximumFractionDigits:2});
+}
+function calculateRatios(){
+ const ca=numberValue("ca"),cl=numberValue("cl");
+ const debt=numberValue("debt"),equity=numberValue("equity");
+ if(ca<0||cl<0||debt<0||equity<0||!cl||!equity){
+  alert("Enter valid non-negative figures. Current liabilities and equity must be greater than zero.");
+  return;
+ }
+ const current=ca/cl,der=debt/equity;
+ const result=document.getElementById("ratioResult");
+ result.style.display="block";
+ result.innerHTML="<strong>Financial Analysis Results</strong><br><br>"+
+ "Current Ratio: <strong>"+current.toFixed(2)+":1</strong><br>"+
+ "Debt-Equity Ratio: <strong>"+der.toFixed(2)+":1</strong><br><br>"+
+ "<strong>Interpretation:</strong><br>"+
+ (current>=1.5?"The current ratio indicates a current asset position above current liabilities.":"The current ratio indicates limited current asset coverage. Check short-term liquidity.")+
+ "<br>"+(der<=1?"Debt is equal to or lower than equity.":"Debt is higher than equity. Review the capital structure.")+
+ "<br><span class='small'>These are basic indicators. Interpretation depends on the industry and accounting context.</span>";
+}
+function calculateInvestment(){
+ const p=numberValue("investment"),r=numberValue("rate"),t=numberValue("years");
+ if(p<=0||t<=0||!Number.isFinite(r)||r<=-100){
+  alert("Enter a positive investment and period, and an annual return greater than -100%.");
+  return;
+ }
+ const fv=p*Math.pow(1+r/100,t);
+ const profit=fv-p;
+ const result=document.getElementById("investmentResult");
+ result.style.display="block";
+ result.innerHTML="<strong>Investment Projection</strong><br><br>"+
+ "Initial Investment: <strong>"+money(p)+"</strong><br>"+
+ "Estimated Future Value: <strong>"+money(fv)+"</strong><br>"+
+ "Estimated Gain / Loss: <strong>"+money(profit)+"</strong><br>"+
+ "<br><span class='small'>Calculated using annual compounding at a constant assumed return. Actual returns are not guaranteed.</span>";
+}
+function simulatePortfolio(){
+ const a=numberValue("assetA"),b=numberValue("assetB"),c=numberValue("assetC");
+ const ra=numberValue("returnA"),rb=numberValue("returnB"),rc=numberValue("returnC");
+ if([a,b,c,ra,rb,rc].some(x=>!Number.isFinite(x))||[a,b,c].some(x=>x<0)||[ra,rb,rc].some(x=>x< -100)){
+  alert("Please enter valid allocations and returns.");
+  return;
+ }
+ const total=a+b+c;
+ if(total<=0){alert("Enter a positive portfolio allocation.");return;}
+ const gain=a*ra/100+b*rb/100+c*rc/100;
+ const result=document.getElementById("simulationResult");
+ result.style.display="block";
+ result.innerHTML="<strong>Simulation Results</strong><br><br>"+
+ "Total Investment: <strong>"+money(total)+"</strong><br>"+
+ "Portfolio Gain / Loss: <strong>"+money(gain)+"</strong><br>"+
+ "Portfolio Return: <strong>"+(gain/total*100).toFixed(2)+"%</strong><br>"+
+ "Final Portfolio Value: <strong>"+money(total+gain)+"</strong><br><br>"+
+ "<span class='small'>The result is a hypothetical weighted return based on your entered assumptions.</span>";
+}
+function downloadProposal(){
+ const name=document.getElementById("studentName").value.trim();
+ const course=document.getElementById("studentCourse").value;
+ const title=document.getElementById("studentTitle").value.trim();
+ const objectives=document.getElementById("studentObjectives").value.trim();
+ if(!name||!title||!objectives){
+  alert("Please complete all proposal fields.");
+  return;
+ }
+ const content="AI & FINANCE RESEARCH LAB\nSTUDENT RESEARCH PROPOSAL\n\n"+
+ "Student Name: "+name+"\nCourse: "+course+"\nResearch Title: "+title+
+ "\n\nResearch Objectives:\n"+objectives+
+ "\n\nPrepared for academic discussion.";
+ const blob=new Blob([content],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const link=document.createElement("a");
+ link.href=url;link.download="Student_Research_Proposal.txt";
+ link.click();URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
