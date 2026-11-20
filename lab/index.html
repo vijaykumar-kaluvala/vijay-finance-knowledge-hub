@@ -122,7 +122,7 @@ footer{background:#08152d;color:#cbd5e1;padding:34px 20px;text-align:center;font
    <div><label>Current Assets (₹)</label><input id="aiCA" type="number" value="750000"></div>
    <div><label>Current Liabilities (₹)</label><input id="aiCL" type="number" value="400000"></div>
   </div>
-  <div class="actions"><button class="btn purple" onclick="runFinancialIntelligence()">Generate Financial Analysis</button><button class="btn blue" onclick="downloadFinancialReport()">Download Analysis Report</button></div>
+  <div class="actions"><button class="btn purple" onclick="runFinancialIntelligence()">Generate Financial Analysis</button><button class="btn blue" onclick="downloadFinancialReport()">Create PDF Analysis Report</button></div>
   <div id="aiAnalysisOutput" class="result" aria-live="polite"></div>
   <p class="note">Method: deterministic ratio calculations and rule-based commentary. This is an educational analytical assistant, not a generative AI model, audit opinion or investment recommendation.</p>
  </div>
@@ -228,7 +228,32 @@ function runFinancialIntelligence(){
  lastFinancialReport=`AI & FINANCE RESEARCH LAB\nFINANCIAL ANALYSIS REPORT\nCompany: ${company}\nFinancial year: ${year}\n\nINPUTS\nRevenue: ${fmt(v.aiRevenue)}\nOperating profit: ${fmt(v.aiOperating)}\nNet profit: ${fmt(v.aiNet)}\nTotal assets: ${fmt(v.aiAssets)}\nTotal debt: ${fmt(v.aiDebt)}\nEquity: ${fmt(v.aiEquity)}\nCurrent assets: ${fmt(v.aiCA)}\nCurrent liabilities: ${fmt(v.aiCL)}\n\nCALCULATED INDICATORS\nOperating margin: ${opm.toFixed(2)}%\nNet profit margin: ${npm.toFixed(2)}%\nReturn on assets: ${roa.toFixed(2)}%\nDebt-equity ratio: ${de.toFixed(2)}:1\nCurrent ratio: ${cr.toFixed(2)}:1\n\nRULE-BASED OBSERVATIONS\n- ${observations.join('\n- ')}\n\nDisclaimer: Educational calculations and rule-based commentary only. Not an audit opinion, generative AI output, or investment recommendation.`;
  show('aiAnalysisOutput',`<b>Financial Analysis: ${company}</b><br>Operating margin: <b>${opm.toFixed(2)}%</b><br>Net profit margin: <b>${npm.toFixed(2)}%</b><br>Return on assets: <b>${roa.toFixed(2)}%</b><br>Debt-equity ratio: <b>${de.toFixed(2)}:1</b><br>Current ratio: <b>${cr.toFixed(2)}:1</b><br><br><b>Analytical observations</b><br>• ${observations.join('<br>• ')}<br><br><span class="note">Rule-based analysis using your entries. Download the report for a copy.</span>`);
 }
-function downloadFinancialReport(){if(!lastFinancialReport){runFinancialIntelligence();if(!lastFinancialReport)return}const blob=new Blob([lastFinancialReport],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Financial_Analysis_Report.txt';a.click();URL.revokeObjectURL(url)}
+function downloadFinancialReport(){
+ // Always recalculate immediately before exporting so the report uses the latest form values and company name.
+ runFinancialIntelligence();
+ if(!lastFinancialReport)return;
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const company=(document.getElementById('aiCompany').value.trim()||'Financial Analysis').replace(/[^\w\- ]+/g,'').trim()||'Financial_Analysis';
+ const reportWindow=window.open('','_blank');
+ if(!reportWindow){alert('Please allow pop-ups for this site to create your PDF report.');return}
+ reportWindow.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(company)} - Financial Analysis Report</title>
+ <style>
+ @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#17233d;margin:0;line-height:1.55}
+ header{background:#101d35;color:#fff;padding:24px 28px;border-bottom:5px solid #e9bd62}
+ header h1{font-size:21px;margin:0 0 5px;letter-spacing:.4px}header p{margin:0;color:#e9bd62;font-size:11px;letter-spacing:1.5px}
+ main{padding:24px 28px}.meta{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #dbe3ef;padding-bottom:14px;margin-bottom:18px}
+ h2{font-size:15px;color:#243c68;margin:20px 0 8px}.report{white-space:pre-wrap;font:12px/1.65 Arial,sans-serif}
+ .footer{border-top:1px solid #dbe3ef;margin-top:24px;padding-top:12px;color:#63718a;font-size:10px}
+ .print{position:fixed;right:20px;top:18px;background:#2463eb;color:white;border:0;border-radius:8px;padding:11px 16px;font-weight:bold;cursor:pointer}
+ @media print{.print{display:none}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+ </style></head><body><button class="print" onclick="window.print()">Print / Save as PDF</button>
+ <header><h1>AI &amp; FINANCE RESEARCH LAB</h1><p>FINANCIAL INTELLIGENCE • ANALYSIS REPORT</p></header>
+ <main><div class="meta"><div><b>Company:</b> ${esc(document.getElementById('aiCompany').value.trim()||'Unnamed company')}</div><div><b>Financial year:</b> ${esc(document.getElementById('aiYear').value.trim())}</div></div>
+ <h2>FINANCIAL ANALYSIS</h2><div class="report">${esc(lastFinancialReport)}</div>
+ <div class="footer">Prepared for educational and academic use. Calculations and commentary are based on user-entered data. This report is not an audit opinion, credit rating, generative AI assessment or investment recommendation.</div></main>
+ <script>window.addEventListener('load',()=>setTimeout(()=>window.print(),350));<\/script></body></html>`);
+ reportWindow.document.close();
+}
 function compareCompanies(){
  const fields=['cmpRevA','cmpRevB','cmpProfitA','cmpProfitB','cmpAssetsA','cmpAssetsB'];
  if(fields.some(id=>!Number.isFinite(val(id))||val(id)<=0)){alert('Enter positive values for revenue, profit and assets for both companies.');return}
