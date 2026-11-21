@@ -65,6 +65,60 @@ function vfaAnalyse(){
  html+='<p>'+ (r[2]>r[1]?'Revenue increased year-on-year.':'Revenue did not increase in the latest year.')+'</p>';
  html+='<p>'+ (p[2]>p[1]?'Net profit increased year-on-year.':'Net profit did not increase in the latest year.')+'</p>';
  html+='<p>'+ (margins[2]>margins[1]?'Profit margin improved.':'Profit margin declined or remained unchanged.')+'</p>';
+ 
+const maxRevenue = Math.max(...r, 1);
+const maxProfit = Math.max(...p, 1);
+
+html += '<h3>Revenue and Net Profit Comparison</h3>';
+html += '<div style="background:#f5f8ff;padding:18px;border-radius:12px;">';
+
+html += r.map((v,i) =>
+  '<div style="margin-bottom:18px;">' +
+  '<b>Year '+(i+1)+'</b>' +
+  '<p>Revenue: '+fmt(v)+'</p>' +
+  '<div style="background:#ddd;border-radius:8px;height:14px;">' +
+  '<div style="background:#2563eb;height:14px;border-radius:8px;width:'+(v/maxRevenue*100)+'%"></div></div>' +
+  '<p>Net Profit: '+fmt(p[i])+'</p>' +
+  '<div style="background:#ddd;border-radius:8px;height:14px;">' +
+  '<div style="background:#16a34a;height:14px;border-radius:8px;width:'+(p[i]/maxProfit*100)+'%"></div></div>' +
+  '</div>'
+).join('');
+
+html += '</div>';
+
+html += '<h3>Year-on-Year Growth Comparison</h3>';
+html += '<p>Revenue growth (Year 1–2): <b>'+pct(growth(r[0],r[1]))+'</b></p>';
+html += '<p>Revenue growth (Year 2–3): <b>'+pct(growth(r[1],r[2]))+'</b></p>';
+html += '<p>Net profit growth (Year 1–2): <b>'+pct(growth(p[0],p[1]))+'</b></p>';
+html += '<p>Net profit growth (Year 2–3): <b>'+pct(growth(p[1],p[2]))+'</b></p>';
+
+const revenueTrend = r[2] >= r[1];
+const profitTrend = p[2] >= p[1];
+const marginTrend = margins[2] >= margins[1];
+
+const healthCount = [revenueTrend,profitTrend,marginTrend].filter(Boolean).length;
+
+const healthLabel = healthCount === 3 ? 'Positive Performance Trend' :
+                    healthCount === 2 ? 'Moderate Performance Trend' :
+                    healthCount === 1 ? 'Needs Financial Review' :
+                    'Requires Immediate Financial Review';
+
+html += '<h3>Financial Health Indicators</h3>';
+html += '<div style="background:#eff6ff;padding:18px;border-radius:12px;">';
+html += '<h3>'+healthLabel+'</h3>';
+html += '<p>Revenue trend: <b>'+(revenueTrend?'Improving':'Declining')+'</b></p>';
+html += '<p>Net profit trend: <b>'+(profitTrend?'Improving':'Declining')+'</b></p>';
+html += '<p>Profit margin trend: <b>'+(marginTrend?'Improving':'Declining')+'</b></p>';
+html += '<p>Assessment: '+healthCount+' out of 3 indicators show a positive trend.</p>';
+html += '<small>Educational, rule-based assessment; not a credit rating or investment recommendation.</small>';
+html += '</div>';
+
+html += '<div style="margin-top:20px;padding:15px;background:#fff7ed;border-radius:10px;">';
+html += '<h3>Professional Financial Report</h3>';
+html += '<p>Use the button below to print or save the analysis as a PDF.</p>';
+html += '<button type="button" onclick="window.print()">Print / Save as PDF</button>';
+html += '</div>';
+
  document.getElementById('vfaOutput').innerHTML=html;
 }
 function vfaReport(){
